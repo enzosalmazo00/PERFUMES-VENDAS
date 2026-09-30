@@ -394,3 +394,44 @@ footer{
 .seller-card-copy span{font-size:.62rem;color:#776e64;text-transform:uppercase;letter-spacing:.08em}
 .seller-picker-empty{grid-column:1/-1;margin:0;padding:13px;border:1px dashed var(--line);color:#766d62;font-size:.7rem;line-height:1.5}
 @media(max-width:520px){.seller-picker{grid-template-columns:1fr}}
+
+
+.site-unavailable[hidden] { display: none; }
+.site-unavailable {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(191, 153, 79, 0.16), transparent 34%),
+    #090806;
+}
+.site-unavailable-card {
+  width: min(680px, 100%);
+  text-align: center;
+  padding: 64px 36px;
+  border: 1px solid rgba(201, 169, 104, 0.32);
+  background: rgba(18, 15, 10, 0.92);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+}
+.site-unavailable-mark {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 30px;
+  color: #c9a968;
+}
+.site-unavailable-card h1 {
+  margin: 8px 0 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 500;
+  line-height: 0.98;
+}
+.site-unavailable-card > p:last-child {
+  max-width: 520px;
+  margin: 0 auto;
+  color: rgba(255,255,255,.72);
+  line-height: 1.7;
+}
