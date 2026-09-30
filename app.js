@@ -181,7 +181,7 @@ function renderSellerPicker() {
     `;
   }).join("");
 
-  $("[data-seller-id]", els.sellerPicker).forEach(button => {
+  $$("[data-seller-id]", els.sellerPicker).forEach(button => {
     button.addEventListener("click", () => {
       state.selectedSellerId = button.dataset.sellerId;
       renderSellerPicker();
@@ -273,7 +273,7 @@ function renderProducts() {
 
 function setFilter(filter) {
   state.filter = filter;
-  $(".filter").forEach(button => {
+  $$(".filter").forEach(button => {
     button.classList.toggle("is-active", button.dataset.filter === filter);
   });
   renderProducts();
