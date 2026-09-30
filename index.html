@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090806">
+  <meta name="description" content="Protótipo premium de e-commerce de fragrâncias.">
+  <title>[NOME DA MARCA] — Parfums</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header class="topbar">
+    <a class="logo" href="#top">
+      <span class="logo-mark">✦</span>
+      <span>[NOME DA MARCA]</span>
+    </a>
+    <nav>
+      <a href="#colecoes">Coleções</a>
+      <a href="#catalogo">Perfumes</a>
+      <a href="#experiencia">Experiência</a>
+    </nav>
+    <button class="bag-btn" id="bagBtn" type="button">
+      Sacola <span id="bagCount">0</span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Maison de parfums · coleção privada</p>
+        <h1>Luxo que não se vê.<br><em>Se percebe.</em></h1>
+        <p class="hero-lead">
+          Uma experiência olfativa criada para transformar fragrância em presença.
+          Curadoria premium, estética cinematográfica e atendimento próximo.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#catalogo">Explorar perfumes</a>
+          <a class="btn btn-ghost" href="#colecoes">Descobrir coleções</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>03</strong><span>universos olfativos</span></div>
+          <div><strong>100%</strong><span>curadoria premium</span></div>
+          <div><strong>Entrega</strong><span>presencial</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="gold-halo"></div>
+        <div class="bottle">
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body">
+            <div class="bottle-shine"></div>
+            <div class="bottle-label">
+              <span>PARFUM</span>
+              <small>EXTRAIT</small>
+            </div>
+          </div>
+          <div class="bottle-shadow"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="collections" id="colecoes">
+      <article class="collection-card collection-man">
+        <div class="collection-image"></div>
+        <div class="collection-vignette"></div>
+        <div class="collection-copy">
+          <p class="eyebrow">Collection I</p>
+          <h2>Masculino</h2>
+          <p>Madeiras profundas, especiarias e assinatura marcante.</p>
+          <button type="button" data-jump-filter="masculino">Explorar coleção →</button>
+        </div>
+      </article>
+
+      <article class="collection-card collection-woman">
+        <div class="collection-image"></div>
+        <div class="collection-vignette"></div>
+        <div class="collection-copy">
+          <p class="eyebrow">Collection II</p>
+          <h2>Feminino</h2>
+          <p>Florais luminosos, âmbar e sensualidade elegante.</p>
+          <button type="button" data-jump-filter="feminino">Explorar coleção →</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="catalog" id="catalogo">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Curadoria privada</p>
+          <h2>Perfumes em destaque</h2>
+        </div>
+        <p>
+          Clique em uma fragrância para ver composição, pirâmide olfativa,
+          estoque e avaliações de demonstração.
+        </p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filtrar perfumes">
+        <button class="filter is-active" type="button" data-filter="todos">Todos</button>
+        <button class="filter" type="button" data-filter="masculino">Masculino</button>
+        <button class="filter" type="button" data-filter="feminino">Feminino</button>
+        <button class="filter" type="button" data-filter="unissex">Unissex</button>
+      </div>
+
+      <p class="status" id="catalogStatus">Carregando catálogo...</p>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="experience" id="experiencia">
+      <div class="experience-intro">
+        <p class="eyebrow">A proposta</p>
+        <h2>Mais que vender perfume.<br>Construir desejo.</h2>
+        <p>
+          O protótipo combina uma vitrine premium com dados reais do catálogo:
+          preço, estoque, notas olfativas, avaliações e um fluxo de compra
+          pronto para evoluir para Mercado Pago.
+        </p>
+      </div>
+
+      <div class="experience-steps">
+        <article>
+          <span>01</span>
+          <h3>Descoberta</h3>
+          <p>O cliente encontra sua assinatura por gênero, estilo e destaque.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Imersão</h3>
+          <p>Topo, coração e fundo apresentam a personalidade da fragrância.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Conversão</h3>
+          <p>Compra simples, objetiva e com entrega presencial informada.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo">
+      <span class="logo-mark">✦</span>
+      <span>[NOME DA MARCA]</span>
+    </div>
+    <p>Protótipo comercial · produtos e avaliações demonstrativos.</p>
+  </footer>
+
+  <div class="overlay" id="productOverlay" hidden>
+    <section class="modal product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" type="button" data-close-product aria-label="Fechar">×</button>
+      <div id="productModalContent"></div>
+    </section>
+  </div>
+
+  <aside class="drawer" id="bagDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div>
+        <p class="eyebrow">Sua seleção</p>
+        <h2>Sacola</h2>
+      </div>
+      <button class="close" type="button" id="closeBag" aria-label="Fechar">×</button>
+    </div>
+    <div id="bagItems" class="bag-items"></div>
+    <div class="drawer-foot">
+      <div class="bag-total">
+        <span>Total</span>
+        <strong id="bagTotal">R$ 0,00</strong>
+      </div>
+      <p>Entrega presencial. Pagamento real ainda não ativado neste protótipo.</p>
+      <button class="btn btn-gold btn-full" id="checkoutBtn" type="button">Finalizar compra</button>
+    </div>
+  </aside>
+  <div class="drawer-mask" id="drawerMask" hidden></div>
+
+  <div class="overlay" id="checkoutOverlay" hidden>
+    <section class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button class="close" type="button" data-close-checkout aria-label="Fechar">×</button>
+      <p class="eyebrow">Demonstração</p>
+      <h2 id="checkoutTitle">Finalizar compra</h2>
+      <div id="checkoutSummary" class="checkout-summary"></div>
+
+      <div class="payment-tabs">
+        <button class="payment-tab is-active" type="button" data-payment="pix">
+          <strong>PIX</strong><span>Confirmação rápida</span>
+        </button>
+        <button class="payment-tab" type="button" data-payment="card">
+          <strong>Cartão</strong><span>Crédito</span>
+        </button>
+      </div>
+
+      <form id="checkoutForm">
+        <label>
+          Nome completo
+          <input name="name" autocomplete="name" required placeholder="Seu nome">
+        </label>
+        <label>
+          WhatsApp
+          <input name="phone" autocomplete="tel" required placeholder="+595 ou +55">
+        </label>
+        <label>
+          E-mail <small>(opcional)</small>
+          <input name="email" type="email" autocomplete="email" placeholder="voce@email.com">
+        </label>
+
+        <div class="demo-box" id="paymentDemoBox">
+          <strong>PIX demonstrativo</strong>
+          <p>Nenhuma cobrança real será feita nesta versão.</p>
+        </div>
+
+        <button class="btn btn-gold btn-full" type="submit">Simular pedido</button>
+      </form>
+
+      <p class="fine-print">
+        Mercado Pago será conectado somente depois da aprovação do negócio.
+      </p>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
