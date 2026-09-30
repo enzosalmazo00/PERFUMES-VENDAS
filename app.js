@@ -28,7 +28,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 const els = {
   productGrid: $("#productGrid"),
-  catalogStatus: $("#catalogStatus"),
+  catalogStatus: $("#catalogStatus"),\n  catalogSearch: $("#catalogSearch"),
   productOverlay: $("#productOverlay"),
   productModalContent: $("#productModalContent"),
   bagBtn: $("#bagBtn"),
@@ -270,7 +270,7 @@ function renderProducts() {
 
 function setFilter(filter) {
   state.filter = filter;
-  $$(".filter").forEach(button => {
+  els.catalogSearch?.addEventListener("input", event => { state.search = event.target.value; renderProducts(); });\n\n$(".filter").forEach(button => {
     button.classList.toggle("is-active", button.dataset.filter === filter);
   });
   renderProducts();
