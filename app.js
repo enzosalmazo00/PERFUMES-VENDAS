@@ -44,7 +44,10 @@ const els = {
   checkoutForm: $("#checkoutForm"),
   paymentDemoBox: $("#paymentDemoBox"),
   sellerPicker: $("#sellerPicker"),
-  toast: $("#toast")
+  toast: $("#toast"),
+  siteUnavailable: $("#siteUnavailable"),
+  siteUnavailableTitle: $("#siteUnavailableTitle"),
+  siteUnavailableMessage: $("#siteUnavailableMessage")
 };
 
 function esc(value = "") {
@@ -101,6 +104,38 @@ async function supabaseGet(table, query = "") {
   }
 
   return response.json();
+}
+
+
+async function loadSiteStatus() {
+  try {
+    const rows = await supabaseGet(
+      "site_status",
+      "select=is_online,outage_kind,public_message,changed_at&id=eq.true&limit=1"
+    );
+    const status = rows[0];
+    if (!status || status.is_online) {
+      if (els.siteUnavailable) els.siteUnavailable.hidden = true;
+      return;
+    }
+
+    const permanent = status.outage_kind === "permanent_closure";
+    if (els.siteUnavailableTitle) {
+      els.siteUnavailableTitle.textContent = permanent
+        ? "Loja encerrada"
+        : "Site temporariamente indisponível";
+    }
+    if (els.siteUnavailableMessage) {
+      els.siteUnavailableMessage.textContent =
+        status.public_message ||
+        (status.outage_kind === "inventory_count"
+          ? "Estamos realizando uma conferência de estoque. Voltamos em breve."
+          : "Estamos realizando um ajuste operacional. Voltamos em breve.");
+    }
+    if (els.siteUnavailable) els.siteUnavailable.hidden = false;
+  } catch (error) {
+    console.error("Falha ao consultar o status da loja", error);
+  }
 }
 
 async function loadSellers() {
@@ -513,5 +548,6 @@ document.addEventListener("keydown", event => {
   else if (els.bagDrawer.classList.contains("is-open")) closeBag();
 });
 
+loadSiteStatus();
 loadCatalog();
 loadSellers();
