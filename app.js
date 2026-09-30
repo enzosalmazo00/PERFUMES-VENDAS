@@ -18,6 +18,7 @@ const state = {
   sellers: [],
   selectedSellerId: null,
   filter: "todos",
+  search: "",
   bag: loadBag(),
   selectedProduct: null,
   payment: "pix"
@@ -28,7 +29,8 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 const els = {
   productGrid: $("#productGrid"),
-  catalogStatus: $("#catalogStatus"),\n  catalogSearch: $("#catalogSearch"),
+  catalogStatus: $("#catalogStatus"),
+  catalogSearch: $("#catalogSearch"),\n  catalogSearch: $("#catalogSearch"),
   productOverlay: $("#productOverlay"),
   productModalContent: $("#productModalContent"),
   bagBtn: $("#bagBtn"),
@@ -220,9 +222,9 @@ async function loadCatalog() {
 }
 
 function renderProducts() {
-  const products = state.filter === "todos"
-    ? state.products
-    : state.products.filter(product => product.category === state.filter);
+  const byCategory = state.filter === "todos" ? state.products : state.products.filter(product => product.category === state.filter);
+  const query = state.search.trim().toLowerCase();
+  const products = query ? byCategory.filter(product => [product.name, product.brand, product.category, String(product.volume_ml)].filter(Boolean).join(" ").toLowerCase().includes(query)) : byCategory;
 
   els.productGrid.innerHTML = products.map(product => {
     const current = product.sale_price_cents ?? product.price_cents;
@@ -488,7 +490,9 @@ function setPayment(method) {
     : "<strong>Cartão demonstrativo</strong><p>Nenhum dado de cartão é solicitado ou processado neste protótipo.</p>";
 }
 
-$$(".filter").forEach(button => {
+els.catalogSearch?.addEventListener("input", event => { state.search = event.target.value; renderProducts(); });
+
+$(".filter").forEach(button => {
   button.addEventListener("click", () => setFilter(button.dataset.filter));
 });
 
