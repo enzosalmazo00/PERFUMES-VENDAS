@@ -15,6 +15,8 @@ const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1594035910387-fea47794
 const state = {
   products: [],
   reviews: [],
+  sellers: [],
+  selectedSellerId: null,
   filter: "todos",
   bag: loadBag(),
   selectedProduct: null,
@@ -41,6 +43,7 @@ const els = {
   checkoutSummary: $("#checkoutSummary"),
   checkoutForm: $("#checkoutForm"),
   paymentDemoBox: $("#paymentDemoBox"),
+  sellerPicker: $("#sellerPicker"),
   toast: $("#toast")
 };
 
@@ -98,6 +101,54 @@ async function supabaseGet(table, query = "") {
   }
 
   return response.json();
+}
+
+async function loadSellers() {
+  try {
+    state.sellers = await supabaseGet(
+      "seller_checkout_options",
+      "select=seller_id,display_name,avatar_url&is_active=eq.true&order=display_name.asc"
+    );
+    renderSellerPicker();
+  } catch (error) {
+    console.error(error);
+    if (els.sellerPicker) {
+      els.sellerPicker.innerHTML = '<p class="seller-picker-empty">Não foi possível carregar os vendedores agora.</p>';
+    }
+  }
+}
+
+function renderSellerPicker() {
+  if (!els.sellerPicker) return;
+
+  if (!state.sellers.length) {
+    els.sellerPicker.innerHTML = '<p class="seller-picker-empty">Nenhum vendedor ativo cadastrado no momento.</p>';
+    return;
+  }
+
+  els.sellerPicker.innerHTML = state.sellers.map(seller => {
+    const initial = esc((seller.display_name || "?").trim().charAt(0).toUpperCase());
+    const avatar = seller.avatar_url
+      ? '<img src="' + esc(seller.avatar_url) + '" alt="">'
+      : initial;
+
+    return `
+      <button class="seller-card ${state.selectedSellerId === seller.seller_id ? "is-active" : ""}" type="button" data-seller-id="${esc(seller.seller_id)}">
+        <span class="seller-avatar">${avatar}</span>
+        <span class="seller-card-copy">
+          <strong>${esc(seller.display_name)}</strong>
+          <span>Selecionar vendedor</span>
+        </span>
+      </button>
+    `;
+  }).join("");
+
+  $("[data-seller-id]", els.sellerPicker).forEach(button => {
+    button.addEventListener("click", () => {
+      state.selectedSellerId = button.dataset.sellerId;
+      renderSellerPicker();
+    });
+  });
 }
 
 async function loadCatalog() {
@@ -373,6 +424,7 @@ function openCheckout() {
     <strong>Total: ${brl(bagTotal())}</strong>
   `;
 
+  renderSellerPicker();
   els.checkoutOverlay.hidden = false;
   syncScrollLock();
 }
@@ -437,12 +489,20 @@ els.checkoutForm.addEventListener("submit", event => {
   const data = new FormData(event.currentTarget);
   const customer = String(data.get("name") || "").trim();
 
-  toast(`Pedido demonstrativo criado para ${customer || "cliente"}`);
+  if (!state.selectedSellerId) {
+    toast("Selecione o vendedor que te atendeu.");
+    return;
+  }
+
+  const selectedSeller = state.sellers.find(seller => seller.seller_id === state.selectedSellerId);
+  toast(`Pedido demonstrativo criado para ${customer || "cliente"} · vendedor: ${selectedSeller?.display_name || "selecionado"}`);
   state.bag = [];
   saveBag();
   renderBag();
   closeCheckout();
   event.currentTarget.reset();
+  state.selectedSellerId = null;
+  renderSellerPicker();
   setPayment("pix");
 });
 
@@ -454,3 +514,4 @@ document.addEventListener("keydown", event => {
 });
 
 loadCatalog();
+loadSellers();
