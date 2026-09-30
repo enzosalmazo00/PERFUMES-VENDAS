@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090806">
-  <title>Painel Operacional — Parfums</title>
+  <title>Painel — Parfums</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,120 +16,230 @@
       <div class="brand">✦ <span>PARFUMS</span></div>
       <p class="eyebrow">Acesso restrito</p>
       <h1>Painel operacional</h1>
-      <p class="muted">Entre com o usuário autorizado do administrador ou vendedor.</p>
-
+      <p class="muted">Administrador e vendedores usam contas individuais.</p>
       <form id="loginForm">
-        <label>
-          E-mail
-          <input id="loginEmail" type="email" autocomplete="email" required>
-        </label>
-        <label>
-          Senha
-          <input id="loginPassword" type="password" autocomplete="current-password" required>
-        </label>
-        <button class="btn btn-primary" type="submit">Entrar</button>
+        <label>E-mail<input id="loginEmail" type="email" autocomplete="email" required></label>
+        <label>Senha<input id="loginPassword" type="password" autocomplete="current-password" minlength="8" required></label>
+        <div class="auth-actions">
+          <button class="btn btn-primary" type="submit">Entrar</button>
+          <button class="btn btn-ghost" type="button" id="createAccessBtn">Criar primeiro acesso</button>
+        </div>
       </form>
+      <p class="muted small">“Criar primeiro acesso” só funciona para e-mails previamente autorizados no cadastro.</p>
       <p class="form-message" id="loginMessage"></p>
     </section>
 
-    <section class="panel" id="panelView" hidden>
+    <section id="panelView" hidden>
       <header class="panel-head">
         <div>
           <div class="brand">✦ <span>PARFUMS</span></div>
-          <p class="eyebrow">Controle operacional</p>
-          <h1>Área de emergência</h1>
+          <p class="eyebrow">Gestão operacional</p>
+          <h1 id="panelTitle">Painel</h1>
         </div>
         <div class="session-box">
-          <span id="actorRole">—</span>
+          <span class="role-chip" id="actorRole">—</span>
+          <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">Abrir loja</a>
           <button class="btn btn-ghost" type="button" id="logoutBtn">Sair</button>
         </div>
       </header>
 
-      <section class="status-card">
-        <div>
-          <p class="eyebrow">Status da loja</p>
-          <div class="status-line">
-            <span class="status-dot" id="statusDot"></span>
-            <strong id="statusText">Consultando...</strong>
-          </div>
-          <p id="statusDetail" class="muted">—</p>
+      <nav class="tabs" id="adminTabs" hidden>
+        <button class="tab is-active" data-tab="overview">Visão geral</button>
+        <button class="tab" data-tab="products">Perfumes</button>
+        <button class="tab" data-tab="network">Vendedores e cidades</button>
+        <button class="tab" data-tab="inventory">Estoques</button>
+        <button class="tab" data-tab="purchases">Compras e risco</button>
+        <button class="tab" data-tab="reports">Relatórios</button>
+        <button class="tab" data-tab="emergency">Emergência</button>
+      </nav>
+
+      <section id="adminArea" hidden>
+        <div class="tab-panel" data-panel="overview">
+          <div class="metrics" id="metrics"></div>
+          <section class="card">
+            <div class="section-head">
+              <div><p class="eyebrow">Atenção</p><h2>Estoque baixo</h2></div>
+              <button class="btn btn-ghost" id="refreshDashboardBtn">Atualizar</button>
+            </div>
+            <div id="lowStockList" class="table-wrap"></div>
+          </section>
         </div>
-        <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">Abrir vitrine</a>
+
+        <div class="tab-panel" data-panel="products" hidden>
+          <section class="card">
+            <p class="eyebrow">Catálogo</p><h2>Cadastrar perfume</h2>
+            <form id="productForm" class="form-grid">
+              <label>Nome<input name="name" required placeholder="Ex.: Sauvage"></label>
+              <label>Marca<input name="brand" placeholder="Ex.: Dior"></label>
+              <label>Categoria<select name="category" required><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
+              <label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
+              <label>Preço de venda (R$)<input name="price" type="number" min="0" step="0.01" required></label>
+              <label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step="0.01"></label>
+              <label class="span-2">Descrição curta<input name="short_description"></label>
+              <label class="span-2">Descrição<textarea name="description"></textarea></label>
+              <label class="span-2">Composição<textarea name="composition"></textarea></label>
+              <label class="check"><input name="is_featured" type="checkbox"> Destacar na vitrine</label>
+              <button class="btn btn-primary" type="submit">Cadastrar perfume</button>
+            </form>
+          </section>
+          <section class="card"><p class="eyebrow">Catálogo atual</p><div id="productList" class="table-wrap"></div></section>
+        </div>
+
+        <div class="tab-panel" data-panel="network" hidden>
+          <div class="two-col">
+            <section class="card">
+              <p class="eyebrow">Cobertura</p><h2>Nova cidade</h2>
+              <form id="cityForm">
+                <label>Cidade<input name="city_name" required></label>
+                <label>Estado/Departamento<input name="state_name"></label>
+                <label>País<select name="country_code"><option value="BR">Brasil</option><option value="PY">Paraguai</option></select></label>
+                <button class="btn btn-primary" type="submit">Cadastrar cidade</button>
+              </form>
+            </section>
+            <section class="card">
+              <p class="eyebrow">Equipe</p><h2>Novo vendedor</h2>
+              <form id="sellerForm">
+                <label>Nome<input name="name" required></label>
+                <label>E-mail de acesso<input name="email" type="email"></label>
+                <label>WhatsApp<input name="whatsapp_number" required placeholder="+55..."></label>
+                <label>URL da foto<input name="avatar_url" type="url"></label>
+                <label>Cidade principal<select name="city_id" id="sellerCitySelect"></select></label>
+                <label class="check"><input name="can_toggle_site_emergency" type="checkbox"> Pode usar emergência</label>
+                <button class="btn btn-primary" type="submit">Cadastrar vendedor</button>
+              </form>
+            </section>
+          </div>
+          <section class="card"><p class="eyebrow">Vendedores</p><div id="sellerList" class="table-wrap"></div></section>
+        </div>
+
+        <div class="tab-panel" data-panel="inventory" hidden>
+          <div class="two-col">
+            <section class="card">
+              <p class="eyebrow">Estrutura</p><h2>Novo estoque/local</h2>
+              <form id="locationForm">
+                <label>Nome do estoque<input name="name" required placeholder="Ex.: Estoque Paranapuã"></label>
+                <label>Cidade<select name="service_city_id" id="locationCitySelect"></select></label>
+                <label>Vendedor responsável<select name="seller_id" id="locationSellerSelect"></select></label>
+                <button class="btn btn-primary" type="submit">Criar estoque</button>
+              </form>
+            </section>
+            <section class="card">
+              <p class="eyebrow">Regulador auditável</p><h2>Movimentar estoque</h2>
+              <form id="adjustForm">
+                <label>Estoque<select name="location_id" id="adjustLocation"></select></label>
+                <label>Perfume<select name="product_id" id="adjustProduct"></select></label>
+                <label>Quantidade (+ entrada / − saída)<input name="quantity_delta" type="number" required placeholder="-1"></label>
+                <label>Motivo<select name="reason_code">
+                  <option value="restock">Reposição</option><option value="breakage">Quebra</option>
+                  <option value="damage">Avaria/dano</option><option value="loss">Perda</option>
+                  <option value="gift">Brinde</option><option value="road_loss">Perda na estrada</option>
+                  <option value="inventory_count">Contagem de estoque</option><option value="return">Devolução</option>
+                  <option value="other">Outro</option>
+                </select></label>
+                <label>Impacto financeiro (R$)<input name="financial_impact" type="number" min="0" step="0.01"></label>
+                <label>Justificativa/nota<textarea name="note" placeholder="Obrigatória para perdas, dano, quebra e brinde."></textarea></label>
+                <button class="btn btn-primary" type="submit">Registrar movimentação</button>
+              </form>
+            </section>
+          </div>
+          <section class="card"><p class="eyebrow">Saldos</p><div id="inventoryList" class="table-wrap"></div></section>
+        </div>
+
+        <div class="tab-panel" data-panel="purchases" hidden>
+          <div class="two-col">
+            <section class="card">
+              <p class="eyebrow">Fornecedores privados</p><h2>Novo fornecedor</h2>
+              <form id="supplierForm">
+                <label>Nome<input name="name" required></label>
+                <label>Contato<input name="contact_name"></label>
+                <label>Telefone<input name="phone"></label>
+                <label>Observações<textarea name="notes"></textarea></label>
+                <button class="btn btn-primary" type="submit">Salvar fornecedor</button>
+              </form>
+            </section>
+            <section class="card">
+              <p class="eyebrow">Entrada de mercadoria</p><h2>Cadastrar lote</h2>
+              <form id="lotForm">
+                <label>Fornecedor<select name="supplier_id" id="lotSupplier"></select></label>
+                <label>Estoque de destino<select name="location_id" id="lotLocation"></select></label>
+                <label>Perfume<select name="product_id" id="lotProduct"></select></label>
+                <label>Quantidade<input name="quantity" type="number" min="1" required></label>
+                <label>Custo unitário (R$)<input name="unit_cost" type="number" min="0" step="0.01" required></label>
+                <label>Risco de perda<select name="risk_type"><option value="">Sem risco informado</option><option value="travel">Viagem</option><option value="seizure">Apreensão</option><option value="damage">Dano</option><option value="loss">Perda</option><option value="other">Outro</option></select></label>
+                <label>Valor considerado no risco (R$)<input name="risk_value" type="number" min="0" step="0.01"></label>
+                <label>Nota do risco<textarea name="risk_note"></textarea></label>
+                <label>Código/referência<input name="reference_code"></label>
+                <button class="btn btn-primary" type="submit">Registrar lote e adicionar ao estoque</button>
+              </form>
+            </section>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="reports" hidden>
+          <section class="card">
+            <div class="section-head"><div><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2></div><button class="btn btn-primary" id="runReportBtn">Gerar relatório</button></div>
+            <div class="filters-grid">
+              <label>De<input type="date" id="reportFrom"></label>
+              <label>Até<input type="date" id="reportTo"></label>
+              <label>Vendedor<select id="reportSeller"></select></label>
+              <label>Produto<select id="reportProduct"></select></label>
+              <label>Cidade<select id="reportCity"></select></label>
+            </div>
+          </section>
+          <div class="metrics" id="reportMetrics"></div>
+          <section class="card"><p class="eyebrow">Movimentações / perdas / brindes</p><div id="reportMovements" class="table-wrap"></div></section>
+          <section class="card"><p class="eyebrow">Risco cadastrado nos lotes</p><div id="reportRisks" class="table-wrap"></div></section>
+        </div>
+
+        <div class="tab-panel" data-panel="emergency" hidden>
+          <div id="emergencyAdminMount"></div>
+        </div>
       </section>
 
-      <section class="emergency-grid">
-        <article class="control-card danger-card">
-          <p class="eyebrow">Ação crítica</p>
-          <h2>Desativar temporariamente</h2>
-          <p class="muted">A vitrine continua existindo, mas o cliente verá apenas a tela de indisponibilidade.</p>
-
-          <label>
-            Categoria
-            <select id="outageKind">
-              <option value="stock_issue">Problema de estoque</option>
-              <option value="inventory_count">Contagem de estoque</option>
-              <option value="maintenance">Manutenção / erro</option>
-              <option value="no_seller">Sem vendedor disponível</option>
-              <option value="operational_pause">Pausa operacional</option>
-              <option value="permanent_closure">Encerramento definitivo</option>
-            </select>
-          </label>
-
-          <label>
-            Justificativa interna
-            <textarea id="outageReason" rows="4" placeholder="Explique por que a loja será retirada do ar..." required></textarea>
-          </label>
-
-          <label>
-            Mensagem pública <span class="optional">(opcional)</span>
-            <textarea id="publicMessage" rows="3" placeholder="Se vazio, será usada a mensagem padrão da categoria."></textarea>
-          </label>
-
-          <button class="btn btn-danger" id="disableSiteBtn" type="button">Ativar modo de emergência</button>
-        </article>
-
-        <article class="control-card">
-          <p class="eyebrow">Restauração</p>
-          <h2>Colocar loja online</h2>
-          <p class="muted">A reativação restaura imediatamente a vitrine pública sem apagar nenhum dado.</p>
-          <label>
-            Nota de reativação <span class="optional">(opcional)</span>
-            <textarea id="restoreReason" rows="3" placeholder="Ex.: contagem finalizada, estoque conferido."></textarea>
-          </label>
-          <button class="btn btn-primary" id="enableSiteBtn" type="button">Colocar loja online</button>
-        </article>
-      </section>
-
-      <section class="permissions-card" id="permissionsCard" hidden>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Administrador</p>
-            <h2>Permissão de emergência dos vendedores</h2>
-          </div>
-          <button class="btn btn-ghost" id="refreshSellersBtn" type="button">Atualizar</button>
-        </div>
-        <div id="sellerPermissions" class="seller-list"></div>
+      <section id="sellerArea" hidden>
+        <div class="metrics" id="sellerMetrics"></div>
+        <section class="card warning-card">
+          <p class="eyebrow">Central de notificações</p><h2>Alertas de estoque baixo</h2>
+          <div id="sellerLowStock"></div>
+        </section>
+        <section class="card"><p class="eyebrow">Meu estoque</p><div id="sellerInventory" class="table-wrap"></div></section>
+        <section class="card" id="sellerEmergencyCard" hidden><div id="emergencySellerMount"></div></section>
       </section>
     </section>
   </main>
 
+  <template id="emergencyTemplate">
+    <div class="emergency-grid">
+      <article class="card danger-card">
+        <p class="eyebrow">Área de emergência</p><h2>Retirar loja do ar</h2>
+        <label>Categoria<select class="outage-kind">
+          <option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option>
+          <option value="maintenance">Manutenção / erro</option><option value="no_seller">Sem vendedor disponível</option>
+          <option value="operational_pause">Pausa operacional</option><option value="permanent_closure">Encerramento definitivo</option>
+        </select></label>
+        <label>Justificativa<textarea class="outage-reason"></textarea></label>
+        <label>Mensagem pública<textarea class="public-message"></textarea></label>
+        <button class="btn btn-danger disable-site">Ativar modo de emergência</button>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Status</p><div class="status-line"><span class="status-dot"></span><strong class="status-text">Consultando...</strong></div>
+        <p class="muted status-detail"></p>
+        <label>Nota de reativação<textarea class="restore-reason"></textarea></label>
+        <button class="btn btn-primary enable-site">Colocar loja online</button>
+      </article>
+    </div>
+  </template>
+
   <div class="modal-backdrop" id="confirmModal" hidden>
-    <div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-      <p class="eyebrow">Confirmação obrigatória</p>
-      <h2 id="confirmTitle">Confirmar ação</h2>
+    <div class="confirm-card">
+      <p class="eyebrow">Confirmação obrigatória</p><h2 id="confirmTitle">Confirmar ação</h2>
       <p id="confirmText" class="muted"></p>
-      <label>
-        Digite <strong id="confirmWordLabel">CONFIRMAR</strong>
-        <input id="confirmWordInput" autocomplete="off">
-      </label>
-      <div class="confirm-actions">
-        <button class="btn btn-ghost" type="button" id="cancelConfirmBtn">Cancelar</button>
-        <button class="btn btn-danger" type="button" id="confirmActionBtn" disabled>Confirmar</button>
-      </div>
+      <label>Digite <strong id="confirmWordLabel">CONFIRMAR</strong><input id="confirmWordInput" autocomplete="off"></label>
+      <div class="confirm-actions"><button class="btn btn-ghost" id="cancelConfirmBtn">Cancelar</button><button class="btn btn-danger" id="confirmActionBtn" disabled>Confirmar</button></div>
     </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast"></div>
   <script type="module" src="painel.js"></script>
 </body>
 </html>
