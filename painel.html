@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090806">
+  <title>Painel Operacional — Parfums</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="auth-card" id="loginView">
+      <div class="brand">✦ <span>PARFUMS</span></div>
+      <p class="eyebrow">Acesso restrito</p>
+      <h1>Painel operacional</h1>
+      <p class="muted">Entre com o usuário autorizado do administrador ou vendedor.</p>
+
+      <form id="loginForm">
+        <label>
+          E-mail
+          <input id="loginEmail" type="email" autocomplete="email" required>
+        </label>
+        <label>
+          Senha
+          <input id="loginPassword" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+      </form>
+      <p class="form-message" id="loginMessage"></p>
+    </section>
+
+    <section class="panel" id="panelView" hidden>
+      <header class="panel-head">
+        <div>
+          <div class="brand">✦ <span>PARFUMS</span></div>
+          <p class="eyebrow">Controle operacional</p>
+          <h1>Área de emergência</h1>
+        </div>
+        <div class="session-box">
+          <span id="actorRole">—</span>
+          <button class="btn btn-ghost" type="button" id="logoutBtn">Sair</button>
+        </div>
+      </header>
+
+      <section class="status-card">
+        <div>
+          <p class="eyebrow">Status da loja</p>
+          <div class="status-line">
+            <span class="status-dot" id="statusDot"></span>
+            <strong id="statusText">Consultando...</strong>
+          </div>
+          <p id="statusDetail" class="muted">—</p>
+        </div>
+        <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">Abrir vitrine</a>
+      </section>
+
+      <section class="emergency-grid">
+        <article class="control-card danger-card">
+          <p class="eyebrow">Ação crítica</p>
+          <h2>Desativar temporariamente</h2>
+          <p class="muted">A vitrine continua existindo, mas o cliente verá apenas a tela de indisponibilidade.</p>
+
+          <label>
+            Categoria
+            <select id="outageKind">
+              <option value="stock_issue">Problema de estoque</option>
+              <option value="inventory_count">Contagem de estoque</option>
+              <option value="maintenance">Manutenção / erro</option>
+              <option value="no_seller">Sem vendedor disponível</option>
+              <option value="operational_pause">Pausa operacional</option>
+              <option value="permanent_closure">Encerramento definitivo</option>
+            </select>
+          </label>
+
+          <label>
+            Justificativa interna
+            <textarea id="outageReason" rows="4" placeholder="Explique por que a loja será retirada do ar..." required></textarea>
+          </label>
+
+          <label>
+            Mensagem pública <span class="optional">(opcional)</span>
+            <textarea id="publicMessage" rows="3" placeholder="Se vazio, será usada a mensagem padrão da categoria."></textarea>
+          </label>
+
+          <button class="btn btn-danger" id="disableSiteBtn" type="button">Ativar modo de emergência</button>
+        </article>
+
+        <article class="control-card">
+          <p class="eyebrow">Restauração</p>
+          <h2>Colocar loja online</h2>
+          <p class="muted">A reativação restaura imediatamente a vitrine pública sem apagar nenhum dado.</p>
+          <label>
+            Nota de reativação <span class="optional">(opcional)</span>
+            <textarea id="restoreReason" rows="3" placeholder="Ex.: contagem finalizada, estoque conferido."></textarea>
+          </label>
+          <button class="btn btn-primary" id="enableSiteBtn" type="button">Colocar loja online</button>
+        </article>
+      </section>
+
+      <section class="permissions-card" id="permissionsCard" hidden>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Administrador</p>
+            <h2>Permissão de emergência dos vendedores</h2>
+          </div>
+          <button class="btn btn-ghost" id="refreshSellersBtn" type="button">Atualizar</button>
+        </div>
+        <div id="sellerPermissions" class="seller-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="confirmModal" hidden>
+    <div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <p class="eyebrow">Confirmação obrigatória</p>
+      <h2 id="confirmTitle">Confirmar ação</h2>
+      <p id="confirmText" class="muted"></p>
+      <label>
+        Digite <strong id="confirmWordLabel">CONFIRMAR</strong>
+        <input id="confirmWordInput" autocomplete="off">
+      </label>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" type="button" id="cancelConfirmBtn">Cancelar</button>
+        <button class="btn btn-danger" type="button" id="confirmActionBtn" disabled>Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="painel.js"></script>
+</body>
+</html>
