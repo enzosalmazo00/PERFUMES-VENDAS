@@ -435,3 +435,5 @@ footer{
   color: rgba(255,255,255,.72);
   line-height: 1.7;
 }
+
+.catalog-search{max-width:620px;margin:0 0 20px;display:flex;align-items:center;gap:10px;border:1px solid rgba(201,169,104,.28);background:rgba(15,13,10,.72);padding:0 14px}.catalog-search span{color:var(--gold-2);font-size:1.2rem}.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:#efe5d8;padding:14px 0;font:400 .78rem Inter,sans-serif}.catalog-search input::placeholder{color:#776e64}
