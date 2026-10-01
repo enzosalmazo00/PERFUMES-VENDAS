@@ -1162,3 +1162,7 @@ body{font-family:Poppins,Arial,sans-serif}
 .payment-tab.is-active{border-color:#efcb86;background:#32220d;color:#fff0d2}
 .payment-tab:focus-visible{outline:3px solid #edca82;outline-offset:3px}
 @media(max-width:520px){.detail-actions .preorder-cta{width:100%}.preorder-modal{padding:20px}.payment-tab{flex:1 1 130px}.checkout-payment-disclosure{font-size:12px}}
+
+/* Verified purchase review trust marker */
+.verified-purchase{display:inline-block;padding:3px 7px;border:1px solid rgba(204,174,97,.55);border-radius:3px;font:600 9px/1.3 Poppins,Arial,sans-serif;letter-spacing:.04em;color:#e8ce8e;margin:0 5px}
+.product-rating small{font:500 11px/1.4 Poppins,Arial,sans-serif;color:#d3c0a4}
