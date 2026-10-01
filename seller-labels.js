@@ -59,7 +59,10 @@ export function openSellerLabel(order,presetName="100x150"){
  '<div class="section"><div class="label-title">ITENS</div><table>'+list+'</table></div>'+
  '<div class="footer"><span>VALOR TOTAL</span><span>'+brl(order.total_cents)+'</span></div>'+
  '<div class="'+(pending?'warning':'paid')+'">'+(pending?'AGUARDANDO PAGAMENTO — NÃO ENTREGAR':
-   order.payment_channel==='seller_cash'?'PAGO EM DINHEIRO · VENDA PRESENCIAL':'PAGAMENTO CONFIRMADO PELA AZZENA')+
+   order.payment_channel==='seller_cash'?'PAGO EM DINHEIRO · VENDA PRESENCIAL':
+   order.payment_channel==='mercadopago'&&order.pickup_redeemed_at?
+     'ENTREGA REGISTRADA · CÓDIGO AZZ UTILIZADO':
+     'PAGO · EXIGIR CÓDIGO AZZ NO PAINEL ANTES DA ENTREGA')+
  '</div></main></body></html>';
  popup.document.open();popup.document.write(html);popup.document.close();popup.focus();return true;
 }
