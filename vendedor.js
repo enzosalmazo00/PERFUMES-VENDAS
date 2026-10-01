@@ -1,5 +1,6 @@
 import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
 import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales8";
+import {initPickupVerifier} from "./seller-pickup.js?v=20261001-pickupcode1";
 
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
@@ -161,7 +162,7 @@ async function refreshInventory(){
   $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
     const canAdvance=order.delivery_method==="presencial"&&order.payment_status==="approved"&&
       !["cancelled","delivered"].includes(order.fulfillment_status);
-    const next=order.fulfillment_status==="ready"?"delivered":order.fulfillment_status==="preparing"?"ready":"preparing";
+    const next=order.fulfillment_status==="ready"?"code_required":order.fulfillment_status==="preparing"?"ready":"preparing";
     const labels={preparing:"Iniciar preparação",ready:"Liberar retirada",delivered:"Marcar entregue"};
     const phone=String(order.customer_phone||"").replace(/\D/g,"");
     return '<article class="seller-order"><header><strong>'+esc(order.public_id)+'</strong><small>'+new Date(order.created_at).toLocaleString("pt-BR")+'</small></header>'+
@@ -170,7 +171,8 @@ async function refreshInventory(){
       ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
       '<p class="seller-order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+'× '+esc(item.product_name)+' · '+esc(item.volume_ml)+' mL').join('<br>')+'</p>'+ 
       '<div class="seller-dashboard-actions"><a class="seller-outline" href="etiqueta.html?pedido='+encodeURIComponent(order.id)+'" target="_blank" rel="noopener noreferrer">Gerar etiqueta</a>'+ (phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
-      (canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
+      (canAdvance&&next==="code_required"?'<a href="#sellerPickupVerifier" class="seller-outline">Conferir código para entregar</a>':
+        canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
   }).join(""):'<p class="muted">Ainda não há pedidos vinculados a você.</p>';
   const pickup=data.pickup||{};
   const pickupForm=$("#sellerPickupForm");
@@ -336,4 +338,5 @@ $("#sellerLabelSize").onchange=()=>{
   localStorage.setItem("azzena-label-prefs",JSON.stringify({...current,size:$("#sellerLabelSize").value}));
 };
 initSellerSales({call,notify,onSale:refreshInventory});
+initPickupVerifier({call,notify,onDelivered:refreshInventory});
 if(readSession())openSeller();else show("loginView");
