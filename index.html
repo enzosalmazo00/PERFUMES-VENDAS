@@ -2,6 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https://fbwlprwhczxjdsciotsi.supabase.co; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070604">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -18,7 +20,7 @@
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
-  <script>if(location.hash&&new URLSearchParams(location.hash.slice(1)).get('type')==='recovery'){location.replace('conta.html'+location.hash)}</script>
+  <script src="recovery-redirect.js"></script>
   <div class="site-unavailable" id="siteUnavailable" hidden>
     <div class="site-unavailable-card">
 <h1 id="siteUnavailableTitle">Site temporariamente indisponível</h1>
@@ -27,9 +29,9 @@
   </div>
 
   <div class="benefit-bar">
-    <div><span class="benefit-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><strong>ENVIOS PARA SÃO PAULO</strong><small>Frete calculado para o seu CEP</small></div>
+    <div><span class="benefit-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><strong>RETIRADA PRESENCIAL</strong><small>Sujeita à disponibilidade do vendedor</small></div>
     <div><span class="benefit-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.7 8.1-7 10-4.3-1.9-7-5.4-7-10V6l7-3Zm-3 9 2 2 4-4"/></svg></span><strong>PRODUTOS SELECIONADOS</strong><small>Curadoria e procedência informada</small></div>
-    <div><span class="benefit-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h4"/></svg></span><strong>PIX E CARTÃO</strong><small>Pagamento no fechamento da compra</small></div>
+    <div><span class="benefit-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h4"/></svg></span><strong>PAGAMENTO EM CONFIGURAÇÃO</strong><small>PIX e cartão após ativação segura</small></div>
   </div>
 
   <header class="header">
@@ -188,8 +190,8 @@
     <section class="service-row">
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 5-7 13L5 8l7-5Z"/><path d="M5 8h14M9 8l3 13 3-13"/></svg></span><div><b>CURADORIA PREMIUM</b><small>Seleção cuidadosa de fragrâncias</small></div></div>
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5h-4v-5h4M4 13v5h4v-5H4Z"/><path d="M16 20c-1 1-2 1-4 1"/></svg></span><div><b>ATENDIMENTO PERSONALIZADO</b><small>Escolha acompanhada do início ao fim</small></div></div>
-      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><b>PAGAMENTO SEGURO</b><small>PIX e cartão no fechamento</small></div></div>
-      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><div><b>RETIRADA COM VENDEDORES</b><small>Frete calculado conforme o CEP</small></div></div>
+      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><b>CHECKOUT PROTEGIDO</b><small>Pagamento em fase de ativação</small></div></div>
+      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><div><b>RETIRADA COM VENDEDORES</b><small>Entrega domiciliar ainda indisponível</small></div></div>
     </section>
   </main>
 
@@ -200,7 +202,7 @@
       <button type="button" data-jump-filter="feminino">Femininos</button>
       <button type="button" data-jump-filter="body_splash">Body Splash</button>
       <a href="#catalogo">Mais vendidos</a>
-      <a href="conta.html">Minha conta</a><a href="vendedor.html">Área do vendedor</a><a href="admin.html">Painel ADM</a>
+      <a href="conta.html">Minha conta</a><a href="vendedor.html">Área do vendedor</a>
     </div>
   </footer>
 
@@ -257,7 +259,7 @@
           </button>
         </div>
       </div>
-      <div class="checkout-payment-provider"><strong>Pagamento centralizado na AZZENA</strong><p>PIX ou cartão diretamente pelo Checkout Seguro do Mercado Pago. Nunca transfira dinheiro para o PIX pessoal de um vendedor.</p></div>
+      <div class="checkout-payment-provider"><strong>Pagamento centralizado na AZZENA</strong><p>PIX ou cartão serão disponibilizados pelo Checkout Seguro do Mercado Pago após ativação. Nunca transfira dinheiro para o PIX pessoal de um vendedor.</p></div>
       <div class="payment-tabs" hidden>
         <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
         <button class="payment-tab" type="button" data-payment="card">Cartão</button>
@@ -281,7 +283,7 @@
         <p id="paymentSetupNotice" class="payment-setup-notice" role="status" hidden>Pagamento seguro AZZENA em configuração. Nenhum PIX pessoal é autorizado.</p>
 <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>IR PARA PAGAMENTO SEGURO</button>
       </form>
-      <div class="checkout-tracking-note"><strong>Rastreio:</strong> a estrutura do pedido já está preparada; a automação do rastreamento de entrega será estudada na próxima etapa.</div>
+      <div class="checkout-tracking-note"><strong>Retirada:</strong> o vendedor informará quando seu pedido pago estiver pronto. Entrega domiciliar ainda não está disponível.</div>
     </section>
   </div>
 
