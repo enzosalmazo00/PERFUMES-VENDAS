@@ -1,4 +1,4 @@
-name: Enrich fragrance catalog
+name: Enrich fragrance catalog\n# retry after matcher fix
 on:
   push:
     paths:
