@@ -159,3 +159,15 @@ export function cents(v){return Math.round(Number(v||0)*100)}
 export function esc(v=""){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 export function option(rows,value,label,empty="Selecione"){return '<option value="">'+empty+'</option>'+rows.map(x=>'<option value="'+esc(x[value])+'">'+esc(typeof label==="function"?label(x):x[label])+'</option>').join("")}
 export function table(headers,rows){if(!rows.length)return '<p class="muted">Nenhum registro.</p>';return '<div class="table-wrap"><table class="data-table"><thead><tr>'+headers.map(h=>'<th>'+h[0]+'</th>').join("")+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+headers.map(h=>'<td>'+h[1](r)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>'}
+
+export async function requestPasswordReset(email){
+  const normalized=String(email||"").trim().toLowerCase();
+  if(!normalized||!normalized.includes("@"))throw new Error("Informe um e-mail válido.");
+  const redirectTo="https://enzosalmazo00.github.io/PERFUMES-VENDAS/conta.html";
+  const r=await fetch(SUPABASE_URL+"/auth/v1/recover?redirect_to="+encodeURIComponent(redirectTo),{
+    method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email:normalized})
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível enviar o e-mail de recuperação.");
+  return d;
+}
