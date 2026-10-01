@@ -606,3 +606,100 @@ footer,.footer-logo,.footer-links a,.footer-links button,
   font-weight:600!important;
   letter-spacing:-.02em!important;
 }
+
+
+/* AZZENA BRAND 20261001 */
+.brand-logo{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:13px!important;
+  padding-left:0!important;
+  width:max-content!important;
+}
+.brand-monogram{
+  position:relative!important;
+  display:block!important;
+  width:54px!important;
+  height:42px!important;
+  flex:0 0 54px!important;
+}
+.brand-z{
+  position:absolute!important;
+  top:50%!important;
+  font-family:"Poppins",Arial,sans-serif!important;
+  font-size:34px!important;
+  line-height:1!important;
+  font-weight:700!important;
+  color:#e7c47e!important;
+  text-shadow:0 0 18px rgba(231,196,126,.15)!important;
+  transform-origin:center!important;
+}
+.brand-z-left{
+  left:2px!important;
+  transform:translateY(-50%)!important;
+}
+.brand-z-right{
+  right:2px!important;
+  transform:translateY(-50%) scaleX(-1)!important;
+}
+.brand-wordmark{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  line-height:1!important;
+}
+.brand-wordmark .logo-name{
+  display:block!important;
+  font-family:"Poppins",Arial,sans-serif!important;
+  font-size:24px!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:.17em!important;
+  color:#e7c47e!important;
+}
+.brand-wordmark small{
+  display:block!important;
+  font-family:"Poppins",Arial,sans-serif!important;
+  margin-top:7px!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  letter-spacing:.38em!important;
+  color:#cda75e!important;
+}
+.footer-logo{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:10px!important;
+  font-family:"Poppins",Arial,sans-serif!important;
+  color:#e6c47d!important;
+}
+.footer-logo strong{
+  font-size:18px!important;
+  font-weight:600!important;
+  letter-spacing:.14em!important;
+}
+.footer-logo span{
+  display:inline!important;
+  font-family:"Poppins",Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:500!important;
+  letter-spacing:.26em!important;
+  color:#a98c55!important;
+}
+@media(max-width:1180px){
+  .brand-logo{gap:10px!important}
+  .brand-monogram{width:46px!important;height:38px!important;flex-basis:46px!important}
+  .brand-z{font-size:30px!important}
+  .brand-wordmark .logo-name{font-size:21px!important}
+  .brand-wordmark small{font-size:8px!important;letter-spacing:.32em!important}
+}
+@media(max-width:760px){
+  .brand-logo{gap:8px!important}
+  .brand-monogram{width:42px!important;height:34px!important;flex-basis:42px!important}
+  .brand-z{font-size:27px!important}
+  .brand-wordmark .logo-name{font-size:20px!important;letter-spacing:.13em!important}
+  .brand-wordmark small{font-size:7.5px!important;margin-top:5px!important;letter-spacing:.28em!important}
+}
