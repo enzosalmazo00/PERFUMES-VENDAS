@@ -1,4 +1,4 @@
-import {esc,money,option,table} from "./admin-api.js";
+import {esc,money,option,table} from "./admin-api.js?v=20260930-2204";
 export function shell(){
 return `<nav class="tabs">
 <button class="tab is-active" data-tab="visao">Visão geral</button>
