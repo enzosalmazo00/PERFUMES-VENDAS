@@ -25,9 +25,9 @@
   will-change:opacity,transform
 }
 .hero-slide.is-active{opacity:1;transform:scale(1)}
-.hero-slide-signature{background-image:url("assets/hero-signature.webp");background-position:58% center}
-.hero-slide-female{background-image:url("assets/hero-female.webp");background-position:58% center}
-.hero-slide-male{background-image:url("assets/hero-male.webp");background-position:58% center}
+.hero-slide-signature{background-image:url("assets/hero-signature.webp?v=20261001-upload");background-position:58% center}
+.hero-slide-female{background-image:url("assets/hero-female.webp?v=20261001-upload");background-position:58% center}
+.hero-slide-male{background-image:url("assets/hero-male.webp?v=20261001-upload");background-position:58% center}
 .hero:before{
   content:"";
   position:absolute;
