@@ -179,7 +179,7 @@ document.querySelector("#orders").innerHTML=table([
 ["Origem",r=>r.payment_channel==="seller_cash"?"Dinheiro presencial":r.payment_channel==="mercadopago"?"Site · Mercado Pago":"Legado"],
 ["Pagamento",r=>'<select class="admin-inline-select" data-order-payment="'+esc(r.id)+'">'+["pending","approved","rejected","cancelled","refunded"].map(x=>'<option value="'+x+'" '+(r.payment_status===x?"selected":"")+'>'+paymentLabels[x]+'</option>').join("")+'</select>'],
 ["Pedido",r=>'<select class="admin-inline-select" data-order-fulfillment="'+esc(r.id)+'">'+["pending","preparing","ready","shipped","delivered","cancelled"].map(x=>'<option value="'+x+'" '+(r.fulfillment_status===x?"selected":"")+'>'+orderStatusLabels[x]+'</option>').join("")+'</select>'],
-["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-save-order="'+esc(r.id)+'">Salvar status</button><a class="btn btn-small" target="_blank" rel="noopener" href="https://wa.me/'+String(r.customer_phone||"").replace(/\\D/g,"")+'?text='+encodeURIComponent("Olá "+r.customer_name+", estamos entrando em contato sobre o pedido "+r.public_id+".")+'">WhatsApp</a></div>']
+["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-save-order="'+esc(r.id)+'">Salvar status</button><a class="btn btn-small" target="_blank" rel="noopener" href="https://wa.me/'+String(r.customer_phone||"").replace(/\D/g,"")+'?text='+encodeURIComponent("Olá "+r.customer_name+", estamos entrando em contato sobre o pedido "+r.public_id+".")+'">WhatsApp</a></div>']
 ],d.orders||[]);
 const cashRows=(d.orders||[]).filter(o=>o.payment_channel==="seller_cash");
 const cashGross=cashRows.reduce((sum,o)=>sum+Number(o.subtotal_cents||0),0);
