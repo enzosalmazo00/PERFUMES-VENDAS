@@ -95,7 +95,7 @@ for t in targets:
     for bs,bk in bms:
         for nn,u in brand_urls[bk]:
             variants={nn,remove_brand(nn,tb),remove_brand(nn,bk)}
-            ns=max(SequenceMatcher(None,tclean or tn,v).ratio() for v in variants if v)
+            usable=[v for v in variants if v]\n            if not usable: continue\n            ns=max(SequenceMatcher(None,tclean or tn,v).ratio() for v in usable)
             tt=set((tclean or tn).split())
             for v in variants:
                 vt=set(v.split())
