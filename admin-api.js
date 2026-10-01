@@ -163,7 +163,7 @@ export function table(headers,rows){if(!rows.length)return '<p class="muted">Nen
 export async function requestPasswordReset(email){
   const normalized=String(email||"").trim().toLowerCase();
   if(!normalized||!normalized.includes("@"))throw new Error("Informe um e-mail válido.");
-  const redirectTo="https://enzosalmazo00.github.io/PERFUMES-VENDAS/";
+  const redirectTo="https://enzosalmazo00.github.io/PERFUMES-VENDAS/admin.html?recovery=1";
   const r=await fetch(SUPABASE_URL+"/auth/v1/recover?redirect_to="+encodeURIComponent(redirectTo),{
     method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email:normalized})
   });
