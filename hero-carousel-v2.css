@@ -26,8 +26,19 @@
   pointer-events:none!important;
   z-index:0!important;
   transform:none!important;
-  background:none!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-position:58% center!important;
   transition:opacity .65s ease,visibility .65s ease!important;
+}
+#inicio .hero-slide:nth-of-type(1){
+  background-image:url("assets/hero-signature.webp?v=20261001-bg3")!important;
+}
+#inicio .hero-slide:nth-of-type(2){
+  background-image:url("assets/hero-feminine.webp?v=20261001-bg3")!important;
+}
+#inicio .hero-slide:nth-of-type(3){
+  background-image:url("assets/hero-masculine.webp?v=20261001-bg3")!important;
 }
 #inicio .hero-slide.is-active{
   opacity:1!important;
@@ -35,26 +46,15 @@
   pointer-events:auto!important;
   z-index:2!important;
 }
-#inicio .hero-media{
-  position:absolute!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  object-position:58% center!important;
-  display:block!important;
-  z-index:0!important;
-  user-select:none!important;
-  -webkit-user-drag:none!important;
-}
+#inicio .hero-media{display:none!important}
 #inicio .hero-shade{
   position:absolute!important;
   inset:0!important;
   z-index:1!important;
   pointer-events:none!important;
   background:
-    linear-gradient(90deg,rgba(2,2,2,.97) 0%,rgba(3,2,2,.92) 23%,rgba(4,3,2,.72) 42%,rgba(4,3,2,.30) 59%,rgba(0,0,0,.08) 79%,rgba(0,0,0,.12) 100%),
-    linear-gradient(0deg,rgba(0,0,0,.20),transparent 42%)!important;
+    linear-gradient(90deg,rgba(2,2,2,.84) 0%,rgba(3,2,2,.72) 25%,rgba(4,3,2,.45) 43%,rgba(4,3,2,.16) 60%,rgba(0,0,0,.02) 82%,rgba(0,0,0,.06) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.14),transparent 42%)!important;
 }
 #inicio.hero:before,
 #inicio .hero-slide:before,
@@ -118,7 +118,7 @@
 }
 @media(max-width:760px){
   #inicio.hero,#inicio .hero-carousel{min-height:610px!important}
-  #inicio .hero-media{object-position:58% center!important}
+  #inicio .hero-slide{background-position:58% center!important}
   #inicio .hero-shade{
     background:
       linear-gradient(180deg,rgba(2,2,2,.92) 0%,rgba(3,2,2,.78) 38%,rgba(3,2,2,.28) 67%,rgba(0,0,0,.10) 100%),
@@ -139,5 +139,5 @@
   #inicio.hero,#inicio .hero-carousel{min-height:590px!important}
   #inicio .hero-copy{min-height:590px!important;padding:34px 18px 235px!important}
   #inicio .hero-copy h1{font-size:40px!important}
-  #inicio .hero-media{object-position:56% center!important}
+  #inicio .hero-slide{background-position:56% center!important}
 }
