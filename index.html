@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-azzena1">
+  <link rel="stylesheet" href="styles.css?v=20261001-shipping1">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="benefit-bar">
-    <div><span class="benefit-icon">◆</span><strong>ENTREGA PRESENCIAL</strong><small>Atendimento combinado com o vendedor</small></div>
+    <div><span class="benefit-icon">◆</span><strong>ENVIOS PARA SÃO PAULO</strong><small>Frete calculado para o seu CEP</small></div>
     <div><span class="benefit-icon">◇</span><strong>PRODUTOS SELECIONADOS</strong><small>Curadoria e procedência informada</small></div>
     <div><span class="benefit-icon">▣</span><strong>PIX E CARTÃO</strong><small>Pagamento no fechamento da compra</small></div>
   </div>
@@ -58,7 +58,7 @@
         <span>⌕</span>
         <input id="topSearch" type="search" placeholder="Buscar perfumes...">
       </label>
-      <a class="user-icon" href="admin.html" aria-label="Área do vendedor">♙</a>
+      <a class="user-icon" href="conta.html" aria-label="Minha conta">♙</a>
       <button class="cart-icon" id="bagBtn" type="button" aria-label="Abrir sacola">
         ♧<span id="bagCount">0</span>
       </button>
@@ -165,7 +165,7 @@
       <div><span>◇</span><div><b>CURADORIA PREMIUM</b><small>Seleção cuidadosa de fragrâncias</small></div></div>
       <div><span>♧</span><div><b>ATENDIMENTO PERSONALIZADO</b><small>Escolha acompanhada do início ao fim</small></div></div>
       <div><span>▣</span><div><b>PAGAMENTO SEGURO</b><small>PIX e cartão no fechamento</small></div></div>
-      <div><span>✦</span><div><b>ENTREGA PRESENCIAL</b><small>Combinada diretamente com o vendedor</small></div></div>
+      <div><span>✦</span><div><b>ENTREGA EM SÃO PAULO</b><small>Frete calculado conforme o CEP</small></div></div>
     </section>
   </main>
 
@@ -176,7 +176,7 @@
       <button type="button" data-jump-filter="feminino">Femininos</button>
       <button type="button" data-jump-filter="body_splash">Body Splash</button>
       <a href="#catalogo">Mais vendidos</a>
-      <a href="admin.html">Área do vendedor</a>
+      <a href="conta.html">Minha conta</a><a href="admin.html">Área do vendedor</a>
     </div>
   </footer>
 
@@ -214,18 +214,26 @@
         <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
         <button class="payment-tab" type="button" data-payment="card">Cartão</button>
       </div>
+      <div id="checkoutCustomerBox"></div>
+      <div id="shippingArea" class="shipping-checkout" hidden>
+        <div class="shipping-head"><div><strong>Endereço de entrega</strong><small>Envios disponíveis para o Estado de São Paulo.</small></div><a href="conta.html">Gerenciar endereços</a></div>
+        <select id="checkoutAddressSelect" class="checkout-select"></select>
+        <button class="outline-shipping-btn" id="calculateShipping" type="button">CALCULAR FRETE</button>
+        <div id="shippingQuotes" class="shipping-quotes"></div>
+        <p id="shippingPublicNote" class="shipping-note"></p>
+      </div>
       <form id="checkoutForm">
-        <label>Nome completo<input name="name" required></label>
-        <label>WhatsApp<input name="phone" required></label>
-        <label>E-mail <small>(opcional)</small><input name="email" type="email"></label>
-        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pagamento é confirmado no atendimento.</p></div>
-        <button class="gold-button full" type="submit">ENVIAR PEDIDO</button>
+        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pedido será criado com pagamento pendente para confirmação no fechamento.</p></div>
+        <div id="checkoutFinalTotal" class="checkout-final-total"></div>
+        <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>CRIAR PEDIDO</button>
       </form>
+      <div class="checkout-tracking-note"><strong>Rastreio:</strong> a estrutura do pedido já está preparada; a automação do rastreamento de entrega será estudada na próxima etapa.</div>
     </section>
   </div>
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-bodysplash2"></script>
+  <script type="module" src="app.js?v=20261001-shipping1"></script>
+  <script type="module" src="customer-checkout.js?v=20261001-shipping1"></script>
 </body>
 </html>
