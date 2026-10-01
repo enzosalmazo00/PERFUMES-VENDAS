@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-stocklock1">
+  <link rel="stylesheet" href="styles.css?v=20261001-preorder-ui1">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -213,6 +213,17 @@
     </section>
   </div>
 
+  <div class="overlay" id="preorderOverlay" hidden>
+    <section class="modal preorder-modal" role="dialog" aria-modal="true" aria-labelledby="preorderDialogTitle">
+      <button class="close" type="button" id="closePreorder" aria-label="Fechar escolha do vendedor">×</button>
+      <p class="eyebrow">ENCOMENDA SOB CONSULTA</p>
+      <h2 id="preorderDialogTitle">Escolha um vendedor</h2>
+      <p id="preorderProductName" class="preorder-product-name"></p>
+      <p class="preorder-disclaimer">A solicitação será enviada diretamente pelo WhatsApp. O vendedor confirmará a disponibilidade, o preço e o prazo. Nenhum pedido ou pagamento será criado automaticamente.</p>
+      <div id="preorderSellerList" class="preorder-seller-list"></div>
+    </section>
+  </div>
+
   <aside class="drawer" id="bagDrawer" aria-hidden="true">
     <div class="drawer-head">
       <div class="drawer-title-wrap">
@@ -259,11 +270,12 @@
           </button>
         </div>
       </div>
-      <div class="checkout-payment-provider"><strong>Pagamento centralizado na AZZENA</strong><p>PIX ou cartão serão disponibilizados pelo Checkout Seguro do Mercado Pago após ativação. Nunca transfira dinheiro para o PIX pessoal de um vendedor.</p></div>
-      <div class="payment-tabs" hidden>
-        <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
-        <button class="payment-tab" type="button" data-payment="card">Cartão</button>
+      <div class="checkout-payment-provider"><strong>PIX e cartão de crédito via Mercado Pago</strong><p>Os pagamentos online ainda estão em configuração. No cartão parcelado, eventuais juros ou encargos dependem do número de parcelas e das condições do Mercado Pago. Confira o valor total antes de confirmar. Nunca faça PIX para a conta pessoal de um vendedor.</p></div>
+      <div class="payment-tabs" role="group" aria-label="Forma de pagamento">
+        <button class="payment-tab is-active" type="button" data-payment="pix" aria-pressed="true">PIX</button>
+        <button class="payment-tab" type="button" data-payment="card" aria-pressed="false">Cartão de crédito</button>
       </div>
+      <p id="paymentMethodDisclosure" class="checkout-payment-disclosure" role="status">PIX: o pagamento será realizado diretamente no Mercado Pago quando o checkout estiver disponível.</p>
       <div id="checkoutCustomerBox"></div>
       <div id="shippingArea" class="shipping-checkout" hidden>
         <div class="shipping-head"><div><strong>Endereço de entrega</strong><small>Envios disponíveis para o Estado de São Paulo.</small></div><a href="conta.html">Gerenciar endereços</a></div>
@@ -278,7 +290,7 @@
         <p class="shipping-note">O pedido e o pagamento ficarão pendentes até a confirmação. Aguarde a liberação do vendedor antes de se deslocar.</p>
       </div>
       <form id="checkoutForm">
-        <div class="demo-box" id="paymentDemoBox"><strong>Pagamento seguro</strong><p>Após selecionar o vendedor e confirmar o local de retirada, você será encaminhado ao Mercado Pago.</p></div>
+        <div class="demo-box" id="paymentDemoBox"><strong>PIX via Mercado Pago</strong><p>O checkout está em fase de ativação. Nenhum valor será cobrado neste momento.</p></div>
         <div id="checkoutFinalTotal" class="checkout-final-total"></div>
         <p id="paymentSetupNotice" class="payment-setup-notice" role="status" hidden>Pagamento seguro AZZENA em configuração. Nenhum PIX pessoal é autorizado.</p>
 <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>IR PARA PAGAMENTO SEGURO</button>
@@ -289,7 +301,7 @@
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-stocklock1"></script>
-  <script type="module" src="customer-checkout.js?v=20261001-gatewayready2"></script>
+  <script type="module" src="app.js?v=20261001-preorder-ui1"></script>
+  <script type="module" src="customer-checkout.js?v=20261001-payment-methods1"></script>
 </body>
 </html>
