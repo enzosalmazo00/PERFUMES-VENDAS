@@ -31,6 +31,7 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
    for(const key of ["id","name","phone","email","tax_id","address","notes"]){const node=field(suppliersForm,key);if(node)node.value=selected[key]||""}
    field(suppliersForm,"contact").value=selected.contact_name||"";
    field(suppliersForm,"is_active").checked=!!selected.is_active;
+   $("#supplierActiveLabel").hidden=false;
    $("#supplierSubmit").textContent="Salvar alterações do fornecedor";
    $("#cancelSupplierEdit").hidden=false;feedback("supplierFeedback","Editando "+selected.name);
    suppliersForm.scrollIntoView({behavior:"smooth",block:"center"});
@@ -63,6 +64,7 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
  function resetSupplier(){
   suppliersForm.reset();field(suppliersForm,"id").value="";
   field(suppliersForm,"is_active").checked=true;
+  $("#supplierActiveLabel").hidden=true;
   $("#supplierSubmit").textContent="Cadastrar fornecedor";$("#cancelSupplierEdit").hidden=true;
  }
  suppliersForm.onsubmit=async event=>{
