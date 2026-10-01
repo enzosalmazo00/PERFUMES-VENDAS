@@ -1,8 +1,33 @@
 
 import {FRAGRANCE_CATALOG,VOLUME_OPTIONS} from "./fragrance-data.js?v=20261001-catalog1";
+import {VERIFIED_FRAGRANCES} from "./verified-fragrances.js?v=20261001-verified1";
 const OTHER="__other__";
 const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 const unique=a=>[...new Set(a)];
+const verified=(brand,name,type)=>VERIFIED_FRAGRANCES.find(x=>normalize(x.brand)===normalize(brand)&&normalize(x.name)===normalize(name)&&x.type===type);
+function updateReference(form,record){
+ const target=form.querySelector(".catalog-reference-note");
+ if(!target)return;
+ target.replaceChildren();
+ if(record){
+  target.textContent="Dados consultados em catálogo oficial; confirme a versão e o tamanho da embalagem. ";
+  const a=document.createElement("a");a.href=record.source;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Ver fonte oficial";
+  target.append(a);
+ }else{
+  target.textContent="Esta versão ainda não tem ficha oficial validada. Preencha categoria, volume real e notas conforme o rótulo; o sistema não inventará essas informações.";
+ }
+}
+function fillVerified(form,record){
+ const f=fields(form);
+ updateReference(form,record);
+ if(!record)return;
+ const category=form.elements.namedItem("category");
+ if(category)category.value=record.gender;
+ const map={short_description:record.short,description:record.description,
+   top_notes:record.top.join(", "),heart_notes:record.heart.join(", "),base_notes:record.base.join(", ")};
+ for(const [key,value]of Object.entries(map)){const input=form.elements.namedItem(key);if(input)input.value=value}
+}
+
 function el(name,attrs={}){const n=document.createElement(name);for(const[k,v]of Object.entries(attrs))n[k]=v;return n}
 function addOption(parent,value,label){const o=new Option(label,value);parent.append(o);return o}
 function matchBrand(value){return FRAGRANCE_CATALOG.find(x=>normalize(x.brand)===normalize(value))}
@@ -60,14 +85,17 @@ function renderFragrances(form,preferred){
   f.fragrance.disabled=!entry&&!f.brand.value;
   f.fragrance.title=isSplash?"Somente sugestões de body splash da marca escolhida":"Sugestões de perfumes da marca escolhida";
 }
-function renderVolumes(form){
-  const f=fields(form),previous=f.volume.value;
-  f.volume.replaceChildren();
-  addOption(f.volume,"","Selecione o volume");
-  for(const amount of VOLUME_OPTIONS)addOption(f.volume,String(amount),amount+" mL");
-  addOption(f.volume,OTHER,"Outro volume — digitar");
-  f.volume.value=[...f.volume.options].some(o=>o.value===previous)?previous:"";
-  toggleVolume(form);
+function renderVolumes(form,preferred){
+ const f=fields(form);
+ const record=verified(f.brand.value,f.fragrance.value,f.type.value);
+ const keep=preferred===undefined?f.volume.value:String(preferred||"");
+ f.volume.replaceChildren();
+ addOption(f.volume,"",record?"Selecione um volume oficial":"Volume não verificado — informar o frasco");
+ if(record){for(const amount of record.volumes)addOption(f.volume,String(amount),amount+" mL")}
+ addOption(f.volume,OTHER,record?"Outro volume / kit — digitar":"Digitar volume da embalagem");
+ f.volume.value=[...f.volume.options].some(x=>x.value===keep)?keep:"";
+ toggleVolume(form);
+ updateReference(form,record);
 }
 function toggleVolume(form){
   const f=fields(form),custom=f.volume.value===OTHER;
@@ -84,13 +112,14 @@ export function initializeCatalogForm(form){
   if(!form||form.dataset.catalogReady==="yes")return;
   form.dataset.catalogReady="yes";
   renderBrands(form,"");
-  renderVolumes(form);
   renderFragrances(form,"");
+  renderVolumes(form);
   const f=fields(form);
   f.search.addEventListener("input",()=>renderBrands(form));
   f.brand.addEventListener("change",()=>{
     syncCustomBrand(form);
     renderFragrances(form,"");
+    renderVolumes(form);
     f.name.value="";
   });
   f.type.addEventListener("change",()=>{
@@ -98,9 +127,14 @@ export function initializeCatalogForm(form){
     f.name.value="";
   });
   f.fragrance.addEventListener("change",()=>{
-    if(f.fragrance.value&&f.fragrance.value!==OTHER)f.name.value=f.fragrance.value;
+    if(f.fragrance.value&&f.fragrance.value!==OTHER){
+      f.name.value=f.fragrance.value;
+      fillVerified(form,verified(f.brand.value,f.fragrance.value,f.type.value));
+      renderVolumes(form);
+    }
     else if(f.fragrance.value===OTHER){
       f.name.value="";
+      fillVerified(form,null);renderVolumes(form);
       f.name.focus();
     }
   });
@@ -120,13 +154,9 @@ export function catalogLoadProduct(form,product){
   f.name.value=product.name||"";
   markSelectedFragrance(form);
   const volume=Number(product.volume_ml||0);
-  if(VOLUME_OPTIONS.includes(volume)){
-    f.volume.value=String(volume);
-    toggleVolume(form);
-  }else{
-    f.volume.value=volume?OTHER:"";
-    toggleVolume(form);
-    if(volume)f.customVolume.value=String(volume);
+  renderVolumes(form,volume);
+  if(volume&&![...f.volume.options].some(o=>o.value===String(volume))){
+    f.volume.value=OTHER;toggleVolume(form);f.customVolume.value=String(volume);
   }
 }
 export function catalogResetForm(form){
@@ -138,6 +168,7 @@ export function catalogResetForm(form){
   syncCustomBrand(form);
   renderFragrances(form,"");
   renderVolumes(form);
+  updateReference(form,null);
 }
 export function catalogReadBrand(data){
   const brand=String(data.get("brand_preset")||"");
