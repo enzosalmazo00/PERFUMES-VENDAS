@@ -22,3 +22,26 @@ $("#profileForm").onsubmit=async e=>{e.preventDefault();const f=e.currentTarget,
 $("#addressCep").addEventListener("blur",async e=>{const cep=e.target.value.replace(/\D/g,"");if(cep.length!==8)return;try{const r=await fetch("https://viacep.com.br/ws/"+cep+"/json/");const d=await r.json();if(d.erro)throw new Error();if(String(d.uf).toUpperCase()!=="SP"){notify("No momento, os envios são somente para o Estado de São Paulo.");return}const f=$("#addressForm");f.elements.street.value=d.logradouro||"";f.elements.neighborhood.value=d.bairro||"";f.elements.city.value=d.localidade||"";f.elements.state.value=d.uf||""}catch{notify("CEP não encontrado.")}});
 $("#addressForm").onsubmit=async e=>{e.preventDefault();const f=e.currentTarget,d=new FormData(f);try{await customerPortal({action:"save_address",id:d.get("id")||null,label:d.get("label"),postal_code:d.get("postal_code"),street:d.get("street"),number:d.get("number"),complement:d.get("complement"),neighborhood:d.get("neighborhood"),city:d.get("city"),state:d.get("state"),is_default:d.get("is_default")==="on"});f.reset();f.elements.label.value="Principal";f.elements.is_default.checked=true;await bootstrap();notify("Endereço salvo.")}catch(x){notify(x.message==="STATE_NOT_SUPPORTED"?"Envios disponíveis somente para São Paulo.":x.message)}};
 bindPasswordEyes();const recovery=recoveryFromHash();if(recovery){authView.hidden=true;accountView.hidden=true;recoveryView.hidden=false}else if(loadCustomerSession()?.access_token)bootstrap();else{authView.hidden=false;accountView.hidden=true;recoveryView.hidden=true}
+
+document.querySelectorAll("[data-toggle-password]").forEach(btn=>btn.addEventListener("click",()=>{
+  const input=document.getElementById(btn.dataset.togglePassword);if(!input)return;
+  const show=input.type==="password";input.type=show?"text":"password";btn.classList.toggle("is-visible",show);btn.setAttribute("aria-label",show?"Ocultar senha":"Mostrar senha");
+}));
+$("#forgotPassword")?.addEventListener("click",async()=>{
+  const email=$("#loginEmail").value.trim();
+  authMessage.textContent="";
+  if(!email){authMessage.textContent="Digite seu e-mail acima e toque novamente em “Esqueceu sua senha?”.";$("#loginEmail").focus();return}
+  try{await requestCustomerPasswordReset(email);authMessage.textContent="Enviamos um link para redefinir sua senha. Abra o e-mail e volte por esse link."}catch(e){authMessage.textContent=e.message}
+});
+const recoverySession=captureRecoverySession();
+if(recoverySession||new URLSearchParams(location.search).get("recovery")==="1"){
+  authView.hidden=false;accountView.hidden=true;
+  $("#recoveryBox").hidden=false;
+  document.querySelector(".account-auth-grid").hidden=true;
+  $(".account-intro").innerHTML='<p class="eyebrow">RECUPERAÇÃO DE ACESSO</p><h1>Defina sua nova senha.</h1><p>Crie uma senha nova para voltar a acessar sua conta.</p>';
+}
+$("#recoveryForm")?.addEventListener("submit",async e=>{
+  e.preventDefault();const p=$("#newPassword").value,c=$("#confirmNewPassword").value;
+  if(p!==c)return notify("As duas senhas precisam ser iguais.");
+  try{await updateCustomerPassword(p);history.replaceState({},document.title,"conta.html");$("#recoveryBox").hidden=true;document.querySelector(".account-auth-grid").hidden=false;authMessage.textContent="Senha alterada com sucesso. Você já pode entrar com a nova senha.";customerSignOut()}catch(err){notify(err.message)}
+});
