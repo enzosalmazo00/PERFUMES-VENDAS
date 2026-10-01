@@ -24,3 +24,142 @@
 .admin-password-field{position:relative}.admin-password-field input{padding-right:46px!important}.admin-password-eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:transparent;color:#bfa66f;display:grid;place-items:center;cursor:pointer}.admin-password-eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}.admin-password-eye.is-visible{color:#e6c778}.admin-forgot-link{border:0;background:transparent;color:#d9bb79;padding:0;text-align:left;font-size:11px;cursor:pointer;margin-top:-4px}.admin-forgot-link:hover{text-decoration:underline}
 
 .admin-password-field{position:relative}.admin-password-field input{padding-right:48px!important}.admin-password-toggle{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;background:transparent;color:#c9ad72;display:grid;place-items:center}.admin-password-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.btn-link{border:0!important;background:transparent!important;color:#d4b36e!important;text-decoration:underline;text-underline-offset:3px;padding:3px 0 7px!important;text-align:right!important}
+
+/* AZZENA / Administração: layout isolado do formulário de acesso.
+   Evita que regras genéricas dos formulários do painel desalinhem os botões. */
+#loginView.auth-card{
+  width:min(570px,100%);
+  margin:clamp(24px,6vh,78px) auto 0;
+  padding:clamp(24px,4vw,46px);
+  border:1px solid rgba(213,181,111,.33);
+  border-radius:4px;
+  background:linear-gradient(143deg,#19140e 0%,#0f0d0a 58%,#0b0a08 100%);
+  box-shadow:0 30px 90px rgba(0,0,0,.42);
+  font-family:Poppins,Arial,sans-serif;
+  min-width:0;
+}
+#loginView .admin-login-brand{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:0 0 27px;
+}
+#loginView .admin-login-mark{
+  width:46px;height:40px;overflow:visible;
+  fill:none;stroke:#e1bf75;stroke-width:2.3;
+  stroke-linecap:round;stroke-linejoin:round;
+  flex:none;
+}
+#loginView .admin-login-brand-name{display:flex;flex-direction:column;gap:4px;align-items:center}
+#loginView .admin-login-brand-name strong{
+  font:600 23px/1 Cinzel,Georgia,serif;letter-spacing:.09em;color:#ebd19c;
+}
+#loginView .admin-login-brand-name small{
+  font:500 9px/1.4 Poppins,Arial,sans-serif;letter-spacing:.48em;color:#ac9769;
+}
+#loginView .admin-login-heading{text-align:center;margin:0 0 30px}
+#loginView .admin-login-kicker{
+  margin:0 0 8px;color:#d6b36c;letter-spacing:.22em;font-size:10px;font-weight:600;
+}
+#loginView h1{
+  font:600 clamp(40px,5vw,52px)/1 "Cormorant Garamond",Georgia,serif;
+  color:#f8f0e2;letter-spacing:.015em;margin:0 0 10px;
+}
+#loginView .admin-login-heading>p:last-child{
+  color:#b8ac9a;font-size:12px;line-height:1.55;margin:0;
+}
+#loginView #loginForm{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:0;width:100%;min-width:0;
+}
+#loginView #loginForm>label{
+  display:flex;flex-direction:column;gap:8px;
+  margin:0 0 18px;min-width:0;width:100%;
+  color:#e2d7c7;font-size:13px;font-weight:500;
+}
+#loginView #loginForm>label input{
+  display:block;width:100%;min-width:0;height:54px;
+  box-sizing:border-box;margin:0;padding:14px 16px;
+  border:1px solid rgba(213,181,111,.31);border-radius:3px;
+  background:#080807;color:#f7eee0;
+  font:400 16px/1.3 Poppins,Arial,sans-serif;
+  -webkit-appearance:none;appearance:none;
+}
+#loginView #loginForm input::placeholder{color:#756c5f;opacity:1;font-size:13px}
+#loginView #loginForm input:focus{
+  border-color:#e3be73;box-shadow:0 0 0 3px rgba(213,181,111,.1);
+}
+#loginView .admin-password-field{
+  display:block;position:relative;width:100%;min-width:0;
+}
+#loginView .admin-password-field input{padding-right:58px!important}
+#loginView .admin-password-eye{
+  position:absolute;top:50%;right:7px;transform:translateY(-50%);
+  display:grid;place-items:center;width:42px;height:42px;
+  border:0;border-radius:3px;background:transparent;color:#dec180;
+  padding:0;cursor:pointer;
+}
+#loginView .admin-password-eye svg{
+  display:block;width:22px;height:22px;
+  fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#loginView .admin-password-eye:focus-visible{
+  outline:2px solid #d5b56f;outline-offset:2px;
+}
+#loginView .admin-forgot-row{
+  display:flex;align-items:center;justify-content:flex-end;
+  min-width:0;margin:-3px 0 21px;
+}
+#loginView .admin-forgot-link{
+  display:inline-block;position:static;float:none;
+  min-height:32px;margin:0;padding:5px 0;
+  border:0;background:transparent;text-align:right;
+  color:#e4c280;font:500 12px/1.4 Poppins,Arial,sans-serif;
+  text-decoration:underline;text-underline-offset:4px;
+}
+#loginView .admin-enter{
+  display:block;width:100%;min-height:52px;
+  border:1px solid #dfba74;border-radius:3px;
+  background:linear-gradient(180deg,#eacb89,#d3ab5f);
+  color:#130e07;font:600 14px Poppins,Arial,sans-serif;
+  text-align:center;margin:0;white-space:normal;
+}
+#loginView .admin-enter:active{filter:brightness(.92)}
+#loginView .admin-login-divider{
+  display:flex;align-items:center;gap:12px;
+  margin:26px 0 17px;color:#93846a;
+  font-size:9px;letter-spacing:.1em;text-align:center;
+}
+#loginView .admin-login-divider:before,
+#loginView .admin-login-divider:after{
+  content:"";height:1px;background:rgba(213,181,111,.21);flex:1;min-width:15px;
+}
+#loginView .admin-secondary-actions{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;width:100%;
+}
+#loginView .admin-secondary-actions>.btn{
+  display:flex;align-items:center;justify-content:center;
+  min-height:48px;width:100%;min-width:0;
+  padding:10px 8px;margin:0;border:1px solid rgba(213,181,111,.35);
+  border-radius:3px;background:transparent;
+  color:#eee0c8;font:500 12px/1.35 Poppins,Arial,sans-serif;
+  text-align:center;white-space:normal;
+}
+#loginView .admin-secondary-actions>.btn:hover{
+  border-color:#dfbe81;background:rgba(213,181,111,.07);
+}
+#loginView .admin-login-message{
+  color:#e5a49e;min-height:20px;margin:18px 0 0;
+  font:500 12px/1.55 Poppins,Arial,sans-serif;
+  overflow-wrap:anywhere;
+}
+#loginView .admin-login-message:empty{min-height:0;margin:0}
+@media(max-width:480px){
+  #loginView.auth-card{margin:clamp(18px,4vh,35px) auto 0;padding:25px 20px}
+  #loginView .admin-login-heading{margin-bottom:25px}
+  #loginView .admin-secondary-actions{grid-template-columns:1fr;gap:9px}
+  #loginView .admin-login-divider{margin:21px 0 14px;font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  #loginView *{scroll-behavior:auto!important;transition:none!important}
+}
