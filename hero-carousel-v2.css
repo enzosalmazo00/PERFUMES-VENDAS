@@ -291,3 +291,13 @@
   font-weight:500!important;
   letter-spacing:0!important;
 }
+
+
+/* AZZENA INTRO BRAND 20261001 */
+#inicio .hero-slide:first-of-type .hero-copy>p{
+  font-family:"Poppins",Arial,sans-serif!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+  color:#ead5a7!important;
+}
