@@ -76,9 +76,12 @@ return `<nav class="tabs">
 <section class="tab-panel" data-panel="rede" hidden>
 <div class="grid2">
   <div class="card"><p class="eyebrow">Cobertura</p><h2>Nova cidade</h2><form id="cityForm"><label>Cidade<input name="city_name" required placeholder="Ex.: Pedro Juan Caballero"></label><label>Estado/Departamento<input name="state_name" placeholder="Ex.: Amambay"></label><label>País<select name="country_code"><option value="BR">Brasil</option><option value="PY">Paraguai</option></select></label><button class="btn btn-primary">Cadastrar cidade</button></form></div>
-  <div class="card"><p class="eyebrow">Equipe</p><h2>Novo vendedor</h2><form id="sellerForm"><label>Nome<input name="name" required></label><label>E-mail de acesso<input name="email" type="email"></label><label>WhatsApp<input name="whatsapp_number" required></label><label>Foto (URL)<input name="avatar_url"></label><label>Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label><label>Cidade<select name="city_id" id="sellerCity"></select></label><label><input type="checkbox" name="can_toggle"> Pode usar emergência</label><button class="btn btn-primary">Cadastrar vendedor</button></form></div>
+  <div class="card"><p class="eyebrow">Equipe</p><h2>Pré-cadastrar vendedor</h2><p class="muted">Opcional: informe o e-mail do vendedor e peça que ele crie a conta no painel dele. Para novas solicitações, use Aprovar abaixo.</p><form id="sellerForm"><label>Nome<input name="name" required></label><label>E-mail de acesso<input name="email" type="email"></label><label>WhatsApp<input name="whatsapp_number" required></label><label>Foto (URL)<input name="avatar_url"></label><label>Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label><label>Cidade<select name="city_id" id="sellerCity"></select></label><label><input type="checkbox" name="can_toggle"> Pode usar emergência</label><button class="btn btn-primary">Cadastrar vendedor</button></form></div>
 </div>
 <div class="card"><p class="eyebrow">Cobertura cadastrada</p><h2>Cidades</h2><div id="cities"></div></div>
+<div class="card"><p class="eyebrow">Aguardando sua autorização</p><h2>Solicitações de vendedores</h2>
+<p class="muted">O vendedor cria a própria conta em <a href="vendedor.html" target="_blank" rel="noopener">vendedor.html</a> e confirma o e-mail. Você aprova ou recusa o acesso aqui. A senha é criada e guardada pelo próprio vendedor.</p>
+<div id="sellerApplications"></div></div>
 <div class="card"><p class="eyebrow">Equipe cadastrada</p><h2>Vendedores</h2><div id="sellers"></div></div>
 <div class="card edit-product-card" id="editSellerCard" hidden>
 <p class="eyebrow">Edição</p><h2>Editar vendedor</h2>
@@ -135,12 +138,20 @@ document.querySelector("#products").innerHTML=table([
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Excluir</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'</div>']
 ],d.products);
 document.querySelector("#cities").innerHTML=table([["Cidade",r=>esc(r.city_name)],["Estado/Departamento",r=>esc(r.state_name||"—")],["País",r=>r.country_code==="PY"?"Paraguai":"Brasil"],["Status",r=>r.is_active?'<span class="badge-ok">Ativa</span>':'<span class="badge-off">Inativa</span>']],d.cities);
+const pendingSellers=d.sellers.filter(r=>r.approval_status==="pending");
+document.querySelector("#sellerApplications").innerHTML=pendingSellers.length?table([
+["Solicitante",r=>'<strong>'+esc(r.name)+'</strong><br><span class="muted">'+esc(r.email||"—")+'</span>'],
+["WhatsApp",r=>esc(r.whatsapp_number)],
+["Data",r=>r.created_at?new Date(r.created_at).toLocaleDateString("pt-BR"):"—"],
+["Ações",r=>'<div class="row-actions"><button class="btn btn-small btn-approve-seller" type="button" data-review-seller="'+esc(r.id)+'" data-decision="approve">Aprovar</button><button class="btn btn-small btn-danger-soft" type="button" data-review-seller="'+esc(r.id)+'" data-decision="reject">Recusar</button></div>']
+],pendingSellers):'<p class="muted">Nenhuma solicitação pendente. Compartilhe o link do painel com seus vendedores.</p>';
 document.querySelector("#sellers").innerHTML=table([
 ["Nome",r=>'<strong>'+esc(r.name)+'</strong>'],
 ["E-mail",r=>esc(r.email||"—")],
 ["WhatsApp",r=>esc(r.whatsapp_number)],
 ["Cidade",r=>{const id=(r.city_ids||[])[0];const c=d.cities.find(x=>x.id===id);return esc(c?.city_name||"—")}],
-["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Inativo</span>'],
+["Status",r=>r.approval_status==="pending"?'<span class="badge-warn">Aguardando aprovação</span>':r.approval_status==="rejected"?'<span class="badge-off">Recusado</span>':r.is_active?'<span class="badge-ok">Aprovado</span>':'<span class="badge-off">Pausado</span>'],
+["Login",r=>r.auth_user_id?"Conta vinculada":'<span class="muted">Aguardando primeiro acesso</span>'],
 ["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
