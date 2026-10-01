@@ -213,3 +213,26 @@
 
 .catalog-reference-note{grid-column:1/-1;padding:12px 14px;background:#20170b;border:1px solid #8a7149;color:#d6c5a5;font-size:12px;line-height:1.55}
 .catalog-reference-note a{color:#efd295;text-decoration:underline}
+
+
+/* Fluxo de compras e estoque AZZENA — acessível em desktop e tablet */
+.admin-intro{margin-bottom:22px;padding:24px 28px;border:1px solid rgba(215,179,111,.3);background:linear-gradient(120deg,#23190e,#0d0c0a)}
+.admin-intro h2{font:600 clamp(29px,3.4vw,42px)/1.08 "Cormorant Garamond",Georgia,serif;color:#f4e4c6;margin:7px 0 10px}
+.admin-intro p:last-child{max-width:790px;color:#c2b3a0;font:400 12px/1.75 Poppins,Arial,sans-serif}
+.stock-direction{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+.stock-direction-btn{min-height:52px;border:1px solid #5d5140;background:#0b0b09;color:#c7bdad;font:700 12px Poppins,Arial,sans-serif;cursor:pointer}
+.stock-direction-btn.is-active{border-color:#e3bf79;background:#312109;color:#f5d994;box-shadow:inset 0 0 0 1px #d1a65b}
+.stock-direction-btn[data-stock-direction="exit"].is-active{border-color:#d58c76;background:#321b17;color:#ffc7af}
+.admin-feedback{min-height:20px;margin:8px 0;font:500 12px/1.6 Poppins,Arial,sans-serif;color:#e7b6a4}
+.admin-feedback.is-success{color:#a1dfb0}
+.admin-table-section{margin-top:26px;border-top:1px solid rgba(213,181,111,.25);padding-top:20px}
+.admin-table-section h3{font:600 23px "Cormorant Garamond",Georgia,serif;color:#e9ce97;margin:0 0 10px}
+.pricing-preview{padding:18px 20px;border:1px solid #a8854b;background:#241a0c;color:#ecd5a5;font:600 13px/1.75 Poppins,Arial,sans-serif;margin:10px 0 18px}
+#lotSalePreview,#repricePreview{font:700 21px/1.3 Poppins,Arial,sans-serif;color:#edcb82;background:#1b160c;border-color:#a17e47}
+#lotForm textarea,#supplierForm textarea,#adjustForm textarea{min-height:80px}
+#lotForm,#supplierForm,#repriceForm,#adjustForm{gap:10px 16px}
+#lotForm>label,#supplierForm>label,#repriceForm>label,#adjustForm>label{min-width:0}
+#purchaseHistory .data-table,#supplierList .data-table,#inventoryHistory .data-table{min-width:750px}
+.tab-panel[data-panel="compras"] .btn-primary,.tab-panel[data-panel="estoque"] .btn-primary{min-height:46px;font-size:12px;letter-spacing:.03em}
+@media(max-width:800px){.admin-intro{padding:20px}.stock-direction{grid-template-columns:1fr 1fr}.tab-panel[data-panel="compras"] .card,.tab-panel[data-panel="estoque"] .card{padding:20px 15px}}
+@media(max-width:440px){.stock-direction-btn{font-size:11px;padding:11px 5px}}
