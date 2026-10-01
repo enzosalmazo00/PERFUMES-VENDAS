@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-accountui2">
+  <link rel="stylesheet" href="styles.css?v=20261001-headerlux2">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -34,8 +34,11 @@
   <header class="header">
     <a class="logo brand-logo" href="#inicio" aria-label="AZZENA PARFUMS">
       <span class="brand-monogram" aria-hidden="true">
-        <span class="brand-z brand-z-left">Z</span>
-        <span class="brand-z brand-z-right">Z</span>
+        <svg class="brand-monogram-svg" viewBox="0 0 88 56" role="img">
+          <path class="zz-stroke zz-left" d="M8 10H39L22 28l17 18H8"/>
+          <path class="zz-stroke zz-right" d="M80 10H49l17 18-17 18h31"/>
+          <path class="zz-core" d="M44 15l6 13-6 13-6-13 6-13Z"/>
+        </svg>
       </span>
       <span class="brand-wordmark">
         <span class="logo-name">AZZENA</span>
@@ -54,13 +57,28 @@
     </nav>
 
     <div class="header-tools">
-      <label class="header-search">
-        <span class="tool-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 5 5"/></svg></span>
-        <input id="topSearch" type="search" placeholder="Buscar perfumes...">
+      <label class="header-search" aria-label="Buscar perfumes">
+        <span class="tool-svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.8 4.8"/></svg>
+        </span>
+        <input id="topSearch" type="search" placeholder="Buscar perfume">
       </label>
-      <a class="user-icon" href="conta.html" aria-label="Minha conta"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-5 3.5-7 8-7s7.2 2 8 7"/></svg></a>
-      <button class="cart-icon" id="bagBtn" type="button" aria-label="Abrir sacola">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span id="bagCount">0</span>
+
+      <a class="user-icon header-action" href="conta.html" aria-label="Minha conta">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8.2" r="3.4"/>
+          <path d="M5.4 19.8c1-4 3.2-5.8 6.6-5.8s5.6 1.8 6.6 5.8"/>
+        </svg>
+      </a>
+
+      <button class="cart-icon header-action luxury-bag-button" id="bagBtn" type="button" aria-label="Abrir minha sacola">
+        <svg class="luxury-bag-icon" viewBox="0 0 32 32" aria-hidden="true">
+          <path class="bag-shell" d="M7.3 11.2h17.4l-1.45 15H8.75l-1.45-15Z"/>
+          <path class="bag-handle" d="M11.4 12V9.3A4.6 4.6 0 0 1 16 4.7a4.6 4.6 0 0 1 4.6 4.6V12"/>
+          <path class="bag-rim" d="M8.1 13.2h15.8"/>
+          <path class="bag-emblem" d="M16 16.2l2.1 2.5-2.1 2.5-2.1-2.5 2.1-2.5Z"/>
+        </svg>
+        <span id="bagCount">0</span>
       </button>
     </div>
   </header>
@@ -189,8 +207,20 @@
 
   <aside class="drawer" id="bagDrawer" aria-hidden="true">
     <div class="drawer-head">
-      <div><p>SUA SELEÇÃO</p><h2>Minha sacola</h2></div>
-      <button class="close" type="button" id="closeBag">×</button>
+      <div class="drawer-title-wrap">
+        <span class="drawer-bag-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path d="M7.3 11.2h17.4l-1.45 15H8.75l-1.45-15Z"/>
+            <path d="M11.4 12V9.3A4.6 4.6 0 0 1 16 4.7a4.6 4.6 0 0 1 4.6 4.6V12"/>
+            <path d="M8.1 13.2h15.8"/>
+            <path d="M16 16.2l2.1 2.5-2.1 2.5-2.1-2.5 2.1-2.5Z"/>
+          </svg>
+        </span>
+        <div><p>SUA SELEÇÃO</p><h2>Minha sacola</h2></div>
+      </div>
+      <button class="close drawer-close-luxury" type="button" id="closeBag" aria-label="Fechar sacola">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
     </div>
     <div id="bagItems" class="bag-items"></div>
     <div class="drawer-foot">
@@ -233,7 +263,7 @@
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-password1"></script>
+  <script type="module" src="app.js?v=20261001-baglux2"></script>
   <script type="module" src="customer-checkout.js?v=20261001-shipping1"></script>
 </body>
 </html>
