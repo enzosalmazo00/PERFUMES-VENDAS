@@ -189,7 +189,13 @@ function closeBag(){els.bagDrawer.classList.remove("is-open");els.drawerMask.hid
 function openCheckout(){if(!state.bag.length)return toast("Sua sacola está vazia.");if(state.bag.some(row=>{const p=state.products.find(item=>item.id===row.id);return !p||Number(p.available_stock)<Number(row.quantity)}))return toast("Um produto ficou indisponível. Atualize o catálogo antes de continuar.");closeBag();els.checkoutSummary.innerHTML=state.bag.map(i=>'<div>'+i.quantity+'× '+esc(i.name)+' — '+brl(i.unit_price_cents*i.quantity)+'</div>').join("")+'<strong>Total: '+brl(total())+'</strong>';renderSellerPicker();els.checkoutOverlay.hidden=false;syncScrollLock()}
 function closeCheckout(){els.checkoutOverlay.hidden=true;syncScrollLock()}
 function syncScrollLock(){document.body.style.overflow=(!els.productOverlay.hidden||!els.checkoutOverlay.hidden||!$("#preorderOverlay").hidden||els.bagDrawer.classList.contains("is-open"))?"hidden":""}
-function setPayment(m){state.payment=m;$$(".payment-tab").forEach(b=>b.classList.toggle("is-active",b.dataset.payment===m));els.paymentDemoBox.innerHTML=m==="pix"?"<strong>PIX</strong><p>O pagamento é confirmado no atendimento.</p>":"<strong>Cartão</strong><p>O pagamento por cartão é confirmado no atendimento.</p>"}
+function setPayment(m){
+ const pix=m==="pix";state.payment=pix?"pix":"card";
+ $(".payment-tab").forEach(b=>{const active=b.dataset.payment===state.payment;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
+ const disclosure=$("#paymentMethodDisclosure");
+ if(disclosure)disclosure.textContent=pix?"PIX: o pagamento será realizado diretamente no Mercado Pago quando o checkout estiver disponível.":"Cartão de crédito: podem existir juros ou encargos que variam com o número de parcelas e as condições do Mercado Pago. Confira valor de cada parcela e total antes de confirmar.";
+ els.paymentDemoBox.innerHTML=pix?"<strong>PIX via Mercado Pago</strong><p>Quando ativado, o pagamento será realizado exclusivamente no checkout seguro da AZZENA. Não envie PIX pessoal ao vendedor.</p>":"<strong>Cartão de crédito via Mercado Pago</strong><p>Escolha o parcelamento no ambiente do Mercado Pago e confira eventuais encargos e o total antes de pagar.</p>";
+}
 function syncSearch(v){state.search=v;els.catalogSearch.value=v;els.topSearch.value=v;renderProducts();$("#catalogo").scrollIntoView({behavior:"smooth"})}
 els.catalogSearch.oninput=e=>{state.search=e.target.value;els.topSearch.value=state.search;renderProducts()};els.topSearch.oninput=e=>syncSearch(e.target.value);
 $$(".filter").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));$$("[data-jump-filter]").forEach(b=>b.onclick=()=>{setFilter(b.dataset.jumpFilter);$("#catalogo").scrollIntoView({behavior:"smooth"})});
