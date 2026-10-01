@@ -154,6 +154,22 @@ async function refreshInventory(){
   $("#sellerCatalogUrl").value=catalogUrl.href;
   $("#sendSellerCatalog").href="https://wa.me/?text="+encodeURIComponent("Confira meus perfumes disponíveis na AZZENA PARFUMS: "+catalogUrl.href);
   $("#openSellerCatalog").href=catalogUrl.href;
+  const statuses={pending:"Recebido",preparing:"Preparando",ready:"Pronto para retirar",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
+  const payments={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
+  const orders=data.orders||[];
+  $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
+    const canAdvance=order.delivery_method==="presencial"&&order.payment_status==="approved"&&
+      !["cancelled","delivered"].includes(order.fulfillment_status);
+    const next=order.fulfillment_status==="ready"?"delivered":order.fulfillment_status==="preparing"?"ready":"preparing";
+    const labels={preparing:"Iniciar preparação",ready:"Liberar retirada",delivered:"Marcar entregue"};
+    const phone=String(order.customer_phone||"").replace(/\D/g,"");
+    return '<article class="seller-order"><header><strong>'+esc(order.public_id)+'</strong><small>'+new Date(order.created_at).toLocaleString("pt-BR")+'</small></header>'+
+      '<p><b>'+esc(order.customer_name)+'</b> · '+money(order.total_cents)+'</p>'+
+      '<p>'+esc(order.delivery_method==="presencial"?"Retirada presencial":"Entrega")+' · '+esc(payments[order.payment_status]||order.payment_status)+
+      ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
+      '<div class="seller-dashboard-actions">'+(phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
+      (canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
+  }).join(""):'<p class="muted">Ainda não há pedidos vinculados a você.</p>';
   const pickup=data.pickup||{};
   const pickupForm=$("#sellerPickupForm");
   for(const key of ["display_name","country_code","street","street_number","neighborhood","city","state","postal_code","complement","google_maps_url","instructions"]){
@@ -255,6 +271,19 @@ document.querySelectorAll("[data-password]").forEach(button=>{
     input.type=visible?"text":"password";
     button.setAttribute("aria-label",visible?"Ocultar senha":"Mostrar senha");
   };
+});
+$("#sellerOrders").addEventListener("click",async event=>{
+  const button=event.target.closest("[data-seller-order-save]");
+  if(!button)return;
+  const next=button.dataset.nextStatus;
+  const prompt=next==="delivered"?"Confirma que o produto foi entregue ao cliente?":"Atualizar o status deste pedido?";
+  if(!confirm(prompt))return;
+  button.disabled=true;
+  try{
+    await call("seller-portal",{action:"update_pickup_order",id:button.dataset.sellerOrderSave,fulfillment_status:next});
+    await refreshInventory();notify("Pedido atualizado.");
+  }catch(error){notify(error.message==="PAYMENT_NOT_CONFIRMED"?"O pagamento ainda não foi confirmado no ADM.":friendlyError(error))}
+  finally{button.disabled=false}
 });
 $("#copySellerCatalog").onclick=async()=>{
   const url=$("#sellerCatalogUrl").value;
