@@ -15,3 +15,13 @@ body.seller-page{font-family:Poppins,Arial,sans-serif;background:radial-gradient
 .seller-dashboard-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.seller-dashboard-head h1{font:600 clamp(37px,5vw,55px) Cormorant Garamond,Georgia,serif;margin:8px 0}.seller-dashboard-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.seller-page #app>.card{margin:16px 0}.seller-page #app .metric{border:1px solid rgba(217,175,94,.3)}
 @media(max-width:760px){.seller-auth-grid{grid-template-columns:1fr}.seller-dashboard-head{display:block}.seller-dashboard-actions{margin:12px 0}.seller-benefits{font-size:8px}.seller-card{padding:22px}}
 @media(prefers-reduced-motion:reduce){.seller-loading-icon{animation:none}}
+.seller-share-card input,.seller-pickup-grid input,.seller-pickup-grid select,.seller-pickup-grid textarea{width:100%;box-sizing:border-box;min-height:46px;border:1px solid rgba(213,181,111,.3);border-radius:3px;background:#0a0907;color:#fff2df;padding:11px 13px;font:400 15px Poppins,Arial,sans-serif}
+.seller-share-card label,.seller-pickup-grid label{display:grid;gap:8px;font-size:12px;color:#e3d1b0}
+.seller-share-card input[readonly]{margin:10px 0 15px}
+.seller-share-actions .seller-primary{width:auto}
+.seller-pickup-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:14px}
+.seller-full-span{grid-column:1/-1}
+.seller-pickup-grid .seller-toggle{display:flex;align-items:start;gap:9px;line-height:1.5;padding:12px;border:1px solid rgba(213,181,111,.27);color:#edd7af}
+.seller-pickup-grid .seller-toggle input{min-height:auto;width:18px;height:18px;margin:2px 0 0;flex:none;accent-color:#d9b571}
+.seller-share-card .muted,.seller-pickup-card .muted{line-height:1.65}
+@media(max-width:680px){.seller-pickup-grid{grid-template-columns:1fr}.seller-full-span{grid-column:1}.seller-share-actions .seller-primary{width:100%}}
