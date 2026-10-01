@@ -17,11 +17,6 @@
       "product_type": "body_splash"
     },
     {
-      "brand": "Fragrance World",
-      "name": "Barakkat Gentle Silver",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Granado",
       "name": "Chá Branco",
       "product_type": "perfume"
@@ -57,31 +52,6 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka Blue",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka For Men",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka Gold",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka Snow",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka White For Women",
-      "product_type": "perfume"
-    },
-    {
       "brand": "L'Occitane au Brésil",
       "name": "Água de Coco",
       "product_type": "perfume"
@@ -104,61 +74,6 @@
     {
       "brand": "L'Occitane au Brésil",
       "name": "Mandacaru",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Lattafa",
-      "name": "Bade'e Al Oud Noble Oud",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe 001 Woman",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe 7",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe 7 Cobalt",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe Esencia",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe Solo",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Jean Lowe Matière",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Jean Lowe Nouveau",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "The Tux",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Tobacco Touch",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Yeah!",
       "product_type": "perfume"
     },
     {
@@ -195,31 +110,6 @@
       "brand": "Natura",
       "name": "Tododia Macadâmia",
       "product_type": "body_splash"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Emir Celestial",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Khair Confection",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Khair Pistachio",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Taskeen Caramel Cascade",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Swiss Arabian",
-      "name": "Shaghaf Oud",
-      "product_type": "perfume"
     },
     {
       "brand": "Swiss Arabian",
