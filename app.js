@@ -66,7 +66,9 @@ function syncSearch(v){state.search=v;els.catalogSearch.value=v;els.topSearch.va
 els.catalogSearch.oninput=e=>{state.search=e.target.value;els.topSearch.value=state.search;renderProducts()};els.topSearch.oninput=e=>syncSearch(e.target.value);
 $$(".filter").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));$$("[data-jump-filter]").forEach(b=>b.onclick=()=>{setFilter(b.dataset.jumpFilter);$("#catalogo").scrollIntoView({behavior:"smooth"})});
 $("[data-close-product]").onclick=closeProduct;els.productOverlay.onclick=e=>{if(e.target===els.productOverlay)closeProduct()};els.bagBtn.onclick=openBag;els.closeBag.onclick=closeBag;els.drawerMask.onclick=closeBag;els.checkoutBtn.onclick=openCheckout;$("[data-close-checkout]").onclick=closeCheckout;els.checkoutOverlay.onclick=e=>{if(e.target===els.checkoutOverlay)closeCheckout()};$$(".payment-tab").forEach(b=>b.onclick=()=>setPayment(b.dataset.payment));
-els.checkoutForm.onsubmit=e=>{e.preventDefault();const d=new FormData(e.currentTarget),customer=String(d.get("name")||"").trim();if(state.sellers.length&&!state.selectedSellerId)return toast("Selecione o vendedor que te atendeu.");toast("Pedido preparado para "+(customer||"cliente"));state.bag=[];saveBag();renderBag();closeCheckout();e.currentTarget.reset();state.selectedSellerId=null;renderSellerPicker()};
+// Segurança: o carrinho não pode simular uma venda se o módulo de pagamento falhar.
+els.checkoutForm.onsubmit=e=>{e.preventDefault();toast("O pagamento deve ser concluído pelo checkout seguro da AZZENA. Recarregue a página se a etapa de pagamento não abrir.");};
+
 document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!els.checkoutOverlay.hidden)closeCheckout();else if(!els.productOverlay.hidden)closeProduct();else if(els.bagDrawer.classList.contains("is-open"))closeBag()});
 
 function initHeroCarousel(){
