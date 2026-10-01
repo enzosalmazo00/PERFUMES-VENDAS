@@ -112,5 +112,4 @@ function initHeroCarousel(){
   start();
 }
 
-initHeroCarousel();
 loadSiteStatus();loadCatalog();loadSellers();
