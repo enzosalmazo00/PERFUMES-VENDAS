@@ -1,6 +1,7 @@
 import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
 import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales8";
 import {initPickupVerifier} from "./seller-pickup.js?v=20261001-pickupcode1";
+import {setupSellerWorkspace,activateSellerTab,updateSellerWorkflow} from "./seller-workspace.js?v=20261001-workspace1";
 
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
@@ -171,7 +172,7 @@ async function refreshInventory(){
       ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
       '<p class="seller-order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+'× '+esc(item.product_name)+' · '+esc(item.volume_ml)+' mL').join('<br>')+'</p>'+ 
       '<div class="seller-dashboard-actions"><a class="seller-outline" href="etiqueta.html?pedido='+encodeURIComponent(order.id)+'" target="_blank" rel="noopener noreferrer">Gerar etiqueta</a>'+ (phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
-      (canAdvance&&next==="code_required"?'<a href="#sellerPickupVerifier" class="seller-outline">Conferir código para entregar</a>':
+      (canAdvance&&next==="code_required"?'<button type="button" class="seller-outline" data-seller-go="retiradas">Conferir código para entregar</button>':
         canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
   }).join(""):'<p class="muted">Ainda não há pedidos vinculados a você.</p>';
   const pickup=data.pickup||{};
@@ -181,8 +182,9 @@ async function refreshInventory(){
   }
   pickupForm.elements.is_enabled.checked=pickup.is_enabled===true;
   renderSellerSales(data);
+  updateSellerWorkflow(data);
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
-  show("app");
+  show("app");activateSellerTab();
   if(data.seller?.can_toggle_site_emergency)await loadStatus();
 }
 
@@ -291,6 +293,24 @@ $("#sellerOrders").addEventListener("click",async event=>{
   }catch(error){notify(error.message==="PAYMENT_NOT_CONFIRMED"?"O pagamento ainda não foi confirmado no ADM.":friendlyError(error))}
   finally{button.disabled=false}
 });
+$("#sellerPreorderSettingsForm").onsubmit=async event=>{
+ event.preventDefault();
+ const submit=$("#sellerPreorderSave"),status=$("#sellerPreorderSettingsStatus");
+ const enabled=$("#sellerPreorderOptIn").checked;
+ submit.disabled=true;status.textContent="Salvando sua preferência...";
+ try{
+   const result=await call("seller-portal",{action:"update_preorder_settings",enabled});
+   await refreshInventory();
+   activateSellerTab("configuracoes");
+   status.textContent=result.data?.enabled?
+     "Pronto. Seu WhatsApp está autorizado a receber solicitações de encomenda.":
+     "Encomendas desativadas. Seu WhatsApp não aparecerá na lista pública para novas solicitações.";
+   notify("Preferência de encomendas salva.");
+ }catch(error){
+   status.textContent=error.message==="SELLER_WHATSAPP_INVALID"?
+     "Seu WhatsApp cadastrado está incompleto. Solicite ao administrador a correção antes de ativar.":friendlyError(error);
+ }finally{submit.disabled=false}
+};
 $("#copySellerCatalog").onclick=async()=>{
   const url=$("#sellerCatalogUrl").value;
   if(!url)return notify("Acesse sua conta aprovada para compartilhar seu catálogo.");
@@ -337,6 +357,7 @@ $("#sellerLabelSize").onchange=()=>{
   let current={};try{current=JSON.parse(localStorage.getItem("azzena-label-prefs")||"{}")}catch{}
   localStorage.setItem("azzena-label-prefs",JSON.stringify({...current,size:$("#sellerLabelSize").value}));
 };
-initSellerSales({call,notify,onSale:refreshInventory});
+setupSellerWorkspace();
+initSellerSales({call,notify,onSale:refreshInventory,navigate:activateSellerTab});
 initPickupVerifier({call,notify,onDelivered:refreshInventory});
 if(readSession())openSeller();else show("loginView");
