@@ -31,7 +31,6 @@ const els = {
   productGrid: $("#productGrid"),
   catalogStatus: $("#catalogStatus"),
   catalogSearch: $("#catalogSearch"),
-  catalogSearch: $("#catalogSearch"),
   productOverlay: $("#productOverlay"),
   productModalContent: $("#productModalContent"),
   bagBtn: $("#bagBtn"),
@@ -324,7 +323,7 @@ function openProduct(productId) {
         </div>
 
         <div class="review-block">
-          <h3>Avaliações demonstrativas</h3>
+          <h3>Avaliações</h3>
           ${reviews.length
             ? reviews.map(review => `
               <div class="review">
@@ -332,7 +331,7 @@ function openProduct(productId) {
                   <strong>${esc(review.customer_name)}</strong>
                   <span class="stars">${"★".repeat(Number(review.rating))}${"☆".repeat(5 - Number(review.rating))}</span>
                 </div>
-                ${review.is_verified_purchase ? '<span class="verified">Compra demonstrativa verificada</span>' : ""}
+                ${review.is_verified_purchase ? '<span class="verified">Compra verificada</span>' : ""}
                 <p>${esc(review.comment)}</p>
               </div>
             `).join("")
@@ -487,8 +486,8 @@ function setPayment(method) {
   });
 
   els.paymentDemoBox.innerHTML = method === "pix"
-    ? "<strong>PIX demonstrativo</strong><p>Nenhuma cobrança real será feita nesta versão.</p>"
-    : "<strong>Cartão demonstrativo</strong><p>Nenhum dado de cartão é solicitado ou processado neste protótipo.</p>";
+    ? "<strong>PIX</strong><p>O pagamento é confirmado no atendimento após o envio do pedido.</p>"
+    : "<strong>Cartão</strong><p>A forma de pagamento por cartão é confirmada no atendimento.</p>";
 }
 
 els.catalogSearch?.addEventListener("input", event => { state.search = event.target.value; renderProducts(); });
@@ -535,7 +534,7 @@ els.checkoutForm.addEventListener("submit", event => {
   }
 
   const selectedSeller = state.sellers.find(seller => seller.seller_id === state.selectedSellerId);
-  toast(`Pedido demonstrativo criado para ${customer || "cliente"} · vendedor: ${selectedSeller?.display_name || "selecionado"}`);
+  toast(`Pedido preparado para ${customer || "cliente"} · vendedor: ${selectedSeller?.display_name || "selecionado"}`);
   state.bag = [];
   saveBag();
   renderBag();
