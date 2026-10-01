@@ -1,0 +1,25 @@
+name: Diagnose Parfumo sitemap
+on:
+  push:
+    paths:
+      - ".github/workflows/diagnose-parfumo-sitemap.yml"
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python -u - <<'PY'
+          import urllib.request,xml.etree.ElementTree as ET
+          u='https://www.parfumo.com/sitemap_en.xml'
+          req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+          d=urllib.request.urlopen(req,timeout=10).read()
+          root=ET.fromstring(d)
+          locs=[e.text.strip() for e in root.iter() if e.tag.endswith('loc')]
+          print('COUNT',len(locs),flush=True)
+          for x in locs[:40]: print(x,flush=True)
+          PY
