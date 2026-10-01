@@ -52,3 +52,11 @@
 .customer-delivery-proof>strong{font-size:clamp(15px,2.2vw,20px)}
 .customer-delivery-proof p{font-size:13px;margin:8px 0 0;color:#1c3322}
 @media(max-width:640px){.customer-pickup-number{font-size:clamp(15px,4.2vw,22px);letter-spacing:.02em}.customer-copy-code{width:100%}}
+
+.review-overlay{position:fixed;inset:0;z-index:140;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:20px;overflow:auto}
+.review-overlay[hidden]{display:none!important}.review-modal{position:relative;width:min(720px,94vw);max-height:90vh;overflow:auto;padding:36px;background:#120e09;border:1px solid rgba(232,193,110,.5);color:#eee4d5}
+.review-modal h2{font:600 40px/1 "Cormorant Garamond",serif;margin:8px 42px 12px 0}.review-intro{font-size:12px;line-height:1.7;color:#c5b7a3}.review-close{position:absolute;right:16px;top:14px;width:38px;height:38px;border:1px solid rgba(232,193,110,.4);background:#0c0906;color:#e9ca8c;font-size:24px}
+.review-product-list{display:grid;gap:16px;margin-top:24px}.review-product{padding:18px;border:1px solid rgba(232,193,110,.25);background:#0c0a07}.review-product h3{margin:0 0 4px;font:600 22px "Cormorant Garamond",serif;color:#f0d7a2}.review-product small{color:#968b7b}
+.review-stars{display:flex;gap:5px;margin:15px 0 12px}.review-star{border:0;background:transparent;color:#6e6250;font-size:30px;line-height:1;padding:0 2px}.review-star.is-active{color:#e8bd65}.review-rating-label{font-size:10px;color:#b9aa92;margin-left:5px}
+.review-product textarea{width:100%;min-height:100px;resize:vertical;padding:12px;border:1px solid rgba(232,193,110,.25);background:#070605;color:#f2eadf;font:400 12px/1.6 Poppins,Arial,sans-serif}.review-submit{margin-top:11px;min-height:42px;padding:9px 16px;border:1px solid #e7c178;background:#d8ad5b;color:#130c04;font:700 11px Poppins,Arial,sans-serif}.review-submit:disabled{opacity:.55}.review-done{padding:10px;border:1px solid rgba(104,156,100,.55);background:#132015;color:#cce7c8;font-size:11px}
+@media(max-width:600px){.review-overlay{padding:10px}.review-modal{padding:24px 17px}.review-star{font-size:34px}}
