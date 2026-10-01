@@ -6,7 +6,7 @@ const API_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const escapeHtml=(v="")=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const brl=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n||0));
 const money=c=>brl(Number(c||0)/100);
-const state={customer:null,method:"shipping",quote:null,pickup:null,pickupCatalog:null,checking:false};
+const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,checking:false};
 const scopeId=new URLSearchParams(location.search).get("vendedor");
 const uuid=value=>/^[0-9a-f-]{36}$/i.test(String(value||""))?String(value):null;
 const cart=()=>{try{return JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]")}catch{return []}};
@@ -28,7 +28,12 @@ function explain(error){return ({
  SELLER_OUT_OF_STOCK:"Este vendedor ainda não tem estoque disponível para retirada.",
  SELLER_STOCK_UNAVAILABLE:"Um ou mais produtos não estão disponíveis na quantidade escolhida com este vendedor.",
  PRODUCT_UNAVAILABLE:"Um produto da sacola não está disponível.",
- PICKUP_FIELDS_REQUIRED:"Selecione um vendedor antes de continuar."
+ PICKUP_FIELDS_REQUIRED:"Selecione um vendedor antes de continuar.",
+ MERCADO_PAGO_NOT_CONFIGURED:"O pagamento online da AZZENA está sendo configurado. Não faça PIX para contas pessoais de vendedores.",
+ MERCADO_PAGO_PREFERENCE_FAILED:"O Mercado Pago não conseguiu preparar o pagamento. Tente novamente.",
+ SELLER_STOCK_UNAVAILABLE:"A quantidade escolhida acabou de ficar indisponível com este vendedor.",
+ PAYMENT_LINK_INVALID:"O link de pagamento não pôde ser validado.",
+ PAYMENT_LINK_MISSING:"Não foi possível obter o link de pagamento."
  }[error?.message]||error?.message||"Não foi possível concluir o pedido.")}
 function mapsLink(raw){
  try{
@@ -55,7 +60,7 @@ function renderReady(){
  const button=$("#checkoutSubmit");
  if(!button)return;
  button.disabled=!canSubmit();
- button.textContent=state.method==="pickup"?"REGISTRAR PEDIDO PARA RETIRADA":"CRIAR PEDIDO PARA ENTREGA";
+ button.textContent="PAGAR COM SEGURANÇA NA AZZENA";
  renderTotals();
 }
 async function publicSellerCatalog(sellerId){
@@ -137,19 +142,18 @@ async function loadCustomer(){
   box.innerHTML='<div class="checkout-login-call"><strong>Não foi possível verificar seus dados agora.</strong><p>Sua sessão foi preservada. Tente novamente ou consulte Minha Conta.</p><a href="conta.html" class="gold-button">MINHA CONTA</a></div>';
  }
  state.checking=false;
- $("#shippingArea").hidden=state.method!=="shipping";
+ $("#shippingArea").hidden=true;
  $("#pickupArea").hidden=state.method!=="pickup";
  if(state.method==="pickup")await loadPickup();
  renderReady();
 }
 function setMode(method){
- state.method=method==="pickup"?"pickup":"shipping";
+ state.method="pickup";
  state.quote=null;state.pickup=null;
  document.querySelectorAll("[data-checkout-method]").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.checkoutMethod===state.method));
  $("#shippingArea").hidden=state.method!=="shipping";
  $("#pickupArea").hidden=state.method!=="pickup";
- if(state.method==="pickup")loadPickup();
- else $("#shippingQuotes").replaceChildren();
+ loadPickup();
  renderReady();
 }
 async function calculateShipping(){
@@ -196,16 +200,20 @@ async function submitOrder(event){
     payment_method:payment(),items:items()
    });
   }
-  localStorage.setItem("perfumes-demo-bag","[]");
-  const publicId=response.data?.order?.public_id||"";
-  alert("Pedido "+publicId+" recebido! Pagamento pendente."+
-   (state.method==="pickup"?" Aguarde a confirmação do vendedor antes de ir ao local.":" Acompanhe a preparação em Minha Conta."));
-  location.href="conta.html#pedidos";
+  const url=String(response.data?.checkout_url||"");
+  let target;
+  try{target=new URL(url)}catch{throw new Error("PAYMENT_LINK_MISSING")}
+  if(target.protocol!=="https:"||!/(^|\\.)mercadopago\\.com(\\.br)?$/.test(target.hostname))
+    throw new Error("PAYMENT_LINK_INVALID");
+  location.assign(target.href);
  }catch(error){message(explain(error));renderReady()}
 }
 function start(){
  const form=$("#checkoutForm");
  if(!form)return;
+ document.querySelectorAll("[data-checkout-method]").forEach(b=>{b.hidden=b.dataset.checkoutMethod!=="pickup";b.classList.toggle("is-active",b.dataset.checkoutMethod==="pickup")});
+ $("#shippingArea").hidden=true;
+ $("#pickupArea").hidden=false;
  form.onsubmit=submitOrder;
  document.querySelectorAll("[data-checkout-method]").forEach(btn=>btn.onclick=()=>setMode(btn.dataset.checkoutMethod));
  $("#calculateShipping").onclick=calculateShipping;
