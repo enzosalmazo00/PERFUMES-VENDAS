@@ -73,7 +73,10 @@ def score_name(target, row):
     combos = {n}
     if c:
         combos.add((n + " " + c).strip())
-    best = max(SequenceMatcher(None, t, x).ratio() for x in combos if x)
+    usable = [x for x in combos if x]
+    if not usable:
+        return 0.0
+    best = max(SequenceMatcher(None, t, x).ratio() for x in usable)
     if t == n:
         best = max(best, 0.965)
     return best
