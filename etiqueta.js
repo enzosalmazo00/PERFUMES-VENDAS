@@ -35,7 +35,9 @@ function render(){
  (Number(order.discount_cents||0)>0?'<p>Desconto: '+money(order.discount_cents)+'</p>':'')+
  '<p class="label-total">TOTAL: '+money(order.total_cents)+'</p>'+
  (pending?'<div class="label-warning">PAGAMENTO PENDENTE — NÃO ENTREGAR</div>':
- '<div class="label-warning">'+(order.payment_channel==="seller_cash"?"DINHEIRO RECEBIDO · VENDA REGISTRADA":"PAGAMENTO CONFIRMADO · LIBERAR APÓS CONFERÊNCIA")+'</div>')+
+ '<div class="label-warning">'+(order.payment_channel==="seller_cash"?"DINHEIRO RECEBIDO · VENDA REGISTRADA":
+   order.payment_channel==="mercadopago"&&order.pickup_redeemed_at?"ENTREGA REGISTRADA · CÓDIGO UTILIZADO":
+   "PAGO · EXIGIR CÓDIGO AZZ NO PAINEL ANTES DA ENTREGA")+'</div>')+
  '<div class="label-foot">Responsável: '+esc(seller?.name||"Vendedor AZZENA")+'<br>Uso interno · confira o pedido e o endereço antes da entrega.</div>';
  update();
 }
