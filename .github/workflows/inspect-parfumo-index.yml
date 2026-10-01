@@ -1,0 +1,27 @@
+name: Inspect Parfumo index
+on:
+  push:
+    paths:
+      - ".github/workflows/inspect-parfumo-index.yml"
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python - <<'PY'
+          import urllib.request
+          for u in ['https://www.parfumo.com/sitemap.xml','https://www.parfumo.com/robots.txt','https://www.parfumo.com/Brands']:
+              try:
+                  req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+                  with urllib.request.urlopen(req,timeout=30) as r:
+                      data=r.read(4000).decode('utf-8',errors='replace')
+                      print('URL',u,'STATUS',r.status,'CT',r.headers.get('content-type'))
+                      print(data[:1500].replace('\n',' '))
+              except Exception as e: print('ERR',u,repr(e))
+          PY
