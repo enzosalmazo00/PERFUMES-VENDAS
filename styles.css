@@ -1165,3 +1165,8 @@ body{font-family:Poppins,Arial,sans-serif}
 
 /* Only verified paid-order feedback displays a verified-purchase label. */
 .verified-purchase{display:inline-block;padding:3px 6px;border:1px solid rgba(218,179,106,.55);border-radius:3px;color:#e9cb8e;font:600 9px/1.35 Poppins,Arial,sans-serif;margin:0 5px}.product-rating small{font:500 11px/1.4 Poppins,Arial,sans-serif;color:#cdbda4}
+
+/* Link discreto de acesso do vendedor, visível inclusive no celular. */
+footer .footer-seller-access{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 auto;margin-left:auto;padding:10px 8px;color:#c6ae83!important;font:500 11px/1.35 Poppins,Arial,sans-serif!important;letter-spacing:.01em;text-decoration:underline;text-underline-offset:4px;border-radius:3px}
+footer .footer-seller-access:focus-visible{outline:2px solid #e6c47d;outline-offset:3px}
+@media(max-width:760px){footer{gap:15px;flex-wrap:wrap}footer .footer-seller-access{margin-left:auto;font-size:11px!important}}
