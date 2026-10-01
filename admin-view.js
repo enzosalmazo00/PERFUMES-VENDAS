@@ -201,7 +201,19 @@ return `<nav class="tabs" aria-label="Áreas da administração">
      <button class="btn btn-primary span2" type="submit" id="lotSubmit">Registrar compra + entrada no estoque</button>
    </form>
  </div>
- <div class="card"><p class="eyebrow">3 · CONFERÊNCIA</p><h2>Histórico de compras</h2><div id="purchaseHistory"><p class="muted">Carregando compras...</p></div></div>
+ <div class="card">
+   <p class="eyebrow">3 · PREÇOS</p><h2>Reajustar preço pelo último custo</h2>
+   <p class="muted">Altere a porcentagem quando quiser, sem precisar dar nova entrada. O último custo de compra continua privado.</p>
+   <form id="repriceForm" class="form-grid">
+     <label class="span2">Produto com custo registrado<select id="repriceProduct" name="product_id" required></select></label>
+     <label>Último custo por unidade<input id="repriceCost" type="text" readonly placeholder="Selecione o produto"></label>
+     <label>Porcentagem sobre o custo (%)<input id="repriceMarkup" name="markup" type="number" min="0" max="1000" step=".01" required></label>
+     <label>Preço de venda recalculado<input id="repricePreview" type="text" readonly placeholder="R$ 0,00"></label>
+     <p class="span2 admin-feedback" id="repriceFeedback" role="status"></p>
+     <button class="btn btn-primary span2" type="submit" id="repriceSubmit">Salvar novo preço de venda</button>
+   </form>
+ </div>
+ <div class="card"><p class="eyebrow">4 · CONFERÊNCIA</p><h2>Histórico de compras</h2><div id="purchaseHistory"><p class="muted">Carregando compras...</p></div></div>
 </section>
 <section class="tab-panel" data-panel="relatorios" hidden><div class="card"><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2><div class="form-grid"><label>De<input type="date" id="from"></label><label>Até<input type="date" id="to"></label><label>Vendedor<select id="reportSeller"></select></label><label>Produto<select id="reportProduct"></select></label><label>Cidade<select id="reportCity"></select></label></div><button class="btn btn-primary" id="runReport">Gerar relatório</button></div><div id="reportMetrics" class="metrics"></div><div class="card" id="reportMoves"></div><div class="card" id="reportRisks"></div></section>
 <section class="tab-panel" data-panel="emergencia" hidden><div class="grid2"><div class="card danger-card"><p class="eyebrow">Emergência</p><h2>Retirar loja do ar</h2><label>Categoria<select id="outageKind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor</option><option value="operational_pause">Pausa operacional</option><option value="permanent_closure">Encerramento definitivo</option></select></label><label>Justificativa<textarea id="outageReason"></textarea></label><label>Mensagem pública<textarea id="publicMessage"></textarea></label><button class="btn btn-danger" id="disableSite">Desativar loja</button></div><div class="card"><p class="eyebrow">Status</p><div class="status-line"><span class="status-dot" id="statusDot"></span><strong id="statusText">—</strong></div><p id="statusDetail" class="muted"></p><label>Nota para reativação<textarea id="restoreReason"></textarea></label><button class="btn btn-primary" id="enableSite">Colocar online</button></div></div></section>`;}
@@ -287,6 +299,7 @@ document.querySelector("#adjustLocation").innerHTML=option(d.locations,"id","nam
 document.querySelector("#adjustProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
 document.querySelector("#lotLocation").innerHTML=option(d.locations,"id","name");
 document.querySelector("#lotProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
+document.querySelector("#repriceProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
 document.querySelector("#reportSeller").innerHTML=option(d.sellers,"id","name","Todos");
 document.querySelector("#reportProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL","Todos");
 document.querySelector("#reportCity").innerHTML=option(d.cities,"id","city_name","Todas");
