@@ -1139,3 +1139,26 @@ body{font-family:Poppins,Arial,sans-serif}
 /* AZZENA pre-payment readiness: real inventory indicators */
 .stock-badge{position:absolute;left:10px;top:10px;z-index:4;border:1px solid #d9a3a3;background:rgba(115,25,32,.94);color:#fff;font:700 12px/1.2 "Poppins",Arial,sans-serif;letter-spacing:.09em;padding:7px 10px;border-radius:4px}
 .buy-card:disabled,.detail-actions .buy-card:disabled{opacity:.85!important;background:#30302e!important;color:#d1c3b2!important;border:1px solid #4e4740!important;box-shadow:none!important;transform:none!important;cursor:not-allowed!important}
+
+
+/* AZZENA PREORDERS AND PAYMENT DISCLOSURE */
+.preorder-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:45px;margin-top:10px;padding:11px 15px;background:#183e31;border:1px solid #91c4aa;border-radius:6px;color:#e6fff0;font:700 13px/1.45 Poppins,Arial,sans-serif;letter-spacing:.015em;text-align:center;cursor:pointer}
+.preorder-cta:hover,.preorder-cta:focus-visible{background:#265743;border-color:#b8e2cb}
+.preorder-cta:focus-visible{outline:3px solid #f4d18d;outline-offset:2px}
+.preorder-unavailable{font:500 12px/1.55 Poppins,Arial,sans-serif;color:#d5c9b5;margin:10px 0 0}
+.preorder-info{font:400 12px/1.7 Poppins,Arial,sans-serif;color:#d5c9b5;margin:14px 0 0;max-width:620px}
+.preorder-info[hidden]{display:none!important}
+.detail-actions{flex-wrap:wrap}.detail-actions .buy-card:disabled{display:none}
+.detail-actions .preorder-cta{width:auto;min-width:210px;margin-top:0}
+.preorder-modal{width:min(570px,94vw);max-height:85vh;overflow-y:auto;padding:clamp(22px,5vw,36px)}
+.preorder-modal h2{font:600 clamp(31px,4vw,43px)/1.14 Cormorant Garamond,Georgia,serif;margin:12px 0}
+.preorder-product-name{font:600 15px/1.6 Poppins,Arial,sans-serif;color:#f0d5a1}
+.preorder-disclaimer{font:400 13px/1.7 Poppins,Arial,sans-serif;color:#d8c9b4}
+.preorder-seller-list{display:grid;gap:12px;margin-top:24px}
+.preorder-seller-link{display:block;padding:14px 18px;background:#193a2d;border:1px solid #87bc9a;border-radius:7px;color:#e8fff0;text-decoration:none;font:600 13px/1.6 Poppins,Arial,sans-serif}
+.preorder-seller-link:hover,.preorder-seller-link:focus-visible{background:#265744}
+.checkout-payment-disclosure{font:500 13px/1.7 Poppins,Arial,sans-serif;color:#f0d7ab;padding:13px 16px;border-left:3px solid #e2bb79;background:#1b150d;margin:8px 0 15px}
+.payment-tabs{display:flex;flex-wrap:wrap;gap:10px}.payment-tab{font:600 13px/1.45 Poppins,Arial,sans-serif;min-height:49px;padding:13px 17px;border-radius:6px;color:#e0c9a0}
+.payment-tab.is-active{border-color:#efcb86;background:#32220d;color:#fff0d2}
+.payment-tab:focus-visible{outline:3px solid #edca82;outline-offset:3px}
+@media(max-width:520px){.detail-actions .preorder-cta{width:100%}.preorder-modal{padding:20px}.payment-tab{flex:1 1 130px}.checkout-payment-disclosure{font-size:12px}}
