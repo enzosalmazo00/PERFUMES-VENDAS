@@ -15,7 +15,11 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <section class="tab-panel" data-panel="perfumes" hidden>
 <div class="card"><p class="eyebrow">Catálogo</p><h2>Novo produto</h2>
 <form id="productForm" class="form-grid">
-<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label class="span2 catalog-global-label">🔎 Buscar perfume, linha ou marca
+<input class="catalog-global-search" type="search" placeholder="Ex.: Ferrari Black, Club de Nuit, Khamrah, 9PM..." autocomplete="off" aria-label="Pesquisar perfume ou marca">
+<small>Pesquise o nome completo ou apenas parte dele. Clique no resultado para preencher o cadastro.</small></label>
+<div class="catalog-global-results span2" role="group" aria-label="Resultados da busca de perfumes" hidden></div>
+<label>Ou filtre pela marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
@@ -47,7 +51,11 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <p class="eyebrow">Edição</p><h2>Editar produto</h2>
 <form id="editProductForm" class="form-grid">
 <input type="hidden" name="id">
-<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label class="span2 catalog-global-label">🔎 Buscar perfume, linha ou marca
+<input class="catalog-global-search" type="search" placeholder="Ex.: Ferrari Black, Club de Nuit, Khamrah, 9PM..." autocomplete="off" aria-label="Pesquisar perfume ou marca">
+<small>Pesquise o nome completo ou apenas parte dele. Clique no resultado para preencher o cadastro.</small></label>
+<div class="catalog-global-results span2" role="group" aria-label="Resultados da busca de perfumes" hidden></div>
+<label>Ou filtre pela marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
@@ -180,16 +188,27 @@ return `<nav class="tabs" aria-label="Áreas da administração">
  </div>
  <div class="card">
    <p class="eyebrow">2 · REGISTRAR COMPRA E RECEBER</p><h2>Entrada de produtos</h2>
-   <p class="muted">Uma única operação grava a compra, vincula o fornecedor e o estoque escolhido, atualiza o custo privado e calcula o preço público. Nada de registrar a mesma entrada duas vezes. Promoções antigas serão desativadas para não esconder o novo preço calculado.</p>
+   <p class="muted">Adicione todos os produtos recebidos do mesmo fornecedor, com custos e porcentagens individuais. Uma única operação grava a compra e atualiza todos os saldos e preços. Nada de registrar a mesma entrada duas vezes. Promoções antigas serão desativadas para não esconder o novo preço calculado.</p>
    <form id="lotForm" class="form-grid">
      <label>Fornecedor<select name="supplier_id" id="lotSupplier" required></select></label>
      <label>Destino: estoque<select name="location_id" id="lotLocation" required></select></label>
-     <label class="span2">Produto<select name="product_id" id="lotProduct" required></select></label>
-     <label>Quantidade de unidades recebidas<input name="qty" type="number" min="1" max="10000" step="1" required placeholder="Ex.: 10"><small>Inclua somente unidades recebidas de fato. Perdas e apreensões não entram no saldo.</small></label>
-     <label>Valor pago por unidade (R$)<input name="cost" type="number" min=".01" max="10000000" step=".01" required placeholder="Ex.: 100,00"></label>
-     <label>Lucro aplicado sobre a compra (%)<input name="markup" type="number" min="0" max="1000" step=".01" value="40" required placeholder="Ex.: 40"></label>
-     <label>Preço de venda calculado (R$)<input name="sale_price_preview" id="lotSalePreview" type="text" readonly placeholder="Preencha o custo e a porcentagem"></label>
-     <div class="span2 pricing-preview" id="lotPriceSummary" aria-live="polite">O preço de venda será calculado automaticamente a partir do valor pago por unidade.</div>
+     <div class="span2 purchase-lines-head"><strong>Produtos recebidos</strong><small>Até 30 itens diferentes, cada um com quantidade, custo e porcentagem próprios.</small></div>
+     <div class="span2 purchase-lines" id="lotItems">
+       <section class="purchase-line" aria-label="Produto recebido 1">
+         <div class="purchase-line-title"><strong>Produto 1</strong><button type="button" class="btn btn-small purchase-remove" data-remove-purchase-line hidden>Remover</button></div>
+         <div class="form-grid">
+           <label class="span2">Buscar no catálogo cadastrado<input class="purchase-line-search" type="search" placeholder="Digite o nome ou marca para filtrar..." autocomplete="off"></label>
+           <label class="span2">Produto<select name="product_id" id="lotProduct" required></select></label>
+           <label>Quantidade recebida<input name="qty" type="number" min="1" max="10000" step="1" required placeholder="Ex.: 10"></label>
+           <label>Custo por unidade (R$)<input name="cost" type="number" min=".01" max="10000000" step=".01" required placeholder="Ex.: 100,00"></label>
+           <label>Acréscimo sobre o custo (%)<input name="markup" type="number" min="0" max="1000" step=".01" value="40" required></label>
+           <label>Preço de venda calculado<input name="sale_price_preview" id="lotSalePreview" type="text" readonly placeholder="R$ 0,00"></label>
+         </div>
+         <div class="purchase-line-summary" aria-live="polite">Selecione o produto, informe quantidade e custo.</div>
+       </section>
+     </div>
+     <div class="span2 purchase-add-row"><button type="button" class="btn" id="addPurchaseLine">+ Adicionar outro produto</button><span id="purchaseLineCount">1 produto nesta compra</span></div>
+     <div class="span2 pricing-preview" id="lotPriceSummary" aria-live="polite">O total da compra e a projeção de venda serão calculados para todos os produtos.</div>
      <label>Data da compra<input name="purchased_at" type="date" required></label>
      <label>Número da nota / referência<input name="reference_code" maxlength="90" placeholder="Opcional"></label>
      <label>Frete da compra (R$)<input name="freight" type="number" min="0" step=".01" value="0"></label>
@@ -199,7 +218,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
      <label class="span2">Notas da compra<textarea name="notes" rows="2" maxlength="1200" placeholder="Observações sobre a compra, embalagem ou procedência"></textarea></label>
      <label class="span2">Descrição da ocorrência<textarea name="risk_note" rows="2" maxlength="500" placeholder="Somente se houve ocorrência"></textarea></label>
      <p class="span2 admin-feedback" id="lotFeedback" role="status"></p>
-     <button class="btn btn-primary span2" type="submit" id="lotSubmit">Registrar compra + entrada no estoque</button>
+     <button class="btn btn-primary span2" type="submit" id="lotSubmit">Registrar compra e dar entrada em todos os produtos</button>
    </form>
  </div>
  <div class="card">

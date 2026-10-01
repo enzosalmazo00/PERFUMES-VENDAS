@@ -1,5 +1,5 @@
 
-import {FRAGRANCE_CATALOG,VOLUME_OPTIONS} from "./fragrance-data.js?v=20261001-catalog1";
+import {FRAGRANCE_CATALOG,VOLUME_OPTIONS} from "./fragrance-data.js?v=20261001-catalogwide2";
 import {VERIFIED_FRAGRANCES} from "./verified-fragrances.js?v=20261001-verified1";
 const OTHER="__other__";
 const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
@@ -33,6 +33,8 @@ function addOption(parent,value,label){const o=new Option(label,value);parent.ap
 function matchBrand(value){return FRAGRANCE_CATALOG.find(x=>normalize(x.brand)===normalize(value))}
 function fields(form){
   return{
+    globalSearch:form.querySelector(".catalog-global-search"),
+    globalResults:form.querySelector(".catalog-global-results"),
     search:form.querySelector(".catalog-brand-search"),
     brand:form.elements.namedItem("brand_preset"),
     customBrand:form.elements.namedItem("brand_custom"),
@@ -63,7 +65,45 @@ function renderBrands(form,preferred){
   addOption(f.brand,OTHER,"Outra marca — digitar");
   if([...f.brand.options].some(o=>o.value===selected))f.brand.value=selected;
   else f.brand.value="";
-  if(f.hint)f.hint.textContent=search?count+" marca(s) encontrada(s)":"57 marcas cadastradas • escolha ou pesquise";
+  if(f.hint)f.hint.textContent=search?count+" marca(s) encontrada(s)" :FRAGRANCE_CATALOG.length+" marcas cadastradas • escolha ou pesquise";
+}
+const searchableCatalog=FRAGRANCE_CATALOG.flatMap(group=>[
+ ...group.fragrances.map(name=>({brand:group.brand,name,type:"perfume",group:group.group})),
+ ...group.splashes.map(name=>({brand:group.brand,name,type:"body_splash",group:group.group}))
+]);
+const searchNormalize=s=>normalize(s).replace(/\b(the|nigt|night)\b/g,"de nuit").replace(/\s+/g," ");
+function chooseSearchResult(form,record){
+ const f=fields(form);
+ f.search.value="";f.globalSearch.value=record.brand+" · "+record.name;
+ f.globalResults.replaceChildren();f.globalResults.hidden=true;
+ renderBrands(form,record.brand);syncCustomBrand(form);
+ f.type.value=record.type;renderFragrances(form,record.name);
+ f.fragrance.value=record.name;f.name.value=record.name;
+ const exact=verified(record.brand,record.name,record.type);
+ fillVerified(form,exact);renderVolumes(form);
+ f.name.focus();
+}
+function renderGlobalResults(form){
+ const f=fields(form),query=searchNormalize(f.globalSearch.value);
+ f.globalResults.replaceChildren();
+ if(query.length<2){f.globalResults.hidden=true;return}
+ const tokens=query.split(" ").filter(Boolean);
+ const found=searchableCatalog.filter(item=>{
+   const haystack=searchNormalize(item.brand+" "+item.name);
+   return haystack.includes(query)||tokens.every(t=>haystack.includes(t));
+ });
+ const shown=found.slice(0,45);
+ const status=el("p");status.className="catalog-search-status";
+ status.textContent=found.length?found.length+" resultado(s) • "+(found.length>45?"exibindo os 45 primeiros":"selecione um perfume"):"Nenhuma sugestão encontrada. Você ainda pode cadastrar manualmente usando Outra marca / Outro nome.";
+ f.globalResults.append(status);
+ for(const record of shown){
+   const button=el("button",{type:"button"});button.className="catalog-search-hit";
+   const name=el("strong");name.textContent=record.name;
+   const details=el("small");details.textContent=record.brand+" · "+(record.type==="body_splash"?"Body Splash":"Perfume");
+   button.append(name,details);button.addEventListener("click",()=>chooseSearchResult(form,record));
+   f.globalResults.append(button);
+ }
+ f.globalResults.hidden=false;
 }
 function syncCustomBrand(form){
   const f=fields(form),isOther=f.brand.value===OTHER;
@@ -115,6 +155,16 @@ export function initializeCatalogForm(form){
   renderFragrances(form,"");
   renderVolumes(form);
   const f=fields(form);
+  if(f.globalSearch){
+    f.globalSearch.addEventListener("input",()=>renderGlobalResults(form));
+    f.globalSearch.addEventListener("keydown",event=>{
+      if(event.key==="Escape"){f.globalResults.hidden=true}
+      if(event.key==="Enter"&&!f.globalResults.hidden){
+        const first=f.globalResults.querySelector(".catalog-search-hit");
+        if(first){event.preventDefault();first.click()}
+      }
+    });
+  }
   f.search.addEventListener("input",()=>renderBrands(form));
   f.brand.addEventListener("change",()=>{
     syncCustomBrand(form);
@@ -151,7 +201,7 @@ export function initializeCatalogForm(form){
 export function catalogLoadProduct(form,product){
   initializeCatalogForm(form);
   const f=fields(form);
-  f.search.value="";
+  f.search.value="";if(f.globalSearch){f.globalSearch.value="";f.globalResults.hidden=true}
   const brand=matchBrand(product.brand);
   renderBrands(form,brand?brand.brand:OTHER);
   if(!brand)f.customBrand.value=product.brand||"";
@@ -168,7 +218,7 @@ export function catalogLoadProduct(form,product){
 }
 export function catalogResetForm(form){
   const f=fields(form);
-  f.search.value="";
+  f.search.value="";if(f.globalSearch){f.globalSearch.value="";f.globalResults.hidden=true;f.globalResults.replaceChildren()}
   f.customBrand.value="";
   f.customVolume.value="";
   renderBrands(form,"");
