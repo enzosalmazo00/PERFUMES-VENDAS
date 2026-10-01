@@ -58,29 +58,27 @@
 
   <main>
     <section class="hero" id="inicio">
-      <div class="hero-copy">
-        <p>ESSÊNCIAS QUE MARCAM HISTÓRIAS</p>
-        <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
-        <span class="hero-desc">Descubra fragrâncias marcantes com uma experiência de compra elegante, pessoal e segura.</span>
-        <button class="gold-button hero-button" type="button" data-jump-filter="todos">VER COLEÇÃO <b>→</b></button>
-
-        <div class="hero-trust">
-          <span>◇ <b>Curadoria selecionada</b></span>
-          <span>▣ <b>Pagamento seguro</b></span>
-          <span>✦ <b>Atendimento premium</b></span>
+      <div class="hero-carousel" id="heroCarousel">
+        <article class="hero-slide is-active" data-hero-slide style="--hero-image:url('assets/hero-signature.webp')">
+          <div class="hero-copy">
+            <p>ESSÊNCIAS QUE MARCAM HISTÓRIAS</p>
+            <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
+            <span class="hero-desc">Descubra fragrâncias marcantes com uma experiência de compra elegante, pessoal e segura.</span>
+            <button class="gold-button hero-button" type="button" data-jump-filter="todos">VER COLEÇÃO <b>→</b></button>
+            <div class="hero-trust"><span>◇ <b>Curadoria selecionada</b></span><span>▣ <b>Pagamento seguro</b></span><span>✦ <b>Atendimento premium</b></span></div>
+          </div>
+        </article>
+        <article class="hero-slide" data-hero-slide style="--hero-image:url('assets/hero-feminine.webp')">
+          <div class="hero-copy"><p>ELEGÂNCIA QUE ENVOLVE</p><h1>Sua presença,<br><em>sua essência.</em></h1><span class="hero-desc">Fragrâncias femininas que transformam cada gesto em uma assinatura inesquecível.</span><button class="gold-button hero-button" type="button" data-jump-filter="feminino">VER FEMININOS <b>→</b></button></div>
+        </article>
+        <article class="hero-slide" data-hero-slide style="--hero-image:url('assets/hero-masculine.webp')">
+          <div class="hero-copy"><p>PERSONALIDADE EM CADA NOTA</p><h1>Presença que<br><em>deixa marca.</em></h1><span class="hero-desc">Perfumes masculinos intensos e sofisticados para uma identidade verdadeiramente marcante.</span><button class="gold-button hero-button" type="button" data-jump-filter="masculino">VER MASCULINOS <b>→</b></button></div>
+        </article>
+        <div class="hero-dots" aria-label="Navegação do destaque">
+          <button class="is-active" type="button" data-hero-dot="0" aria-label="Slide 1"></button>
+          <button type="button" data-hero-dot="1" aria-label="Slide 2"></button>
+          <button type="button" data-hero-dot="2" aria-label="Slide 3"></button>
         </div>
-      </div>
-
-      <div class="hero-carousel" aria-hidden="true">
-        <div class="hero-slide hero-slide-signature is-active" data-hero-slide="0"></div>
-        <div class="hero-slide hero-slide-female" data-hero-slide="1"></div>
-        <div class="hero-slide hero-slide-male" data-hero-slide="2"></div>
-      </div>
-
-      <div class="hero-dots" role="tablist" aria-label="Destaques">
-        <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="Mostrar destaque 1" aria-selected="true"></button>
-        <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Mostrar destaque 2" aria-selected="false"></button>
-        <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Mostrar destaque 3" aria-selected="false"></button>
       </div>
     </section>
 
