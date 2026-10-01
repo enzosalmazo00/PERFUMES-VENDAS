@@ -2,7 +2,10 @@ import {openSellerLabel} from "./seller-labels.js?v=20261001-sales5";
 const $=s=>document.querySelector(s);
 const brl=c=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100);
 let services=null,initialized=false,poll=null,orderData=[],inventory=[],cart=[],notifications=[],saleKey=null;
-const int=c=>Math.round(Number(c||0)*100);
+const int=value=>{
+ const number=Number(String(value??"0").trim().replace(",","."));
+ return Number.isFinite(number)?Math.round(number*100):NaN;
+};
 const number=v=>Number(v??0);
 const digits=v=>String(v||"").replace(/\D/g,"");
 const safe=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
@@ -133,6 +136,7 @@ function bind(){
   const address={street:d.get("address_street"),number:d.get("address_number"),
     neighborhood:d.get("address_neighborhood"),city:d.get("address_city"),
     state:d.get("address_state"),postal_code:d.get("address_postal_code")};
+  if(!confirm("Confirma que você recebeu "+brl(received)+" em DINHEIRO VIVO? Valor da venda: "+brl(t.total)+". Troco: "+brl(received-t.total)+". O estoque será atualizado imediatamente."))return;
   if(!saleKey)saleKey=crypto.randomUUID();
   const button=$("#sellerRegisterCash");
   button.disabled=true;button.textContent="REGISTRANDO VENDA...";
