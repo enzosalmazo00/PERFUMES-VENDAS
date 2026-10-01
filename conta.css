@@ -31,3 +31,8 @@
   .account-save-actions .gold-button{width:100%}
   .account-details-form .account-card{height:auto}
 }
+.account-pickup{padding:15px 18px;margin-top:15px;border:1px solid rgba(218,176,105,.38);background:#171108}
+.account-pickup strong{font-size:15px;color:#eecf9a}
+.account-pickup p{color:#e5d5bb;line-height:1.65;margin:8px 0;font-size:12px}
+.account-pickup a{color:#efcd8f;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.account-pickup .account-warning{color:#e6c684;padding-top:7px;border-top:1px solid rgba(218,176,105,.22)}
