@@ -11,6 +11,20 @@ export async function resendConfirmation(email){const normalized=String(email||"
 export const adminApi=p=>call("admin-operations",p);
 export const procurementApi=p=>call("admin-procurement",p);
 export const emergencyApi=p=>call("site-emergency",p);
+export const productImageApi=p=>call("admin-product-image",p);
+export async function uploadProductImage(file){
+  if(!(file instanceof File)||!file.size)throw new Error("Selecione a foto do perfume.");
+  const allowed=["image/jpeg","image/png","image/webp"];
+  if(!allowed.includes(file.type))throw new Error("Use uma imagem JPG, PNG ou WebP.");
+  if(file.size>10*1024*1024)throw new Error("A imagem deve ter no máximo 10 MB.");
+  const safe=(file.name||"perfume").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/^-+|-+$/g,"").slice(-80)||"perfume";
+  const objectPath="products/"+Date.now()+"-"+crypto.randomUUID()+"-"+safe;
+  const encodedPath=objectPath.split("/").map(encodeURIComponent).join("/");
+  const s=loadSession();
+  const r=await fetch(SUPABASE_URL+"/storage/v1/object/product-images/"+encodedPath,{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+(s?.access_token||""),"Content-Type":file.type,"x-upsert":"false"},body:file});
+  if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d?.message||d?.error||"Não foi possível enviar a foto.");}
+  return SUPABASE_URL+"/storage/v1/object/public/product-images/"+encodedPath;
+}
 export function money(c){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100)}
 export function cents(v){return Math.round(Number(v||0)*100)}
 export function esc(v=""){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
