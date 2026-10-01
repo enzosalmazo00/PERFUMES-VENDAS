@@ -61,3 +61,11 @@
 - [x] Atalho na notificação abre a aba de pedidos; pedido pronto pode abrir a aba de verificação da retirada.
 - [x] Navegação por teclado/ARIA, layout adaptado para mobile e manutenção dos formulários existentes.
 - [ ] Verificar manualmente no navegador iPad e smartphone, com contas autorizadas, os fluxos de formulários, impressão, atualização e retorno à aba anteriormente aberta.
+
+## Revisão final do fluxo de avaliações e privacidade
+- [x] Comprador só consegue publicar comentário depois de clicar explicitamente em 0 a 5 estrelas; nota 0 é uma escolha válida.
+- [x] Botão “Avaliar sua compra” disponível no histórico mesmo após fechar a janela inicial.
+- [x] Retorno do Mercado Pago direciona a avaliação ao pedido correspondente; pendência de webhook é verificada periodicamente por período limitado.
+- [x] Média numérica, estrelas e número de avaliações reais mostrados no catálogo; identificação de compra verificada aparece apenas nas avaliações autenticadas.
+- [x] Número de WhatsApp dos vendedores deixou de ser duplicado na tabela pública geral. Contato de encomenda exige adesão explícita do vendedor.
+- [ ] Testar retorno do Mercado Pago, webhook, abertura da janela e publicação com uma compra real após configurar credenciais, estoque e retirada.
