@@ -23,7 +23,7 @@ return `<nav class="tabs">
 <label>Categoria<select name="category" required><option value="">Selecione a categoria</option><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
 <label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
-<label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
+<label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label><label>Desconto máximo do vendedor (%)<input name="max_discount_percent" type="number" min="0" max="100" step=".01" value="0" required><small>Limite para vendas presenciais em dinheiro. Acima desse valor, o servidor recusa a venda.</small></label>
 <label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" value=".500" required></label>
 <label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" value="12" required></label>
 <label>Altura (cm)<input name="height_cm" type="number" min="1" step=".1" value="15" required></label>
@@ -55,7 +55,7 @@ return `<nav class="tabs">
 <label>Categoria<select name="category" required><option value="">Selecione a categoria</option><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
 <label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
-<label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
+<label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label><label>Desconto máximo do vendedor (%)<input name="max_discount_percent" type="number" min="0" max="100" step=".01" value="0" required><small>Limite para vendas presenciais em dinheiro. Acima desse valor, o servidor recusa a venda.</small></label>
 <label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" required></label>
 <label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" required></label>
 <label>Altura (cm)<input name="height_cm" type="number" min="1" step=".1" required></label>
@@ -133,6 +133,7 @@ document.querySelector("#products").innerHTML=table([
 ["Tipo",r=>r.product_type==="body_splash"?"Body Splash":"Perfume"],
 ["Categoria",r=>esc(r.category)],
 ["Preço",r=>money(r.sale_price_cents??r.price_cents)],
+["Desconto máx.",r=>Number(r.max_discount_percent||0).toLocaleString("pt-BR")+"%"],
 ["Envio",r=>Number(r.weight_kg||0).toFixed(3)+" kg · "+Number(r.width_cm||0)+"×"+Number(r.height_cm||0)+"×"+Number(r.length_cm||0)+" cm"],
 ["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Fora da loja</span>'],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Excluir</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'</div>']
