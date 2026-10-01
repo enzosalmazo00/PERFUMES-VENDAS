@@ -6,7 +6,7 @@ const API_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const escapeHtml=(v="")=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const brl=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n||0));
 const money=c=>brl(Number(c||0)/100);
-const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,checking:false};
+const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,checking:false,gatewayReady:false};
 const scopeId=new URLSearchParams(location.search).get("vendedor");
 const uuid=value=>/^[0-9a-f-]{36}$/i.test(String(value||""))?String(value):null;
 const cart=()=>{try{return JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]")}catch{return []}};
@@ -59,7 +59,11 @@ function canSubmit(){
 function renderReady(){
  const button=$("#checkoutSubmit");
  if(!button)return;
- button.disabled=!canSubmit();
+ button.disabled=!canSubmit()||!state.gatewayReady;
+ if(!state.gatewayReady){
+   button.textContent="PAGAMENTO ONLINE AGUARDANDO ATIVAÇÃO";
+   return renderTotals();
+ }
  button.textContent="PAGAR COM SEGURANÇA NA AZZENA";
  renderTotals();
 }
@@ -124,7 +128,17 @@ async function loadCustomer(){
  }
  box.innerHTML='<div class="checkout-login-call">Verificando sua conta AZZENA...</div>';
  try{
-  state.customer=(await customerPortal({action:"bootstrap"})).data;
+  const [account,gate]=await Promise.all([
+    customerPortal({action:"bootstrap"}),
+    customerCheckout({action:"gateway_status"})
+  ]);
+  state.customer=account.data;
+  state.gatewayReady=gate.data?.online_configured===true;
+  const note=$("#paymentSetupNotice");
+  if(note){
+    note.hidden=state.gatewayReady;
+    if(!state.gatewayReady)note.textContent="O pagamento seguro à AZZENA está em configuração. O pedido online só poderá ser finalizado quando a loja ativar o Mercado Pago. Nunca pague PIX pessoal de vendedor.";
+  }
   const profile=state.customer.profile||{};
   box.innerHTML='<div class="checkout-customer-ok"><span>Cliente</span><strong>'+escapeHtml(profile.full_name||"Conta cadastrada")+
    '</strong><a href="conta.html">Editar dados</a></div>';
@@ -138,6 +152,8 @@ async function loadCustomer(){
   $("#shippingPublicNote").textContent=state.customer.shipping?.public_note||"Entrega disponível para o Estado de São Paulo.";
   if(!customerReady())message("Complete seu nome e telefone em Minha Conta antes de finalizar o pedido.");
  }catch(error){
+  state.gatewayReady=false;
+  const note=$("#paymentSetupNotice");if(note){note.hidden=false;note.textContent="Não foi possível validar o pagamento da loja. Tente novamente mais tarde; não faça transferências pessoais."}
   state.customer=null;
   box.innerHTML='<div class="checkout-login-call"><strong>Não foi possível verificar seus dados agora.</strong><p>Sua sessão foi preservada. Tente novamente ou consulte Minha Conta.</p><a href="conta.html" class="gold-button">MINHA CONTA</a></div>';
  }
@@ -185,6 +201,7 @@ async function submitOrder(event){
  if(!state.customer){location.href="conta.html";return}
  if(!customerReady()){message("Complete seu perfil em Minha Conta.");return}
  if(!canSubmit()){message("Escolha e confirme uma opção de entrega ou retirada.");return}
+ if(!state.gatewayReady){message("O pagamento seguro da AZZENA ainda não foi ativado.");return}
  const submit=$("#checkoutSubmit");submit.disabled=true;submit.textContent="REGISTRANDO PEDIDO...";
  try{
   let response;
