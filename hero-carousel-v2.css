@@ -155,3 +155,48 @@
   #inicio .hero-copy h1{font-size:40px!important}
   #inicio .hero-slide{background-position:56% center!important}
 }
+
+
+/* LUXURY HERO TYPOGRAPHY 20261001 */
+#inicio .hero-copy>p{
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.30em!important;
+  line-height:1.55!important;
+  text-transform:uppercase!important;
+  color:#dcc38f!important;
+  text-shadow:0 1px 12px rgba(0,0,0,.9)!important;
+}
+#inicio .hero-button{
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.14em!important;
+  line-height:1.2!important;
+  text-transform:uppercase!important;
+  padding:14px 25px!important;
+  border-radius:2px!important;
+}
+#inicio .hero-button b{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:19px!important;
+  font-weight:500!important;
+  line-height:0!important;
+  margin-left:9px!important;
+}
+#inicio .hero-desc{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:17px!important;
+  font-weight:400!important;
+  letter-spacing:.012em!important;
+}
+#inicio .hero-trust{
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-weight:400!important;
+  letter-spacing:.025em!important;
+}
+@media(max-width:760px){
+  #inicio .hero-copy>p{font-size:9px!important;letter-spacing:.24em!important}
+  #inicio .hero-button{font-size:9px!important;letter-spacing:.12em!important}
+}
