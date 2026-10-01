@@ -1132,3 +1132,6 @@ body{font-family:Poppins,Arial,sans-serif}
 @media(max-width:540px){.checkout-method-options{grid-template-columns:1fr}.checkout-method{min-height:70px}}
 
 .checkout-payment-provider{padding:15px 17px;border:1px solid rgba(219,177,105,.4);background:linear-gradient(110deg,#201609,#090806);margin:17px 0}.checkout-payment-provider strong{font-size:13px;color:#eed29b}.checkout-payment-provider p{font-size:11px;line-height:1.65;color:#cbbb9d;margin:7px 0 0}.checkout-method[hidden],.payment-tabs[hidden],.shipping-checkout[hidden]{display:none!important}
+
+.payment-setup-notice{margin:14px 0;padding:14px 17px;border:1px solid #a78045;background:#211608;color:#efd3a6;font-size:12px;line-height:1.6}
+.payment-setup-notice[hidden]{display:none!important}
