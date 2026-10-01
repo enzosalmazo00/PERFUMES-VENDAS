@@ -2,7 +2,7 @@ import {esc,money,option,table} from "./admin-api.js?v=20261001-0045";
 export function shell(){
 return `<nav class="tabs">
 <button class="tab is-active" data-tab="visao">Visão geral</button>
-<button class="tab" data-tab="perfumes">Perfumes</button>
+<button class="tab" data-tab="perfumes">Perfumes / Body Splash</button>
 <button class="tab" data-tab="rede">Vendedores/Cidades</button>
 <button class="tab" data-tab="estoque">Estoques</button>
 <button class="tab" data-tab="compras">Compras/Risco</button>
@@ -11,13 +11,14 @@ return `<nav class="tabs">
 </nav>
 <section class="tab-panel" data-panel="visao"><div id="metrics" class="metrics"></div><div class="card"><p class="eyebrow">Alertas</p><h2>Estoque baixo</h2><div id="lowStock"></div></div></section>
 <section class="tab-panel" data-panel="perfumes" hidden>
-<div class="card"><p class="eyebrow">Catálogo</p><h2>Novo perfume</h2>
+<div class="card"><p class="eyebrow">Catálogo</p><h2>Novo produto</h2>
 <form id="productForm" class="form-grid">
 <label>Nome<input name="name" required></label><label>Marca<input name="brand"></label>
+<label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
-<label class="span2 product-image-field">Foto do perfume<input name="image" id="productImage" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG ou WebP · até 10 MB</small><img id="productImagePreview" class="product-image-preview" alt="Prévia da foto do perfume" hidden></label>
+<label class="span2 product-image-field">Foto do produto<input name="image" id="productImage" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG ou WebP · até 10 MB</small><img id="productImagePreview" class="product-image-preview" alt="Prévia da foto do perfume" hidden></label>
 <label class="span2">Resumo curto<textarea name="short_description" placeholder="Texto curto que aparece no destaque do produto"></textarea></label>
 <label class="span2">Descrição completa<textarea name="description"></textarea></label>
 <label class="span2">Composição<textarea name="composition"></textarea></label>
@@ -32,10 +33,11 @@ return `<nav class="tabs">
 <div class="card"><p class="eyebrow">Produtos cadastrados</p><h2>Gerenciar catálogo</h2><p class="muted">Edite informações, notas olfativas, foto e preço. “Excluir” remove o card da loja sem apagar o histórico.</p><div id="products"></div></div>
 
 <div class="card edit-product-card" id="editProductCard" hidden>
-<p class="eyebrow">Edição</p><h2>Editar perfume</h2>
+<p class="eyebrow">Edição</p><h2>Editar produto</h2>
 <form id="editProductForm" class="form-grid">
 <input type="hidden" name="id">
 <label>Nome<input name="name" required></label><label>Marca<input name="brand"></label>
+<label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
@@ -66,7 +68,8 @@ const low=d.inventory.filter(x=>x.low_stock);
 document.querySelector("#lowStock").innerHTML=table([["Produto",r=>esc(r.product_name)],["Local",r=>esc(r.location_name)],["Saldo",r=>'<span class="badge-warn">⚠ '+r.quantity+'</span>'],["Limite",r=>r.low_stock_threshold]],low);
 document.querySelector("#products").innerHTML=table([
 ["Foto",r=>r.image_url?'<img class="product-thumb" src="'+esc(r.image_url)+'" alt="">':'—'],
-["Perfume",r=>'<strong>'+esc(r.name)+'</strong><br><span class="muted">'+esc(r.brand||"—")+' · '+r.volume_ml+' mL</span>'],
+["Produto",r=>'<strong>'+esc(r.name)+'</strong><br><span class="muted">'+esc(r.brand||"—")+' · '+r.volume_ml+' mL</span>'],
+["Tipo",r=>r.product_type==="body_splash"?"Body Splash":"Perfume"],
 ["Categoria",r=>esc(r.category)],
 ["Preço",r=>money(r.sale_price_cents??r.price_cents)],
 ["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Fora da loja</span>'],
