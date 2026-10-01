@@ -2,13 +2,14 @@ import{
   loadCustomerSession,validCustomerSession,customerSignIn,customerSignUp,
   customerSignOut,customerPortal,requestPasswordReset,recoveryFromHash,updateRecoveredPassword
 }from"./customer-api.js?v=20261001-sessionfix1";
+import{installReviewFlow}from"./review-flow.js?v=20261001-review1";
 
 const $=selector=>document.querySelector(selector);
 const authView=$("#authView"),accountView=$("#accountView"),recoveryView=$("#recoveryView");
 const authMessage=$("#authMessage"),toast=$("#accountToast"),screen=$("#accountSessionScreen");
 const fields=$("#accountDetailsForm");
 const field=name=>fields.elements.namedItem(name);
-let boot=null,selectedAddressId=null,checking=false,validatedCep="";
+let boot=null,selectedAddressId=null,checking=false,validatedCep="",reviewFlow=null;
 const esc=(value="")=>String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const brl=value=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(value||0)/100);
 const digits=value=>String(value??"").replace(/\D/g,"");
@@ -162,6 +163,14 @@ function renderOrders(){
    }
    const paymentLabels={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",
      cancelled:"Cancelado",refunded:"Estornado"};
+   const reviewed=new Set((order.reviews||[]).map(r=>r.product_id));
+   const unreviewed=[...new Set((order.items||[]).map(i=>i.product_id).filter(Boolean))].filter(id=>!reviewed.has(id));
+   const eligibleForReview=paid&&order.payment_channel==="mercadopago";
+   const reviewAction=eligibleForReview
+     ?'<div class="order-review-action">'+(unreviewed.length
+        ?'<button type="button" data-open-review-order="'+esc(order.id)+'">★ AVALIAR SUA COMPRA</button>'
+        :'<span>★ Avaliações enviadas. Obrigado!</span>')+'</div>'
+     :'';
    return '<article class="order-item"><div class="order-head"><div><strong>'+esc(order.public_id)+
      '</strong><p>'+new Date(order.created_at).toLocaleString("pt-BR")+'</p></div>'+
      '<span class="order-status">'+esc(redeemed?"Entregue ao cliente":statusLabel(order.fulfillment_status))+'</span></div>'+
@@ -173,7 +182,7 @@ function renderOrders(){
      '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
      (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
      (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+
-     '</p>'+pickupCodeCard+pickupDetails+'</article>';
+     '</p>'+pickupCodeCard+pickupDetails+reviewAction+'</article>';
  }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
 }
 let orderRefreshBusy=false;
@@ -181,8 +190,9 @@ async function refreshCustomerOrders(){
  if(orderRefreshBusy||accountView.hidden||!loadCustomerSession()||document.visibilityState!=="visible")return;
  orderRefreshBusy=true;
  try{
+   const paidBefore=new Set((boot?.orders||[]).filter(o=>o.payment_status==="approved").map(o=>o.id));
    const response=await customerPortal({action:"orders"});
-   if(boot&&Array.isArray(response.data)){boot.orders=response.data;renderOrders()}
+   if(boot&&Array.isArray(response.data)){boot.orders=response.data;renderOrders();reviewFlow?.check(paidBefore)}
  }catch(error){console.warn("Pedidos: atualização temporariamente indisponível.",error?.message||"")}
  finally{orderRefreshBusy=false}
 }
@@ -224,6 +234,7 @@ function renderAccount(){
   authView.hidden=true;recoveryView.hidden=true;accountView.hidden=false;
   hideChecking();
   if(location.hash==="#pedidos")requestAnimationFrame(()=>$("#pedidos").scrollIntoView({block:"start"}));
+  reviewFlow?.check();
 }
 async function openAccount({quiet=false}={}){
   if(checking)return;
@@ -376,6 +387,7 @@ fields.onsubmit=async event=>{
   }finally{button.disabled=false;button.textContent="SALVAR ALTERAÇÕES"}
 };
 
+reviewFlow=installReviewFlow({getOrders:()=>boot?.orders||[],portal:customerPortal,refresh:refreshCustomerOrders,rerender:renderOrders,notify});
 bindPasswordEyes();
 if(recoveryFromHash()){
   showRecovery();
