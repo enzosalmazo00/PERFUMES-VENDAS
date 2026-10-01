@@ -1,3 +1,4 @@
+if(location.hash&&new URLSearchParams(location.hash.slice(1)).get("type")==="recovery"){location.replace("conta.html"+location.hash);}
 const SUPABASE_URL="https://fbwlprwhczxjdsciotsi.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const SPRITE_INDEX={"velora-noir":0,"solaris-elixir":1,"fleur-dambre":2,"nero-absolu":3,"eclat-rose":4,"vertige":5};
