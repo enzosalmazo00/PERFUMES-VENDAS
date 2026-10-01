@@ -1135,3 +1135,7 @@ body{font-family:Poppins,Arial,sans-serif}
 
 .payment-setup-notice{margin:14px 0;padding:14px 17px;border:1px solid #a78045;background:#211608;color:#efd3a6;font-size:12px;line-height:1.6}
 .payment-setup-notice[hidden]{display:none!important}
+
+/* AZZENA pre-payment readiness: real inventory indicators */
+.stock-badge{position:absolute;left:10px;top:10px;z-index:4;border:1px solid #d9a3a3;background:rgba(115,25,32,.94);color:#fff;font:700 12px/1.2 "Poppins",Arial,sans-serif;letter-spacing:.09em;padding:7px 10px;border-radius:4px}
+.buy-card:disabled,.detail-actions .buy-card:disabled{opacity:.85!important;background:#30302e!important;color:#d1c3b2!important;border:1px solid #4e4740!important;box-shadow:none!important;transform:none!important;cursor:not-allowed!important}
