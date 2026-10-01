@@ -6,6 +6,7 @@ return `<nav class="tabs">
 <button class="tab" data-tab="rede">Vendedores/Cidades</button>
 <button class="tab" data-tab="estoque">Estoques</button>
 <button class="tab" data-tab="pedidos">Pedidos/Envios</button>
+<button class="tab" data-tab="caixa">Caixa / Dinheiro</button>
 <button class="tab" data-tab="compras">Compras/Risco</button>
 <button class="tab" data-tab="relatorios">Relatórios</button>
 <button class="tab" data-tab="emergencia">Emergência</button>
@@ -119,6 +120,11 @@ return `<nav class="tabs">
 </div>
 <div class="card"><p class="eyebrow">Pedidos</p><h2>Pedidos de clientes</h2><div id="orders"></div></div>
 </section>
+<section class="tab-panel" data-panel="caixa" hidden>
+ <div class="card"><p class="eyebrow">CONTROLE FINANCEIRO</p><h2>Vendas presenciais em dinheiro</h2>
+ <p class="muted">Todas as vendas recebidas em dinheiro vivo ficam registradas com o vendedor responsável, desconto autorizado, valor recebido, troco e baixa de estoque. PIX e cartão só pelo Mercado Pago da AZZENA.</p>
+ <div id="cashSalesSummary" class="metrics"></div><div id="cashSalesTable"></div>
+ </div></section>
 <section class="tab-panel" data-panel="compras" hidden><div class="grid2"><div class="card"><p class="eyebrow">Privado</p><h2>Novo fornecedor</h2><form id="supplierForm"><label>Nome<input name="name" required></label><label>Contato<input name="contact"></label><label>Telefone<input name="phone"></label><label>Notas<textarea name="notes"></textarea></label><button class="btn btn-primary">Salvar</button></form></div>
 <div class="card"><p class="eyebrow">Entrada</p><h2>Novo lote</h2><form id="lotForm"><label>Fornecedor<select name="supplier_id" id="lotSupplier"></select></label><label>Destino<select name="location_id" id="lotLocation"></select></label><label>Produto<select name="product_id" id="lotProduct"></select></label><label>Quantidade<input name="qty" type="number" min="1" required></label><label>Custo unitário (R$)<input name="cost" type="number" min="0" step=".01" required></label><label>Risco<select name="risk"><option value="">Sem risco</option><option value="travel">Viagem</option><option value="seizure">Apreensão</option><option value="damage">Dano</option><option value="loss">Perda</option><option value="other">Outro</option></select></label><label>Valor do risco (R$)<input name="risk_value" type="number" min="0" step=".01"></label><label>Nota<textarea name="risk_note"></textarea></label><button class="btn btn-primary">Registrar lote + estoque</button></form></div></div></section>
 <section class="tab-panel" data-panel="relatorios" hidden><div class="card"><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2><div class="form-grid"><label>De<input type="date" id="from"></label><label>Até<input type="date" id="to"></label><label>Vendedor<select id="reportSeller"></select></label><label>Produto<select id="reportProduct"></select></label><label>Cidade<select id="reportCity"></select></label></div><button class="btn btn-primary" id="runReport">Gerar relatório</button></div><div id="reportMetrics" class="metrics"></div><div class="card" id="reportMoves"></div><div class="card" id="reportRisks"></div></section>
@@ -168,10 +174,27 @@ document.querySelector("#orders").innerHTML=table([
  return "Retirada com "+esc(owner?.name||"Vendedor")+(loc.street?" · "+esc(loc.street)+", "+esc(loc.street_number||"")+" · "+esc(loc.city||"")+"/"+esc(loc.state||""):"");
 }],
 ["Total",r=>money(r.total_cents)],
+["Origem",r=>r.payment_channel==="seller_cash"?"Dinheiro presencial":r.payment_channel==="mercadopago"?"Site · Mercado Pago":"Legado"],
 ["Pagamento",r=>'<select class="admin-inline-select" data-order-payment="'+esc(r.id)+'">'+["pending","approved","rejected","cancelled","refunded"].map(x=>'<option value="'+x+'" '+(r.payment_status===x?"selected":"")+'>'+paymentLabels[x]+'</option>').join("")+'</select>'],
 ["Pedido",r=>'<select class="admin-inline-select" data-order-fulfillment="'+esc(r.id)+'">'+["pending","preparing","ready","shipped","delivered","cancelled"].map(x=>'<option value="'+x+'" '+(r.fulfillment_status===x?"selected":"")+'>'+orderStatusLabels[x]+'</option>').join("")+'</select>'],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-save-order="'+esc(r.id)+'">Salvar status</button><a class="btn btn-small" target="_blank" rel="noopener" href="https://wa.me/'+String(r.customer_phone||"").replace(/\\D/g,"")+'?text='+encodeURIComponent("Olá "+r.customer_name+", estamos entrando em contato sobre o pedido "+r.public_id+".")+'">WhatsApp</a></div>']
 ],d.orders||[]);
+const cashRows=(d.orders||[]).filter(o=>o.payment_channel==="seller_cash");
+const cashGross=cashRows.reduce((sum,o)=>sum+Number(o.subtotal_cents||0),0);
+const cashDiscount=cashRows.reduce((sum,o)=>sum+Number(o.discount_cents||0),0);
+const cashNet=cashRows.reduce((sum,o)=>sum+Number(o.total_cents||0),0);
+document.querySelector("#cashSalesSummary").innerHTML=[
+ ["Vendas em dinheiro",cashRows.length],["Faturamento líquido",money(cashNet)],
+ ["Descontos concedidos",money(cashDiscount)]
+].map(row=>'<div class="metric"><span>'+row[0]+'</span><strong>'+row[1]+'</strong></div>').join("");
+document.querySelector("#cashSalesTable").innerHTML=table([
+ ["Data",o=>new Date(o.created_at).toLocaleString("pt-BR")],
+ ["Pedido",o=>esc(o.public_id)],["Cliente",o=>esc(o.customer_name)],
+ ["Vendedor",o=>esc(d.sellers.find(s=>s.id===o.seller_id)?.name||"—")],
+ ["Bruto",o=>money(o.subtotal_cents)],["Desconto",o=>money(o.discount_cents)],
+ ["Líquido",o=>money(o.total_cents)],["Dinheiro recebido",o=>money(o.cash_received_cents)],
+ ["Troco",o=>money(o.cash_change_cents)]
+],cashRows);
 const ss=d.shipping_settings||{};
 const sf=document.querySelector("#shippingSettingsForm");
 if(sf){sf.elements.origin_postal_code.value=ss.origin_postal_code||"";sf.elements.provider_environment.value=ss.provider_environment||"sandbox";sf.elements.shipping_enabled.checked=!!ss.shipping_enabled;sf.elements.public_note.value=ss.public_note||"Envios disponíveis para o Estado de São Paulo."}
