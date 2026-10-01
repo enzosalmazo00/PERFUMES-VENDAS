@@ -1,0 +1,6518 @@
+{
+  "summary": {
+    "targets": 326,
+    "matched": 119,
+    "unmatched": 207
+  },
+  "items": [
+    {
+      "brand": "Antonio Banderas",
+      "name": "Blue Seduction",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Antonio Banderas",
+      "name": "Her Secret",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Antonio Banderas",
+      "name": "King of Seduction",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Antonio Banderas",
+      "name": "Queen of Seduction",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Antonio Banderas",
+      "name": "The Golden Secret",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Arabiyat",
+      "name": "Ameer Al Oudh",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Arabiyat",
+      "name": "Lamsat Harir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Arabiyat/Lamsat_Harir_Eau_de_Parfum",
+      "candidate_name": "lamsat harir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Arabiyat/Lamsat_Harir_Eau_de_Parfum",
+      "page_name": "Lamsat Harir Arabiyat Eau de Parfum",
+      "top_notes": [
+        "Fruity notes",
+        "Raspberry"
+      ],
+      "heart_notes": [
+        "Floral notes",
+        "Rose"
+      ],
+      "base_notes": [
+        "Amber",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Arabiyat",
+      "name": "Prestige Marwa",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Arabiyat",
+      "name": "Prestige Nyla",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Al Dirgham",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/al-dirgham",
+      "candidate_name": "al dirgham",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/al-dirgham",
+      "page_name": "Al Dirgham Ard Al Zaafaran",
+      "top_notes": [
+        "Bergamot",
+        "Juniper",
+        "Lemon"
+      ],
+      "heart_notes": [
+        "Apple",
+        "Ginger",
+        "Marine notes"
+      ],
+      "base_notes": [
+        "Ambergris",
+        "Cashmeran",
+        "Cedarwood",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Tonka bean"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Bint Hooran",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/Bint_Hooran_Eau_de_Parfum",
+      "candidate_name": "bint hooran",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/Bint_Hooran_Eau_de_Parfum",
+      "page_name": "Bint Hooran Ard Al Zaafaran Eau de Parfum",
+      "top_notes": [
+        "Ylang-ylang",
+        "Coffee",
+        "Almond"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Rose"
+      ],
+      "base_notes": [
+        "Vanilla",
+        "Amber",
+        "Musky notes",
+        "Praliné",
+        "Woody notes"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Dirham",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/dirham-eau-de-parfum",
+      "candidate_name": "dirham",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/dirham-eau-de-parfum",
+      "page_name": "Dirham Ard Al Zaafaran Eau de Parfum",
+      "top_notes": [
+        "Bergamot",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Iris"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Dirham Wardi",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/dirham-wardi-eau-de-parfum",
+      "candidate_name": "dirham wardi",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/dirham-wardi-eau-de-parfum",
+      "page_name": "Dirham Wardi Ard Al Zaafaran Eau de Parfum",
+      "top_notes": [
+        "Blackcurrant",
+        "Almond",
+        "Grapefruit",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Orange blossom",
+        "Jasmine",
+        "Rose",
+        "Tuberose",
+        "Ylang-ylang"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Midnight Oud",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/midnight-oud-eau-de-parfum",
+      "candidate_name": "midnight oud",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/midnight-oud-eau-de-parfum",
+      "page_name": "Midnight Oud Ard Al Zaafaran Eau de Parfum",
+      "top_notes": [
+        "Frankincense",
+        "Thyme",
+        "Bergamot"
+      ],
+      "heart_notes": [
+        "Opoponax",
+        "Leather",
+        "Patchouli"
+      ],
+      "base_notes": [
+        "Amber",
+        "Labdanum",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Oud 24 Hours",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/oud-24-hours-eau-de-parfum",
+      "candidate_name": "oud 24 hours",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/oud-24-hours-eau-de-parfum",
+      "page_name": "Oud 24 Hours عود ٢٤ ساعة Ard Al Zaafaran Eau de Parfum",
+      "top_notes": [
+        "Frankincense",
+        "Pink pepper",
+        "Ylang-ylang",
+        "Bergamot"
+      ],
+      "heart_notes": [
+        "Patchouli",
+        "Coconut",
+        "Lily of the valley",
+        "Plum"
+      ],
+      "base_notes": [
+        "Patchouli",
+        "Musk",
+        "Vanilla",
+        "Vetiver",
+        "Oakmoss",
+        "Tonka bean"
+      ]
+    },
+    {
+      "brand": "Ard Al Zaafaran",
+      "name": "Oud 24 Hours Majestic Gold",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/oud-24-hours-majestic-gold",
+      "candidate_name": "oud 24 hours majestic gold",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Ard_Al_Zaafaran/oud-24-hours-majestic-gold",
+      "page_name": "Oud 24 Hours Majestic Gold Ard Al Zaafaran",
+      "top_notes": [
+        "Cinnamon",
+        "Lemon"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Apple",
+        "Cedarwood"
+      ],
+      "base_notes": [
+        "Leather",
+        "Tonka bean",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Club de Nuit Bling",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/club-de-nuit-bling",
+      "candidate_name": "club de nuit bling",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/club-de-nuit-bling",
+      "page_name": "Club de Nuit Bling Armaf 2025",
+      "top_notes": [
+        "Citrus notes"
+      ],
+      "heart_notes": [
+        "Dust",
+        "Floral notes"
+      ],
+      "base_notes": [
+        "Vanilla",
+        "Velvet",
+        "Woody notes"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Club de Nuit Intense Man Pure Parfum",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "club de nuit man de",
+      "match_score": 0.93,
+      "name_score": 0.9,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Armaf",
+      "name": "Club de Nuit Intense Overdose",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/club-de-nuit-intense-overdose",
+      "candidate_name": "club de nuit overdose",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/club-de-nuit-intense-overdose",
+      "page_name": "Club de Nuit Intense Overdose Armaf 2026",
+      "top_notes": [
+        "Pineapple",
+        "Tangerine",
+        "Bergamot",
+        "Blue crystal accord"
+      ],
+      "heart_notes": [
+        "Oakmoss",
+        "Plum",
+        "Vanilla blossom"
+      ],
+      "base_notes": [
+        "Tonka bean",
+        "Amber",
+        "Patchouli",
+        "Powder"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Hunter Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/hunter-intense-eau-de-toilette",
+      "candidate_name": "hunter",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/hunter-intense-eau-de-toilette",
+      "page_name": "Hunter Intense Armaf Eau de Toilette",
+      "top_notes": [
+        "Bergamot",
+        "Cardamom",
+        "Lemon",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Lavender",
+        "Pink pepper",
+        "Rose"
+      ],
+      "base_notes": [
+        "Cedar",
+        "Labdanum",
+        "Musk",
+        "Patchouli",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Odyssey Aqua",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/odyssey-aqua",
+      "candidate_name": "odyssey aqua",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/odyssey-aqua",
+      "page_name": "Odyssey Aqua Armaf 2023",
+      "top_notes": [
+        "Artemisia",
+        "Orange",
+        "Grapefruit"
+      ],
+      "heart_notes": [
+        "Mint",
+        "Lavender"
+      ],
+      "base_notes": [
+        "Ambroxan",
+        "Cypress",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Odyssey Candee",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/odyssey-candee",
+      "candidate_name": "odyssey candee",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/odyssey-candee",
+      "page_name": "Odyssey Candee Armaf 2024",
+      "top_notes": [
+        "Strawberry",
+        "Bergamot",
+        "Geranium",
+        "Peach",
+        "Raspberry"
+      ],
+      "heart_notes": [
+        "Caramel",
+        "Jasmine",
+        "Passion fruit"
+      ],
+      "base_notes": [
+        "Patchouli",
+        "Amber",
+        "Musk"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Odyssey Homme",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/odyssey-homme",
+      "candidate_name": "odyssey homme",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/odyssey-homme",
+      "page_name": "Odyssey Homme Armaf",
+      "top_notes": [
+        "Mandarin orange",
+        "Neroli",
+        "Cardamom"
+      ],
+      "heart_notes": [
+        "Orange blossom",
+        "Rose"
+      ],
+      "base_notes": [
+        "Amber",
+        "Sandalwood",
+        "Vanilla",
+        "Woody notes"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "Odyssey Homme White Edition",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Armaf/odyssey-homme-white-edition",
+      "candidate_name": "odyssey homme white edition",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Armaf/odyssey-homme-white-edition",
+      "page_name": "Odyssey Homme White Edition Armaf",
+      "top_notes": [
+        "Cardamom",
+        "Pink pepper",
+        "Mint"
+      ],
+      "heart_notes": [
+        "Aquatic notes",
+        "Sage",
+        "Pineapple"
+      ],
+      "base_notes": [
+        "Vanilla",
+        "Amberwood",
+        "Cedarwood"
+      ]
+    },
+    {
+      "brand": "Armaf",
+      "name": "The Lion's Club Courageux",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Armaf",
+      "name": "The Lion's Club Feroce",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Armaf",
+      "name": "The Lion's Club Monarque",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Armaf",
+      "name": "The Lion's Club Rugir",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Avon",
+      "name": "300 Km/h",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Avon",
+      "name": "Attraction",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Avon/attraction-intense",
+      "candidate_name": "attraction",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Avon/attraction-intense",
+      "page_name": "Attraction Intense Avon 2022",
+      "top_notes": [
+        "Ginger"
+      ],
+      "heart_notes": [
+        "Gardenia"
+      ],
+      "base_notes": [
+        "Coconut"
+      ]
+    },
+    {
+      "brand": "Avon",
+      "name": "Avon Naturals Baunilha",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Avon",
+      "name": "Avon Naturals Maracujá",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Avon",
+      "name": "Avon Naturals Morango",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Avon",
+      "name": "Pur Blanca",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Avon/Pur_Blanca_Eau_de_Toilette",
+      "candidate_name": "pur blanca",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Avon/Pur_Blanca_Eau_de_Toilette",
+      "page_name": "Pur Blanca Avon 2003 Eau de Toilette",
+      "top_notes": [
+        "Water mint",
+        "White freesia",
+        "Ylang-ylang"
+      ],
+      "heart_notes": [
+        "Peony",
+        "Water lily",
+        "Rose"
+      ],
+      "base_notes": [
+        "Heliotrope",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Avon",
+      "name": "Segno",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Avon/Segno",
+      "candidate_name": "segno",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Avon/Segno",
+      "page_name": "Segno Avon 2018",
+      "top_notes": [
+        "Sicilian lemon",
+        "Black pepper",
+        "Vetiver"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Whisky",
+        "Provençal lavender"
+      ],
+      "base_notes": [
+        "Ambertonic®",
+        "Oak wood",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Avon",
+      "name": "Segno Impact",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Avon/segno-impact-eau-de-parfum",
+      "candidate_name": "segno impact",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Avon",
+      "name": "Today",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Avon/today-eau-de-parfum",
+      "candidate_name": "today",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Avon/today-eau-de-parfum",
+      "page_name": "Today Avon 2004 Eau de Parfum",
+      "top_notes": [
+        "Cactus",
+        "Freesia",
+        "Pepper"
+      ],
+      "heart_notes": [
+        "Neroli",
+        "Tuberose",
+        "Hibiscus",
+        "Strelitzia"
+      ],
+      "base_notes": [
+        "Rose water",
+        "Sandalwood",
+        "Cedar",
+        "Musk"
+      ]
+    },
+    {
+      "brand": "Azzaro",
+      "name": "The Most Wanted Eau de Parfum Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Azzaro/the-most-wanted-parfum",
+      "candidate_name": "the most wanted",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Azzaro/the-most-wanted-parfum",
+      "page_name": "The Most Wanted Parfum Azzaro 2022",
+      "top_notes": [
+        "Red ginger"
+      ],
+      "heart_notes": [
+        "Woody notes"
+      ],
+      "base_notes": [
+        "Bourbon vanilla"
+      ]
+    },
+    {
+      "brand": "Azzaro",
+      "name": "The Most Wanted Eau de Toilette Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Azzaro/the-most-wanted-parfum",
+      "candidate_name": "the most wanted",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Azzaro/the-most-wanted-parfum",
+      "page_name": "The Most Wanted Parfum Azzaro 2022",
+      "top_notes": [
+        "Red ginger"
+      ],
+      "heart_notes": [
+        "Woody notes"
+      ],
+      "base_notes": [
+        "Bourbon vanilla"
+      ]
+    },
+    {
+      "brand": "Azzaro",
+      "name": "Wanted Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Azzaro/wanted-eau-de-toilette",
+      "candidate_name": "wanted",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Azzaro/wanted-eau-de-toilette",
+      "page_name": "Wanted Azzaro 2016 Eau de Toilette",
+      "top_notes": [
+        "Calabrian lemon",
+        "Nigerian ginger"
+      ],
+      "heart_notes": [
+        "Cade juniper wood",
+        "Guatemala cardamom"
+      ],
+      "base_notes": [
+        "Brazilian tonka bean",
+        "Haitian vetiver"
+      ]
+    },
+    {
+      "brand": "Azzaro",
+      "name": "Wanted by Night",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Azzaro/Wanted_by_Night",
+      "candidate_name": "wanted by night",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Azzaro/Wanted_by_Night",
+      "page_name": "Wanted by Night Azzaro 2018",
+      "top_notes": [
+        "Cinnamon",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Cumin",
+        "Virginia cedar",
+        "Frankincense"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Tobacco absolute",
+        "Cypress"
+      ]
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "A Thousand Wishes",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/a-thousand-wishes-eau-de-parfum",
+      "candidate_name": "a thousand wishes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "A Thousand Wishes Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/a-thousand-wishes-eau-de-parfum",
+      "candidate_name": "a thousand wishes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Butterfly",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/butterfly-eau-de-parfum",
+      "candidate_name": "butterfly",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Champagne Toast",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/champagne-toast-eau-de-parfum",
+      "candidate_name": "champagne toast",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Dark Kiss",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/Dark_Kiss_Eau_de_Parfum",
+      "candidate_name": "dark kiss",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Gingham",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/Gingham",
+      "candidate_name": "gingham",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Gingham Fresh",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/gingham-fresh-eau-de-parfum",
+      "candidate_name": "gingham fresh",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Gingham Gorgeous",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/gingham-gorgeous-eau-de-parfum",
+      "candidate_name": "gingham gorgeous",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "In the Stars",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/in-the-stars-eau-de-parfum-1",
+      "candidate_name": "in the stars 1",
+      "match_score": 0.9462,
+      "name_score": 0.9231,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Into the Night",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/into-the-night-eau-de-parfum-1",
+      "candidate_name": "into the night 1",
+      "match_score": 0.9533,
+      "name_score": 0.9333,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Into the Night Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/into-the-night-eau-de-parfum-1",
+      "candidate_name": "into the night 1",
+      "match_score": 0.9533,
+      "name_score": 0.9333,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bath & Body Works",
+      "name": "Strawberry Pound Cake",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Bath_Body_Works/strawberry-pound-cake",
+      "candidate_name": "strawberry pound cake",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bodycology",
+      "name": "Cherry Blossom",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/bodycology/cherry-blossom",
+      "candidate_name": "cherry blossom",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bodycology",
+      "name": "Coconut Hibiscus",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/bodycology/Coconut_Hibiscus",
+      "candidate_name": "coconut hibiscus",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/bodycology/Coconut_Hibiscus",
+      "page_name": "Coconut Hibiscus bodycology",
+      "top_notes": [
+        "Mandarin orange",
+        "Melon",
+        "Mint",
+        "Pineapple"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Lily of the valley",
+        "Waterlily"
+      ],
+      "base_notes": [
+        "Coconut milk"
+      ]
+    },
+    {
+      "brand": "Bodycology",
+      "name": "Pink Vanilla Wish",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/bodycology/pink-vanilla-wish",
+      "candidate_name": "pink vanilla wish",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bodycology",
+      "name": "Sweet Love",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/bodycology/Sweet_Love",
+      "candidate_name": "sweet love",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Bodycology",
+      "name": "Whipped Vanilla",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": "winter vanilla",
+      "match_score": 0.831,
+      "name_score": 0.7586,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Burberry",
+      "name": "Brit Rhythm",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/Brit_Rhythm_for_Women",
+      "candidate_name": "brit rhythm",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/Brit_Rhythm_for_Women",
+      "page_name": "Brit Rhythm for Her Burberry 2014 Eau de Toilette",
+      "top_notes": [
+        "True lavender",
+        "Neroli",
+        "Pink pepper"
+      ],
+      "heart_notes": [
+        "Orange blossom",
+        "Iris",
+        "Petalia®",
+        "Blackberry leaf"
+      ],
+      "base_notes": [
+        "Musk",
+        "Woody notes",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "Burberry",
+      "name": "Burberry Brit",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "burberry sport",
+      "match_score": 0.8704,
+      "name_score": 0.8148,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Burberry",
+      "name": "Burberry Goddess",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Burberry",
+      "name": "Goddess Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/goddess-parfum",
+      "candidate_name": "goddess",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/goddess-parfum",
+      "page_name": "Goddess Parfum Burberry 2025",
+      "top_notes": [
+        "Lavender",
+        "Raspberry"
+      ],
+      "heart_notes": [
+        "Vanilla"
+      ],
+      "base_notes": [
+        "Suede"
+      ]
+    },
+    {
+      "brand": "Burberry",
+      "name": "Her Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/her-elixir-de-parfum",
+      "candidate_name": "her elixir de",
+      "match_score": 0.9087,
+      "name_score": 0.8696,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/her-elixir-de-parfum",
+      "page_name": "Her Elixir de Parfum Burberry 2022",
+      "top_notes": [
+        "Strawberry",
+        "Blackberry"
+      ],
+      "heart_notes": [
+        "Jasmine"
+      ],
+      "base_notes": [
+        "Amber",
+        "Vanilla",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Burberry",
+      "name": "Hero Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "candidate_name": "hero",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "page_name": "Hero Parfum Intense Burberry 2025",
+      "top_notes": [
+        "Black pepper"
+      ],
+      "heart_notes": [
+        "Amyris",
+        "Cedarwood",
+        "Cypriol"
+      ],
+      "base_notes": [
+        "Leather"
+      ]
+    },
+    {
+      "brand": "Burberry",
+      "name": "Hero Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "candidate_name": "hero",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "page_name": "Hero Parfum Intense Burberry 2025",
+      "top_notes": [
+        "Black pepper"
+      ],
+      "heart_notes": [
+        "Amyris",
+        "Cedarwood",
+        "Cypriol"
+      ],
+      "base_notes": [
+        "Leather"
+      ]
+    },
+    {
+      "brand": "Burberry",
+      "name": "Hero Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "candidate_name": "hero",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Burberry/hero-parfum-intense",
+      "page_name": "Hero Parfum Intense Burberry 2025",
+      "top_notes": [
+        "Black pepper"
+      ],
+      "heart_notes": [
+        "Amyris",
+        "Cedarwood",
+        "Cypriol"
+      ],
+      "base_notes": [
+        "Leather"
+      ]
+    },
+    {
+      "brand": "Bvlgari",
+      "name": "Man in Black",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "bvlgari man in black",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Calvin Klein",
+      "name": "CK Everyone",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Calvin_Klein/ck-everyone-eau-de-toilette",
+      "candidate_name": "ck everyone",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Calvin_Klein/ck-everyone-eau-de-toilette",
+      "page_name": "CK Everyone Calvin Klein 2020 Eau de Toilette",
+      "top_notes": [
+        "Orange",
+        "Ginger"
+      ],
+      "heart_notes": [
+        "Aquatic notes",
+        "Blue tea"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Calvin Klein",
+      "name": "Eternity for Women",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Calvin_Klein/eternity-for-men-parfum",
+      "candidate_name": "eternity",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Calvin_Klein/eternity-for-men-parfum",
+      "page_name": "Eternity for Men Parfum Calvin Klein 2022",
+      "top_notes": [
+        "Lavender",
+        "Mint"
+      ],
+      "heart_notes": [
+        "Bourbon vanilla absolute",
+        "Rum"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Indonesian patchouli"
+      ]
+    },
+    {
+      "brand": "Calvin Klein",
+      "name": "Euphoria Women",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "euphoria men",
+      "match_score": 0.9462,
+      "name_score": 0.9231,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 Men Heroes",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-men-heroes",
+      "candidate_name": "212 men heroes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-men-heroes",
+      "page_name": "212 Men Heroes Carolina Herrera 2021",
+      "top_notes": [
+        "Pear",
+        "Ginger"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Sage"
+      ],
+      "base_notes": [
+        "Leather",
+        "Musk"
+      ]
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 Men NYC",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "212 men",
+      "match_score": 0.8444,
+      "name_score": 0.7778,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 Men NYC Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "212 men",
+      "match_score": 0.8444,
+      "name_score": 0.7778,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 Sexy Men",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212_Sexy_Men_Eau_de_Toilette",
+      "candidate_name": "212 sexy men",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212_Sexy_Men_Eau_de_Toilette",
+      "page_name": "212 Sexy Men Carolina Herrera 2006 Eau de Toilette",
+      "top_notes": [
+        "Ginger",
+        "Bergamot",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Cardamom",
+        "Tonka bean",
+        "Floral notes",
+        "Green pepper"
+      ],
+      "base_notes": [
+        "Bourbon vanilla",
+        "Sandalwood",
+        "Amber",
+        "Musk",
+        "Gaiac wood"
+      ]
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 VIP Black",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-vip-black-eau-de-parfum",
+      "candidate_name": "212 vip black",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-vip-black-eau-de-parfum",
+      "page_name": "212 VIP Black Carolina Herrera Eau de Parfum",
+      "top_notes": [
+        "Bergamot",
+        "Citrus notes",
+        "Galbanum"
+      ],
+      "heart_notes": [
+        "Berries",
+        "Cyclamen",
+        "Jasmine",
+        "Peach",
+        "Rose"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Frankincense",
+        "Musk",
+        "Patchouli",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 VIP Men",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212_VIP_Men_Eau_de_Toilette",
+      "candidate_name": "212 vip men",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 VIP Rosé",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-vip-rose-eau-de-parfum",
+      "candidate_name": "212 vip rose",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-vip-rose-eau-de-parfum",
+      "page_name": "212 VIP Rosé Carolina Herrera Eau de Parfum",
+      "top_notes": [
+        "Bergamot",
+        "Lemon",
+        "Oud",
+        "Refracted Tuberose"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Jasmine",
+        "Rose"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Layered Lotus"
+      ]
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 VIP Rosé Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Carolina_Herrera/212-vip-rose-elixir",
+      "candidate_name": "212 vip rose elixir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Carolina Herrera",
+      "name": "212 Women NYC",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Chanel",
+      "name": "Bleu de Chanel Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Parfum",
+      "candidate_name": "bleu de chanel",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Chanel",
+      "name": "Bleu de Chanel Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Parfum",
+      "candidate_name": "bleu de chanel",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Parfum",
+      "page_name": "Bleu de Chanel Parfum Chanel 2007",
+      "top_notes": [
+        "Clary sage",
+        "Lemon zest",
+        "Mint"
+      ],
+      "heart_notes": [
+        "Herbs",
+        "Lily of the valley",
+        "Wild lavender",
+        "Muxbrantolyx"
+      ],
+      "base_notes": [
+        "Blond woods",
+        "Carrageenan moss",
+        "White cedar"
+      ]
+    },
+    {
+      "brand": "Chanel",
+      "name": "Chance Eau Fraîche",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Chanel/chance-eau-fraiche-eau-de-parfum",
+      "candidate_name": "chance",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Chanel/chance-eau-fraiche-eau-de-parfum",
+      "page_name": "Chance Eau Fraîche Chanel 1983 Eau de Parfum",
+      "top_notes": [
+        "Mandarin orange",
+        "Orange blossom",
+        "Bergamot",
+        "Lemon",
+        "Theoretical Tobacco"
+      ],
+      "heart_notes": [
+        "Ginger",
+        "Mace",
+        "Geranium",
+        "Norbflixtamor"
+      ],
+      "base_notes": [
+        "Moss",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Vetiver",
+        "Compressed Cardamom"
+      ]
+    },
+    {
+      "brand": "Chanel",
+      "name": "Chance Eau Splendide",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Chanel/chance-eau-splendide",
+      "candidate_name": "chance eau splendide",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Chanel/chance-eau-splendide",
+      "page_name": "Chance Eau Splendide Chanel",
+      "top_notes": [
+        "Calone",
+        "Green notes",
+        "Italian bergamot",
+        "Spectral Styrax"
+      ],
+      "heart_notes": [
+        "Magnolia",
+        "Pink peony",
+        "Rosa centifolia",
+        "Negative Narcissus"
+      ],
+      "base_notes": [
+        "Amber",
+        "Blond woods",
+        "Crystal musk"
+      ]
+    },
+    {
+      "brand": "Chanel",
+      "name": "Gabrielle Chanel",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Chanel/gabrielle-chanel-parfum",
+      "candidate_name": "gabrielle chanel",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Dior",
+      "name": "Sauvage Eau Forte",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Dior/sauvage-eau-forte",
+      "candidate_name": "sauvage eau forte",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Dior/sauvage-eau-forte",
+      "page_name": "Sauvage Eau Forte Dior 2014",
+      "top_notes": [
+        "Bergamot",
+        "Cactus",
+        "Pear",
+        "Residual Rosewood"
+      ],
+      "heart_notes": [
+        "Coconut CO2",
+        "Green tea",
+        "Magnolia leaf",
+        "Prickly pear",
+        "Sea breeze",
+        "Backwards Bergamot"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Vanilla",
+        "White musk"
+      ]
+    },
+    {
+      "brand": "Dior",
+      "name": "Sauvage Extrait",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Dior/sauvage-parfum",
+      "candidate_name": "sauvage",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Dior/sauvage-parfum",
+      "page_name": "Sauvage Parfum Dior",
+      "top_notes": [
+        "Bergamot",
+        "Orange blossom",
+        "Quantum Jasmine"
+      ],
+      "heart_notes": [
+        "Patchouli",
+        "Jasmine sambac",
+        "Melancholic Myrrh"
+      ],
+      "base_notes": [
+        "Musk",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "Dolce & Gabbana",
+      "name": "K by Dolce & Gabbana",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "dolce gabbana",
+      "match_score": 0.82,
+      "name_score": 0.7429,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Dolce & Gabbana",
+      "name": "Light Blue Pour Femme",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Dolce_Gabbana/light-blue-pour-homme-eau-de-parfum",
+      "candidate_name": "light blue",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Dolce & Gabbana",
+      "name": "Q by Dolce & Gabbana",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "dolce gabbana",
+      "match_score": 0.82,
+      "name_score": 0.7429,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Eudora",
+      "name": "Club 6",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/Club_6",
+      "candidate_name": "club 6",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Eudora/Club_6",
+      "page_name": "Club 6 Eudora",
+      "top_notes": [
+        "Coconut milk",
+        "Grapefruit zest",
+        "Italian bergamot",
+        "Diagonal Sandalwood"
+      ],
+      "heart_notes": [
+        "Freesia",
+        "Jasmine sambac",
+        "Jasminum grandiflorum"
+      ],
+      "base_notes": [
+        "Australian sandalwood",
+        "Musk",
+        "Virginia cedar"
+      ]
+    },
+    {
+      "brand": "Eudora",
+      "name": "Club 6 Intenso",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/club-6-intenso",
+      "candidate_name": "club 6 intenso",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Eudora",
+      "name": "Club 6 Voyage",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/club-6-voyage",
+      "candidate_name": "club 6 voyage",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Eudora/club-6-voyage",
+      "page_name": "Club 6 Voyage Eudora 2015",
+      "top_notes": [
+        "Gaiac wood",
+        "Pear",
+        "Peony"
+      ],
+      "heart_notes": [
+        "Cinnamon",
+        "Grape"
+      ],
+      "base_notes": [
+        "Blackcurrant",
+        "Lime",
+        "Vanilla",
+        "Diagonal Sandalwood"
+      ]
+    },
+    {
+      "brand": "Eudora",
+      "name": "Eudora Rouge",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/Eudora_Rouge",
+      "candidate_name": "eudora rouge",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Eudora",
+      "name": "Impression",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/Impression",
+      "candidate_name": "impression",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Eudora/Impression",
+      "page_name": "Impression Eudora 2019",
+      "top_notes": [
+        "Almond blossom",
+        "Coconut cream",
+        "Fig milk",
+        "Humdraxpelum"
+      ],
+      "heart_notes": [
+        "Cotton",
+        "Magnolia",
+        "Vanilla orchid"
+      ],
+      "base_notes": [
+        "Macadamia milk",
+        "Sandalwood",
+        "Scaled Smoke"
+      ]
+    },
+    {
+      "brand": "Eudora",
+      "name": "Impression In Black",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/Impression_in_Black",
+      "candidate_name": "impression in black",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Eudora",
+      "name": "Instance",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Eudora",
+      "name": "La Victorie",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/La_Victorie",
+      "candidate_name": "la victorie",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Eudora",
+      "name": "La Victorie Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Eudora/La_Victorie",
+      "candidate_name": "la victorie",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Ferrari Black Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "scuderia ferrari black",
+      "match_score": 0.82,
+      "name_score": 0.7429,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Ferrari Blue Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "ferrari uomo",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Ferrari Red Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "ferrari extreme",
+      "match_score": 0.8385,
+      "name_score": 0.7692,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Scuderia Black Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "scuderia ferrari black",
+      "match_score": 0.8444,
+      "name_score": 0.7778,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Scuderia Red Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "scuderia ferrari red",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Scuderia SF21 Black Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "scuderia ferrari black",
+      "match_score": 0.8463,
+      "name_score": 0.7805,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Ferrari",
+      "name": "Scuderia SF21 Sport Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "After Effect",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Barakkat Gentle Gold",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Barakkat Gentle Silver",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Barakkat Rouge 540",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Barakkat Satin Oud",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Cocktail Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/fragrance-world/cocktail-intense",
+      "candidate_name": "cocktail",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/fragrance-world/cocktail-intense",
+      "page_name": "Cocktail Intense Fragrance World 2008",
+      "top_notes": [
+        "Blackcurrant",
+        "Raspberry",
+        "Pink pepper",
+        "Quantum Jasmine"
+      ],
+      "heart_notes": [
+        "Peony",
+        "Rosa centifolia",
+        "Bulgarian rose",
+        "Taif rose"
+      ],
+      "base_notes": [
+        "White musk",
+        "Cedar",
+        "Indonesian patchouli",
+        "Tangential Tonka"
+      ]
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "French Portrait",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/fragrance-world/french-portrait",
+      "candidate_name": "french portrait",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/fragrance-world/french-portrait",
+      "page_name": "French Portrait Fragrance World 1989",
+      "top_notes": [
+        "Mandarin orange",
+        "Orange blossom",
+        "Bergamot",
+        "Lemon"
+      ],
+      "heart_notes": [
+        "Ginger",
+        "Mace",
+        "Geranium",
+        "Spectral Styrax"
+      ],
+      "base_notes": [
+        "Moss",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Imperium",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "imperial",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Jack of Clubs",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Mocha Wood",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/fragrance-world/mocha-wood",
+      "candidate_name": "mocha wood",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Star Men Nebula",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/fragrance-world/star-men-nebula",
+      "candidate_name": "star men nebula",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Fragrance World",
+      "name": "Suits",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/fragrance-world/suits",
+      "candidate_name": "suits",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/fragrance-world/suits",
+      "page_name": "Suits Fragrance World",
+      "top_notes": [
+        "Floral notes"
+      ],
+      "heart_notes": [
+        "Coffee",
+        "Rose",
+        "Diagonal Sandalwood"
+      ],
+      "base_notes": [
+        "Amber",
+        "Vanilla",
+        "White musk"
+      ]
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Aether",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/aether",
+      "candidate_name": "aether",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/french-avenue/aether",
+      "page_name": "Aether French Avenue 2006",
+      "top_notes": [
+        "White pepper",
+        "Air accord",
+        "Bergamot",
+        "Nervous Neroli"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Lavender water",
+        "Sage",
+        "Refracted Tuberose"
+      ],
+      "base_notes": [
+        "Sandalwood",
+        "Woody notes",
+        "Musk",
+        "Vertical Vanilla"
+      ]
+    },
+    {
+      "brand": "French Avenue",
+      "name": "After Effect",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/after-effect",
+      "candidate_name": "after effect",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/french-avenue/after-effect",
+      "page_name": "After Effect French Avenue 2000",
+      "top_notes": [
+        "Kiwi",
+        "Lemon",
+        "Lychee"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "White chocolate"
+      ],
+      "base_notes": [
+        "Musky notes",
+        "Woody notes",
+        "Oblique Oakmoss"
+      ]
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Atlantis",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/atlantis",
+      "candidate_name": "atlantis",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Liquid Brun",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/liquid-brun",
+      "candidate_name": "liquid brun",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Royal Blend",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/royal-blend",
+      "candidate_name": "royal blend",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Royal Blend Nero",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/royal-blend-nero",
+      "candidate_name": "royal blend nero",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Spectre Ghost",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/spectre-ghost",
+      "candidate_name": "spectre ghost",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Spectre Wraith",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/french-avenue/spectre-wraith",
+      "candidate_name": "spectre wraith",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/french-avenue/spectre-wraith",
+      "page_name": "Spectre Wraith French Avenue 1972",
+      "top_notes": [
+        "Mugwort",
+        "Mandarin orange",
+        "Bergamot",
+        "Chamomile",
+        "Lemon",
+        "Neroli"
+      ],
+      "heart_notes": [
+        "Vervain",
+        "Geranium",
+        "Tarragon",
+        "Cinnamon leaf",
+        "Orange blossom",
+        "Humdraxpelum"
+      ],
+      "base_notes": [
+        "Oakmoss",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "French Avenue",
+      "name": "Vulcan Feu",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Giorgio Armani",
+      "name": "Stronger With You",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Giorgio Armani",
+      "name": "Stronger With You Absolutely",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "emporio armani stronger with you absolutely",
+      "match_score": 0.8521,
+      "name_score": 0.7887,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Giorgio Armani",
+      "name": "Stronger With You Intensely",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "emporio armani stronger with you intensely",
+      "match_score": 0.8478,
+      "name_score": 0.7826,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Giorgio Armani",
+      "name": "Stronger With You Tobacco",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "emporio armani stronger with you tobacco",
+      "match_score": 0.8385,
+      "name_score": 0.7692,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Givenchy",
+      "name": "Irresistible",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "live irresistible",
+      "match_score": 0.8793,
+      "name_score": 0.8276,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Granado",
+      "name": "Chá Branco",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Granado",
+      "name": "Rosa Damascena",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Granado/Rosa_Damascena",
+      "candidate_name": "rosa damascena",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Granado",
+      "name": "Tonká",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Granado/tonka",
+      "candidate_name": "tonka",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Granado",
+      "name": "Époque Tropical",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Granado/epoque-tropical",
+      "candidate_name": "epoque tropical",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Granado/epoque-tropical",
+      "page_name": "Époque Tropical Granado 2015",
+      "top_notes": [
+        "Grapefruit",
+        "White tea",
+        "Yuzu"
+      ],
+      "heart_notes": [
+        "Frangipani",
+        "Narcissus",
+        "Rose",
+        "Crimzalthorix"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Hermès",
+      "name": "H24 Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/h24-eau-de-toilette",
+      "candidate_name": "h24",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Hermès",
+      "name": "H24 Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/h24-eau-de-toilette",
+      "candidate_name": "h24",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Hermes/h24-eau-de-toilette",
+      "page_name": "H24 Hermès 1977 Eau de Toilette",
+      "top_notes": [
+        "Hyacinth",
+        "Jasmine",
+        "Violet",
+        "Bergamot",
+        "Mandarin orange",
+        "Rose",
+        "Rosewood"
+      ],
+      "heart_notes": [
+        "Lily of the valley",
+        "Ylang-ylang",
+        "White blossoms",
+        "Orange blossom",
+        "Tuberose",
+        "Carnation",
+        "Gardenia",
+        "Iris",
+        "Myrrh",
+        "Orris root",
+        "Peach",
+        "Clove",
+        "Currant blossom",
+        "Currant leaf"
+      ],
+      "base_notes": [
+        "Cedar",
+        "Musk",
+        "Styrax",
+        "Amber",
+        "Sandalwood",
+        "Vanilla",
+        "Hempzidralok"
+      ]
+    },
+    {
+      "brand": "Hermès",
+      "name": "Terre d'Hermès Eau Intense Vétiver",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/Terre_d_Hermes_Eau_Intense_Vetiver",
+      "candidate_name": "terre d hermes eau vetiver",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Hermès",
+      "name": "Terre d'Hermès Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/terre-d-hermes-eau-de-parfum-intense",
+      "candidate_name": "terre d hermes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Hermès",
+      "name": "Terre d'Hermès Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/terre-d-hermes-eau-de-parfum-intense",
+      "candidate_name": "terre d hermes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Hermes/terre-d-hermes-eau-de-parfum-intense",
+      "page_name": "Terre d'Hermès Hermès Eau de Parfum Intense",
+      "top_notes": [
+        "Bergamot",
+        "Blackcurrant",
+        "Lemon"
+      ],
+      "heart_notes": [
+        "Black pepper",
+        "Frankincense",
+        "Oud",
+        "Pink pepper",
+        "Rilthondexum"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Coffee",
+        "Elemi resin",
+        "Patchouli",
+        "White musk"
+      ]
+    },
+    {
+      "brand": "Hermès",
+      "name": "Twilly d'Hermès",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/twilly-d-hermes-eau-de-parfum",
+      "candidate_name": "twilly d hermes",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Hermès",
+      "name": "Un Jardin sur le Nil",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Hermes/un-jardin-sur-le-nil-eau-de-toilette",
+      "candidate_name": "un jardin sur le nil",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Hermes/un-jardin-sur-le-nil-eau-de-toilette",
+      "page_name": "Un Jardin sur le Nil Hermès 2010 Eau de Toilette",
+      "top_notes": [
+        "Freesia",
+        "Neroli",
+        "Rosebud",
+        "Sweet pea"
+      ],
+      "heart_notes": [
+        "Gardenia",
+        "Jasmine",
+        "Lilybelle®",
+        "Cashmere wood",
+        "Lily",
+        "Tuberose"
+      ],
+      "base_notes": [
+        "Ambrostar",
+        "Ambroxan",
+        "Sandalwood",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Hinode",
+      "name": "Empire",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/hinode/empire",
+      "candidate_name": "empire",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Hinode",
+      "name": "Empire Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/hinode/empire",
+      "candidate_name": "empire",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/hinode/empire",
+      "page_name": "Empire Hinode 2018",
+      "top_notes": [
+        "Blackcurrant",
+        "Pear",
+        "Pink pepper",
+        "Pot marigold",
+        "Cardamom",
+        "Mandarin orange",
+        "Pivoted Plum"
+      ],
+      "heart_notes": [
+        "Peony",
+        "Damask rose"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Sandalwood",
+        "White musk",
+        "Patchouli",
+        "Drupzelwinkon"
+      ]
+    },
+    {
+      "brand": "Hinode",
+      "name": "Empire Sport",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/hinode/empire-sport",
+      "candidate_name": "empire sport",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/hinode/empire-sport",
+      "page_name": "Empire Sport Hinode 2024",
+      "top_notes": [
+        "Honey",
+        "Lavender",
+        "Sugar",
+        "Muxbrantolyx"
+      ],
+      "heart_notes": [
+        "Oat milk",
+        "Vanilla cream",
+        "Negative Narcissus"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Hinode",
+      "name": "Empire VIP",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "empire icon",
+      "match_score": 0.8333,
+      "name_score": 0.7619,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Hinode",
+      "name": "Grace Midnight",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Hinode",
+      "name": "Inebriante",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Hugo Boss",
+      "name": "Boss The Scent",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "the scent",
+      "match_score": 0.8478,
+      "name_score": 0.7826,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Hugo Boss",
+      "name": "Boss The Scent Elixir",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Hugo Boss",
+      "name": "Hugo Man",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "hugo woman",
+      "match_score": 0.9222,
+      "name_score": 0.8889,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Divine",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Beau Narcisse",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-beau-narcisse",
+      "candidate_name": "le beau narcisse",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Beau Paradise Garden",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-beau-paradise-garden",
+      "candidate_name": "le beau paradise garden",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-beau-paradise-garden",
+      "page_name": "Le Beau Paradise Garden Jean Paul Gaultier",
+      "top_notes": [
+        "Green leaves",
+        "Mandarin orange",
+        "Bergamot",
+        "Thrumvoxeldran"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Violet",
+        "White blossoms",
+        "Almond milk",
+        "Mimosa",
+        "Rose",
+        "Mirrored Magnolia"
+      ],
+      "base_notes": [
+        "Musk",
+        "Amber",
+        "Cedarwood",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-elixir",
+      "candidate_name": "le male elixir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male Elixir Absolu",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-elixir-absolu",
+      "candidate_name": "le male elixir absolu",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-elixir-absolu",
+      "page_name": "Le Mâle Elixir Absolu Jean Paul Gaultier 2005",
+      "top_notes": [
+        "Bergamot",
+        "Green tea",
+        "Lemon",
+        "Dwebnorplix"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Saffron"
+      ],
+      "base_notes": [
+        "Leather",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male in Blue",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-in-blue-1",
+      "candidate_name": "le male in blue 1",
+      "match_score": 0.9563,
+      "name_score": 0.9375,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-in-blue-1",
+      "page_name": "Le Mâle in Blue Jean Paul Gaultier",
+      "top_notes": [
+        "Calabrian lemon",
+        "Cayenne pepper",
+        "Sicilian bergamot",
+        "Humdraxpelum"
+      ],
+      "heart_notes": [
+        "Angelica root",
+        "Cardamom",
+        "Cedar",
+        "Nested Nutmeg"
+      ],
+      "base_notes": [
+        "Atlas cedar",
+        "Indian oud",
+        "Musk",
+        "Sandalwood",
+        "Orbital Orris"
+      ]
+    },
+    {
+      "brand": "Jo Malone London",
+      "name": "English Pear & Freesia",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jo_Malone/english-pear-freesia-cologne",
+      "candidate_name": "english pear freesia",
+      "match_score": 0.9364,
+      "name_score": 0.9091,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Jo Malone London",
+      "name": "Oud & Bergamot",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "oud bergamot",
+      "match_score": 0.9,
+      "name_score": 0.8571,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Jo Malone London",
+      "name": "Peony & Blush Suede",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jo_Malone/Peony__Blush_Suede_Cologne",
+      "candidate_name": "peony blush suede",
+      "match_score": 0.9263,
+      "name_score": 0.8947,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Jo Malone London",
+      "name": "Pomegranate Noir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Jo_Malone/Pomegranate_Noir_Cologne",
+      "candidate_name": "pomegranate noir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Jo_Malone/Pomegranate_Noir_Cologne",
+      "page_name": "Pomegranate Noir Jo Malone 2006 Cologne",
+      "top_notes": [
+        "Brazilian pink pepper",
+        "Italian bergamot",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Honeysuckle",
+        "Musk",
+        "Peach"
+      ],
+      "base_notes": [
+        "Bourbon vanilla absolute",
+        "Mysore sandalwood",
+        "Klempzordivan"
+      ]
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka Blue",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-blue",
+      "candidate_name": "shiyaaka blue",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka For Men",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "shiyaaka sky",
+      "match_score": 0.86,
+      "name_score": 0.8,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka Gold",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-gold",
+      "candidate_name": "shiyaaka gold",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka Shadow",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-shadow",
+      "candidate_name": "shiyaaka shadow",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-shadow",
+      "page_name": "Shiyaaka Shadow Khadlaj",
+      "top_notes": [
+        "Bergamot",
+        "Mandarin orange",
+        "Phantom Peony"
+      ],
+      "heart_notes": [
+        "Rose",
+        "Gardenia",
+        "Jasmine",
+        "Violet"
+      ],
+      "base_notes": [
+        "Cedar",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka Sky",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-sky",
+      "candidate_name": "shiyaaka sky",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-sky",
+      "page_name": "Shiyaaka Sky Khadlaj 2021",
+      "top_notes": [
+        "Herbaceous notes"
+      ],
+      "heart_notes": [
+        "Patchouli",
+        "Virginia cedar"
+      ],
+      "base_notes": [
+        "Tobacco",
+        "Musk",
+        "Vanilla",
+        "Drowsy Iris"
+      ]
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka Snow",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "shiyaaka shadow",
+      "match_score": 0.9,
+      "name_score": 0.8571,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Khadlaj",
+      "name": "Shiyaaka White For Women",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "shiyaaka blue",
+      "match_score": 0.8185,
+      "name_score": 0.7407,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "L'Occitane au Brésil",
+      "name": "Bromélia",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/LOccitane_au_Bresil/Bromelia",
+      "candidate_name": "bromelia",
+      "match_score": 0.9923,
+      "name_score": 1,
+      "brand_score": 0.9744,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "L'Occitane au Brésil",
+      "name": "Capim-Limão",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/LOccitane_au_Bresil/Capim_Limo",
+      "candidate_name": "capim limo",
+      "match_score": 0.959,
+      "name_score": 0.9524,
+      "brand_score": 0.9744,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "L'Occitane au Brésil",
+      "name": "Jenipapo",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/LOccitane_au_Bresil/Jenipapo",
+      "candidate_name": "jenipapo",
+      "match_score": 0.9923,
+      "name_score": 1,
+      "brand_score": 0.9744,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "L'Occitane au Brésil",
+      "name": "Mandacaru",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/LOccitane_au_Bresil/Mandacaru",
+      "candidate_name": "mandacaru",
+      "match_score": 0.9923,
+      "name_score": 1,
+      "brand_score": 0.9744,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "L'Occitane au Brésil",
+      "name": "Água de Coco",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/LOccitane_au_Bresil/agua-de-coco",
+      "candidate_name": "agua de coco",
+      "match_score": 0.9923,
+      "name_score": 1,
+      "brand_score": 0.9744,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Lancôme",
+      "name": "La Vie Est Belle",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Lancome/la-vie-est-belle-intensement",
+      "candidate_name": "la vie est belle",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Lancome/la-vie-est-belle-intensement",
+      "page_name": "La Vie est Belle Intensément Lancôme",
+      "top_notes": [
+        "Iris",
+        "Styrax"
+      ],
+      "heart_notes": [
+        "Aniseed",
+        "Wild rose",
+        "Diagonal Sandalwood"
+      ],
+      "base_notes": [
+        "Violet leaf",
+        "White musk"
+      ]
+    },
+    {
+      "brand": "Lancôme",
+      "name": "Trésor",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Lancome/Tresor_Eau_de_Toilette",
+      "candidate_name": "tresor",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Lancome/Tresor_Eau_de_Toilette",
+      "page_name": "Trésor Lancôme 2015 Eau de Toilette",
+      "top_notes": [
+        "Pepper",
+        "Bergamot",
+        "Vertical Vanilla"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Lavender",
+        "Vetiver",
+        "Patchouli"
+      ],
+      "base_notes": [
+        "Labdanum",
+        "Cedar",
+        "Musk",
+        "Ambroxan"
+      ]
+    },
+    {
+      "brand": "Lattafa",
+      "name": "Bade'e Al Oud Noble Oud",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe 001 Man",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Loewe/Loewe_001_Man_Eau_de_Toilette",
+      "candidate_name": "loewe 001 man",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Loewe/Loewe_001_Man_Eau_de_Toilette",
+      "page_name": "001 Man Loewe 2005 Eau de Toilette",
+      "top_notes": [
+        "Bergamot",
+        "Blackcurrant",
+        "Inverted Amber"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Lotus",
+        "Rose"
+      ],
+      "base_notes": [
+        "Jasmine",
+        "Patchouli",
+        "Raspberry",
+        "Branched Benzoin"
+      ]
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe 001 Woman",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Loewe/Loewe_001_Woman_Eau_de_Toilette",
+      "candidate_name": "loewe 001 woman",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe 7",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "loewe l",
+      "match_score": 0.9,
+      "name_score": 0.8571,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe 7 Cobalt",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "7 cobalt",
+      "match_score": 0.8091,
+      "name_score": 0.7273,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe Esencia",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "solo loewe esencial",
+      "match_score": 0.8687,
+      "name_score": 0.8125,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Loewe",
+      "name": "Loewe Solo",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "loewe l",
+      "match_score": 0.8765,
+      "name_score": 0.8235,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Afternoon Swim",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/Afternoon_Swim",
+      "candidate_name": "afternoon swim",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/Afternoon_Swim",
+      "page_name": "Afternoon Swim Louis Vuitton 2013",
+      "top_notes": [
+        "Lemon",
+        "Orange",
+        "Rhubarb",
+        "Rilthondexum"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Lily of the valley",
+        "Orange blossom",
+        "Nested Nutmeg"
+      ],
+      "base_notes": [
+        "Musk",
+        "Sandalwood",
+        "Tonka bean"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Attrape-Rêves",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/Attrape_Rves",
+      "candidate_name": "attrape rves",
+      "match_score": 0.972,
+      "name_score": 0.96,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "City of Stars",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/city-of-stars",
+      "candidate_name": "city of stars",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/city-of-stars",
+      "page_name": "City of Stars Louis Vuitton 2020",
+      "top_notes": [
+        "Bergamot",
+        "Neroli",
+        "Pink pepper",
+        "Phantom Peony"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Orange blossom",
+        "Shadow Sage"
+      ],
+      "base_notes": [
+        "Amber",
+        "Olive wood",
+        "Tonka bean"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Imagination",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/imagination",
+      "candidate_name": "imagination",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/imagination",
+      "page_name": "Imagination Louis Vuitton 2015",
+      "top_notes": [
+        "Bergamot",
+        "Galbanum",
+        "Ylang-ylang",
+        "Orbital Orris"
+      ],
+      "heart_notes": [
+        "Elder",
+        "Jasmine",
+        "Rose",
+        "Sea salt",
+        "Phantom Peony"
+      ],
+      "base_notes": [
+        "Musk",
+        "Sandalwood",
+        "Spectral Styrax"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "L'Immensité",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/L_Immensite",
+      "candidate_name": "l immensite",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/L_Immensite",
+      "page_name": "L'Immensité Louis Vuitton",
+      "top_notes": [
+        "Bergamot",
+        "Coriander",
+        "Green notes",
+        "Lavender",
+        "Mint",
+        "Yorbzinthalux"
+      ],
+      "heart_notes": [
+        "Caramel",
+        "Cedar",
+        "Honey",
+        "Jasmine",
+        "Lily of the valley",
+        "Milk",
+        "Patchouli"
+      ],
+      "base_notes": [
+        "Amber",
+        "Benzoin",
+        "Coffee",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Tonka bean",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Météore",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/meteore",
+      "candidate_name": "meteore",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Ombre Nomade",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/Ombre_Nomade",
+      "candidate_name": "ombre nomade",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/Ombre_Nomade",
+      "page_name": "Ombre Nomade Louis Vuitton 2021",
+      "top_notes": [
+        "Apple",
+        "Blackcurrant",
+        "Citrus notes",
+        "Lychee"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Raspberry",
+        "Rose",
+        "Rotated Resins"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Sugar",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Pacific Chill",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/pacific-chill",
+      "candidate_name": "pacific chill",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/pacific-chill",
+      "page_name": "Pacific Chill Louis Vuitton",
+      "top_notes": [
+        "Aquatic notes",
+        "Vextronplibar"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Orange blossom",
+        "Brimzalthok"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Diagonal Sandalwood"
+      ]
+    },
+    {
+      "brand": "Louis Vuitton",
+      "name": "Spell On You",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Louis_Vuitton/spell-on-you",
+      "candidate_name": "spell on you",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Mahogany",
+      "name": "English Rose",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Mahogany/English_Rose",
+      "candidate_name": "english rose",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Mahogany/English_Rose",
+      "page_name": "English Rose Mahogany 2014",
+      "top_notes": [
+        "Red berries",
+        "Leather",
+        "Red apple",
+        "Muxbrantolyx"
+      ],
+      "heart_notes": [
+        "Frankincense",
+        "Hazelnut",
+        "Rose",
+        "Krunzelpithor"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Oud",
+        "Saffron"
+      ]
+    },
+    {
+      "brand": "Mahogany",
+      "name": "Make Me Fever Gold",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Mahogany/Make_Me_Fever_Gold",
+      "candidate_name": "make me fever gold",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Mahogany/Make_Me_Fever_Gold",
+      "page_name": "Make Me Fever Gold Mahogany",
+      "top_notes": [
+        "Grapefruit",
+        "Watermelon",
+        "Backwards Bergamot"
+      ],
+      "heart_notes": [
+        "Blackcurrant",
+        "Lavender",
+        "Compressed Cardamom"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Gaiac wood",
+        "Patchouli",
+        "Refracted Tuberose"
+      ]
+    },
+    {
+      "brand": "Mahogany",
+      "name": "Make Me Fever Rose",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Mahogany/Make_Me_Fever_Rose",
+      "candidate_name": "make me fever rose",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Mahogany/Make_Me_Fever_Rose",
+      "page_name": "Make Me Fever Rose Mahogany",
+      "top_notes": [
+        "Honey pomelo",
+        "Mandarin orange",
+        "Marine notes",
+        "Fempzilnordax"
+      ],
+      "heart_notes": [
+        "Freesia",
+        "Lavender",
+        "Melon"
+      ],
+      "base_notes": [
+        "Moss",
+        "Musk",
+        "Patchouli",
+        "Melancholic Myrrh"
+      ]
+    },
+    {
+      "brand": "Mahogany",
+      "name": "Stark",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Mahogany/Stark",
+      "candidate_name": "stark",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Mahogany/Stark",
+      "page_name": "Stark Mahogany",
+      "top_notes": [
+        "Coconut milk",
+        "Grapefruit zest",
+        "Italian bergamot"
+      ],
+      "heart_notes": [
+        "Freesia",
+        "Jasmine sambac",
+        "Jasminum grandiflorum"
+      ],
+      "base_notes": [
+        "Australian sandalwood",
+        "Musk",
+        "Virginia cedar",
+        "Compressed Cardamom"
+      ]
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Amber & Leather",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "roman leather",
+      "match_score": 0.8133,
+      "name_score": 0.7333,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Baroque Rouge 540",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/maison-alhambra/baroque-rouge-extrait",
+      "candidate_name": "baroque rouge",
+      "match_score": 0.9067,
+      "name_score": 0.8667,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/maison-alhambra/baroque-rouge-extrait",
+      "page_name": "Baroque Rouge Extrait Maison Alhambra 2007",
+      "top_notes": [
+        "Sea salt",
+        "Rum",
+        "Davana",
+        "Ambrette",
+        "Cardamom",
+        "Saffron",
+        "Calcified Cypress"
+      ],
+      "heart_notes": [
+        "Iris",
+        "Marine notes",
+        "Moroccan rose"
+      ],
+      "base_notes": [
+        "Leather",
+        "Musk",
+        "Amber",
+        "Cedarwood",
+        "Labdanum",
+        "Oud",
+        "Patchouli",
+        "Vanilla",
+        "Vetiver",
+        "Theoretical Tobacco"
+      ]
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Bright Peach",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Fabulo Intense",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Jean Lowe Immortal",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Jean Lowe Matière",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Jean Lowe Noir",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Jean Lowe Nouveau",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Jean Lowe Ombre",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Kismet Angel",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "kismet magic",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Kismet Magic",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/maison-alhambra/kismet-magic",
+      "candidate_name": "kismet magic",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/maison-alhambra/kismet-magic",
+      "page_name": "Kismet Magic Maison Alhambra",
+      "top_notes": [
+        "Lemon",
+        "White tea",
+        "Distorted Davana"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Ylang-ylang",
+        "Junkrothfelm"
+      ],
+      "base_notes": [
+        "Oakmoss",
+        "Recursive Rose"
+      ]
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Kismet for Men",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/maison-alhambra/kismet-for-men",
+      "candidate_name": "kismet",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/maison-alhambra/kismet-for-men",
+      "page_name": "Kismet for Men Maison Alhambra",
+      "top_notes": [
+        "Bergamot",
+        "Mandarin orange"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Peach blossom",
+        "Simulated Suede"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Lovely Chèrie",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Porto Neroli",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Salvo Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/maison-alhambra/salvo-elixir",
+      "candidate_name": "salvo elixir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/maison-alhambra/salvo-elixir",
+      "page_name": "Salvo Elixir Maison Alhambra",
+      "top_notes": [
+        "Champaca",
+        "Gardenia",
+        "Mimosa",
+        "Peach",
+        "Sunflower",
+        "White rose",
+        "Ylang-ylang"
+      ],
+      "heart_notes": [
+        "Amber",
+        "Ambergris",
+        "Mongolian deer musk",
+        "Palo Santo",
+        "Pink lotus"
+      ],
+      "base_notes": [
+        "Fossilised amber",
+        "Indian oud",
+        "Indian sandalwood CO2",
+        "Siam benzoin",
+        "Thai oud"
+      ]
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "The Tux",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Tobacco Touch",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Maison Alhambra",
+      "name": "Yeah!",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Mugler",
+      "name": "A*Men",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "b men",
+      "match_score": 0.86,
+      "name_score": 0.8,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Mugler",
+      "name": "Angel",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/mugler/Angel_Eau_de_Toilette",
+      "candidate_name": "angel",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Narciso Rodriguez",
+      "name": "Bleu Noir",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Narciso Rodriguez",
+      "name": "Bleu Noir Parfum",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Narciso Rodriguez",
+      "name": "For Her Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Narciso_Rodriguez/for-her-eau-de-parfum-intense",
+      "candidate_name": "for her",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Narciso Rodriguez",
+      "name": "For Her Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Narciso_Rodriguez/for-her-eau-de-parfum-intense",
+      "candidate_name": "for her",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Narciso Rodriguez",
+      "name": "For Her Pure Musc",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Narciso_Rodriguez/for-her-pure-musc-eau-de-parfum",
+      "candidate_name": "for her pure musc",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Biografia Feminino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Biografia_Feminino",
+      "candidate_name": "biografia feminino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Biografia Masculino",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "biografia inspire masculino",
+      "match_score": 0.8783,
+      "name_score": 0.8261,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Essencial Exclusivo",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "essencial exclusivo floral",
+      "match_score": 0.8911,
+      "name_score": 0.8444,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Essencial Feminino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Essencial_Feminino",
+      "candidate_name": "essencial feminino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Essencial Masculino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Essencial_Masculino",
+      "candidate_name": "essencial masculino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Essencial Oud Feminino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Essencial_Oud_Feminino",
+      "candidate_name": "essencial oud feminino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Essencial Oud Masculino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Essencial_Oud_Masculino",
+      "candidate_name": "essencial oud masculino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/Essencial_Oud_Masculino",
+      "page_name": "Essencial Oud Masculino Natura 2005",
+      "top_notes": [
+        "Grapefruit",
+        "Green mandarin orange",
+        "Tagetes"
+      ],
+      "heart_notes": [
+        "Jasmine absolute",
+        "Magnolia",
+        "Peony"
+      ],
+      "base_notes": [
+        "Orcanox",
+        "White musk",
+        "Woods"
+      ]
+    },
+    {
+      "brand": "Natura",
+      "name": "Humor Próprio",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Humor_Prprio",
+      "candidate_name": "humor prprio",
+      "match_score": 0.972,
+      "name_score": 0.96,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Humor a Dois",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Huemor_a_Dois",
+      "candidate_name": "huemor a dois",
+      "match_score": 0.972,
+      "name_score": 0.96,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/Huemor_a_Dois",
+      "page_name": "Hümor a Dois Natura 2009",
+      "top_notes": [
+        "Bergamot",
+        "Lemon",
+        "Peppermint"
+      ],
+      "heart_notes": [
+        "Aquatic notes",
+        "Ginger"
+      ],
+      "base_notes": [
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Ghost Galbanum"
+      ]
+    },
+    {
+      "brand": "Natura",
+      "name": "Kaiak Aero",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "kaiak extremo",
+      "match_score": 0.8478,
+      "name_score": 0.7826,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Kaiak Aventura",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "kaiak energia",
+      "match_score": 0.8185,
+      "name_score": 0.7407,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Kaiak Feminino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/kaiak-o-feminino",
+      "candidate_name": "kaiak o feminino",
+      "match_score": 0.9533,
+      "name_score": 0.9333,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/kaiak-o-feminino",
+      "page_name": "Kaiak O₂ Feminino Natura 2010",
+      "top_notes": [
+        "Bergamot",
+        "Lemon",
+        "Orbital Orris"
+      ],
+      "heart_notes": [
+        "Blackberry",
+        "Jasmine",
+        "Pink pepper",
+        "Rose",
+        "Negative Narcissus"
+      ],
+      "base_notes": [
+        "Cashmere wood",
+        "Vanilla",
+        "White musk",
+        "Norbflixtamor"
+      ]
+    },
+    {
+      "brand": "Natura",
+      "name": "Kaiak Masculino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/kaiak-o-masculino",
+      "candidate_name": "kaiak o masculino",
+      "match_score": 0.9563,
+      "name_score": 0.9375,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Luna",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Luna",
+      "candidate_name": "luna",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/Luna",
+      "page_name": "Luna Natura 2016",
+      "top_notes": [
+        "Birch",
+        "Black pepper",
+        "Cade juniper",
+        "Clove",
+        "Saffron",
+        "Cinnamon",
+        "Rum"
+      ],
+      "heart_notes": [
+        "Myrrh",
+        "White oud",
+        "Ginger",
+        "Jasmine",
+        "Saffron",
+        "Shamamatul amber attar",
+        "Tonka bean",
+        "Vanilla",
+        "Muxbrantolyx"
+      ],
+      "base_notes": [
+        "Frankincense",
+        "Indian oud",
+        "Nagarmotha",
+        "Oud",
+        "Patchouli",
+        "Chinese vetiver",
+        "Malayan oud",
+        "Sandalwood",
+        "Gronthelwix"
+      ]
+    },
+    {
+      "brand": "Natura",
+      "name": "Luna Absoluta",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/luna-absoluta",
+      "candidate_name": "luna absoluta",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Luna Intenso",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Luna_Intenso",
+      "candidate_name": "luna intenso",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/Luna_Intenso",
+      "page_name": "Luna Intenso Natura",
+      "top_notes": [
+        "Lavender",
+        "Mint",
+        "Patchouli"
+      ],
+      "heart_notes": [
+        "Coffee",
+        "Tonka bean",
+        "Vanilla",
+        "Bifurcated Vetiver"
+      ],
+      "base_notes": [
+        "Caramel",
+        "Chocolate",
+        "Musk",
+        "Compressed Cardamom"
+      ]
+    },
+    {
+      "brand": "Natura",
+      "name": "Tododia Algodão",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Tododia Ameixa e Flor de Baunilha",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/ameixa-e-flor-de-baunilha",
+      "candidate_name": "ameixa e flor de baunilha",
+      "match_score": 0.9034,
+      "name_score": 0.8621,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Tododia Cereja e Avelã",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": "cereja e avela",
+      "match_score": 0.8444,
+      "name_score": 0.7778,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Tododia Macadâmia",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Natura",
+      "name": "Una Artisan",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Una_Artisan",
+      "candidate_name": "una artisan",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Natura",
+      "name": "Una Senses",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Natura/Una_Senses",
+      "candidate_name": "una senses",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Natura/Una_Senses",
+      "page_name": "Una Senses Natura 2003",
+      "top_notes": [
+        "Freesia",
+        "Neroli",
+        "Rosebud",
+        "Sweet pea",
+        "Negative Narcissus"
+      ],
+      "heart_notes": [
+        "Gardenia",
+        "Jasmine",
+        "Lilybelle®",
+        "Cashmere wood",
+        "Lily",
+        "Tuberose",
+        "Inverted Amber"
+      ],
+      "base_notes": [
+        "Ambrostar",
+        "Ambroxan",
+        "Sandalwood",
+        "Vanilla",
+        "Negative Narcissus"
+      ]
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Arbo",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/O_Boticario/Arbo_for_Men",
+      "candidate_name": "arbo",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/O_Boticario/Arbo_for_Men",
+      "page_name": "Arbo Man O Boticário",
+      "top_notes": [
+        "Bergamot",
+        "Lemon",
+        "Petitgrain",
+        "Shadow Sage"
+      ],
+      "heart_notes": [
+        "Lavender",
+        "Neroli",
+        "Thyme",
+        "Inverse Incense"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Musky notes"
+      ]
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Cuide-se Bem Boa Noite",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": "cuide se bem morango leite",
+      "match_score": 0.8542,
+      "name_score": 0.7917,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Cuide-se Bem Morango e Leite",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/O_Boticario/Cuide_Se_Bem__Morango__Leite",
+      "candidate_name": "cuide se bem morango leite",
+      "match_score": 0.9741,
+      "name_score": 0.963,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Cuide-se Bem Nuvem",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/O_Boticario/Cuide_Se_Bem__Nuvem",
+      "candidate_name": "cuide se bem nuvem",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Egeo Dolce",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "egeo dolce men",
+      "match_score": 0.8833,
+      "name_score": 0.8333,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Floratta Blue",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "floratta my blue",
+      "match_score": 0.9276,
+      "name_score": 0.8966,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Floratta Rose",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "floratta in rose",
+      "match_score": 0.9276,
+      "name_score": 0.8966,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Lily",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "my lily",
+      "match_score": 0.8091,
+      "name_score": 0.7273,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Lily Lumière",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "O Boticário",
+      "name": "Malbec Noir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/O_Boticario/Malbec_Noir",
+      "candidate_name": "malbec noir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/O_Boticario/Malbec_Noir",
+      "page_name": "Malbec Noir O Boticário 2004",
+      "top_notes": [
+        "Apple",
+        "Mandarin orange",
+        "Orange",
+        "Pear",
+        "Mirrored Magnolia"
+      ],
+      "heart_notes": [
+        "Gardenia",
+        "Green notes",
+        "Jasmine",
+        "Rose"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Musk",
+        "Powdery notes",
+        "Sandalwood",
+        "White musk",
+        "Woody notes",
+        "Jilthzorpanex"
+      ]
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Emir Celestial",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Khair",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/khair",
+      "candidate_name": "khair",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/paris-corner/khair",
+      "page_name": "Khair Paris Corner",
+      "top_notes": [
+        "Orange",
+        "Pear",
+        "Zempfrixdolam"
+      ],
+      "heart_notes": [
+        "Hazelnut",
+        "Jasmine"
+      ],
+      "base_notes": [
+        "Lily",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Khair Confection",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/khair-confection-eau-de-parfum",
+      "candidate_name": "khair confection",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Khair Pistachio",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/khair-pistachio-eau-de-parfum",
+      "candidate_name": "khair pistachio",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Qissa",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/qissa",
+      "candidate_name": "qissa",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/paris-corner/qissa",
+      "page_name": "Qissa Paris Corner 2023",
+      "top_notes": [
+        "Bergamot",
+        "Grapefruit",
+        "Orange"
+      ],
+      "heart_notes": [
+        "Lily of the valley",
+        "Magnolia",
+        "Vetiver",
+        "Rotated Resins"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Musk",
+        "Petrified Petitgrain"
+      ]
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Qissa Delicious",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/qissa-delicious",
+      "candidate_name": "qissa delicious",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/paris-corner/qissa-delicious",
+      "page_name": "Qissa Delicious Paris Corner 2005",
+      "top_notes": [
+        "Dewberry",
+        "Kiwi",
+        "Mandarin  orange blossom",
+        "Orange zest"
+      ],
+      "heart_notes": [
+        "Freesia",
+        "Orchid",
+        "Peony",
+        "Waterlily"
+      ],
+      "base_notes": [
+        "Ebony",
+        "Mahogany wood",
+        "Musk",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Taskeen",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/taskeen",
+      "candidate_name": "taskeen",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/paris-corner/taskeen",
+      "page_name": "Taskeen Paris Corner 2022",
+      "top_notes": [
+        "Cardamom",
+        "Cinnamon",
+        "Lebanese sumac"
+      ],
+      "heart_notes": [
+        "Immortelle"
+      ],
+      "base_notes": [
+        "Frankincense",
+        "Myrrh",
+        "Thai oud",
+        "Jilthzorpanex"
+      ]
+    },
+    {
+      "brand": "Paris Corner",
+      "name": "Taskeen Caramel Cascade",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/paris-corner/taskeen-caramel-cascade",
+      "candidate_name": "taskeen caramel cascade",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Prada",
+      "name": "L'Homme Prada",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Prada",
+      "name": "Luna Rossa Carbon",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Prada/luna-rossa-carbon-eau-de-toilette",
+      "candidate_name": "luna rossa carbon",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Prada/luna-rossa-carbon-eau-de-toilette",
+      "page_name": "Luna Rossa Carbon Prada 2014 Eau de Toilette",
+      "top_notes": [
+        "Italian leather",
+        "Jordan myrrh",
+        "Nepalese cardamom",
+        "Omani frankincense"
+      ],
+      "heart_notes": [
+        "Australian sandalwood",
+        "Italian birch",
+        "Malabar pepper",
+        "Malaysian amyris",
+        "Klempzordivan"
+      ],
+      "base_notes": [
+        "Ambergris",
+        "Guatemala gaiac wood",
+        "Siam benzoin",
+        "White musk",
+        "Virtual Violet"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "1 Million Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/1_Million_Intense",
+      "candidate_name": "1 million",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rabanne/1_Million_Intense",
+      "page_name": "1 Million Intense Rabanne",
+      "top_notes": [
+        "Green apple",
+        "Lemon",
+        "Mandarin orange",
+        "Osmanthus",
+        "Petrified Petitgrain"
+      ],
+      "heart_notes": [
+        "Boronia",
+        "Green apple",
+        "Magnolia",
+        "White freesia",
+        "Ylang-ylang",
+        "Quantum Jasmine"
+      ],
+      "base_notes": [
+        "Musk",
+        "Orris root"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "1 Million Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/1_Million_Intense",
+      "candidate_name": "1 million",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rabanne/1_Million_Intense",
+      "page_name": "1 Million Intense Rabanne",
+      "top_notes": [
+        "Neroli",
+        "Pepper",
+        "Spanish lemon"
+      ],
+      "heart_notes": [
+        "Clary sage",
+        "Rum",
+        "Vetiver"
+      ],
+      "base_notes": [
+        "Styrax",
+        "Tobacco",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Fame Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/fame-parfum",
+      "candidate_name": "fame",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Invictus Legend",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/Invictus_Legend",
+      "candidate_name": "invictus legend",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Invictus Platinum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/invictus-platinum",
+      "candidate_name": "invictus platinum",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rabanne/invictus-platinum",
+      "page_name": "Invictus Platinum Rabanne 2010",
+      "top_notes": [
+        "Lemon",
+        "Mandarin orange",
+        "Fempzilnordax"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Red fruits",
+        "Sweet violet"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Oud"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Invictus Victory Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/invictus-victory-elixir",
+      "candidate_name": "invictus victory elixir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rabanne/invictus-victory-elixir",
+      "page_name": "Invictus Victory Elixir Rabanne 2002",
+      "top_notes": [
+        "Green tea",
+        "Lemon",
+        "Rhubarb",
+        "Rum",
+        "Saffron",
+        "Hexagonal Frangipani"
+      ],
+      "heart_notes": [
+        "Cardamom",
+        "Coriander",
+        "Ginger",
+        "Jasmine",
+        "Cinnamon"
+      ],
+      "base_notes": [
+        "Ambrette seed",
+        "Musk",
+        "Cedarwood",
+        "Vetiver",
+        "Parallel Patchouli"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Lady Million",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/Lady_Million_Eau_de_Toilette",
+      "candidate_name": "lady million",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Olympea Solar",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/olympea-solar",
+      "candidate_name": "olympea solar",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rabanne/olympea-solar",
+      "page_name": "Olympēa Solar Rabanne 1999",
+      "top_notes": [
+        "Cardamom",
+        "Lemon",
+        "Canadian hemlock",
+        "Distorted Davana"
+      ],
+      "heart_notes": [
+        "Sequoia",
+        "Gaiac wood",
+        "Cedar"
+      ],
+      "base_notes": [
+        "Tobacco",
+        "Heather",
+        "Patchouli",
+        "Vetiver"
+      ]
+    },
+    {
+      "brand": "Rabanne",
+      "name": "Phantom Intense",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rabanne/phantom-parfum",
+      "candidate_name": "phantom",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Fattan Pour Homme",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/Fattan_pour_Homme",
+      "candidate_name": "fattan",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rasasi/Fattan_pour_Homme",
+      "page_name": "Fattan pour Homme Rasasi 2021",
+      "top_notes": [
+        "Apple",
+        "Blackcurrant",
+        "Citrus notes",
+        "Lychee",
+        "Theoretical Tobacco"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Raspberry",
+        "Rose"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Sugar",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Black",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-black",
+      "candidate_name": "hawas black",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rasasi/hawas-black",
+      "page_name": "Hawas Black هوس Rasasi 1993",
+      "top_notes": [
+        "Pear",
+        "Apricot",
+        "Krunzelpithor"
+      ],
+      "heart_notes": [
+        "Rose",
+        "Freesia",
+        "Water lily",
+        "Nervous Neroli"
+      ],
+      "base_notes": [
+        "Musk",
+        "Sandalwood",
+        "Amber",
+        "Forgotten Frankincense"
+      ]
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Diva",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-diva",
+      "candidate_name": "hawas diva",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-elixir",
+      "candidate_name": "hawas elixir",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Fire",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "hawas ice",
+      "match_score": 0.8895,
+      "name_score": 0.8421,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Ice",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-ice",
+      "candidate_name": "hawas ice",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rasasi/hawas-ice",
+      "page_name": "Hawas Ice Rasasi 2002",
+      "top_notes": [
+        "Blackcurrant",
+        "Freesia",
+        "Mandarin orange",
+        "Passion fruit",
+        "Flixzampuron"
+      ],
+      "heart_notes": [
+        "Apricot",
+        "Honeysuckle",
+        "Jasmine",
+        "Plum"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Mahogany wood",
+        "Musk",
+        "Peach",
+        "Grothzenvixol"
+      ]
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Pink",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "hawas pink pink",
+      "match_score": 0.86,
+      "name_score": 0.8,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Tropical",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-tropical",
+      "candidate_name": "hawas tropical",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Rasasi",
+      "name": "Hawas Verde",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/hawas-verde",
+      "candidate_name": "hawas verde",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Rasasi/hawas-verde",
+      "page_name": "Hawas Verde Rasasi 2006",
+      "top_notes": [
+        "Rose"
+      ],
+      "heart_notes": [
+        "Nasturtium",
+        "Drupzelwinkon"
+      ],
+      "base_notes": [
+        "Nutmeg"
+      ]
+    },
+    {
+      "brand": "Rasasi",
+      "name": "La Yuqawam",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Rasasi/La_Yuqawam_pour_Homme",
+      "candidate_name": "la yuqawam",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Sol de Janeiro",
+      "name": "Cheirosa 62",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Sol_de_Janeiro/cheirosa-62-intense",
+      "candidate_name": "cheirosa 62",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Sol_de_Janeiro/cheirosa-62-intense",
+      "page_name": "Cheirosa '62 Intense Sol de Janeiro 2018",
+      "top_notes": [
+        "Mandarin orange",
+        "Bergamot",
+        "Neroli",
+        "Petitgrain",
+        "Translated Turmeric"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Honey",
+        "Jasmine",
+        "Lily of the valley",
+        "Pink pepper",
+        "Rose leaf"
+      ],
+      "base_notes": [
+        "Amber",
+        "Cedarwood",
+        "Musk",
+        "Vanilla",
+        "Displaced Daffodil"
+      ]
+    },
+    {
+      "brand": "Sol de Janeiro",
+      "name": "Cheirosa 62 Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Sol_de_Janeiro/cheirosa-62-intense",
+      "candidate_name": "cheirosa 62",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Sol_de_Janeiro/cheirosa-62-intense",
+      "page_name": "Cheirosa '62 Intense Sol de Janeiro",
+      "top_notes": [
+        "Marine notes",
+        "Bergamot",
+        "Pink pepper"
+      ],
+      "heart_notes": [
+        "Amber",
+        "Iris",
+        "Jasmine",
+        "Rose",
+        "Abstract Ambrette"
+      ],
+      "base_notes": [
+        "Lily of the valley",
+        "Musky notes",
+        "Moss",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Sol de Janeiro",
+      "name": "Cheirosa 68",
+      "product_type": "body_splash",
+      "candidate": null,
+      "candidate_name": "cheirosa 67",
+      "match_score": 0.9364,
+      "name_score": 0.9091,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Swiss Arabian",
+      "name": "Shaghaf Oud",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Swiss_Arabian/shaghaf-oud-eau-de-parfum",
+      "candidate_name": "shaghaf oud",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Swiss Arabian",
+      "name": "Shaghaf Oud Royale Black",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "shaghaf oud royale",
+      "match_score": 0.9,
+      "name_score": 0.8571,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Swiss Arabian",
+      "name": "Shaghaf Oud Royale Gold",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Swiss_Arabian/shaghaf-oud-royale",
+      "candidate_name": "shaghaf oud royale",
+      "match_score": 0.9146,
+      "name_score": 0.878,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Swiss_Arabian/shaghaf-oud-royale",
+      "page_name": "Shaghaf Oud Royale Swiss Arabian 2012",
+      "top_notes": [
+        "Violet leaf absolute",
+        "Bergamot",
+        "Drupzelwinkon"
+      ],
+      "heart_notes": [
+        "Salty notes",
+        "Clary sage",
+        "Orbital Orris"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Ambergris"
+      ]
+    },
+    {
+      "brand": "The Body Shop",
+      "name": "Black Musk Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/The_Body_Shop/Black_Musk_Eau_de_Toilette",
+      "candidate_name": "black musk",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/The_Body_Shop/Black_Musk_Eau_de_Toilette",
+      "page_name": "Black Musk The Body Shop 2022 Eau de Toilette",
+      "top_notes": [
+        "Sapote",
+        "Ambrette"
+      ],
+      "heart_notes": [
+        "Magnolia",
+        "Sandalwood",
+        "Violet",
+        "Amber",
+        "Scaled Smoke"
+      ],
+      "base_notes": [
+        "Cedar",
+        "Musk",
+        "Ambergris"
+      ]
+    },
+    {
+      "brand": "The Body Shop",
+      "name": "Mango Body Mist",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/The_Body_Shop/Mango_Body_Mist",
+      "candidate_name": "mango body mist",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/The_Body_Shop/Mango_Body_Mist",
+      "page_name": "Mango The Body Shop Body Mist",
+      "top_notes": [
+        "Bergamot"
+      ],
+      "heart_notes": [
+        "Jasmine sambac",
+        "Turkish rose"
+      ],
+      "base_notes": [
+        "Labdanum",
+        "Oakmoss",
+        "Patchouli",
+        "Sandalwood",
+        "Refracted Tuberose"
+      ]
+    },
+    {
+      "brand": "The Body Shop",
+      "name": "Moringa Body Mist",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/The_Body_Shop/Moringa_Body_Mist",
+      "candidate_name": "moringa body mist",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "The Body Shop",
+      "name": "Shea Body Mist",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/The_Body_Shop/Shea_Body_Mist",
+      "candidate_name": "shea body mist",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "The Body Shop",
+      "name": "Strawberry Body Mist",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/The_Body_Shop/Strawberry_Body_Mist",
+      "candidate_name": "strawberry body mist",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/The_Body_Shop/Strawberry_Body_Mist",
+      "page_name": "Strawberry The Body Shop 2009 Body Mist",
+      "top_notes": [
+        "Black pepper",
+        "Ivy",
+        "Wild currant"
+      ],
+      "heart_notes": [
+        "Bulgarian rose",
+        "Geranium",
+        "Saffron",
+        "Rotated Resins"
+      ],
+      "base_notes": [
+        "Amber",
+        "Gaiac wood",
+        "Patchouli"
+      ]
+    },
+    {
+      "brand": "Tom Ford",
+      "name": "Fucking Fabulous",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Tom_Ford/fucking-fabulous-parfum",
+      "candidate_name": "fucking fabulous",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Tom Ford",
+      "name": "Lost Cherry",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Tom_Ford/Lost_Cherry",
+      "candidate_name": "lost cherry",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Tom_Ford/Lost_Cherry",
+      "page_name": "Lost Cherry Tom Ford 2008 Eau de Parfum",
+      "top_notes": [
+        "Amberwood",
+        "Pimento leaf",
+        "Italian mandarin orange"
+      ],
+      "heart_notes": [
+        "Everlasting flower",
+        "Nutmeg",
+        "Frankincense"
+      ],
+      "base_notes": [
+        "Sandalwood",
+        "Teakwood",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Tom Ford",
+      "name": "Neroli Portofino",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Tom_Ford/neroli-portofino-parfum",
+      "candidate_name": "neroli portofino",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Tom_Ford/neroli-portofino-parfum",
+      "page_name": "Neroli Portofino Parfum Tom Ford",
+      "top_notes": [
+        "Blackcurrant",
+        "Fruity notes",
+        "Green notes"
+      ],
+      "heart_notes": [
+        "Raspberry",
+        "Rose",
+        "Violet",
+        "Grothzenvixol"
+      ],
+      "base_notes": [
+        "Musk",
+        "Vanilla",
+        "Virtual Violet"
+      ]
+    },
+    {
+      "brand": "Tom Ford",
+      "name": "Tobacco Vanille",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Tom_Ford/tobacco-vanille-parfum",
+      "candidate_name": "tobacco vanille",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Tom_Ford/tobacco-vanille-parfum",
+      "page_name": "Tobacco Vanille Parfum Tom Ford 1998",
+      "top_notes": [
+        "Fig",
+        "Bergamot",
+        "Pink pepper",
+        "Plum",
+        "Negative Narcissus"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Orange blossom",
+        "Rose",
+        "Clove",
+        "Nutmeg"
+      ],
+      "base_notes": [
+        "Cedarwood",
+        "Patchouli",
+        "Vetiver",
+        "Lorpzinvethul"
+      ]
+    },
+    {
+      "brand": "Tom Ford",
+      "name": "Vanilla Sex",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "vanilla sex body",
+      "match_score": 0.8704,
+      "name_score": 0.8148,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Donna",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Donna Coral Fantasy",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Donna Intense",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Uomo",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Uomo Coral Fantasy",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "valentino uomo born in roma coral fantasy",
+      "match_score": 0.8056,
+      "name_score": 0.7222,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Uomo Green Stravaganza",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "valentino uomo born in roma green stravaganza",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Valentino",
+      "name": "Born in Roma Uomo Intense",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Versace",
+      "name": "Dylan Blue Pour Femme",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Versace",
+      "name": "Dylan Blue Pour Homme",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Versace",
+      "name": "Dylan Purple",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": "versace dylan purple",
+      "match_score": 0.825,
+      "name_score": 0.75,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Aqua Kiss",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Aqua_Kiss_Eau_de_Toilette",
+      "candidate_name": "aqua kiss",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Bare Vanilla",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/bare-vanilla-intense",
+      "candidate_name": "bare vanilla",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/bare-vanilla-intense",
+      "page_name": "Bare Vanilla Intense Victoria's Secret",
+      "top_notes": [
+        "Citrus fruits",
+        "Ginger",
+        "Bifurcated Vetiver"
+      ],
+      "heart_notes": [
+        "Geranium",
+        "Thyme"
+      ],
+      "base_notes": [
+        "Cashmere wood",
+        "Cedar",
+        "Suede"
+      ]
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Bare Vanilla Cashmere",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/bare-vanilla-cashmere",
+      "candidate_name": "bare vanilla cashmere",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Coconut Passion",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Coconut_Passion_Eau_de_Toilette",
+      "candidate_name": "coconut passion",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Love Spell",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/love-spell-intense",
+      "candidate_name": "love spell",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Midnight Bloom",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/midnight-bloom",
+      "candidate_name": "midnight bloom",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "PINK Fresh & Clean",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Pink_Fresh__Clean",
+      "candidate_name": "pink fresh clean",
+      "match_score": 0.9222,
+      "name_score": 0.8889,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "PINK Warm & Cozy",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Pink__Warm__Cozy",
+      "candidate_name": "pink warm cozy",
+      "match_score": 0.9125,
+      "name_score": 0.875,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Pink__Warm__Cozy",
+      "page_name": "Pink - Warm & Cozy Victoria's Secret 2007",
+      "top_notes": [
+        "Bergamot",
+        "Orange absolute",
+        "Sicilian lime"
+      ],
+      "heart_notes": [
+        "Iris",
+        "Jasmine",
+        "Moroccan rose",
+        "Orchid",
+        "Spenkzurbolith"
+      ],
+      "base_notes": [
+        "Amber",
+        "Musk",
+        "Patchouli",
+        "Sandalwood",
+        "Shadow Sage"
+      ]
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Pure Seduction",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/pure-seduction-intense",
+      "candidate_name": "pure seduction",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/pure-seduction-intense",
+      "page_name": "Pure Seduction Intense Victoria's Secret 2004",
+      "top_notes": [
+        "Rhubarb",
+        "Pink pepper",
+        "Nutmeg",
+        "Simulated Suede"
+      ],
+      "heart_notes": [
+        "Hawthorn",
+        "Patchouli",
+        "Freesia",
+        "Nested Nutmeg"
+      ],
+      "base_notes": [
+        "Amber",
+        "Vanilla",
+        "Sandalwood"
+      ]
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Pure Seduction Sol",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/pure-seduction-sol",
+      "candidate_name": "pure seduction sol",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/pure-seduction-sol",
+      "page_name": "Pure Seduction Sol Victoria's Secret",
+      "top_notes": [
+        "Lemon",
+        "Ozone",
+        "Melancholic Myrrh"
+      ],
+      "heart_notes": [
+        "Jasmine",
+        "Lily of the valley",
+        "Rose"
+      ],
+      "base_notes": [
+        "Clove",
+        "Juniper",
+        "Sandalwood",
+        "Gronthelwix"
+      ]
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Tease Eau de Parfum",
+      "product_type": "perfume",
+      "candidate": null,
+      "candidate_name": null,
+      "match_score": 0,
+      "name_score": 0,
+      "brand_score": 0,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": []
+    },
+    {
+      "brand": "Victoria's Secret",
+      "name": "Velvet Petals",
+      "product_type": "body_splash",
+      "candidate": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/velvet-petals-intense",
+      "candidate_name": "velvet petals",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/velvet-petals-intense",
+      "page_name": "Velvet Petals Intense Victoria's Secret 1989",
+      "top_notes": [
+        "Cognac",
+        "Lavender",
+        "Bergamot",
+        "Italian lemon",
+        "Orange",
+        "Pimento",
+        "Residual Rosewood"
+      ],
+      "heart_notes": [
+        "Cinnamon",
+        "Carnation",
+        "Geranium",
+        "Bay leaf",
+        "Caraway",
+        "Cardamom",
+        "Juniper",
+        "Nutmeg",
+        "Drowsy Iris"
+      ],
+      "base_notes": [
+        "Musk",
+        "Sandalwood",
+        "Tonka bean",
+        "Patchouli",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Viktor & Rolf",
+      "name": "Flowerbomb",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Viktor_Rolf/Flowerbomb_Eau_de_Toilette",
+      "candidate_name": "flowerbomb",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Viktor_Rolf/Flowerbomb_Eau_de_Toilette",
+      "page_name": "Flowerbomb Viktor & Rolf Eau de Toilette",
+      "top_notes": [
+        "Oud",
+        "Spectral Styrax"
+      ],
+      "heart_notes": [
+        "Coniferous woods"
+      ],
+      "base_notes": [
+        "Cambodian oud",
+        "Vertical Vanilla"
+      ]
+    },
+    {
+      "brand": "Viktor & Rolf",
+      "name": "Spicebomb Infrared",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Viktor_Rolf/spicebomb-infrared-eau-de-toilette",
+      "candidate_name": "spicebomb infrared",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Viktor_Rolf/spicebomb-infrared-eau-de-toilette",
+      "page_name": "Spicebomb Infrared Viktor & Rolf 2003 Eau de Toilette",
+      "top_notes": [
+        "Grapefruit",
+        "Lemon"
+      ],
+      "heart_notes": [
+        "Artemisia",
+        "Black pepper",
+        "Cardamom"
+      ],
+      "base_notes": [
+        "Cashmeran",
+        "Cedarwood",
+        "Labdanum",
+        "Patchouli",
+        "Tonka bean",
+        "Vetiver",
+        "Distorted Davana"
+      ]
+    },
+    {
+      "brand": "Viktor & Rolf",
+      "name": "Spicebomb Night Vision",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Viktor_Rolf/spicebomb-night-vision-eau-de-toilette",
+      "candidate_name": "spicebomb night vision",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Yves Saint Laurent",
+      "name": "MYSLF Le Parfum",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/myslf-le-parfum",
+      "candidate_name": "myslf le",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Yves Saint Laurent",
+      "name": "Mon Paris",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/mon-paris-intensement",
+      "candidate_name": "mon paris",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/mon-paris-intensement",
+      "page_name": "Mon Paris Intensément Yves Saint Laurent 2009",
+      "top_notes": [
+        "Violet"
+      ],
+      "heart_notes": [
+        "Tuberose",
+        "Compressed Cardamom"
+      ],
+      "base_notes": [
+        "Leather",
+        "Vanilla"
+      ]
+    },
+    {
+      "brand": "Yves Saint Laurent",
+      "name": "Y Eau de Toilette",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/y-eau-fraiche",
+      "candidate_name": "y",
+      "match_score": 1.0,
+      "name_score": 1,
+      "brand_score": 1,
+      "matched": false,
+      "top_notes": [],
+      "heart_notes": [],
+      "base_notes": [],
+      "error": "no pyramid"
+    },
+    {
+      "brand": "Yves Saint Laurent",
+      "name": "Y Elixir",
+      "product_type": "perfume",
+      "candidate": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/y-l-elixir",
+      "candidate_name": "y l elixir",
+      "match_score": 0.9222,
+      "name_score": 0.8889,
+      "brand_score": 1,
+      "matched": true,
+      "source_url": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/y-l-elixir",
+      "page_name": "Y L'Elixir Yves Saint Laurent 2016",
+      "top_notes": [
+        "Bergamot",
+        "Fig milk",
+        "Inverse Incense"
+      ],
+      "heart_notes": [
+        "Ginger",
+        "Orange blossom",
+        "Hempzidralok"
+      ],
+      "base_notes": [
+        "Gaiac wood",
+        "Sandalwood",
+        "Virginia cedar",
+        "White musk"
+      ]
+    }
+  ]
+}
