@@ -112,6 +112,7 @@ function bind(){
   if(!Number.isInteger(quantity)||quantity<1||quantity>100)return services.notify("Informe uma quantidade válida.");
   if(!Number.isFinite(pct)||pct<0||pct>p.max_discount_percent)return services.notify(
      "O desconto máximo permitido neste produto é "+p.max_discount_percent+"%.");
+  if(cart.some(item=>item.id===p.id))return services.notify("Este perfume já está na lista. Remova o item para alterar quantidade ou desconto.");
   const added=cart.filter(item=>item.id===p.id).reduce((sum,item)=>sum+item.quantity,0);
   if(added+quantity>p.quantity)return services.notify("Estoque insuficiente. Disponíveis: "+(p.quantity-added)+".");
   cart.push({id:p.id,name:p.name,volume_ml:p.volume_ml,quantity,
