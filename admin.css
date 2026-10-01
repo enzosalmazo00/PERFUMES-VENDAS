@@ -236,3 +236,5 @@
 .tab-panel[data-panel="compras"] .btn-primary,.tab-panel[data-panel="estoque"] .btn-primary{min-height:46px;font-size:12px;letter-spacing:.03em}
 @media(max-width:800px){.admin-intro{padding:20px}.stock-direction{grid-template-columns:1fr 1fr}.tab-panel[data-panel="compras"] .card,.tab-panel[data-panel="estoque"] .card{padding:20px 15px}}
 @media(max-width:440px){.stock-direction-btn{font-size:11px;padding:11px 5px}}
+
+#supplierActiveLabel[hidden],#adjustImpactLabel[hidden]{display:none!important}
