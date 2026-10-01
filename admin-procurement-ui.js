@@ -10,6 +10,7 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
   SUPPLIER_NOT_ACTIVE:"O fornecedor selecionado está inativo.",
   PURCHASE_FIELDS_INVALID:"Confira fornecedor, estoque, produto, quantidade, custo e porcentagem.",
   PURCHASE_ITEMS_INVALID:"Confira todas as linhas: selecione produtos válidos, quantidades e custos.",
+  REQUEST_ID_REQUIRED:"Identificador da compra inválido. Atualize o ADM e tente novamente.",
   DUPLICATE_PURCHASE_PRODUCT:"Este produto aparece duas vezes. Agrupe as quantidades em uma linha.",
   PURCHASE_COSTS_INVALID:"Frete e outras despesas não podem ser negativos.",
   PRODUCT_COST_NOT_REGISTERED:"Registre uma compra deste produto antes de reajustar o preço.",
@@ -171,7 +172,7 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
    const before=select.value,found=filterLineProducts(line,search.value);
    if(before&&!select.value)setLineCostFromProduct(line);
    else computePurchase();
-   if(found===1&&select.options.length===2)select.value=select.options[1].value;
+   if(found===1&&select.options.length===2){select.value=select.options[1].value;setLineCostFromProduct(line)}
   });
   search.addEventListener("keydown",event=>{
    if(event.key==="Enter"){
