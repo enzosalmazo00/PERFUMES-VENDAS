@@ -14,10 +14,15 @@ return `<nav class="tabs">
 <section class="tab-panel" data-panel="perfumes" hidden>
 <div class="card"><p class="eyebrow">Catálogo</p><h2>Novo produto</h2>
 <form id="productForm" class="form-grid">
-<label>Nome<input name="name" required></label><label>Marca<input name="brand"></label>
+<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
+<label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
+<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label>
+<label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
-<label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
+<label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
+<label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
 <label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" value=".500" required></label>
 <label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" value="12" required></label>
@@ -41,10 +46,15 @@ return `<nav class="tabs">
 <p class="eyebrow">Edição</p><h2>Editar produto</h2>
 <form id="editProductForm" class="form-grid">
 <input type="hidden" name="id">
-<label>Nome<input name="name" required></label><label>Marca<input name="brand"></label>
+<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
+<label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
+<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label>
+<label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
-<label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
+<label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
+<label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
 <label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" required></label>
 <label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" required></label>
