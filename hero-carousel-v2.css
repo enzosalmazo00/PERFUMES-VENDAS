@@ -222,3 +222,33 @@
   #inicio .hero-copy>p{font-size:10px!important}
   #inicio .hero-desc{font-size:16px!important}
 }
+
+
+/* HERO READABLE FONT OVERRIDE 20261001 */
+#inicio .hero-copy>p,
+#inicio .hero-button,
+#inicio .hero-trust{
+  font-family:"Montserrat",Arial,sans-serif!important;
+}
+#inicio .hero-copy>p{
+  font-weight:600!important;
+  letter-spacing:.16em!important;
+}
+#inicio .hero-button{
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+}
+#inicio .hero-desc{
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:18px!important;
+  line-height:1.55!important;
+  font-weight:400!important;
+  letter-spacing:0!important;
+}
+#inicio .hero-copy h1,
+#inicio .hero-copy h1 em{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+}
+@media(max-width:900px){
+  #inicio .hero-desc{font-size:16px!important}
+}
