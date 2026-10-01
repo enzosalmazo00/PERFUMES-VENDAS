@@ -52,3 +52,30 @@
 .customer-delivery-proof>strong{font-size:clamp(15px,2.2vw,20px)}
 .customer-delivery-proof p{font-size:13px;margin:8px 0 0;color:#1c3322}
 @media(max-width:640px){.customer-pickup-number{font-size:clamp(15px,4.2vw,22px);letter-spacing:.02em}.customer-copy-code{width:100%}}
+
+/* Verified-purchase reviews – AZZENA */
+.customer-review-overlay[hidden]{display:none!important}
+.customer-review-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;overflow-y:auto}
+.customer-review-dialog{position:relative;width:min(690px,100%);max-height:94vh;overflow-y:auto;background:linear-gradient(145deg,#211910,#0c0b09 68%);color:#f5eee1;border:1px solid #a9854b;box-shadow:0 25px 90px rgba(0,0,0,.65);border-radius:12px;padding:clamp(20px,4vw,37px);font-family:Poppins,Arial,sans-serif}
+.customer-review-dialog h2{font:600 clamp(30px,5vw,43px)/1.15 'Cormorant Garamond',Georgia,serif;color:#eacc8d;margin:9px 0}
+.customer-review-close{position:absolute;right:15px;top:12px;border:0;background:transparent;color:#eee;font:400 31px/1 Poppins,Arial,sans-serif;cursor:pointer;padding:4px 9px}
+.review-intro{font:400 13px/1.75 Poppins,Arial,sans-serif;color:#d7cab6;margin:0 0 23px}
+.review-items{display:grid;gap:15px}
+.review-product{border:1px solid #56472e;background:rgba(10,9,8,.6);border-radius:8px;padding:17px;display:grid;gap:11px}
+.review-product h3{margin:0;color:#f3deb0;font:600 18px/1.35 'Cormorant Garamond',Georgia,serif}
+.review-product .review-star-controls{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.review-product .review-star-controls button{border:1px solid transparent;border-radius:4px;background:transparent;color:#c0a377;font:500 27px/1 Arial,sans-serif;cursor:pointer;min-height:40px;min-width:37px}
+.review-product .review-star-controls button[aria-pressed="true"]{color:#f3c86d}
+.review-product .review-star-controls .review-zero{font:600 12px/1 Poppins,Arial,sans-serif;padding:9px;min-width:55px;border:1px solid #6d5b40;margin-right:10px;color:#d8d2c7}
+.review-product .review-star-controls .review-zero[aria-pressed="true"]{background:#765324;border-color:#e2bc78;color:white}
+.review-product textarea{width:100%;min-height:93px;padding:12px;background:#090807;color:#f5eee1;border:1px solid #77613d;border-radius:5px;font:400 13px/1.5 Poppins,Arial,sans-serif;resize:vertical}
+.review-product textarea:focus-visible,.review-product button:focus-visible,.customer-review-close:focus-visible{outline:2px solid #f3c86d;outline-offset:2px}
+.review-product .review-send{justify-self:start;background:#e5bc73;color:#221407;border:0;border-radius:5px;padding:11px 19px;font:700 12px Poppins,Arial,sans-serif;cursor:pointer}
+.review-product .review-send:disabled{opacity:.6;cursor:wait}
+.review-message{min-height:19px;color:#f2ce8d;font:400 12px Poppins,Arial,sans-serif}
+.review-finish{margin-top:14px}
+.customer-review-complete{border:1px solid #5b6e46;border-radius:6px;color:#d7edc5;background:#172318;padding:15px;line-height:1.5}
+.order-review-action{margin-top:13px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.order-review-action button{background:transparent;border:1px solid #d9b773;color:#f2d99c;padding:10px 16px;border-radius:4px;font:600 12px Poppins,Arial,sans-serif;cursor:pointer}
+.order-review-action span{color:#c8b98e;font-size:12px}
+@media(max-width:520px){.customer-review-overlay{place-items:start center}.review-product .review-star-controls button{min-width:33px;font-size:23px}.review-product .review-send{width:100%}}
