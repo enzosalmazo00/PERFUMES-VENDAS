@@ -1,0 +1,143 @@
+/* Hero carousel isolated override */
+#inicio.hero{
+  position:relative!important;
+  display:block!important;
+  min-height:560px!important;
+  overflow:hidden!important;
+  background:#050403!important;
+  border-bottom:1px solid #28221a!important;
+  isolation:isolate!important;
+}
+#inicio .hero-carousel{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  min-height:560px!important;
+  overflow:hidden!important;
+  background:#050403!important;
+  touch-action:pan-y!important;
+}
+#inicio .hero-slide{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  transform:none!important;
+  background:none!important;
+  transition:opacity .65s ease,visibility .65s ease!important;
+}
+#inicio .hero-slide.is-active{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  z-index:2!important;
+}
+#inicio .hero-media{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:58% center!important;
+  display:block!important;
+  z-index:0!important;
+  user-select:none!important;
+  -webkit-user-drag:none!important;
+}
+#inicio .hero-shade{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,rgba(2,2,2,.97) 0%,rgba(3,2,2,.92) 23%,rgba(4,3,2,.72) 42%,rgba(4,3,2,.30) 59%,rgba(0,0,0,.08) 79%,rgba(0,0,0,.12) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.20),transparent 42%)!important;
+}
+#inicio.hero:before,
+#inicio .hero-slide:before,
+#inicio .hero-slide:after{display:none!important}
+#inicio .hero-copy{
+  position:relative!important;
+  z-index:3!important;
+  width:min(50%,680px)!important;
+  min-height:560px!important;
+  padding:58px 0 50px 6vw!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+}
+#inicio .hero-copy>p{
+  color:#c9b998!important;
+  margin:0 0 14px!important;
+}
+#inicio .hero-copy h1{
+  color:#efd6a1!important;
+  text-shadow:0 2px 26px rgba(0,0,0,.95)!important;
+}
+#inicio .hero-copy h1 em{color:#e4bb64!important}
+#inicio .hero-desc{
+  color:#e7dfd5!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.95)!important;
+}
+#inicio .hero-trust{color:#e7d9bc!important}
+#inicio .hero-dots{
+  position:absolute!important;
+  z-index:20!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:21px!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  padding:8px 12px!important;
+}
+#inicio .hero-dots .hero-dot{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:block!important;
+  width:10px!important;
+  height:10px!important;
+  min-width:10px!important;
+  min-height:10px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.96)!important;
+  background:rgba(0,0,0,.22)!important;
+  box-shadow:0 1px 8px rgba(0,0,0,.7)!important;
+  transform:none!important;
+}
+#inicio .hero-dots .hero-dot.is-active{
+  background:#fff!important;
+  border-color:#fff!important;
+  transform:scale(1.18)!important;
+}
+@media(max-width:760px){
+  #inicio.hero,#inicio .hero-carousel{min-height:610px!important}
+  #inicio .hero-media{object-position:58% center!important}
+  #inicio .hero-shade{
+    background:
+      linear-gradient(180deg,rgba(2,2,2,.92) 0%,rgba(3,2,2,.78) 38%,rgba(3,2,2,.28) 67%,rgba(0,0,0,.10) 100%),
+      linear-gradient(90deg,rgba(0,0,0,.56) 0%,rgba(0,0,0,.12) 74%,rgba(0,0,0,.03) 100%)!important;
+  }
+  #inicio .hero-copy{
+    width:100%!important;
+    min-height:610px!important;
+    justify-content:flex-start!important;
+    padding:38px 22px 245px!important;
+  }
+  #inicio .hero-copy h1{font-size:46px!important}
+  #inicio .hero-desc{font-size:14px!important}
+  #inicio .hero-trust{flex-wrap:wrap!important}
+  #inicio .hero-dots{bottom:18px!important}
+}
+@media(max-width:430px){
+  #inicio.hero,#inicio .hero-carousel{min-height:590px!important}
+  #inicio .hero-copy{min-height:590px!important;padding:34px 18px 235px!important}
+  #inicio .hero-copy h1{font-size:40px!important}
+  #inicio .hero-media{object-position:56% center!important}
+}
