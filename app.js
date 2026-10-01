@@ -3,7 +3,7 @@ const SUPABASE_URL="https://fbwlprwhczxjdsciotsi.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const SPRITE_INDEX={"velora-noir":0,"solaris-elixir":1,"fleur-dambre":2,"nero-absolu":3,"eclat-rose":4,"vertige":5};
 const sellerScopeId=/^[0-9a-f-]{36}$/i.test(new URLSearchParams(location.search).get("vendedor")||"")?new URLSearchParams(location.search).get("vendedor"):null;
-const state={products:[],reviews:[],sellers:[],sellerScope:null,selectedSellerId:sellerScopeId,filter:"todos",search:"",bag:loadBag(),selectedProduct:null,payment:"pix"};
+const state={products:[],reviews:[],sellers:[],sellerScope:null,selectedSellerId:sellerScopeId,filter:"todos",search:"",bag:loadBag(),selectedProduct:null,preorderSellers:[],payment:"pix"};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const els={productGrid:$("#productGrid"),catalogStatus:$("#catalogStatus"),catalogSearch:$("#catalogSearch"),topSearch:$("#topSearch"),productOverlay:$("#productOverlay"),productModalContent:$("#productModalContent"),bagBtn:$("#bagBtn"),bagCount:$("#bagCount"),bagDrawer:$("#bagDrawer"),closeBag:$("#closeBag"),drawerMask:$("#drawerMask"),bagItems:$("#bagItems"),bagTotal:$("#bagTotal"),checkoutBtn:$("#checkoutBtn"),checkoutOverlay:$("#checkoutOverlay"),checkoutSummary:$("#checkoutSummary"),checkoutForm:$("#checkoutForm"),paymentDemoBox:$("#paymentDemoBox"),sellerPicker:$("#sellerPicker"),toast:$("#toast"),siteUnavailable:$("#siteUnavailable"),siteUnavailableTitle:$("#siteUnavailableTitle"),siteUnavailableMessage:$("#siteUnavailableMessage")};
 function esc(v=""){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
@@ -48,7 +48,51 @@ async function availableStockBySeller(){
  }
  return available;
 }
-function toast(m){els.toast.textContent=m;els.toast.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove("show"),2300)}
+function toast(m){els.toast.textContent=m;els.toast.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove("show"),3500)}
+function preorderContacts(){return sellerScopeId?state.preorderSellers.filter(s=>s.seller_id===sellerScopeId):state.preorderSellers;}
+function preorderLink(seller,product){
+ const phone=String(seller.whatsapp||"").replace(/[^0-9]/g,"");
+ if(!/^\d{10,15}$/.test(phone))return null;
+ const message="Olá! Encontrei "+product.name+" ("+product.volume_ml+" mL) na AZZENA PARFUMS e gostaria de solicitar por encomenda. Poderia confirmar a disponibilidade, o preço final e o prazo de entrega? Sei que a solicitação não é uma compra nem reserva automática.";
+ return "https://wa.me/"+phone+"?text="+encodeURIComponent(message);
+}
+async function loadPreorderContacts(){
+ try{
+   const response=await fetch(SUPABASE_URL+"/rest/v1/rpc/public_preorder_sellers",{
+     method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json",Accept:"application/json"},
+     body:"{}"
+   });
+   if(!response.ok)throw new Error("PREORDER_CONTACTS_UNAVAILABLE");
+   const rows=await response.json();
+   state.preorderSellers=Array.isArray(rows)?rows.filter(s=>
+     /^[0-9a-f-]{36}$/i.test(String(s?.seller_id||"")) &&
+     /^\d{10,15}$/.test(String(s?.whatsapp||"")) &&
+     String(s?.display_name||"").trim().length>0
+   ).slice(0,50):[];
+ }catch(error){state.preorderSellers=[];console.error("Não foi possível carregar contatos de encomenda",error)}
+ if(state.products.length)renderProducts();
+}
+function closePreorder(){const modal=$("#preorderOverlay");if(modal)modal.hidden=true;syncScrollLock()}
+function requestPreorder(product){
+ const contacts=preorderContacts();
+ if(!contacts.length){toast("Nenhum vendedor disponível para encomendas no momento.");return}
+ if(contacts.length===1){
+   const href=preorderLink(contacts[0],product);
+   if(!href){toast("WhatsApp do vendedor indisponível.");return}
+   window.open(href,"_blank","noopener,noreferrer");
+   return;
+ }
+ $("#preorderProductName").textContent=product.name+" · "+product.volume_ml+" mL";
+ $("#preorderSellerList").replaceChildren();
+ for(const seller of contacts){
+   const href=preorderLink(seller,product);if(!href)continue;
+   const link=document.createElement("a");
+   link.className="preorder-seller-link";link.href=href;link.target="_blank";link.rel="noopener noreferrer";
+   link.textContent="Conversar com "+seller.display_name+" no WhatsApp ↗";
+   $("#preorderSellerList").append(link);
+ }
+ $("#preorderOverlay").hidden=false;syncScrollLock();
+}
 async function supabaseGet(table,query=""){const r=await fetch(SUPABASE_URL+"/rest/v1/"+table+"?"+query,{headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Accept:"application/json"}});if(!r.ok)throw new Error(await r.text());return r.json()}
 async function loadSiteStatus(){try{const rows=await supabaseGet("site_status","select=is_online,outage_kind,public_message&id=eq.true&limit=1"),s=rows[0];if(!s||s.is_online){els.siteUnavailable.hidden=true;return}els.siteUnavailableTitle.textContent=s.outage_kind==="permanent_closure"?"Loja encerrada":"Site temporariamente indisponível";els.siteUnavailableMessage.textContent=s.public_message||"Estamos realizando um ajuste operacional. Voltamos em breve.";els.siteUnavailable.hidden=false}catch(e){console.error(e)}}
 async function loadSellers(){
@@ -113,7 +157,7 @@ function openBag(){els.bagDrawer.classList.add("is-open");els.drawerMask.hidden=
 function closeBag(){els.bagDrawer.classList.remove("is-open");els.drawerMask.hidden=true;syncScrollLock()}
 function openCheckout(){if(!state.bag.length)return toast("Sua sacola está vazia.");if(state.bag.some(row=>{const p=state.products.find(item=>item.id===row.id);return !p||Number(p.available_stock)<Number(row.quantity)}))return toast("Um produto ficou indisponível. Atualize o catálogo antes de continuar.");closeBag();els.checkoutSummary.innerHTML=state.bag.map(i=>'<div>'+i.quantity+'× '+esc(i.name)+' — '+brl(i.unit_price_cents*i.quantity)+'</div>').join("")+'<strong>Total: '+brl(total())+'</strong>';renderSellerPicker();els.checkoutOverlay.hidden=false;syncScrollLock()}
 function closeCheckout(){els.checkoutOverlay.hidden=true;syncScrollLock()}
-function syncScrollLock(){document.body.style.overflow=(!els.productOverlay.hidden||!els.checkoutOverlay.hidden||els.bagDrawer.classList.contains("is-open"))?"hidden":""}
+function syncScrollLock(){document.body.style.overflow=(!els.productOverlay.hidden||!els.checkoutOverlay.hidden||!$("#preorderOverlay").hidden||els.bagDrawer.classList.contains("is-open"))?"hidden":""}
 function setPayment(m){state.payment=m;$$(".payment-tab").forEach(b=>b.classList.toggle("is-active",b.dataset.payment===m));els.paymentDemoBox.innerHTML=m==="pix"?"<strong>PIX</strong><p>O pagamento é confirmado no atendimento.</p>":"<strong>Cartão</strong><p>O pagamento por cartão é confirmado no atendimento.</p>"}
 function syncSearch(v){state.search=v;els.catalogSearch.value=v;els.topSearch.value=v;renderProducts();$("#catalogo").scrollIntoView({behavior:"smooth"})}
 els.catalogSearch.oninput=e=>{state.search=e.target.value;els.topSearch.value=state.search;renderProducts()};els.topSearch.oninput=e=>syncSearch(e.target.value);
@@ -122,7 +166,9 @@ $("[data-close-product]").onclick=closeProduct;els.productOverlay.onclick=e=>{if
 // Segurança: o carrinho não pode simular uma venda se o módulo de pagamento falhar.
 els.checkoutForm.onsubmit=e=>{e.preventDefault();toast("O pagamento deve ser concluído pelo checkout seguro da AZZENA. Recarregue a página se a etapa de pagamento não abrir.");};
 
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!els.checkoutOverlay.hidden)closeCheckout();else if(!els.productOverlay.hidden)closeProduct();else if(els.bagDrawer.classList.contains("is-open"))closeBag()});
+$("#closePreorder").onclick=closePreorder;
+$("#preorderOverlay").onclick=e=>{if(e.target===$("#preorderOverlay"))closePreorder()};
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#preorderOverlay").hidden)closePreorder();else if(!els.checkoutOverlay.hidden)closeCheckout();else if(!els.productOverlay.hidden)closeProduct();else if(els.bagDrawer.classList.contains("is-open"))closeBag()});
 
 function initHeroCarousel(){
   const hero=document.getElementById("inicio");
@@ -198,4 +244,4 @@ function initHeroCarousel(){
   start();
 }
 
-loadSiteStatus();loadCatalog();loadSellers();
+loadSiteStatus();loadCatalog();loadSellers();loadPreorderContacts();
