@@ -1,18 +1,134 @@
 export const SUPABASE_URL="https://fbwlprwhczxjdsciotsi.supabase.co";
 export const SUPABASE_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 export const TOKEN_KEY="perfumes-admin-session";
-export function loadSession(){try{return JSON.parse(sessionStorage.getItem(TOKEN_KEY)||"null")}catch{return null}}
-export function saveSession(v){if(v)sessionStorage.setItem(TOKEN_KEY,JSON.stringify(v));else sessionStorage.removeItem(TOKEN_KEY)}
-export function headers(){const s=loadSession();return{apikey:SUPABASE_KEY,Authorization:"Bearer "+(s?.access_token||""),"Content-Type":"application/json"}}
-export async function call(name,payload,auth=true){const r=await fetch(SUPABASE_URL+"/functions/v1/"+name,{method:"POST",headers:auth?headers():{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify(payload)});const d=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(d?.error||"Falha na operação.");e.status=r.status;throw e}return d}
-export async function signIn(email,password){const r=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})});const d=await r.json().catch(()=>({}));if(!r.ok){const raw=d?.error_description||d?.msg||d?.error||"Falha no login.";if(String(raw).toLowerCase().includes("email not confirmed")||String(d?.error_code||"").includes("email_not_confirmed"))throw new Error("Seu e-mail ainda não foi confirmado. Use “Reenviar confirmação” e confirme pelo link recebido.");throw new Error(raw)}saveSession(d);return d}
-export async function createFirstAccess(email,password){if(password.length<8)throw new Error("A senha precisa ter pelo menos 8 caracteres.");const r=await fetch(SUPABASE_URL+"/auth/v1/signup",{method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email:String(email||"").trim().toLowerCase(),password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível criar o acesso.");if(d?.access_token)saveSession(d);return d}
-export async function resendConfirmation(email){const normalized=String(email||"").trim().toLowerCase();if(!normalized||!normalized.includes("@"))throw new Error("Informe um e-mail válido.");const r=await fetch(SUPABASE_URL+"/auth/v1/resend",{method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({type:"signup",email:normalized})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível reenviar a confirmação.");return d}
+
+function readStorage(storage){
+  try{return JSON.parse(storage.getItem(TOKEN_KEY)||"null")}catch{return null}
+}
+export function loadSession(){
+  const persistent=readStorage(localStorage);
+  if(persistent)return persistent;
+  const legacy=readStorage(sessionStorage);
+  if(legacy){
+    try{localStorage.setItem(TOKEN_KEY,JSON.stringify(legacy));sessionStorage.removeItem(TOKEN_KEY)}catch{}
+    return legacy;
+  }
+  return null;
+}
+export function saveSession(v){
+  try{
+    if(v)localStorage.setItem(TOKEN_KEY,JSON.stringify(v));
+    else localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
+  }catch{}
+}
+function authHeaders(session,contentType="application/json"){
+  return{apikey:SUPABASE_KEY,Authorization:"Bearer "+(session?.access_token||""),"Content-Type":contentType};
+}
+export function headers(){return authHeaders(loadSession())}
+
+export async function refreshSession(){
+  const session=loadSession();
+  if(!session?.refresh_token){
+    const e=new Error("Sua sessão expirou. Entre novamente.");
+    e.status=401;
+    throw e;
+  }
+  const r=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=refresh_token",{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({refresh_token:session.refresh_token})
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){
+    saveSession(null);
+    const e=new Error("Sua sessão expirou. Entre novamente.");
+    e.status=401;
+    throw e;
+  }
+  saveSession(d);
+  return d;
+}
+
+async function validSession(){
+  const s=loadSession();
+  if(!s?.access_token){
+    const e=new Error("Faça login para continuar.");
+    e.status=401;
+    throw e;
+  }
+  const exp=Number(s.expires_at||0);
+  if(exp && exp<=Math.floor(Date.now()/1000)+45)return refreshSession();
+  return s;
+}
+
+export async function call(name,payload,auth=true,retry=true){
+  let session=null;
+  if(auth)session=await validSession();
+  const r=await fetch(SUPABASE_URL+"/functions/v1/"+name,{
+    method:"POST",
+    headers:auth?authHeaders(session):{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify(payload)
+  });
+  if(r.status===401&&auth&&retry){
+    await refreshSession();
+    return call(name,payload,auth,false);
+  }
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){
+    const e=new Error(d?.error||"Falha na operação.");
+    e.status=r.status;
+    throw e;
+  }
+  return d;
+}
+
+export async function signIn(email,password){
+  const r=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password",{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({email,password})
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){
+    const raw=d?.error_description||d?.msg||d?.error||"Falha no login.";
+    if(String(raw).toLowerCase().includes("email not confirmed")||String(d?.error_code||"").includes("email_not_confirmed"))throw new Error("Seu e-mail ainda não foi confirmado.");
+    throw new Error(raw);
+  }
+  saveSession(d);
+  return d;
+}
+export async function createFirstAccess(email,password){
+  if(password.length<8)throw new Error("A senha precisa ter pelo menos 8 caracteres.");
+  const r=await fetch(SUPABASE_URL+"/auth/v1/signup",{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({email:String(email||"").trim().toLowerCase(),password})
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível criar o acesso.");
+  if(d?.access_token)saveSession(d);
+  return d;
+}
+export async function resendConfirmation(email){
+  const normalized=String(email||"").trim().toLowerCase();
+  if(!normalized||!normalized.includes("@"))throw new Error("Informe um e-mail válido.");
+  const r=await fetch(SUPABASE_URL+"/auth/v1/resend",{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({type:"signup",email:normalized})
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível reenviar a confirmação.");
+  return d;
+}
+
 export const adminApi=p=>call("admin-operations",p);
 export const procurementApi=p=>call("admin-procurement",p);
 export const emergencyApi=p=>call("site-emergency",p);
 export const productImageApi=p=>call("admin-product-image",p);
-export async function uploadProductImage(file){
+
+export async function uploadProductImage(file,retry=true){
   if(!(file instanceof File)||!file.size)throw new Error("Selecione a foto do perfume.");
   const allowed=["image/jpeg","image/png","image/webp"];
   if(!allowed.includes(file.type))throw new Error("Use uma imagem JPG, PNG ou WebP.");
@@ -20,9 +136,22 @@ export async function uploadProductImage(file){
   const safe=(file.name||"perfume").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/^-+|-+$/g,"").slice(-80)||"perfume";
   const objectPath="products/"+Date.now()+"-"+crypto.randomUUID()+"-"+safe;
   const encodedPath=objectPath.split("/").map(encodeURIComponent).join("/");
-  const s=loadSession();
-  const r=await fetch(SUPABASE_URL+"/storage/v1/object/product-images/"+encodedPath,{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+(s?.access_token||""),"Content-Type":file.type,"x-upsert":"false"},body:file});
-  if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d?.message||d?.error||"Não foi possível enviar a foto.");}
+  const s=await validSession();
+  const r=await fetch(SUPABASE_URL+"/storage/v1/object/product-images/"+encodedPath,{
+    method:"POST",
+    headers:authHeaders(s,file.type),
+    body:file
+  });
+  if(r.status===401&&retry){
+    await refreshSession();
+    return uploadProductImage(file,false);
+  }
+  if(!r.ok){
+    const d=await r.json().catch(()=>({}));
+    const e=new Error(d?.message||d?.error||"Não foi possível enviar a foto.");
+    e.status=r.status;
+    throw e;
+  }
   return SUPABASE_URL+"/storage/v1/object/public/product-images/"+encodedPath;
 }
 export function money(c){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100)}
