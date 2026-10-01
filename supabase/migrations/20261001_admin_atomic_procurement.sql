@@ -274,3 +274,8 @@ REVOKE ALL ON FUNCTION public.azzena_admin_procurement(text,jsonb,uuid) FROM PUB
 GRANT EXECUTE ON FUNCTION public.azzena_admin_procurement(text,jsonb,uuid) TO service_role;
 REVOKE ALL ON FUNCTION public.azzena_admin_reprice_product(uuid,uuid,numeric) FROM PUBLIC,anon,authenticated;
 GRANT EXECUTE ON FUNCTION public.azzena_admin_reprice_product(uuid,uuid,numeric) TO service_role;
+
+-- Indices auxiliares das novas relacoes privadas
+CREATE INDEX IF NOT EXISTS product_pricing_lot_azz_idx ON private.product_pricing(last_purchase_lot_id);
+CREATE INDEX IF NOT EXISTS product_pricing_updated_by_azz_idx ON private.product_pricing(updated_by);
+CREATE INDEX IF NOT EXISTS purchase_lots_location_azz_idx ON private.purchase_lots(location_id);
