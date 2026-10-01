@@ -704,7 +704,7 @@ export const FRAGRANCE_CATALOG=[
       "Shaghaf Oud Azraq",
       "Casablanca",
       "Layali",
-      "Gh yara"
+      "Gharaam"
     ],
     "splashes": []
   },
