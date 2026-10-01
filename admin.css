@@ -20,3 +20,5 @@
 .tracking-admin-note strong{color:#dfbb6e}.tracking-admin-note p{color:#9c9184;font-size:11px;line-height:1.6;margin-bottom:0}
 .tab-panel[data-panel="pedidos"] .data-table td{vertical-align:top}
 .tab-panel[data-panel="pedidos"] .row-actions .btn{white-space:nowrap}
+
+.admin-password-field{position:relative}.admin-password-field input{padding-right:46px!important}.admin-password-eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:transparent;color:#bfa66f;display:grid;place-items:center;cursor:pointer}.admin-password-eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}.admin-password-eye.is-visible{color:#e6c778}.admin-forgot-link{border:0;background:transparent;color:#d9bb79;padding:0;text-align:left;font-size:11px;cursor:pointer;margin-top:-4px}.admin-forgot-link:hover{text-decoration:underline}
