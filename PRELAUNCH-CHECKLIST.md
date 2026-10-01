@@ -14,6 +14,10 @@
 - [x] Cópia limpa da versão anterior na branch `backup/original-before-azzena-prepayment-fixes-20261001`.
 - [x] Testes automatizados da lógica: disponibilidade, ponto de retirada, falha na consulta, reconciliação do carrinho e limite por produto passaram.
 - [x] Política do banco para pagamento e retirada: funções críticas sem `EXECUTE` direto para `anon` e `authenticated`.
+- [x] Avaliações pós-pagamento: somente pedidos Mercado Pago com pagamento `approved` podem avaliar produtos realmente comprados; uma avaliação por produto/pedido.
+- [x] Privacidade das avaliações: nome público reduzido ao primeiro nome + iniciais dos sobrenomes, ignorando conectivos comuns (ex.: "Enzo S. S.").
+- [x] Nota de produto aceita 0 a 5 estrelas + comentário; avaliações verificadas aprovadas entram no cálculo e na exibição pública do produto.
+- [x] Modal pós-pagamento possui botão de fechar e reaparece apenas em nova sessão se ainda houver produto pago sem avaliação.
 
 ## Pendências anteriores à primeira venda
 - [ ] No Supabase Auth, ativar proteção contra senhas vazadas (se disponível no plano). Não há ação deste conector para alterar configuração do Auth.
