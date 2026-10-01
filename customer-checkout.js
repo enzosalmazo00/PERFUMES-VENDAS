@@ -240,7 +240,7 @@ function start(){
  document.addEventListener("azzena:seller-changed",()=>{if(state.method==="pickup")loadPickup()});
  $("#checkoutBtn").addEventListener("click",()=>{setTimeout(loadCustomer,0)});
  document.querySelectorAll(".payment-tab").forEach(btn=>btn.addEventListener("click",()=>{
-  setTimeout(()=>{const box=$("#paymentDemoBox");if(box)box.innerHTML='<strong>'+payment().toUpperCase()+'</strong><p>O pedido será registrado com pagamento pendente. A loja confirmará a forma de pagamento e a disponibilidade antes do envio ou retirada.</p>'},0);
+  setTimeout(()=>{const box=$("#paymentDemoBox");if(box)box.innerHTML='<strong>'+payment().toUpperCase()+'</strong><p>PIX e cartão são processados pelo Mercado Pago. No cartão, eventuais juros e custos variam conforme o número de parcelas e serão exibidos antes da confirmação.</p>'},0);
  }));
  renderReady();
 }
