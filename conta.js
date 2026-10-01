@@ -101,18 +101,35 @@ function renderAddresses(){
 }
 function renderOrders(){
   const orders=boot?.orders||[];
-  $("#orderList").innerHTML=orders.length?orders.map(order=>
-    '<article class="order-item"><div class="order-head"><div><strong>'+esc(order.public_id)+
-    '</strong><p>'+new Date(order.created_at).toLocaleString("pt-BR")+
-    '</p></div><span class="order-status">'+esc(statusLabel(order.fulfillment_status))+
-    '</span></div><div class="order-lines">'+(order.items||[]).map(item=>
-      esc(item.quantity)+"× "+esc(item.product_name)+" · "+brl(item.line_total_cents)
-    ).join("<br>")+"</div><p>Frete: "+brl(order.shipping_price_cents)+" · "+esc(order.shipping_carrier||"—")+
-    " / "+esc(order.shipping_service||"—")+"<br>Total: <strong>"+brl(order.total_cents)+
-    "</strong>"+(order.shipping_delivery_days?"<br>Prazo informado na compra: até "+esc(order.shipping_delivery_days)+" dia(s).":"")+
-    (order.tracking_code?"<br>Rastreio: "+esc(order.tracking_code):"<br>Rastreio automático: em preparação.")+
-    "</p></article>"
-  ).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
+  const maps=raw=>{
+    try{
+      const u=new URL(raw);
+      if(u.protocol!=="https:"||(!/^(maps\.app\.goo\.gl|goo\.gl)$/.test(u.hostname)&&!/^((www|maps)\.)?google\.[a-z.]+$/.test(u.hostname)))return null;
+      return u.href;
+    }catch{return null}
+  };
+  $("#orderList").innerHTML=orders.length?orders.map(order=>{
+    const isPickup=order.delivery_method==="presencial"&&order.pickup_location_snapshot;
+    const loc=isPickup?order.pickup_location_snapshot:null;
+    const map=loc?maps(loc.google_maps_url):null;
+    const location=loc?
+      '<div class="account-pickup"><strong>Local de retirada: '+esc(loc.display_name||"Retirada com o vendedor")+'</strong><p>'+
+      esc(loc.street)+', '+esc(loc.street_number)+(loc.complement?' · '+esc(loc.complement):'')+
+      '<br>'+esc(loc.neighborhood)+' · '+esc(loc.city)+'/'+esc(loc.state)+
+      (loc.postal_code?'<br>CEP: '+esc(loc.postal_code):'')+'</p>'+
+      (map?'<a href="'+esc(map)+'" target="_blank" rel="noopener noreferrer">Abrir Google Maps ↗</a>':'')+
+      (loc.instructions?'<p>'+esc(loc.instructions)+'</p>':'')+
+      '<p class="account-warning">Aguarde a confirmação do pagamento e a liberação da retirada antes de se deslocar.</p></div>':"";
+    const paymentLabels={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
+    return '<article class="order-item"><div class="order-head"><div><strong>'+esc(order.public_id)+
+      '</strong><p>'+new Date(order.created_at).toLocaleString("pt-BR")+'</p></div><span class="order-status">'+esc(statusLabel(order.fulfillment_status))+'</span></div>'+
+      '<div class="order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+"× "+esc(item.product_name)+" · "+brl(item.line_total_cents)).join("<br>")+
+      '</div><p><strong>'+esc(paymentLabels[order.payment_status]||order.payment_status)+'</strong><br>'+
+      (isPickup?'Retirada presencial · sem frete':'Entrega · Frete: '+brl(order.shipping_price_cents)+' · '+esc(order.shipping_carrier||"—")+" / "+esc(order.shipping_service||"—"))+
+      '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
+      (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
+      (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+'</p>'+location+'</article>';
+  }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
 }
 function renderAccount(){
   const profile=boot?.profile||{};
