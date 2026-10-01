@@ -101,6 +101,9 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
   if(saved){
    field(lotForm,"cost").value=(Number(saved.last_unit_cost_cents)/100).toFixed(2);
    field(lotForm,"markup").value=Number(saved.markup_percent);
+  }else{
+   field(lotForm,"cost").value="";
+   field(lotForm,"markup").value="40";
   }
   computePurchase();
  });
@@ -126,7 +129,9 @@ export function setupProcurement({api,getData,refresh,notify,esc,money,cents,opt
    pendingId=null;pendingFingerprint="";
    feedback("lotFeedback",saved.data?.already_recorded?
      "Esta compra já estava registrada; nenhuma unidade foi duplicada.":"Compra registrada! Estoque e preço de venda atualizados juntos.",true);
-   lotForm.reset();computePurchase();notify("Entrada de mercadoria confirmada.");
+   lotForm.reset();
+   const today=new Date();field(lotForm,"purchased_at").value=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+   computePurchase();notify("Entrada de mercadoria confirmada.");
    const updated=await Promise.allSettled([refresh(),load()]);
    if(updated.some(x=>x.status==="rejected"))notify("Entrada salva; atualize a página para conferir o painel.");
   }catch(error){feedback("lotFeedback",errorText(error))}
