@@ -160,7 +160,12 @@ const paymentLabels={pending:"Pendente",approved:"Aprovado",rejected:"Recusado",
 document.querySelector("#orders").innerHTML=table([
 ["Pedido",r=>'<strong>'+esc(r.public_id)+'</strong><br><span class="muted">'+new Date(r.created_at).toLocaleString("pt-BR")+'</span>'],
 ["Cliente",r=>'<strong>'+esc(r.customer_name)+'</strong><br><span class="muted">'+esc(r.customer_phone)+'</span>'],
-["Entrega",r=>r.delivery_method==="shipping"?'<span>'+esc(r.shipping_city||"—")+'/'+esc(r.shipping_state||"")+'<br><span class="muted">'+esc(r.shipping_carrier||"—")+' · '+esc(r.shipping_service||"—")+' · '+money(r.shipping_price_cents)+'</span></span>':"Presencial"],
+["Entrega",r=>{
+ if(r.delivery_method==="shipping")return esc(r.shipping_city||"—")+"/"+esc(r.shipping_state||"")+" · "+esc(r.shipping_carrier||"—")+" · "+money(r.shipping_price_cents);
+ const loc=r.pickup_location_snapshot||{};
+ const owner=d.sellers.find(x=>x.id===r.seller_id);
+ return "Retirada com "+esc(owner?.name||"Vendedor")+(loc.street?" · "+esc(loc.street)+", "+esc(loc.street_number||"")+" · "+esc(loc.city||"")+"/"+esc(loc.state||""):"");
+}],
 ["Total",r=>money(r.total_cents)],
 ["Pagamento",r=>'<select class="admin-inline-select" data-order-payment="'+esc(r.id)+'">'+["pending","approved","rejected","cancelled","refunded"].map(x=>'<option value="'+x+'" '+(r.payment_status===x?"selected":"")+'>'+paymentLabels[x]+'</option>').join("")+'</select>'],
 ["Pedido",r=>'<select class="admin-inline-select" data-order-fulfillment="'+esc(r.id)+'">'+["pending","preparing","ready","shipped","delivered","cancelled"].map(x=>'<option value="'+x+'" '+(r.fulfillment_status===x?"selected":"")+'>'+orderStatusLabels[x]+'</option>').join("")+'</select>'],
