@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
-<link rel="stylesheet" href="vendedor.css?v=20261001-sales7">
+<link rel="stylesheet" href="vendedor.css?v=20261001-pickupcode1">
 </head><body class="seller-page">
 <div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
 <header class="seller-top">
@@ -79,6 +79,24 @@
 <div class="seller-dashboard-actions"><button type="button" class="seller-outline" id="sellerMarkAllRead">Marcar todas como lidas</button><button class="seller-outline" type="button" id="sellerRefreshNotifications">Atualizar</button></div>
 <div id="sellerNotificationList" class="seller-notification-list"><p class="muted">Carregando notificações...</p></div>
 </div>
+<div class="card seller-pickup-verifier" id="sellerPickupVerifier">
+<p class="eyebrow">ENTREGA SEGURA · CÓDIGO ÚNICO</p>
+<h2>Conferir código de retirada</h2>
+<p class="muted">Peça ao cliente o código AZZ exibido em Minha Conta. O sistema consulta o pagamento, a data, o total de itens e se o código já foi utilizado. Não entregue produtos sem confirmação.</p>
+<form id="sellerVerifyForm" class="seller-verify-form" autocomplete="off">
+<label for="sellerPickupCode">CÓDIGO APRESENTADO PELO CLIENTE
+<input id="sellerPickupCode" type="text" maxlength="26" inputmode="text" autocapitalize="characters" spellcheck="false"
+placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" required></label>
+<button id="sellerVerifySubmit" type="submit" class="seller-primary">CONSULTAR CÓDIGO E PAGAMENTO</button>
+</form>
+<p class="seller-verify-status" id="pickupVerifyStatus" role="status" aria-live="polite">Aguardando o código do cliente.</p>
+<section id="pickupVerifyResult" class="pickup-verified-receipt" aria-label="Comprovante da compra" hidden></section>
+<div id="pickupConfirmArea" class="pickup-confirm-area" hidden>
+<label><input type="checkbox" id="pickupConfirmChecklist">
+<strong>Conferi o nome do cliente, o pagamento e a quantidade de TODOS os produtos. Os produtos estão sendo entregues agora.</strong></label>
+<button id="pickupConfirmDelivery" class="seller-primary" type="button" disabled>CONFIRMAR ENTREGA E BAIXAR CÓDIGO</button>
+</div>
+</div>
 <div class="card"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
  <div class="card"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
  <div class="card seller-orders-card" id="sellerOrdersCard">
@@ -145,5 +163,5 @@
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261001-sales8"></script>
+<script type="module" src="vendedor.js?v=20261001-pickupcode1"></script>
 </body></html>
