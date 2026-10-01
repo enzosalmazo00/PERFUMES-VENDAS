@@ -1,14 +1,264 @@
-import{SUPABASE_URL,SUPABASE_KEY,loadSession,saveSession,headers,money,esc,table}from"./admin-api.js";
-const $=s=>document.querySelector(s),login=$("#loginView"),app=$("#app"),msg=$("#loginMessage"),toast=$("#toast");
-function notify(t){toast.textContent=t;toast.classList.add("show");clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove("show"),2500)}
-async function call(name,payload,auth=true){const r=await fetch(SUPABASE_URL+"/functions/v1/"+name,{method:"POST",headers:auth?headers():{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify(payload)});const d=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(d?.error||"Falha na operação.");e.status=r.status;throw e}return d}
-async function signIn(email,password){const r=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Falha no login.");saveSession(d)}
-async function createAccess(email,password){if(password.length<8)throw new Error("A senha precisa ter pelo menos 8 caracteres.");const a=await call("seller-bootstrap",{email},false);if(!a.allowed)throw new Error("Este e-mail ainda não foi autorizado no cadastro do vendedor.");const r=await fetch(SUPABASE_URL+"/auth/v1/signup",{method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível criar o acesso.");if(d?.access_token)saveSession(d);return d}
-async function refresh(){const d=(await call("seller-portal",{})).data,inv=d.inventory||[],low=d.low_stock||[];$("#sellerName").textContent=d.seller?.name||"Meu estoque";$("#metrics").innerHTML=[["Produtos",inv.length],["Unidades",inv.reduce((s,x)=>s+Number(x.quantity||0),0)],["Alertas",low.length]].map(x=>'<div class="metric"><span>'+x[0]+'</span><strong>'+x[1]+'</strong></div>').join("");$("#alerts").innerHTML=low.length?low.map(x=>'<div class="alert-row"><span class="badge-warn">⚠ '+esc(x.product_name)+'</span><span>Restam '+x.quantity+' em '+esc(x.location_name)+'</span></div>').join(""):'<p class="muted">Nenhum alerta de estoque baixo.</p>';$("#inventory").innerHTML=table([["Produto",r=>esc(r.product_name)+" "+esc(r.volume_ml||"")+" mL"],["Local",r=>esc(r.location_name)],["Saldo",r=>r.low_stock?'<span class="badge-warn">⚠ '+r.quantity+'</span>':r.quantity],["Limite",r=>r.low_stock_threshold]],inv);if(d.seller?.can_toggle_site_emergency){$("#emergencyCard").hidden=false;await loadStatus()}login.hidden=true;app.hidden=false}
-async function loadStatus(){try{const d=(await call("site-emergency",{action:"get_status"})).data;$("#status").textContent=d.is_online?"Loja online":"Loja fora do ar · "+(d.outage_reason||"")}catch(e){$("#status").textContent="Não foi possível consultar o status."}}
-$("#loginForm").onsubmit=async e=>{e.preventDefault();msg.textContent="";try{await signIn($("#email").value.trim(),$("#password").value);await refresh()}catch(x){saveSession(null);msg.textContent=x.message}};
-$("#createAccess").onclick=async()=>{msg.textContent="";try{const d=await createAccess($("#email").value.trim(),$("#password").value);if(d.access_token)await refresh();else msg.textContent="Conta criada. Confirme o e-mail recebido e depois entre."}catch(x){msg.textContent=x.message}};
-$("#logout").onclick=()=>{saveSession(null);location.reload()};
-$("#disable").onclick=async()=>{const reason=$("#reason").value.trim();if(reason.length<3)return notify("Informe a justificativa.");if(!confirm("Confirma desativar a loja temporariamente?"))return;try{await call("site-emergency",{action:"set_status",is_online:false,outage_kind:$("#kind").value,outage_reason:reason});await loadStatus();notify("Loja temporariamente desativada.")}catch(e){notify(e.message)}};
-$("#enable").onclick=async()=>{if(!confirm("Confirma colocar a loja online?"))return;try{await call("site-emergency",{action:"set_status",is_online:true,outage_reason:"Reativação pelo vendedor"});await loadStatus();notify("Loja online.")}catch(e){notify(e.message)}};
-(async()=>{if(!loadSession()?.access_token)return;try{await refresh()}catch{saveSession(null)}})();
+import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
+
+const $=selector=>document.querySelector(selector);
+const SESSION_KEY="azzena-seller-session";
+const views=["loadingView","loginView","confirmView","applyView","pendingView","app"];
+let refreshing=null,loading=false;
+const feedback=(target,message)=>{$(target).textContent=message||""};
+function show(view){
+  for(const id of views)$("#"+id).hidden=id!==view;
+  if(view==="loadingView"){$("#loadingRetry").hidden=true;$(".seller-loading-icon").hidden=false}
+}
+function busy(message="Verificando seu acesso..."){
+  $("#loadingMessage").textContent=message;
+  show("loadingView");
+}
+function notify(message){
+  const toast=$("#toast");
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer=setTimeout(()=>toast.classList.remove("show"),3500);
+}
+function readSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")}catch{return null}}
+function saveSession(value){
+  if(!value)localStorage.removeItem(SESSION_KEY);
+  else localStorage.setItem(SESSION_KEY,JSON.stringify({...value,
+    expires_at:Number(value.expires_at||0)||Math.floor(Date.now()/1000)+Number(value.expires_in||3600)}));
+}
+function logout(){saveSession(null);show("loginView")}
+async function refreshSession(){
+  if(refreshing)return refreshing;
+  refreshing=(async()=>{
+    const current=readSession();
+    if(!current?.refresh_token)throw new Error("LOGIN_REQUIRED");
+    const response=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=refresh_token",{
+      method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+      body:JSON.stringify({refresh_token:current.refresh_token})
+    });
+    const body=await response.json().catch(()=>({}));
+    if(!response.ok){
+      if(response.status===400||response.status===401){saveSession(null);throw new Error("LOGIN_REQUIRED")}
+      throw new Error("Não foi possível confirmar a sessão. Confira a internet e tente novamente.");
+    }
+    const next={...current,...body};
+    saveSession(next);
+    return next;
+  })();
+  try{return await refreshing}finally{refreshing=null}
+}
+async function validSession(){
+  const session=readSession();
+  if(!session)throw new Error("LOGIN_REQUIRED");
+  if(!session.access_token&&session.refresh_token)return refreshSession();
+  if(!session.access_token)throw new Error("LOGIN_REQUIRED");
+  if(Number(session.expires_at||0)&&Number(session.expires_at)<=Math.floor(Date.now()/1000)+60)return refreshSession();
+  return session;
+}
+async function call(name,payload,auth=true,retry=true){
+  const session=auth?await validSession():null;
+  const response=await fetch(SUPABASE_URL+"/functions/v1/"+name,{
+    method:"POST",
+    headers:{apikey:SUPABASE_KEY,
+      ...(auth?{Authorization:"Bearer "+session.access_token}:{}),
+      "Content-Type":"application/json"},
+    body:JSON.stringify(payload)
+  });
+  if(response.status===401&&auth&&retry){
+    const latest=readSession();
+    if(latest?.access_token===session.access_token)await refreshSession();
+    return call(name,payload,auth,false);
+  }
+  const body=await response.json().catch(()=>({}));
+  if(!response.ok){
+    const e=new Error(body?.error||"Falha na operação.");
+    e.status=response.status;e.details=body;throw e;
+  }
+  return body;
+}
+function friendlyError(error){
+  const map={
+    LOGIN_REQUIRED:"Entre novamente para acessar seu painel.",
+    EMAIL_UNCONFIRMED:"Confirme seu e-mail antes de solicitar acesso. Confira a caixa de entrada e o spam.",
+    SELLER_PENDING:"Seu cadastro ainda está aguardando aprovação.",
+    SELLER_REJECTED:"Esta solicitação foi recusada. Fale com a administração.",
+    FORBIDDEN:"Você ainda não tem permissão para entrar no painel.",
+    SELLER_FIELDS_REQUIRED:"Informe seu nome completo e WhatsApp com DDD válido.",
+    SELLER_REQUEST_ALREADY_EXISTS:"Este cadastro já foi enviado. Entre para verificar o status.",
+    EMAIL_ALREADY_LINKED:"Este e-mail já está vinculado a outro cadastro de vendedor.",
+    SELLER_APPLICATION_FAILED:"Não foi possível enviar sua solicitação. Tente novamente."
+  };
+  return map[error?.message]||error?.message||"Não foi possível concluir a operação.";
+}
+async function signIn(email,password){
+  const response=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password",{
+    method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({email:String(email||"").trim().toLowerCase(),password})
+  });
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error_description||data.msg||"E-mail ou senha incorretos.");
+  saveSession(data);
+  return data;
+}
+async function signUp(name,phone,email,password){
+  if(password.length<8)throw new Error("Use uma senha de pelo menos 8 caracteres.");
+  if(String(phone||"").replace(/\D/g,"").length<10)throw new Error("Informe o WhatsApp com DDD.");
+  const response=await fetch(SUPABASE_URL+"/auth/v1/signup",{
+    method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({email:String(email||"").trim().toLowerCase(),
+      password,data:{full_name:String(name).trim()}})
+  });
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error_description||data.msg||"Não foi possível criar sua conta.");
+  if(data.access_token)saveSession(data);
+  return data;
+}
+function showPending(status,info){
+  const title={
+    pending:"Aguardando aprovação",
+    rejected:"Solicitação recusada",
+    paused:"Seu acesso está pausado"
+  }[status]||"Aguardando liberação";
+  const description={
+    pending:"Sua solicitação foi recebida. O administrador precisa aprovar seu acesso. Volte a esta página para conferir o status.",
+    rejected:"Seu pedido foi recusado. Entre em contato com a administração para esclarecimentos.",
+    paused:"Sua conta está temporariamente sem acesso. Entre em contato com a administração."
+  }[status]||"Confira com a administração o status do seu cadastro.";
+  $("#pendingTitle").textContent=title;
+  $("#pendingDescription").textContent=description;
+  $("#pendingEmail").textContent=info?.email||readSession()?.user?.email||"";
+  $("#checkApproval").hidden=status==="rejected";
+  show("pendingView");
+}
+async function refreshInventory(){
+  const response=await call("seller-portal",{});
+  const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
+  $("#sellerName").textContent=data.seller?.name||"Meu estoque";
+  $("#metrics").innerHTML=[
+    ["Produtos",inventory.length],
+    ["Unidades",inventory.reduce((sum,item)=>sum+Number(item.quantity||0),0)],
+    ["Alertas",low.length]
+  ].map(item=>'<div class="metric"><span>'+item[0]+'</span><strong>'+item[1]+'</strong></div>').join("");
+  $("#alerts").innerHTML=low.length?low.map(item=>
+    '<div class="alert-row"><span class="badge-warn">⚠ '+esc(item.product_name)+
+    '</span><span>Restam '+item.quantity+' em '+esc(item.location_name)+'</span></div>'
+  ).join(""):'<p class="muted">Nenhum alerta de estoque baixo.</p>';
+  $("#inventory").innerHTML=table([
+    ["Produto",item=>esc(item.product_name)+" "+esc(item.volume_ml||"")+" mL"],
+    ["Local",item=>esc(item.location_name)],
+    ["Saldo",item=>item.low_stock?'<span class="badge-warn">⚠ '+item.quantity+'</span>':item.quantity],
+    ["Limite",item=>item.low_stock_threshold]
+  ],inventory);
+  $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
+  show("app");
+  if(data.seller?.can_toggle_site_emergency)await loadStatus();
+}
+async function openSeller(){
+  if(loading)return;
+  loading=true;
+  busy();
+  try{
+    await validSession();
+    const result=await call("seller-application",{action:"status"});
+    const info=result.data||{};
+    if(info.status==="approved"){await refreshInventory();return}
+    if(info.status==="not_registered"){
+      const form=$("#applyForm");
+      form.elements.name.value=readSession()?.user?.user_metadata?.full_name||"";
+      form.elements.phone.value="";
+      show("applyView");return;
+    }
+    showPending(info.status,info);
+  }catch(error){
+    if(error?.message==="LOGIN_REQUIRED"&&!readSession()){show("loginView");return}
+    if(error?.message==="EMAIL_UNCONFIRMED"){show("confirmView");return}
+    if(error?.message==="SELLER_PENDING"){showPending("pending");return}
+    if(error?.message==="SELLER_REJECTED"){showPending("rejected");return}
+    $("#loadingMessage").textContent="Não conseguimos verificar seu acesso. "+friendlyError(error);
+    $("#loadingRetry").hidden=false;
+    $(".seller-loading-icon").hidden=true;
+  }finally{loading=false}
+}
+async function loadStatus(){
+  try{
+    const response=await call("site-emergency",{action:"get_status"});
+    $("#status").textContent=response.data.is_online?"Loja online":"Loja fora do ar · "+(response.data.outage_reason||"");
+  }catch{$("#status").textContent="Não foi possível consultar o status."}
+}
+$("#loginForm").onsubmit=async event=>{
+  event.preventDefault();
+  feedback("#loginMessage","");
+  busy("Entrando na sua conta...");
+  try{await signIn($("#email").value,$("#password").value);await openSeller()}
+  catch(error){show("loginView");feedback("#loginMessage",friendlyError(error))}
+};
+$("#signupForm").onsubmit=async event=>{
+  event.preventDefault();
+  feedback("#signupMessage","");
+  const form=event.currentTarget,button=form.querySelector('[type="submit"]'),data=new FormData(form);
+  const name=String(data.get("name")||"").trim(),phone=String(data.get("phone")||"").trim();
+  button.disabled=true;
+  try{
+    const result=await signUp(name,phone,data.get("email"),String(data.get("password")||""));
+    if(result.access_token){
+      const applied=await call("seller-application",{action:"apply",name,whatsapp_number:phone});
+      showPending(applied.data.status,applied.data);
+    }else{
+      show("confirmView");
+    }
+  }catch(error){show("loginView");feedback("#signupMessage",friendlyError(error))}
+  finally{button.disabled=false}
+};
+$("#applyForm").onsubmit=async event=>{
+  event.preventDefault();
+  const form=event.currentTarget,button=form.querySelector('[type="submit"]');
+  button.disabled=true;feedback("#applyMessage","");
+  try{
+    const result=await call("seller-application",{
+      action:"apply",name:form.elements.name.value,whatsapp_number:form.elements.phone.value
+    });
+    if(result.data?.status==="approved"){await refreshInventory();return}
+    showPending(result.data?.status,result.data);
+  }catch(error){feedback("#applyMessage",friendlyError(error))}
+  finally{button.disabled=false}
+};
+$("#resetPassword").onclick=async()=>{
+  const email=$("#email").value.trim();
+  if(!email){feedback("#loginMessage","Informe seu e-mail acima para recuperar a senha.");$("#email").focus();return}
+  try{
+    const response=await fetch(SUPABASE_URL+"/auth/v1/recover?redirect_to="+encodeURIComponent("https://enzosalmazo00.github.io/PERFUMES-VENDAS/"),{
+      method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email})
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error_description||data.msg||"Não foi possível enviar a recuperação.");
+    feedback("#loginMessage","Link enviado. Confira o e-mail e o spam. Como o acesso usa a mesma conta AZZENA, você pode redefinir a senha pela página de recuperação.");
+  }catch(error){feedback("#loginMessage",friendlyError(error))}
+};
+$("#backToLogin").onclick=()=>show("loginView");
+$("#retryLoad").onclick=openSeller;
+$("#checkApproval").onclick=openSeller;
+for(const id of ["loadingLogout","applyLogout","pendingLogout","logout"])$("#"+id).onclick=logout;
+document.querySelectorAll("[data-password]").forEach(button=>{
+  button.onclick=()=>{
+    const input=$("#"+button.dataset.password),visible=input.type==="password";
+    input.type=visible?"text":"password";
+    button.setAttribute("aria-label",visible?"Ocultar senha":"Mostrar senha");
+  };
+});
+$("#disable").onclick=async()=>{
+  const reason=$("#reason").value.trim();
+  if(reason.length<3){notify("Informe a justificativa.");return}
+  if(!confirm("Confirma desativar a loja temporariamente?"))return;
+  try{
+    await call("site-emergency",{action:"set_status",is_online:false,outage_kind:$("#kind").value,outage_reason:reason});
+    await loadStatus();notify("Loja temporariamente desativada.");
+  }catch(error){notify(friendlyError(error))}
+};
+$("#enable").onclick=async()=>{
+  if(!confirm("Confirma colocar a loja online?"))return;
+  try{
+    await call("site-emergency",{action:"set_status",is_online:true,outage_reason:"Reativação pelo vendedor"});
+    await loadStatus();notify("Loja online.");
+  }catch(error){notify(friendlyError(error))}
+};
+if(readSession())openSeller();else show("loginView");
