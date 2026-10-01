@@ -6,7 +6,7 @@ let data=null;
 function notify(t){toast.textContent=t;toast.classList.add("show");clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove("show"),2600)}
 function bindTabs(){$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.toggle("is-active",x===b));$$(".tab-panel").forEach(p=>p.hidden=p.dataset.panel!==b.dataset.tab);if(b.dataset.tab==="compras")loadSuppliers();if(b.dataset.tab==="relatorios")runReports();if(b.dataset.tab==="emergencia")loadStatus()})}
 async function refresh(){data=(await adminApi({action:"dashboard"})).data;renderDashboard(data)}
-async function open(){content.innerHTML=shell();login.hidden=true;app.hidden=false;bindTabs();bindForms();await refresh()}
+async function open(){const fresh=(await adminApi({action:"dashboard"})).data;data=fresh;content.innerHTML=shell();login.hidden=true;app.hidden=false;bindTabs();bindForms();renderDashboard(data)}
 async function loadSuppliers(){try{const a=(await procurementApi({action:"list_suppliers"})).data||[];$("#lotSupplier").innerHTML=option(a,"id","name","Sem fornecedor")}catch(e){notify(e.message)}}
 function bindForms(){
 $("#productImage").onchange=e=>{const file=e.target.files?.[0],preview=$("#productImagePreview");if(!file){preview.hidden=true;preview.removeAttribute("src");return}preview.src=URL.createObjectURL(file);preview.hidden=false};
@@ -27,4 +27,4 @@ $("#loginForm").onsubmit=async e=>{e.preventDefault();msg.textContent="";try{awa
 $("#createAccess").onclick=async()=>{msg.textContent="";try{const d=await createFirstAccess($("#email").value.trim(),$("#password").value);if(d.access_token)await open();else msg.textContent="Conta criada. Confirme o e-mail recebido e depois entre. Se não encontrar a mensagem, use “Reenviar confirmação”."}catch(x){msg.textContent=x.message}};
 $("#resendConfirm").onclick=async()=>{msg.textContent="";try{await resendConfirmation($("#email").value.trim());msg.textContent="E-mail de confirmação reenviado. Abra sua caixa de entrada, confirme o acesso e depois entre normalmente."}catch(x){msg.textContent=x.message}};
 $("#logout").onclick=()=>{saveSession(null);location.reload()};
-(async()=>{if(!loadSession()?.access_token)return;try{await open()}catch{saveSession(null)}})();
+(async()=>{if(!loadSession()?.access_token)return;try{await open()}catch(e){if(e?.status===401){saveSession(null);login.hidden=false;app.hidden=true;msg.textContent="Sua sessão expirou. Entre novamente."}else{login.hidden=false;app.hidden=true;msg.textContent=e?.message||"Não foi possível carregar o painel. Tente novamente."}}})();
