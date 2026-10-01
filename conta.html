@@ -158,8 +158,19 @@
       <p>A área de pedidos já está preparada para receber código e link de rastreio. A integração de rastreamento automático será estudada e configurada na próxima etapa.</p>
     </section>
   </section>
+  <div class="customer-review-overlay" id="reviewOverlay" hidden>
+    <section class="customer-review-dialog" role="dialog" aria-modal="true" aria-labelledby="reviewDialogTitle" tabindex="-1">
+      <button class="customer-review-close" type="button" id="reviewClose" aria-label="Fechar avaliação">×</button>
+      <p class="eyebrow">COMPRA CONFIRMADA · SUA EXPERIÊNCIA IMPORTA</p>
+      <h2 id="reviewDialogTitle">Avalie sua compra</h2>
+      <p class="review-intro">Avalie cada produto com estrelas de 0 a 5 e conte como foi sua experiência. Seu nome aparecerá apenas com o primeiro nome e as iniciais dos sobrenomes.</p>
+      <div id="reviewItems" class="review-items"></div>
+      <p id="reviewMessage" class="review-message" role="status" aria-live="polite"></p>
+      <button class="outline-account-btn review-finish" type="button" id="reviewDone">FECHAR</button>
+    </section>
+  </div>
   <div id="accountToast" class="toast"></div>
 </main>
-<script type="module" src="conta.js?v=20261001-pickupcode1"></script>
+<script type="module" src="conta.js?v=20261001-review1"></script>
 </body>
 </html>
