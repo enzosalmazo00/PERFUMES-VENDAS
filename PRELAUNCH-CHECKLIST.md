@@ -57,3 +57,15 @@
 - [x] Atalho na notificação abre a aba de pedidos; pedido pronto pode abrir a aba de verificação da retirada.
 - [x] Navegação por teclado/ARIA, layout adaptado para mobile e manutenção dos formulários existentes.
 - [ ] Verificar manualmente no navegador iPad e smartphone, com contas autorizadas, os fluxos de formulários, impressão, atualização e retorno à aba anteriormente aberta.
+
+## Avaliações verificadas — implementado, teste transacional pendente
+- [x] Notas de 0 a 5 estrelas e comentário individual por produto comprado.
+- [x] Confirmação de pedido pago no servidor antes de permitir publicar; nenhum cliente pode marcar avaliações como verificadas diretamente.
+- [x] Nome público abreviado no servidor para primeiro nome e iniciais dos sobrenomes.
+- [x] Comprovante do pedido e usuário avaliador mantidos em tabela privada, fora da consulta pública.
+- [x] Janela de avaliação com botão fechar ao retornar do Mercado Pago, somente após o webhook confirmar o pagamento.
+- [x] Botão **Avaliar sua compra** no histórico para o cliente avaliar depois, se fechar a janela.
+- [x] Média e contagem das estrelas do perfume atualizadas a partir das avaliações aprovadas e verificadas.
+- [x] Três avaliações antigas sem vínculo comprovado com pedidos preservadas, porém ocultas da vitrine.
+- [x] Verificados: 0–5 nas regras do banco, teste de pedido inexistente recusado, permissões restritas e exibição anonimizada.
+- [ ] Compra real por PIX e cartão, retorno do Mercado Pago e abertura da avaliação precisam ser testados após ativar as credenciais. Não criar pedidos fictícios na produção.
