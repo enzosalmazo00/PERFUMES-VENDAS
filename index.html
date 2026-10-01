@@ -246,6 +246,17 @@
         <strong>Quem te atendeu?</strong>
         <div class="seller-picker" id="sellerPicker"><p>Carregando vendedores...</p></div>
       </div>
+      <div class="checkout-methods" role="group" aria-label="Modalidade de entrega">
+        <p class="eyebrow">COMO VOCÊ PREFERE RECEBER?</p>
+        <div class="checkout-method-options">
+          <button type="button" class="checkout-method is-active" data-checkout-method="shipping">
+            <strong>Receber em casa</strong><small>Entrega no Estado de São Paulo · frete calculado pelo CEP</small>
+          </button>
+          <button type="button" class="checkout-method" data-checkout-method="pickup">
+            <strong>Retirar com o vendedor</strong><small>Retirada presencial no endereço cadastrado · sem frete</small>
+          </button>
+        </div>
+      </div>
       <div class="payment-tabs">
         <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
         <button class="payment-tab" type="button" data-payment="card">Cartão</button>
@@ -257,6 +268,11 @@
         <button class="outline-shipping-btn" id="calculateShipping" type="button">CALCULAR FRETE</button>
         <div id="shippingQuotes" class="shipping-quotes"></div>
         <p id="shippingPublicNote" class="shipping-note"></p>
+      </div>
+      <div id="pickupArea" class="pickup-checkout" hidden>
+        <div class="pickup-checkout-heading"><strong>Retirada presencial</strong><small>Escolha o vendedor responsável acima.</small></div>
+        <div id="pickupAvailability" class="shipping-message">Selecione um vendedor para ver os produtos disponíveis e o local de retirada.</div>
+        <p class="shipping-note">O pedido e o pagamento ficarão pendentes até a confirmação. Aguarde a liberação do vendedor antes de se deslocar.</p>
       </div>
       <form id="checkoutForm">
         <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pedido será criado com pagamento pendente para confirmação no fechamento.</p></div>
