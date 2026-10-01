@@ -149,6 +149,17 @@ async function refreshInventory(){
     ["Saldo",item=>item.low_stock?'<span class="badge-warn">⚠ '+item.quantity+'</span>':item.quantity],
     ["Limite",item=>item.low_stock_threshold]
   ],inventory);
+  const catalogUrl=new URL("index.html",location.href);
+  catalogUrl.searchParams.set("vendedor",data.seller.id);
+  $("#sellerCatalogUrl").value=catalogUrl.href;
+  $("#sendSellerCatalog").href="https://wa.me/?text="+encodeURIComponent("Confira meus perfumes disponíveis na AZZENA PARFUMS: "+catalogUrl.href);
+  $("#openSellerCatalog").href=catalogUrl.href;
+  const pickup=data.pickup||{};
+  const pickupForm=$("#sellerPickupForm");
+  for(const key of ["display_name","country_code","street","street_number","neighborhood","city","state","postal_code","complement","google_maps_url","instructions"]){
+    if(pickupForm.elements[key])pickupForm.elements[key].value=pickup[key]||(key==="country_code"?"BR":"");
+  }
+  pickupForm.elements.is_enabled.checked=pickup.is_enabled===true;
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
   show("app");
   if(data.seller?.can_toggle_site_emergency)await loadStatus();
@@ -245,6 +256,28 @@ document.querySelectorAll("[data-password]").forEach(button=>{
     button.setAttribute("aria-label",visible?"Ocultar senha":"Mostrar senha");
   };
 });
+$("#copySellerCatalog").onclick=async()=>{
+  const url=$("#sellerCatalogUrl").value;
+  if(!url)return notify("Acesse sua conta aprovada para compartilhar seu catálogo.");
+  try{await navigator.clipboard.writeText(url);notify("Link do catálogo copiado!")}
+  catch{$("#sellerCatalogUrl").focus();$("#sellerCatalogUrl").select();notify("Selecione e copie o link exibido no campo.")}
+};
+$("#sellerPickupForm").onsubmit=async event=>{
+  event.preventDefault();
+  const form=event.currentTarget,submit=form.querySelector('[type="submit"]');
+  const values=new FormData(form);
+  const pickup=Object.fromEntries(["display_name","country_code","street","street_number","neighborhood","city","state","postal_code","complement","google_maps_url","instructions"].map(k=>[k,values.get(k)]));
+  pickup.is_enabled=form.elements.is_enabled.checked;
+  submit.disabled=true;$("#sellerPickupMessage").textContent="Salvando o endereço...";
+  try{
+    await call("seller-portal",{action:"save_pickup",pickup});
+    $("#sellerPickupMessage").textContent="Endereço atualizado. "+(pickup.is_enabled?"Clientes podem escolher retirar neste local.":"Retirada desativada no momento.");
+    notify("Ponto de retirada salvo.");
+  }catch(error){
+    const message=error.message==="GOOGLE_MAPS_LINK_INVALID"?"Use um link válido do Google Maps.":friendlyError(error);
+    $("#sellerPickupMessage").textContent=message;notify(message);
+  }finally{submit.disabled=false}
+};
 $("#disable").onclick=async()=>{
   const reason=$("#reason").value.trim();
   if(reason.length<3){notify("Informe a justificativa.");return}
