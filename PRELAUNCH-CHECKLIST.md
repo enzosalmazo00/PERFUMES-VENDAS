@@ -33,6 +33,17 @@
 - [x] Testes de regressão do banco realizados em transações revertidas (sem criar compras ou fornecedores reais).
 - [ ] Conferir pelo navegador, usando a conta do administrador, um lançamento real de fornecedor e uma entrada de produto no estoque.
 
+## Catálogo de sugestões e recebimento de múltiplos produtos — 2026-10-01
+- [x] Adicionadas 159 novas sugestões, totalizando 721 fragrâncias/body splashes organizados em 62 marcas. Ferrari Black/Scuderia Red, Club de Nuit e novas linhas árabes incluídas.
+- [x] Campo de busca pelo perfume, linha ou marca nos formulários de criar/editar; seleção direta do resultado.
+- [x] Nome, versão e marca são sugestões editoriais; notas, concentração e volume só vêm preenchidos automaticamente se a ficha oficial da fragrância estiver validada.
+- [x] Uma única compra pode receber até 30 produtos diferentes, cada qual com busca, quantidade, custo unitário, acréscimo percentual e preço de venda calculado.
+- [x] Total da compra, despesas e receita projetada atualizados a partir de todas as linhas.
+- [x] Função transacional com uma nota/lote, várias linhas, atualização simultânea dos saldos e preços, recusa de produto duplicado e chave de idempotência.
+- [x] Testes da transação em rollback: duas fragrâncias, preços separados, estoque correto, sem duplicação por reenvio, linha inválida rejeitada e lotes não persistidos.
+- [x] Revisados grants: a rotina transacional não pode ser chamada por `anon` nem `authenticated` diretamente.
+- [ ] Fazer teste visual e uma entrada real de fornecedor já cadastrado usando a sessão administrativa após a publicação do painel.
+
 ## Pendências anteriores à primeira venda
 - [ ] No Supabase Auth, ativar proteção contra senhas vazadas (se disponível no plano). Não há ação deste conector para alterar configuração do Auth.
 - [ ] Cadastrar estoque físico com saldo real em `inventory_locations` e `inventory_balances` por vendedor.
