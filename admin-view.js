@@ -172,7 +172,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
      <label>CPF/CNPJ ou documento<input name="tax_id" maxlength="60" placeholder="Se aplicável"></label>
      <label>Endereço ou local de origem<input name="address" maxlength="350"></label>
      <label class="span2">Observações<textarea name="notes" maxlength="1500" rows="2"></textarea></label>
-     <label class="checkline"><input type="checkbox" name="is_active" checked> Fornecedor ativo</label>
+     <label class="checkline" id="supplierActiveLabel" hidden><input type="checkbox" name="is_active" checked> Fornecedor ativo</label>
      <p id="supplierFeedback" class="span2 admin-feedback" role="status"></p>
      <div class="span2 row-actions"><button class="btn btn-primary" type="submit" id="supplierSubmit">Cadastrar fornecedor</button><button class="btn" type="button" id="cancelSupplierEdit" hidden>Cancelar edição</button></div>
    </form>
