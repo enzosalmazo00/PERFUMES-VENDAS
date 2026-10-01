@@ -118,6 +118,8 @@ return `<nav class="tabs">
     <div class="tracking-admin-note"><strong>Rastreio automático</strong><p>A estrutura do banco já possui campos para código e link de rastreio. A integração automática de rastreamento será estudada e implementada em uma próxima etapa.</p></div>
   </div>
 </div>
+<div class="card"><p class="eyebrow">COBRANÇA DA LOJA</p><h2>Mercado Pago · Checkout Seguro</h2><div id="mercadoPagoStatus"></div>
+<p class="muted">PIX e cartão dos clientes são cobrados exclusivamente pela AZZENA. O vendedor só registra dinheiro vivo na aba Caixa do painel dele. Envio para São Paulo desativado.</p></div>
 <div class="card"><p class="eyebrow">Pedidos</p><h2>Pedidos de clientes</h2><div id="orders"></div></div>
 </section>
 <section class="tab-panel" data-panel="caixa" hidden>
@@ -195,6 +197,9 @@ document.querySelector("#cashSalesTable").innerHTML=table([
  ["Líquido",o=>money(o.total_cents)],["Dinheiro recebido",o=>money(o.cash_received_cents)],
  ["Troco",o=>money(o.cash_change_cents)]
 ],cashRows);
+document.querySelector("#mercadoPagoStatus").innerHTML=d.mercado_pago_credentials_present?
+ '<div class="badge-ok">Credenciais cadastradas no Supabase. Faça um pagamento de teste antes de liberar vendas reais.</div>':
+ '<div class="badge-warn">Integração preparada; falta configurar o Access Token e a chave secreta de Webhook da conta Mercado Pago da loja. O checkout online permanece indisponível até a configuração.</div>';
 const ss=d.shipping_settings||{};
 const sf=document.querySelector("#shippingSettingsForm");
 if(sf){sf.elements.origin_postal_code.value=ss.origin_postal_code||"";sf.elements.provider_environment.value=ss.provider_environment||"sandbox";sf.elements.shipping_enabled.checked=!!ss.shipping_enabled;sf.elements.public_note.value=ss.public_note||"Envios disponíveis para o Estado de São Paulo."}
