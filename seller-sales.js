@@ -1,4 +1,4 @@
-import {openSellerLabel} from "./seller-labels.js?v=20261001-sales5";
+import {openSellerLabel} from "./seller-labels.js?v=20261001-pickupcode2";
 const $=s=>document.querySelector(s);
 const brl=c=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100);
 let services=null,initialized=false,poll=null,orderData=[],inventory=[],heldStock=[],cart=[],notifications=[],saleKey=null;
