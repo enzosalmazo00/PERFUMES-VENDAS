@@ -1,5 +1,5 @@
 import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
-import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales7";
+import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales8";
 
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
