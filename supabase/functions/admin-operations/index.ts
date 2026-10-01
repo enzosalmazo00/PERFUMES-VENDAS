@@ -47,6 +47,23 @@ export default {
       return json({data:{products,sellers,cities,locations,inventory,orders,shipping_settings,shipping_provider_configured,mercado_pago_credentials_present:Boolean(Deno.env.get("MERCADO_PAGO_ACCESS_TOKEN")&&Deno.env.get("MERCADO_PAGO_WEBHOOK_SECRET"))}});
     }
 
+    if(action==="inventory_history"){
+      const [movements,products,locations]=await Promise.all([
+        ctx.supabaseAdmin.from("inventory_movements")
+        .select("id,product_id,inventory_location_id,quantity_delta,reason_code,note,financial_impact_cents,created_at")
+        .order("created_at",{ascending:false}).limit(100),
+        ctx.supabaseAdmin.from("products").select("id,name"),
+        ctx.supabaseAdmin.from("inventory_locations").select("id,name")
+      ]);
+      if(movements.error||products.error||locations.error)return json({error:"INVENTORY_HISTORY_FAILED"},500);
+      const pm=new Map((products.data||[]).map((x:any)=>[x.id,x.name]));
+      const lm=new Map((locations.data||[]).map((x:any)=>[x.id,x.name]));
+      return json({data:(movements.data||[]).map((x:any)=>({...x,
+        product_name:pm.get(x.product_id)||"Produto removido",
+        location_name:lm.get(x.inventory_location_id)||"Local removido"
+      }))});
+    }
+
     if(action==="create_product"){
       const name=txt(body?.name), productType=txt(body?.product_type)||"perfume", category=txt(body?.category), volume=num(body?.volume_ml), price=Math.max(0,num(body?.price_cents));
       if(!name||!["perfume","body_splash"].includes(productType)||!["masculino","feminino","unissex"].includes(category)||volume<=0) return json({error:"PRODUCT_FIELDS_REQUIRED"},400);
