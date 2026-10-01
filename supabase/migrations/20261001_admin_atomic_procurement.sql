@@ -229,8 +229,7 @@ BEGIN
       markup_percent=excluded.markup_percent,last_purchase_lot_id=excluded.last_purchase_lot_id,
       updated_by=excluded.updated_by,updated_at=now();
    UPDATE public.products SET price_cents=v_price,
-      sale_price_cents=CASE WHEN sale_price_cents IS NOT NULL AND sale_price_cents>v_price
-      THEN NULL ELSE sale_price_cents END,updated_at=now()
+      sale_price_cents=NULL,updated_at=now()
    WHERE id=v_product_id;
    RETURN jsonb_build_object('data',jsonb_build_object('lot_id',v_lot_id,'already_recorded',false,
          'new_balance',v_balance,'movement_id',v_movement,'unit_cost_cents',v_cost,
@@ -260,8 +259,7 @@ BEGIN
  UPDATE private.product_pricing SET markup_percent=p_markup_percent,updated_by=p_actor_id,updated_at=now()
  WHERE product_id=p_product_id;
  UPDATE public.products SET price_cents=v_price,
-   sale_price_cents=CASE WHEN sale_price_cents IS NOT NULL AND sale_price_cents>v_price THEN NULL
-   ELSE sale_price_cents END,updated_at=now() WHERE id=p_product_id;
+   sale_price_cents=NULL,updated_at=now() WHERE id=p_product_id;
  RETURN jsonb_build_object('data',jsonb_build_object('old_price_cents',v_old_price,
  'unit_cost_cents',v_cost,'markup_percent',p_markup_percent,'new_price_cents',v_price));
 END $function$
