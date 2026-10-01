@@ -1,4 +1,5 @@
 import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
+import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales5";
 
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
@@ -177,6 +178,7 @@ async function refreshInventory(){
     if(pickupForm.elements[key])pickupForm.elements[key].value=pickup[key]||(key==="country_code"?"BR":"");
   }
   pickupForm.elements.is_enabled.checked=pickup.is_enabled===true;
+  renderSellerSales(data);
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
   show("app");
   if(data.seller?.can_toggle_site_emergency)await loadStatus();
@@ -324,4 +326,5 @@ $("#enable").onclick=async()=>{
     await loadStatus();notify("Loja online.");
   }catch(error){notify(friendlyError(error))}
 };
+initSellerSales({call,notify,onSale:refreshInventory});
 if(readSession())openSeller();else show("loginView");
