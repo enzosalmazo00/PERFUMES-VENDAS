@@ -210,3 +210,6 @@
   .form-grid .catalog-fragrance-select,
   .form-grid .catalog-volume-select{font-size:16px}
 }
+
+.catalog-reference-note{grid-column:1/-1;padding:12px 14px;background:#20170b;border:1px solid #8a7149;color:#d6c5a5;font-size:12px;line-height:1.55}
+.catalog-reference-note a{color:#efd295;text-decoration:underline}
