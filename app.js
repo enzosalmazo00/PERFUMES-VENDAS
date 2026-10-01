@@ -125,12 +125,16 @@ try{
    if(!response.ok)throw new Error("SELLER_CATALOG_UNAVAILABLE");
    const catalog=await response.json();
    state.sellerScope=catalog||null;
-   state.products=Array.isArray(catalog?.products)?catalog.products.map(p=>({...p,available_stock:catalog?.pickup?Math.max(0,Number(p.stock)||0):0})):[];
+   if(catalog?.seller){
+   const base=await supabaseGet("products","select=*&is_active=eq.true&order=is_best_seller.desc,is_featured.desc,created_at.asc");
+   const sellerStock=new Map((catalog.pickup&&Array.isArray(catalog.products)?catalog.products:[]).map(p=>[p.id,Math.max(0,Number(p.stock)||0)]));
+   state.products=base.map(p=>({...p,available_stock:sellerStock.get(p.id)||0}));
+ }else state.products=[];
    const banner=$("#sellerCatalogBanner");
    if(banner){
      banner.hidden=false;
      $("#sellerCatalogTitle").textContent=catalog?.seller?"Catálogo de "+catalog.seller.name:"Catálogo indisponível";
-     $("#sellerCatalogDescription").textContent=catalog?.seller?"Produtos com estoque disponível diretamente com este vendedor.":"Este vendedor não está disponível no momento.";
+     $("#sellerCatalogDescription").textContent=catalog?.seller?"Produtos disponíveis para retirada ou, quando esgotados, sob consulta por encomenda com este vendedor.":"Este vendedor não está disponível no momento.";
    }
    const title=$(".catalog-title h2");if(title)title.textContent="Produtos disponíveis";
  }else{
@@ -145,7 +149,34 @@ try{
 }
 function filteredProducts(){let rows;if(state.filter==="todos")rows=state.products;else if(state.filter==="body_splash")rows=state.products.filter(p=>p.product_type==="body_splash");else rows=state.products.filter(p=>(p.category===state.filter||p.category==="unissex"&&["masculino","feminino"].includes(state.filter))&&p.product_type!=="body_splash");const q=state.search.trim().toLowerCase();if(q)rows=rows.filter(p=>[p.name,p.brand,p.product_type==="body_splash"?"body splash":"perfume",p.category,p.volume_ml].join(" ").toLowerCase().includes(q));return rows}
 function reviewSummary(id){const r=state.reviews.filter(x=>x.product_id===id);if(!r.length)return{stars:"☆☆☆☆☆",text:""};const avg=r.reduce((a,b)=>a+Number(b.rating||0),0)/r.length;return{stars:"★".repeat(Math.round(avg))+"☆".repeat(5-Math.round(avg)),text:"("+r.length+")"}}
-function renderProducts(){const rows=filteredProducts();els.catalogStatus.textContent=rows.length?rows.length+" fragrância"+(rows.length===1?"":"s")+" no catálogo · "+rows.filter(p=>Number(p.available_stock)>0).length+" com retirada disponível":"Nenhuma fragrância encontrada.";els.productGrid.innerHTML=(sellerScopeId?rows:rows.slice(0,12)).map(p=>{const price=p.sale_price_cents??p.price_cents,r=reviewSummary(p.id),soldOut=Number(p.available_stock||0)<1;return '<article class="product-card" data-product-id="'+esc(p.id)+'"><div class="product-media"><span class="product-heart">♡</span>'+(soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art") +'</div><div class="product-body"><h3>'+esc(p.name).toUpperCase()+'</h3><div class="product-brand">'+esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"Perfume importado"))+' · '+esc(p.volume_ml)+'ml</div><div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+brl(price)+'</strong><button class="buy-card" type="button" data-buy="'+esc(p.id)+'"'+(soldOut?' disabled aria-disabled="true"':'')+'>'+(soldOut?'ESGOTADO':'▱ &nbsp; COMPRAR')+'</button></div></article>'}).join("");$$(".product-card",els.productGrid).forEach(card=>card.onclick=e=>{if(e.target.closest("[data-buy]"))return;openProduct(card.dataset.productId)});$$("[data-buy]",els.productGrid).forEach(b=>b.onclick=e=>{e.stopPropagation();const p=state.products.find(x=>x.id===b.dataset.buy);if(p)addToBag(p)})}
+function renderProducts(){
+ const rows=filteredProducts(),contacts=preorderContacts();
+ els.catalogStatus.textContent=rows.length?rows.length+" fragrância"+(rows.length===1?"":"s")+" no catálogo · "+rows.filter(p=>Number(p.available_stock)>0).length+" com retirada disponível":"Nenhuma fragrância encontrada.";
+ els.productGrid.innerHTML=(sellerScopeId?rows:rows.slice(0,12)).map(p=>{
+   const price=p.sale_price_cents??p.price_cents,r=reviewSummary(p.id),soldOut=Number(p.available_stock||0)<1;
+   const preorder=soldOut?(contacts.length?
+     '<button class="preorder-cta" type="button" data-preorder="'+esc(p.id)+'">Solicitar por encomenda ↗</button>':
+     '<p class="preorder-unavailable">Encomendas temporariamente indisponíveis</p>'):"";
+   return '<article class="product-card" data-product-id="'+esc(p.id)+'"><div class="product-media"><span class="product-heart">♡</span>'+
+     (soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art")+
+     '</div><div class="product-body"><h3>'+esc(p.name).toUpperCase()+'</h3><div class="product-brand">'+
+     esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"Perfume importado"))+' · '+esc(p.volume_ml)+
+     'ml</div><div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
+     brl(price)+'</strong><button class="buy-card" type="button" data-buy="'+esc(p.id)+'"'+
+     (soldOut?' disabled aria-disabled="true"':'')+'>'+(soldOut?'ESGOTADO':'▱ &nbsp; COMPRAR')+
+     '</button>'+preorder+'</div></article>';
+ }).join("");
+ $$(".product-card",els.productGrid).forEach(card=>card.onclick=e=>{
+   if(e.target.closest("[data-buy],[data-preorder]"))return;
+   openProduct(card.dataset.productId);
+ });
+ $$("[data-buy]",els.productGrid).forEach(b=>b.onclick=e=>{
+   e.stopPropagation();const p=state.products.find(x=>x.id===b.dataset.buy);if(p)addToBag(p);
+ });
+ $$("[data-preorder]",els.productGrid).forEach(b=>b.onclick=e=>{
+   e.stopPropagation();const p=state.products.find(x=>x.id===b.dataset.preorder);if(p)requestPreorder(p);
+ });
+}
 function setFilter(f){state.filter=f;$$(".filter").forEach(b=>b.classList.toggle("is-active",b.dataset.filter===f));renderProducts()}
 function openProduct(id){const p=state.products.find(x=>x.id===id);if(!p)return;const reviews=state.reviews.filter(r=>r.product_id===id),price=p.sale_price_cents??p.price_cents;els.productModalContent.innerHTML='<div class="product-detail"><div class="detail-media">'+productArt(p,"detail-art") +'</div><div class="detail-copy"><p class="eyebrow">'+esc(p.product_type==="body_splash"?"BODY SPLASH":(p.brand||"PERFUME IMPORTADO"))+' · '+esc(p.category)+'</p><h2>'+esc(p.name)+'</h2><p class="detail-price">'+brl(price)+' · '+esc(p.volume_ml)+' mL</p><p class="detail-desc">'+esc(p.description||p.short_description||"Fragrância selecionada para uma experiência marcante e sofisticada.")+'</p><p class="detail-stock">'+(Number(p.available_stock)>0?esc(p.available_stock)+" unidade(s) disponíveis para retirada":"Esgotado para retirada")+'</p><div class="notes"><div class="note"><strong>Notas de topo</strong><span>'+esc((p.top_notes||[]).join(" · ")||"—")+'</span></div><div class="note"><strong>Notas de coração</strong><span>'+esc((p.heart_notes||[]).join(" · ")||"—")+'</span></div><div class="note"><strong>Notas de fundo</strong><span>'+esc((p.base_notes||[]).join(" · ")||"—")+'</span></div></div><div class="composition"><strong>Composição</strong><p>'+esc(p.composition||"Informação técnica disponível no atendimento.")+'</p></div><div class="review-block"><strong>Avaliações</strong>'+(reviews.length?reviews.map(r=>'<div class="review"><div class="review-head"><b>'+esc(r.customer_name)+'</b><span class="stars">'+"★".repeat(Number(r.rating))+"☆".repeat(5-Number(r.rating))+'</span></div><p>'+esc(r.comment)+'</p></div>').join(""):'<p class="detail-desc">Ainda não há avaliações para esta fragrância.</p>')+'</div><div class="detail-actions"><button class="buy-card" id="addSelectedToBag"'+(Number(p.available_stock)>0?'':' disabled')+'>ADICIONAR À SACOLA</button><button class="buy-card secondary" id="buySelectedNow"'+(Number(p.available_stock)>0?'':' disabled')+'>COMPRAR AGORA</button></div></div></div>';els.productOverlay.hidden=false;syncScrollLock();$("#addSelectedToBag").onclick=()=>{if(addToBag(p))closeProduct()};$("#buySelectedNow").onclick=()=>{if(addToBag(p)){closeProduct();openBag()}}}
 function closeProduct(){els.productOverlay.hidden=true;syncScrollLock()}
