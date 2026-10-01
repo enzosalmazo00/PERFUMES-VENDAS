@@ -557,3 +557,52 @@ textarea,
 .footer-logo{
   font-family:"Cinzel",Georgia,serif!important;
 }
+
+
+/* WIDE READABLE POPPINS 20261001 */
+html,body,
+button,input,select,textarea,
+.benefit-bar,
+.logo,.logo-name,.logo small,
+.nav,.nav a,.nav button,
+.header-search input,
+.category-text,.category-text p,.category-text h2,.category-text span,.category-text b,
+.catalog-title,.catalog-title h2,.catalog-title button,
+.catalog-search input,.filter,.catalog-status,
+.product-body,.product-body h3,.product-brand,.product-rating,.product-price,.buy-card,
+.service-row,.service-row b,.service-row small,
+footer,.footer-logo,.footer-links a,.footer-links button,
+.eyebrow,.detail-copy,.detail-copy h2,.detail-desc,.detail-price,.detail-stock,
+.note span,.composition p,.review p,
+.drawer,.drawer h2,.drawer-head p,.bag-item p,.empty-bag,
+.checkout-modal,.checkout-modal h2,.checkout-summary,.checkout-modal label,.checkout-modal input,.demo-box{
+  font-family:"Poppins",Arial,sans-serif!important;
+}
+.logo{
+  padding-left:0!important;
+}
+.logo-name{
+  font-size:24px!important;
+  font-weight:600!important;
+  letter-spacing:.16em!important;
+  color:#e7c47e!important;
+}
+.logo small,
+.logo-crown,
+.mini-crown{
+  display:none!important;
+}
+.footer-logo{
+  font-size:18px!important;
+  font-weight:600!important;
+  letter-spacing:.14em!important;
+  color:#e6c47d!important;
+}
+.category-text h2,
+.catalog-title h2,
+.detail-copy h2,
+.checkout-modal h2,
+.drawer h2{
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+}
