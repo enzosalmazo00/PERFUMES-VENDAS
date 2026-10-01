@@ -69,7 +69,7 @@ function brl(cents) {
 }
 
 function imageFor(product) {
-  return PRODUCT_IMAGES[product.slug] || FALLBACK_IMAGE;
+  return product.image_url || PRODUCT_IMAGES[product.slug] || FALLBACK_IMAGE;
 }
 
 function loadBag() {
@@ -419,7 +419,7 @@ function renderBag() {
   els.checkoutBtn.disabled = false;
   els.bagItems.innerHTML = state.bag.map(item => `
     <div class="bag-item">
-      <img src="${esc(PRODUCT_IMAGES[item.slug] || FALLBACK_IMAGE)}" alt="">
+      <img src="${esc(item.image_url || PRODUCT_IMAGES[item.slug] || FALLBACK_IMAGE)}" alt="">
       <div>
         <h4>${esc(item.name)}</h4>
         <p>${esc(item.volume_ml)} mL · qtd. ${esc(item.quantity)} · ${brl(item.unit_price_cents * item.quantity)}</p>
