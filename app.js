@@ -37,4 +37,62 @@ $$(".filter").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));$$("[data-ju
 $("[data-close-product]").onclick=closeProduct;els.productOverlay.onclick=e=>{if(e.target===els.productOverlay)closeProduct()};els.bagBtn.onclick=openBag;els.closeBag.onclick=closeBag;els.drawerMask.onclick=closeBag;els.checkoutBtn.onclick=openCheckout;$("[data-close-checkout]").onclick=closeCheckout;els.checkoutOverlay.onclick=e=>{if(e.target===els.checkoutOverlay)closeCheckout()};$$(".payment-tab").forEach(b=>b.onclick=()=>setPayment(b.dataset.payment));
 els.checkoutForm.onsubmit=e=>{e.preventDefault();const d=new FormData(e.currentTarget),customer=String(d.get("name")||"").trim();if(state.sellers.length&&!state.selectedSellerId)return toast("Selecione o vendedor que te atendeu.");toast("Pedido preparado para "+(customer||"cliente"));state.bag=[];saveBag();renderBag();closeCheckout();e.currentTarget.reset();state.selectedSellerId=null;renderSellerPicker()};
 document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!els.checkoutOverlay.hidden)closeCheckout();else if(!els.productOverlay.hidden)closeProduct();else if(els.bagDrawer.classList.contains("is-open"))closeBag()});
+
+function initHeroCarousel(){
+  const hero=$("#inicio");
+  if(!hero)return;
+  const slides=$("[data-hero-slide]",hero);
+  const dots=$("[data-hero-dot]",hero);
+  if(slides.length<2||slides.length!==dots.length)return;
+
+  let current=0;
+  let timer=null;
+  let startX=null;
+  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  const show=(index,userAction=false)=>{
+    current=(index+slides.length)%slides.length;
+    slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===current));
+    dots.forEach((dot,i)=>{
+      const active=i===current;
+      dot.classList.toggle("is-active",active);
+      dot.setAttribute("aria-selected",active?"true":"false");
+    });
+    if(userAction)restart();
+  };
+
+  const stop=()=>{if(timer){clearInterval(timer);timer=null}};
+  const start=()=>{
+    stop();
+    if(reduced||document.hidden)return;
+    timer=setInterval(()=>show(current+1),5500);
+  };
+  const restart=()=>{stop();start()};
+
+  dots.forEach((dot,i)=>dot.addEventListener("click",()=>show(i,true)));
+
+  hero.addEventListener("pointerdown",e=>{
+    if(e.pointerType==="mouse")return;
+    startX=e.clientX;
+  },{passive:true});
+  hero.addEventListener("pointerup",e=>{
+    if(startX===null)return;
+    const delta=e.clientX-startX;
+    startX=null;
+    if(Math.abs(delta)<45)return;
+    show(current+(delta<0?1:-1),true);
+  },{passive:true});
+  hero.addEventListener("pointercancel",()=>{startX=null},{passive:true});
+
+  hero.addEventListener("mouseenter",stop);
+  hero.addEventListener("mouseleave",start);
+  hero.addEventListener("focusin",stop);
+  hero.addEventListener("focusout",start);
+  document.addEventListener("visibilitychange",()=>document.hidden?stop():start());
+
+  show(0);
+  start();
+}
+
+initHeroCarousel();
 loadSiteStatus();loadCatalog();loadSellers();

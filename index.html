@@ -8,10 +8,10 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Enzo Salmazo Perfumes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" as="image" href="assets/hero-signature.webp" type="image/webp">\n  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-2346">
+  <link rel="stylesheet" href="styles.css?v=20261001-hero3">
 </head>
 <body>
   <div class="site-unavailable" id="siteUnavailable" hidden>
@@ -71,14 +71,16 @@
         </div>
       </div>
 
-      <div class="hero-stage" aria-hidden="true">
-        <div class="rock-glow"></div>
-        <div class="hero-bottle bottle-a"></div>
-        <div class="hero-bottle bottle-b"></div>
-        <span class="hero-orbit one"></span>
-        <span class="hero-orbit two"></span>
-        <span class="hero-orbit three"></span>
-        <span class="hero-orbit four"></span>
+      <div class="hero-carousel" aria-hidden="true">
+        <div class="hero-slide hero-slide-signature is-active" data-hero-slide="0"></div>
+        <div class="hero-slide hero-slide-female" data-hero-slide="1"></div>
+        <div class="hero-slide hero-slide-male" data-hero-slide="2"></div>
+      </div>
+
+      <div class="hero-dots" role="tablist" aria-label="Destaques">
+        <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="Mostrar destaque 1" aria-selected="true"></button>
+        <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Mostrar destaque 2" aria-selected="false"></button>
+        <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Mostrar destaque 3" aria-selected="false"></button>
       </div>
     </section>
 
@@ -195,6 +197,6 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <script type="module" src="app.js?v=20261001-0218"></script>
+  <script type="module" src="app.js?v=20261001-hero3"></script>
 </body>
 </html>
