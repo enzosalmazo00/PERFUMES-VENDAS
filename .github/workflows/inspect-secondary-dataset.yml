@@ -1,0 +1,26 @@
+name: Inspect secondary fragrance dataset
+on:
+  push:
+    paths:
+      - ".github/workflows/inspect-secondary-dataset.yml"
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inspect CSV schema
+        run: |
+          python - <<'PY'
+          import csv, urllib.request, io
+          u='https://raw.githubusercontent.com/balarabetahir/Perfume-Recommendation-with-Sentence-BERT/main/perfume_data.csv'
+          raw=urllib.request.urlopen(u,timeout=60).read().decode('utf-8-sig',errors='replace')
+          r=csv.DictReader(io.StringIO(raw))
+          print('FIELDS=',r.fieldnames)
+          for i,row in zip(range(3),r):
+              print('ROW',i,{k:row.get(k) for k in r.fieldnames})
+          PY
