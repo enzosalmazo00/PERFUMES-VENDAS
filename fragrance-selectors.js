@@ -120,10 +120,13 @@ export function initializeCatalogForm(form){
     syncCustomBrand(form);
     renderFragrances(form,"");
     renderVolumes(form);
+    form.elements.namedItem("category").value="";
     f.name.value="";
   });
   f.type.addEventListener("change",()=>{
     renderFragrances(form,"");
+    renderVolumes(form);
+    form.elements.namedItem("category").value="";
     f.name.value="";
   });
   f.fragrance.addEventListener("change",()=>{
@@ -138,7 +141,11 @@ export function initializeCatalogForm(form){
       f.name.focus();
     }
   });
-  f.name.addEventListener("input",()=>markSelectedFragrance(form));
+  f.name.addEventListener("input",()=>{
+    const old=f.fragrance.value;
+    markSelectedFragrance(form);
+    if(old!==f.fragrance.value)renderVolumes(form);
+  });
   f.volume.addEventListener("change",()=>toggleVolume(form));
 }
 export function catalogLoadProduct(form,product){
