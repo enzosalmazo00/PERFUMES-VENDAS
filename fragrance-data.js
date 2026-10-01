@@ -8,6 +8,12 @@
    https://www.jeanpaulgaultier.com/ww/en/c/le-male
    https://www.chanel.com/us/v/fragrance-eau-de-parfum-fragrances/
    https://www.victoriassecret.com/us/vs/beauty-catalog/5000011041
+   https://armaf.com/collections/club-de-nuit
+   https://lattafa.com/product-category/perfumes/
+   https://afnan.com/
+   https://www.pariscornerperfumes.com/products/khair-pistachio
+   https://khadlaj-perfumes.com/collections/shiyaaka-range
+   Sugestões sem ficha validada exigem conferência de embalagem, origem, concentração e volume.
 */
 export const FRAGRANCE_CATALOG=[
   {
@@ -133,7 +139,44 @@ export const FRAGRANCE_CATALOG=[
       "Najdia",
       "Raghba",
       "Opulent Oud",
-      "Qaed Al Fursan"
+      "Qaed Al Fursan",
+      "Khamrah Waha",
+      "Asad Elixir",
+      "Yara Elixir",
+      "Fahad",
+      "Sheikh Al Shuyukh Supreme",
+      "Sheikh Al Shuyukh Luxe Edition",
+      "Ana Abiyedh Passion",
+      "Ameerat Al Arab Sugar Crown",
+      "Angham",
+      "Angham Second Song",
+      "Nebras",
+      "Nebras Elixir",
+      "Musamam Black Intense",
+      "Maahir Honor",
+      "Maahir Black Edition",
+      "Ajayeb Dubai",
+      "Ajayeb Dubai Portrait",
+      "Mayar Cherry Intense",
+      "Liam Blue Shine",
+      "Liam Grey",
+      "His Confession",
+      "Her Confession",
+      "Teriaq",
+      "Teriaq Intense",
+      "Sehr",
+      "Eternal Oud",
+      "Art of Arabia I",
+      "Art of Arabia II",
+      "Noble Blush",
+      "Vintage Radio",
+      "Oud Mood",
+      "Raed Absolu",
+      "Raed Intensely",
+      "Opulent Musk",
+      "Opulent Red",
+      "Bade'e Al Oud Noble Blush",
+      "Bade'e Al Oud Noble Oud"
     ],
     "splashes": []
   },
@@ -610,6 +653,74 @@ export const FRAGRANCE_CATALOG=[
     "splashes": []
   },
   {
+    "group": "IMPORTADAS",
+    "brand": "Ferrari",
+    "fragrances": [
+      "Scuderia Black Eau de Toilette",
+      "Scuderia Red Eau de Toilette",
+      "Ferrari Black Eau de Toilette",
+      "Ferrari Red Eau de Toilette",
+      "Ferrari Blue Eau de Toilette",
+      "Scuderia SF21 Black Eau de Parfum",
+      "Scuderia SF21 Sport Eau de Parfum"
+    ],
+    "splashes": []
+  },
+  {
+    "group": "ÁRABES",
+    "brand": "Arabiyat",
+    "fragrances": [
+      "Ameer Al Oudh",
+      "Lamsat Harir",
+      "Prestige Nyla",
+      "Prestige Marwa"
+    ],
+    "splashes": []
+  },
+  {
+    "group": "ÁRABES",
+    "brand": "Ard Al Zaafaran",
+    "fragrances": [
+      "Dirham",
+      "Dirham Wardi",
+      "Oud 24 Hours",
+      "Oud 24 Hours Majestic Gold",
+      "Midnight Oud",
+      "Al Dirgham",
+      "Bint Hooran"
+    ],
+    "splashes": []
+  },
+  {
+    "group": "ÁRABES",
+    "brand": "Khadlaj",
+    "fragrances": [
+      "Shiyaaka For Men",
+      "Shiyaaka Blue",
+      "Shiyaaka Gold",
+      "Shiyaaka White For Women",
+      "Shiyaaka Sky",
+      "Shiyaaka Shadow",
+      "Shiyaaka Snow"
+    ],
+    "splashes": []
+  },
+  {
+    "group": "ÁRABES",
+    "brand": "Paris Corner",
+    "fragrances": [
+      "Khair",
+      "Khair Pistachio",
+      "Khair Confection",
+      "Qissa",
+      "Qissa Delicious",
+      "Taskeen",
+      "Taskeen Caramel Cascade",
+      "Emir Celestial"
+    ],
+    "splashes": []
+  },
+  {
     "group": "ÁRABES",
     "brand": "Armaf",
     "fragrances": [
@@ -621,7 +732,29 @@ export const FRAGRANCE_CATALOG=[
       "Odyssey Homme",
       "Odyssey Mandarin Sky",
       "Tres Nuit",
-      "Hunter Intense"
+      "Hunter Intense",
+      "Club de Nuit Intense Man Eau de Toilette",
+      "Club de Nuit Intense Man Eau de Parfum",
+      "Club de Nuit Intense Man Pure Parfum",
+      "Club de Nuit Intense Man Extrait de Parfum",
+      "Club de Nuit Intense Overdose",
+      "Club de Nuit Urban Man Elixir",
+      "Club de Nuit Iconic",
+      "Club de Nuit Iconic Extrait de Parfum",
+      "Club de Nuit Bling",
+      "Club de Nuit Precieux 1 Extrait de Parfum",
+      "Club de Nuit Woman",
+      "Club de Nuit Man",
+      "Club de Nuit Elite",
+      "Club de Nuit Private Key to My Love",
+      "Odyssey Aqua",
+      "Odyssey Mega",
+      "Odyssey Homme White Edition",
+      "Odyssey Candee",
+      "The Lion's Club Courageux",
+      "The Lion's Club Rugir",
+      "The Lion's Club Monarque",
+      "The Lion's Club Feroce"
     ],
     "splashes": []
   },
@@ -636,7 +769,29 @@ export const FRAGRANCE_CATALOG=[
       "Supremacy in Oud",
       "Turathi Blue",
       "Modest Une",
-      "Rare Carbon"
+      "Rare Carbon",
+      "9PM Night Out",
+      "9PM Elixir",
+      "9AM",
+      "9AM Pour Femme",
+      "9PM Pour Femme",
+      "Supremacy Collector's Edition",
+      "Supremacy Gala",
+      "Supremacy Silver",
+      "Supremacy Noir",
+      "Supremacy Gold",
+      "Supremacy Pink",
+      "Turathi Electric",
+      "Turathi Purple",
+      "Turathi Red",
+      "Turathi Brown Homme",
+      "Rare Reef",
+      "Historic Olmeda",
+      "Historic Doria",
+      "Kiaana Vibes",
+      "Lynked Freedom",
+      "Mirsaal of Trust",
+      "Modest Deux"
     ],
     "splashes": []
   },
@@ -650,7 +805,14 @@ export const FRAGRANCE_CATALOG=[
       "Amber Oud Blue Edition",
       "L'Aventure",
       "L'Aventure Intense",
-      "Detour Noir"
+      "Detour Noir",
+      "Amber Oud Aqua Dubai",
+      "Amber Oud Dubai Night",
+      "Amber Oud White Edition",
+      "Amber Oud Carbon Edition",
+      "Amber Oud Ruby Edition",
+      "Amber Oud Ultra Violet",
+      "Amber Oud Black Edition"
     ],
     "splashes": []
   },
@@ -665,7 +827,17 @@ export const FRAGRANCE_CATALOG=[
       "Jean Lowe Noir",
       "Yeah!",
       "Salvo Elixir",
-      "Baroque Rouge 540"
+      "Baroque Rouge 540",
+      "Lovely Chèrie",
+      "Porto Neroli",
+      "Fabulo Intense",
+      "Amber & Leather",
+      "The Tux",
+      "Kismet Angel",
+      "Kismet for Men",
+      "Jean Lowe Ombre",
+      "Jean Lowe Matière",
+      "Jean Lowe Nouveau"
     ],
     "splashes": []
   },
@@ -678,7 +850,14 @@ export const FRAGRANCE_CATALOG=[
       "Hawas Black",
       "Daarej Pour Homme",
       "La Yuqawam",
-      "Fattan Pour Homme"
+      "Fattan Pour Homme",
+      "Hawas Fire",
+      "Hawas Tropical",
+      "Hawas For Her",
+      "Hawas Diva",
+      "Hawas Elixir",
+      "Hawas Pink",
+      "Hawas Verde"
     ],
     "splashes": []
   },
@@ -691,7 +870,12 @@ export const FRAGRANCE_CATALOG=[
       "Evoke Gold for Her",
       "Aristocrat for Him",
       "Aristocrat for Her",
-      "Wis al Dhahab"
+      "Wis al Dhahab",
+      "Aristocrat Coral",
+      "Aristocrat Pink",
+      "Evoke Midnight",
+      "Wisal",
+      "Wisal Dhahab"
     ],
     "splashes": []
   },
@@ -704,7 +888,13 @@ export const FRAGRANCE_CATALOG=[
       "Shaghaf Oud Azraq",
       "Casablanca",
       "Layali",
-      "Gharaam"
+      "Gharaam",
+      "Shaghaf Oud Abyad",
+      "Shaghaf Oud Aswad",
+      "Shaghaf Oud Ahmar",
+      "Shaghaf Oud Royale",
+      "Shaghaf Oud Royale Gold",
+      "Shaghaf Oud Royale Black"
     ],
     "splashes": []
   },
@@ -717,7 +907,10 @@ export const FRAGRANCE_CATALOG=[
       "Aether",
       "Spectre Wraith",
       "Spectre Ghost",
-      "After Effect"
+      "After Effect",
+      "Royal Blend Nero",
+      "Atlantis",
+      "Vulcan Feu"
     ],
     "splashes": []
   },
@@ -729,7 +922,14 @@ export const FRAGRANCE_CATALOG=[
       "Imperium",
       "Suits",
       "Mocha Wood",
-      "Jack of Clubs"
+      "Jack of Clubs",
+      "Barakkat Satin Oud",
+      "Barakkat Gentle Gold",
+      "Barakkat Gentle Silver",
+      "After Effect",
+      "Cocktail Intense",
+      "Star Men Nebula",
+      "French Portrait"
     ],
     "splashes": []
   },
