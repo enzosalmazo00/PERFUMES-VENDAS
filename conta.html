@@ -4,13 +4,28 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#070604"><title>Minha Conta — AZZENA PARFUMS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261001-account1"><link rel="stylesheet" href="conta.css?v=20261001-password1">
 </head>
 <body class="account-page">
+<div class="account-benefit-strip">
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.7 8.1-7 10-4.3-1.9-7-5.4-7-10V6l7-3Zm-3 9 2 2 4-4"/></svg> Compra segura</span>
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg> Entregas em São Paulo</span>
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5h-4v-5h4M4 13v5h4v-5H4Z"/><path d="M16 20c-1 1-2 1-4 1"/></svg> Atendimento personalizado</span>
+</div>
 <header class="account-header">
-<a class="logo brand-logo" href="index.html"><span class="brand-monogram"><span class="brand-z brand-z-left">Z</span><span class="brand-z brand-z-right">Z</span></span><span class="brand-wordmark"><span class="logo-name">AZZENA</span><small>PARFUMS</small></span></a>
-<a class="account-back" href="index.html">← Voltar à loja</a>
+  <a class="account-logo" href="index.html" aria-label="AZZENA PARFUMS">
+    <span class="account-logo-mark"><span>Z</span><span>Z</span></span>
+    <span class="account-logo-copy"><strong>AZZENA</strong><small>PARFUMS</small></span>
+  </a>
+  <div class="account-header-title">
+    <span class="account-header-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-5 3.5-7 8-7s7.2 2 8 7"/></svg></span>
+    <div><small>ÁREA DO CLIENTE</small><strong>Minha Conta</strong></div>
+  </div>
+  <nav class="account-header-actions">
+    <a href="index.html#catalogo">Perfumes</a>
+    <a href="index.html">Voltar à loja</a>
+  </nav>
 </header>
 
 <main class="account-wrap">
@@ -20,6 +35,14 @@
 <form id="loginForm" class="account-card"><h2>Entrar</h2><label>E-mail<input id="loginEmail" type="email" required autocomplete="email"></label><label>Senha<div class="password-field"><input id="loginPassword" type="password" required autocomplete="current-password"><button class="password-eye" type="button" data-toggle-password="loginPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label><button class="forgot-link" id="forgotPasswordBtn" type="button">Esqueceu sua senha?</button><button class="gold-button full">ENTRAR</button></form>
 <form id="signupForm" class="account-card"><h2>Criar conta</h2><label>Nome completo<input id="signupName" required autocomplete="name"></label><label>E-mail<input id="signupEmail" type="email" required autocomplete="email"></label><label>Senha<div class="password-field"><input id="signupPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-eye" type="button" data-toggle-password="signupPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label><button class="gold-button full">CRIAR CONTA</button></form>
 </div><p id="authMessage" class="account-message"></p>
+<div id="recoveryBox" class="account-card recovery-card" hidden>
+  <p class="eyebrow">RECUPERAÇÃO DE ACESSO</p><h2>Criar nova senha</h2>
+  <form id="recoveryForm">
+    <label>Nova senha<div class="password-field"><input id="newPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-toggle" type="button" data-toggle-password="newPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/></svg></button></div></label>
+    <label>Confirmar nova senha<div class="password-field"><input id="confirmNewPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-toggle" type="button" data-toggle-password="confirmNewPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/></svg></button></div></label>
+    <button class="gold-button full">SALVAR NOVA SENHA</button>
+  </form>
+</div>
 </section>
 
 <section id="recoveryView" class="account-auth" hidden>
