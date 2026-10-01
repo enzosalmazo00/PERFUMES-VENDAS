@@ -19,7 +19,7 @@ export function installReviewFlow({getOrders,portal,refresh,rerender,notify}){
   function cleanReturnUrl(){
     const url=new URL(location.href);
     if(!url.searchParams.has("avaliar")&&!url.searchParams.has("pedido"))return;
-    url.searchParams.delete("avaliar");url.searchParams.delete("pedido");
+    for(const key of ["avaliar","pedido","collection_id","payment_id","collection_status","status","external_reference","merchant_order_id","preference_id","merchant_account_id"])url.searchParams.delete(key);
     history.replaceState(null,"",url.pathname+url.search+url.hash);
   }
   function close(){
