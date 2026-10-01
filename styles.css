@@ -1105,3 +1105,7 @@ footer,.footer-logo,.footer-links a,.footer-links button,
   .brand-wordmark .logo-name{font-size:16px!important;letter-spacing:.11em!important}
   .brand-wordmark small{font-size:6.5px!important}
 }
+
+body{font-family:Poppins,Arial,sans-serif}
+.trust-svg{display:inline-grid;place-items:center;color:var(--gold2)}.trust-svg svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.catalog-search .tool-svg{display:grid;place-items:center;color:#cdb989}.catalog-search .tool-svg svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
