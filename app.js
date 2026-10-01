@@ -51,8 +51,24 @@ async function availableStockBySeller(){
 function toast(m){els.toast.textContent=m;els.toast.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove("show"),2300)}
 async function supabaseGet(table,query=""){const r=await fetch(SUPABASE_URL+"/rest/v1/"+table+"?"+query,{headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Accept:"application/json"}});if(!r.ok)throw new Error(await r.text());return r.json()}
 async function loadSiteStatus(){try{const rows=await supabaseGet("site_status","select=is_online,outage_kind,public_message&id=eq.true&limit=1"),s=rows[0];if(!s||s.is_online){els.siteUnavailable.hidden=true;return}els.siteUnavailableTitle.textContent=s.outage_kind==="permanent_closure"?"Loja encerrada":"Site temporariamente indisponível";els.siteUnavailableMessage.textContent=s.public_message||"Estamos realizando um ajuste operacional. Voltamos em breve.";els.siteUnavailable.hidden=false}catch(e){console.error(e)}}
-async function loadSellers(){try{state.sellers=await supabaseGet("seller_checkout_options","select=seller_id,display_name,avatar_url&is_active=eq.true&order=display_name.asc");renderSellerPicker()}catch(e){console.error(e);els.sellerPicker.innerHTML="<p>Nenhum vendedor ativo no momento.</p>"}}
-function renderSellerPicker(){if(!state.sellers.length){els.sellerPicker.innerHTML="<p>Nenhum vendedor ativo no momento.</p>";return}const shown=sellerScopeId?state.sellers.filter(s=>s.seller_id===sellerScopeId):state.sellers;els.sellerPicker.innerHTML=shown.map(s=>'<button class="seller-card '+(state.selectedSellerId===s.seller_id?"is-active":"")+'" type="button" data-seller-id="'+esc(s.seller_id)+'"><strong>'+esc(s.display_name)+'</strong></button>').join("");$$("[data-seller-id]",els.sellerPicker).forEach(b=>b.onclick=()=>{state.selectedSellerId=b.dataset.sellerId;renderSellerPicker();document.dispatchEvent(new CustomEvent("azzena:seller-changed",{detail:{sellerId:state.selectedSellerId}}))})}
+async function loadSellers(){
+ try{
+   const options=await supabaseGet("seller_checkout_options","select=seller_id,display_name,avatar_url&is_active=eq.true&order=display_name.asc");
+   const verified=await Promise.allSettled(options.map(async seller=>{
+     const response=await fetch(SUPABASE_URL+"/rest/v1/rpc/public_seller_catalog",{
+       method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json",Accept:"application/json"},
+       body:JSON.stringify({p_seller_id:seller.seller_id})
+     });
+     if(!response.ok)throw new Error("SELLER_PICKUP_LOOKUP_FAILED");
+     const catalog=await response.json();
+     return catalog?.pickup&&Array.isArray(catalog?.products)&&catalog.products.length>0?seller:null;
+   }));
+   state.sellers=verified.filter(r=>r.status==="fulfilled"&&r.value).map(r=>r.value);
+   if(!state.sellers.some(s=>s.seller_id===state.selectedSellerId))state.selectedSellerId=state.sellers[0]?.seller_id||null;
+   renderSellerPicker();
+ }catch(e){console.error(e);els.sellerPicker.innerHTML="<p>Retirada indisponível no momento.</p>"}
+}
+function renderSellerPicker(){if(!state.sellers.length){els.sellerPicker.innerHTML="<p>Retirada indisponível: ainda não há vendedores com ponto de retirada e estoque confirmados.</p>";return}const shown=sellerScopeId?state.sellers.filter(s=>s.seller_id===sellerScopeId):state.sellers;els.sellerPicker.innerHTML=shown.map(s=>'<button class="seller-card '+(state.selectedSellerId===s.seller_id?"is-active":"")+'" type="button" data-seller-id="'+esc(s.seller_id)+'"><strong>'+esc(s.display_name)+'</strong></button>').join("");$$("[data-seller-id]",els.sellerPicker).forEach(b=>b.onclick=()=>{state.selectedSellerId=b.dataset.sellerId;renderSellerPicker();document.dispatchEvent(new CustomEvent("azzena:seller-changed",{detail:{sellerId:state.selectedSellerId}}))})}
 async function loadCatalog(){
 els.catalogStatus.textContent="Carregando catálogo...";
 try{
