@@ -1,10 +1,26 @@
 
 import {FRAGRANCE_CATALOG,VOLUME_OPTIONS} from "./fragrance-data.js?v=20261001-catalogwide2";
 import {VERIFIED_FRAGRANCES} from "./verified-fragrances.js?v=20261001-verified1";
+import {SUPABASE_URL,SUPABASE_KEY} from "./admin-api.js?v=20261001-accountui3";
+const PRESETS=new Map();let presetsPromise=null;
+const presetKey=(brand,name,type)=>[normalize(brand),normalize(name),type].join("|");
+function loadPresets(){
+ if(presetsPromise)return presetsPromise;
+ presetsPromise=fetch(SUPABASE_URL+"/rest/v1/product_catalog_presets?is_active=eq.true&select=brand,name,category,product_type,default_volume_ml,short_description,description,top_notes,heart_notes,base_notes,source_url,enrichment_status",{headers:{apikey:SUPABASE_KEY}})
+ .then(r=>{if(!r.ok)throw new Error("CATALOG_PRESETS_FAILED");return r.json()})
+ .then(rows=>{for(const x of rows)PRESETS.set(presetKey(x.brand,x.name,x.product_type),x);return rows})
+ .catch(()=>[]);
+ return presetsPromise;
+}
 const OTHER="__other__";
 const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 const unique=a=>[...new Set(a)];
-const verified=(brand,name,type)=>VERIFIED_FRAGRANCES.find(x=>normalize(x.brand)===normalize(brand)&&normalize(x.name)===normalize(name)&&x.type===type);
+const legacyVerified=(brand,name,type)=>VERIFIED_FRAGRANCES.find(x=>normalize(x.brand)===normalize(brand)&&normalize(x.name)===normalize(name)&&x.type===type);
+const verified=(brand,name,type)=>{
+ const p=PRESETS.get(presetKey(brand,name,type));
+ if(p&&p.enrichment_status==="verified")return {brand:p.brand,name:p.name,type:p.product_type,gender:p.category,volumes:p.default_volume_ml?[p.default_volume_ml]:[],short:p.short_description||"",description:p.description||"",top:p.top_notes||[],heart:p.heart_notes||[],base:p.base_notes||[],source:p.source_url||""};
+ return legacyVerified(brand,name,type);
+};
 function updateReference(form,record){
  const target=form.querySelector(".catalog-reference-note");
  if(!target)return;
@@ -151,6 +167,7 @@ function markSelectedFragrance(form){
 export function initializeCatalogForm(form){
   if(!form||form.dataset.catalogReady==="yes")return;
   form.dataset.catalogReady="yes";
+  loadPresets();
   renderBrands(form,"");
   renderFragrances(form,"");
   renderVolumes(form);
