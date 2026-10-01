@@ -39,58 +39,76 @@ els.checkoutForm.onsubmit=e=>{e.preventDefault();const d=new FormData(e.currentT
 document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!els.checkoutOverlay.hidden)closeCheckout();else if(!els.productOverlay.hidden)closeProduct();else if(els.bagDrawer.classList.contains("is-open"))closeBag()});
 
 function initHeroCarousel(){
-  const hero=$("#inicio");
+  const hero=document.getElementById("inicio");
   if(!hero)return;
-  const slides=$("[data-hero-slide]",hero);
-  const dots=$("[data-hero-dot]",hero);
+
+  const slides=Array.from(hero.querySelectorAll("[data-hero-slide]"));
+  const dots=Array.from(hero.querySelectorAll("[data-hero-dot]"));
   if(slides.length<2||slides.length!==dots.length)return;
 
   let current=0;
   let timer=null;
-  let startX=null;
-  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  let touchStartX=null;
 
-  const show=(index,userAction=false)=>{
+  function render(index){
     current=(index+slides.length)%slides.length;
-    slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===current));
+    slides.forEach((slide,i)=>{
+      slide.classList.toggle("is-active",i===current);
+      slide.setAttribute("aria-hidden",i===current?"false":"true");
+    });
     dots.forEach((dot,i)=>{
       const active=i===current;
       dot.classList.toggle("is-active",active);
       dot.setAttribute("aria-selected",active?"true":"false");
+      dot.tabIndex=active?0:-1;
     });
-    if(userAction)restart();
-  };
+  }
 
-  const stop=()=>{if(timer){clearInterval(timer);timer=null}};
-  const start=()=>{
+  function stop(){
+    if(timer!==null){
+      window.clearInterval(timer);
+      timer=null;
+    }
+  }
+
+  function start(){
     stop();
-    if(reduced||document.hidden)return;
-    timer=setInterval(()=>show(current+1),5500);
-  };
-  const restart=()=>{stop();start()};
+    if(document.hidden)return;
+    timer=window.setInterval(()=>render(current+1),5000);
+  }
 
-  dots.forEach((dot,i)=>dot.addEventListener("click",()=>show(i,true)));
+  function select(index){
+    render(index);
+    start();
+  }
 
-  hero.addEventListener("pointerdown",e=>{
-    if(e.pointerType==="mouse")return;
-    startX=e.clientX;
+  dots.forEach((dot,i)=>{
+    dot.addEventListener("click",e=>{
+      e.preventDefault();
+      select(i);
+    });
+  });
+
+  hero.addEventListener("touchstart",e=>{
+    touchStartX=e.changedTouches?.[0]?.clientX??null;
   },{passive:true});
-  hero.addEventListener("pointerup",e=>{
-    if(startX===null)return;
-    const delta=e.clientX-startX;
-    startX=null;
-    if(Math.abs(delta)<45)return;
-    show(current+(delta<0?1:-1),true);
+
+  hero.addEventListener("touchend",e=>{
+    if(touchStartX===null)return;
+    const endX=e.changedTouches?.[0]?.clientX;
+    if(typeof endX!=="number"){touchStartX=null;return;}
+    const delta=endX-touchStartX;
+    touchStartX=null;
+    if(Math.abs(delta)<40)return;
+    select(current+(delta<0?1:-1));
   },{passive:true});
-  hero.addEventListener("pointercancel",()=>{startX=null},{passive:true});
 
-  hero.addEventListener("mouseenter",stop);
-  hero.addEventListener("mouseleave",start);
-  hero.addEventListener("focusin",stop);
-  hero.addEventListener("focusout",start);
-  document.addEventListener("visibilitychange",()=>document.hidden?stop():start());
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden)stop();
+    else start();
+  });
 
-  show(0);
+  render(0);
   start();
 }
 
