@@ -20,7 +20,7 @@ return `<nav class="tabs">
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
 <label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
-<label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
+<label>Categoria<select name="category" required><option value="">Selecione a categoria</option><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
 <label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
@@ -52,7 +52,7 @@ return `<nav class="tabs">
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
 <label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
-<label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
+<label>Categoria<select name="category" required><option value="">Selecione a categoria</option><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
 <label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
