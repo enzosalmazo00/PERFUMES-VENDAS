@@ -148,7 +148,7 @@ try{
 }catch(e){console.error(e);els.catalogStatus.textContent="Não foi possível carregar o catálogo agora."}
 }
 function filteredProducts(){let rows;if(state.filter==="todos")rows=state.products;else if(state.filter==="body_splash")rows=state.products.filter(p=>p.product_type==="body_splash");else rows=state.products.filter(p=>(p.category===state.filter||p.category==="unissex"&&["masculino","feminino"].includes(state.filter))&&p.product_type!=="body_splash");const q=state.search.trim().toLowerCase();if(q)rows=rows.filter(p=>[p.name,p.brand,p.product_type==="body_splash"?"body splash":"perfume",p.category,p.volume_ml].join(" ").toLowerCase().includes(q));return rows}
-function reviewSummary(id){const r=state.reviews.filter(x=>x.product_id===id);if(!r.length)return{stars:"☆☆☆☆☆",text:""};const avg=r.reduce((a,b)=>a+Number(b.rating||0),0)/r.length;const rounded=Math.max(0,Math.min(5,Math.round(avg)));return{stars:"★".repeat(rounded)+"☆".repeat(5-rounded),text:avg.toFixed(1).replace(".",",")+" / 5 · "+r.length+" avaliação"+(r.length===1?"":"ões")};}
+function reviewSummary(id){const r=state.reviews.filter(x=>x.product_id===id);if(!r.length)return{stars:"☆☆☆☆☆",text:""};const avg=r.reduce((a,b)=>a+Number(b.rating||0),0)/r.length;const rounded=Math.max(0,Math.min(5,Math.round(avg)));return{stars:"★".repeat(rounded)+"☆".repeat(5-rounded),text:avg.toFixed(1).replace(".",",")+" / 5 · "+r.length+" "+(r.length===1?"avaliação":"avaliações")};}
 function renderProducts(){
  const rows=filteredProducts(),contacts=preorderContacts();
  els.catalogStatus.textContent=rows.length?rows.length+" fragrância"+(rows.length===1?"":"s")+" no catálogo · "+rows.filter(p=>Number(p.available_stock)>0).length+" com retirada disponível":"Nenhuma fragrância encontrada.";
