@@ -60,3 +60,30 @@ export async function updateRecoveredPassword(accessToken,password){
   if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível atualizar a senha.");
   return d;
 }
+
+export async function requestCustomerPasswordReset(email){
+  const normalized=String(email||"").trim().toLowerCase();
+  if(!normalized||!normalized.includes("@"))throw new Error("Informe seu e-mail para recuperar a senha.");
+  const redirectTo="https://enzosalmazo00.github.io/PERFUMES-VENDAS/conta.html?recovery=1";
+  const r=await fetch(SUPABASE_URL+"/auth/v1/recover?redirect_to="+encodeURIComponent(redirectTo),{
+    method:"POST",headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({email:normalized})
+  });
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível enviar o e-mail de recuperação.");
+  return d;
+}
+export function captureRecoverySession(){
+  const hash=new URLSearchParams(location.hash.replace(/^#/,""));
+  const access_token=hash.get("access_token"),refresh_token=hash.get("refresh_token"),type=hash.get("type");
+  if(type==="recovery"&&access_token){
+    const s={access_token,refresh_token:refresh_token||"",expires_at:Math.floor(Date.now()/1000)+Number(hash.get("expires_in")||3600),token_type:"bearer"};
+    saveCustomerSession(s);return s;
+  }
+  return null;
+}
+export async function updateCustomerPassword(password){
+  const s=await validCustomerSession();
+  if(String(password||"").length<8)throw new Error("A senha precisa ter pelo menos 8 caracteres.");
+  const r=await fetch(SUPABASE_URL+"/auth/v1/user",{method:"PUT",headers:authHeaders(s),body:JSON.stringify({password})});
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d?.error_description||d?.msg||"Não foi possível atualizar a senha.");
+  return d;
+}
