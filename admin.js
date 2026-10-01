@@ -1,6 +1,6 @@
 import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-accountui3";
-import{shell,renderDashboard}from"./admin-view.js?v=20261001-sellerflow1";
-import{initializeCatalogForm,catalogLoadProduct,catalogResetForm,catalogReadBrand,catalogReadVolume}from"./fragrance-selectors.js?v=20261001-catalog1";
+import{shell,renderDashboard}from"./admin-view.js?v=20261001-pickup2";
+import{initializeCatalogForm,catalogLoadProduct,catalogResetForm,catalogReadBrand,catalogReadVolume}from"./fragrance-selectors.js?v=20261001-verified2";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const login=$("#loginView"),app=$("#app"),content=$("#adminContent"),msg=$("#loginMessage"),toast=$("#toast");
 let data=null;
