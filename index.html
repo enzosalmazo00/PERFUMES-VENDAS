@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-pickup3">
+  <link rel="stylesheet" href="styles.css?v=20261001-storev3">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -189,7 +189,7 @@
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 5-7 13L5 8l7-5Z"/><path d="M5 8h14M9 8l3 13 3-13"/></svg></span><div><b>CURADORIA PREMIUM</b><small>Seleção cuidadosa de fragrâncias</small></div></div>
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5h-4v-5h4M4 13v5h4v-5H4Z"/><path d="M16 20c-1 1-2 1-4 1"/></svg></span><div><b>ATENDIMENTO PERSONALIZADO</b><small>Escolha acompanhada do início ao fim</small></div></div>
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><b>PAGAMENTO SEGURO</b><small>PIX e cartão no fechamento</small></div></div>
-      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><div><b>ENTREGA EM SÃO PAULO</b><small>Frete calculado conforme o CEP</small></div></div>
+      <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span><div><b>RETIRADA COM VENDEDORES</b><small>Frete calculado conforme o CEP</small></div></div>
     </section>
   </main>
 
@@ -249,15 +249,16 @@
       <div class="checkout-methods" role="group" aria-label="Modalidade de entrega">
         <p class="eyebrow">COMO VOCÊ PREFERE RECEBER?</p>
         <div class="checkout-method-options">
-          <button type="button" class="checkout-method is-active" data-checkout-method="shipping">
+          <button type="button" class="checkout-method" data-checkout-method="shipping" hidden>
             <strong>Receber em casa</strong><small>Entrega no Estado de São Paulo · frete calculado pelo CEP</small>
           </button>
-          <button type="button" class="checkout-method" data-checkout-method="pickup">
+          <button type="button" class="checkout-method is-active" data-checkout-method="pickup">
             <strong>Retirar com o vendedor</strong><small>Retirada presencial no endereço cadastrado · sem frete</small>
           </button>
         </div>
       </div>
-      <div class="payment-tabs">
+      <div class="checkout-payment-provider"><strong>Pagamento centralizado na AZZENA</strong><p>PIX ou cartão diretamente pelo Checkout Seguro do Mercado Pago. Nunca transfira dinheiro para o PIX pessoal de um vendedor.</p></div>
+      <div class="payment-tabs" hidden>
         <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
         <button class="payment-tab" type="button" data-payment="card">Cartão</button>
       </div>
@@ -275,9 +276,9 @@
         <p class="shipping-note">O pedido e o pagamento ficarão pendentes até a confirmação. Aguarde a liberação do vendedor antes de se deslocar.</p>
       </div>
       <form id="checkoutForm">
-        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pedido será criado com pagamento pendente para confirmação no fechamento.</p></div>
+        <div class="demo-box" id="paymentDemoBox"><strong>Pagamento seguro</strong><p>Após selecionar o vendedor e confirmar o local de retirada, você será encaminhado ao Mercado Pago.</p></div>
         <div id="checkoutFinalTotal" class="checkout-final-total"></div>
-        <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>CRIAR PEDIDO</button>
+        <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>IR PARA PAGAMENTO SEGURO</button>
       </form>
       <div class="checkout-tracking-note"><strong>Rastreio:</strong> a estrutura do pedido já está preparada; a automação do rastreamento de entrega será estudada na próxima etapa.</div>
     </section>
@@ -285,7 +286,7 @@
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-pickup3"></script>
-  <script type="module" src="customer-checkout.js?v=20261001-pickup3"></script>
+  <script type="module" src="app.js?v=20261001-storev3"></script>
+  <script type="module" src="customer-checkout.js?v=20261001-storev3"></script>
 </body>
 </html>
