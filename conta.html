@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#070604"><title>Minha Conta — AZZENA PARFUMS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261001-account1"><link rel="stylesheet" href="conta.css?v=20261001-account1">
+<link rel="stylesheet" href="styles.css?v=20261001-account1"><link rel="stylesheet" href="conta.css?v=20261001-password1">
 </head>
 <body class="account-page">
 <header class="account-header">
@@ -17,9 +17,19 @@
 <section id="authView" class="account-auth">
 <div class="account-intro"><p class="eyebrow">ÁREA DO CLIENTE</p><h1>Sua experiência continua aqui.</h1><p>Entre para salvar seus endereços, calcular o frete para São Paulo e acompanhar seus pedidos.</p></div>
 <div class="account-auth-grid">
-<form id="loginForm" class="account-card"><h2>Entrar</h2><label>E-mail<input id="loginEmail" type="email" required autocomplete="email"></label><label>Senha<input id="loginPassword" type="password" required autocomplete="current-password"></label><button class="gold-button full">ENTRAR</button></form>
-<form id="signupForm" class="account-card"><h2>Criar conta</h2><label>Nome completo<input id="signupName" required autocomplete="name"></label><label>E-mail<input id="signupEmail" type="email" required autocomplete="email"></label><label>Senha<input id="signupPassword" type="password" minlength="8" required autocomplete="new-password"></label><button class="gold-button full">CRIAR CONTA</button></form>
+<form id="loginForm" class="account-card"><h2>Entrar</h2><label>E-mail<input id="loginEmail" type="email" required autocomplete="email"></label><label>Senha<div class="password-field"><input id="loginPassword" type="password" required autocomplete="current-password"><button class="password-eye" type="button" data-toggle-password="loginPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label><button class="forgot-link" id="forgotPasswordBtn" type="button">Esqueceu sua senha?</button><button class="gold-button full">ENTRAR</button></form>
+<form id="signupForm" class="account-card"><h2>Criar conta</h2><label>Nome completo<input id="signupName" required autocomplete="name"></label><label>E-mail<input id="signupEmail" type="email" required autocomplete="email"></label><label>Senha<div class="password-field"><input id="signupPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-eye" type="button" data-toggle-password="signupPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label><button class="gold-button full">CRIAR CONTA</button></form>
 </div><p id="authMessage" class="account-message"></p>
+</section>
+
+<section id="recoveryView" class="account-auth" hidden>
+  <div class="account-intro"><p class="eyebrow">RECUPERAÇÃO DE ACESSO</p><h1>Crie uma nova senha.</h1><p>Defina uma nova senha para voltar a acessar sua conta ou o painel administrativo.</p></div>
+  <form id="recoveryForm" class="account-card recovery-card">
+    <label>Nova senha<div class="password-field"><input id="newPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-eye" type="button" data-toggle-password="newPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label>
+    <label>Confirmar nova senha<div class="password-field"><input id="confirmPassword" type="password" minlength="8" required autocomplete="new-password"><button class="password-eye" type="button" data-toggle-password="confirmPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label>
+    <button class="gold-button full">ATUALIZAR SENHA</button>
+    <p id="recoveryMessage" class="account-message"></p>
+  </form>
 </section>
 
 <section id="accountView" hidden>
@@ -41,5 +51,5 @@
 </section>
 <div id="accountToast" class="toast"></div>
 </main>
-<script type="module" src="conta.js?v=20261001-account1"></script>
+<script type="module" src="conta.js?v=20261001-password1"></script>
 </body></html>
