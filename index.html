@@ -2,18 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090806">\n  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n  <meta http-equiv="Pragma" content="no-cache">\n  <meta http-equiv="Expires" content="0">
-  <meta name="description" content="Loja premium de fragrâncias selecionadas.">
-  <title>[NOME DA MARCA] — Parfums</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070604">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Perfumes importados com curadoria premium, atendimento personalizado e entrega presencial.">
+  <title>[NOME DA MARCA] — Perfumes Importados</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260930-2204">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261001-0130">
 </head>
 <body>
-  <div class="noise"></div>
-
   <div class="site-unavailable" id="siteUnavailable" hidden>
     <div class="site-unavailable-card" role="status" aria-live="polite">
       <span class="site-unavailable-mark">✦</span>
@@ -23,144 +24,112 @@
     </div>
   </div>
 
+  <div class="luxury-strip">
+    <span>✦ Curadoria premium</span>
+    <span>Entrega presencial</span>
+    <span>PIX e cartão</span>
+    <span>Atendimento personalizado</span>
+  </div>
 
-  <header class="topbar">
-    <a class="logo" href="#top">
-      <span class="logo-mark">✦</span>
-      <span>[NOME DA MARCA]</span>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Ir para o início">
+      <span class="brand-monogram">P</span>
+      <span class="brand-copy"><strong>[NOME DA MARCA]</strong><small>FRAGRÂNCIAS QUE MARCAM</small></span>
     </a>
-    <nav>
-      <a href="#colecoes">Coleções</a>
-      <a href="#catalogo">Perfumes</a>
-      <a href="#experiencia">Experiência</a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="is-active" href="#inicio">Início</a>
+      <button type="button" data-jump-filter="masculino">Masculino</button>
+      <button type="button" data-jump-filter="feminino">Feminino</button>
+      <a href="#catalogo">Destaques</a>
+      <a href="#contato">Contato</a>
     </nav>
-    <button class="bag-btn" id="bagBtn" type="button">
-      Sacola <span id="bagCount">0</span>
-    </button>
+
+    <div class="header-actions">
+      <button class="search-jump" type="button" aria-label="Buscar perfumes" onclick="document.querySelector('#catalogSearch')?.focus();document.querySelector('#catalogo')?.scrollIntoView({behavior:'smooth'})">⌕</button>
+      <button class="bag-btn" id="bagBtn" type="button" aria-label="Abrir sacola">
+        <span class="bag-icon">♧</span>
+        <span class="bag-count" id="bagCount">0</span>
+      </button>
+      <a class="buy-top" href="#catalogo">Comprar agora</a>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Maison de parfums · coleção privada</p>
-        <h1>Luxo que não se vê.<br><em>Se percebe.</em></h1>
-        <p class="hero-lead">
-          Uma experiência olfativa criada para transformar fragrância em presença.
-          Curadoria premium, estética cinematográfica e atendimento próximo.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-gold" href="#catalogo">Explorar perfumes</a>
-          <a class="btn btn-ghost" href="#colecoes">Descobrir coleções</a>
-        </div>
-        <div class="hero-stats">
-          <div><strong>03</strong><span>universos olfativos</span></div>
-          <div><strong>100%</strong><span>curadoria premium</span></div>
-          <div><strong>Entrega</strong><span>presencial</span></div>
-        </div>
+  <main>
+    <section class="cinematic-hero" id="inicio">
+      <div class="hero-panel hero-left">
+        <p class="eyebrow">ESSÊNCIA DE PODER</p>
+        <h1>Presença que<br>deixa sua marca.</h1>
+        <button class="outline-cta" type="button" data-jump-filter="masculino">Explorar masculino →</button>
       </div>
 
-      <div class="hero-art" aria-hidden="true">
-        <div class="gold-halo"></div>
-        <div class="bottle">
-          <div class="bottle-cap"></div>
-          <div class="bottle-neck"></div>
-          <div class="bottle-body">
-            <div class="bottle-shine"></div>
-            <div class="bottle-label">
-              <span>PARFUM</span>
-              <small>EXTRAIT</small>
-            </div>
-          </div>
-          <div class="bottle-shadow"></div>
-        </div>
+      <div class="hero-center">
+        <div class="hero-monogram">P</div>
+        <h2>[NOME DA MARCA]</h2>
+        <p>FRAGRÂNCIAS QUE MARCAM</p>
+        <span class="hero-line"></span>
+        <strong>MAIS QUE PERFUMES.<br>EXPERIÊNCIAS INESQUECÍVEIS.</strong>
+      </div>
+
+      <div class="hero-panel hero-right">
+        <p class="eyebrow">ELEGÂNCIA QUE ENVOLVE</p>
+        <h1>Momentos que<br>viram memória.</h1>
+        <button class="outline-cta" type="button" data-jump-filter="feminino">Explorar feminino →</button>
       </div>
     </section>
 
-    <section class="collections" id="colecoes">
-      <article class="collection-card collection-man">
-        <div class="collection-image"></div>
-        <div class="collection-vignette"></div>
-        <div class="collection-copy">
-          <p class="eyebrow">Collection I</p>
-          <h2>Masculino</h2>
-          <p>Madeiras profundas, especiarias e assinatura marcante.</p>
-          <button type="button" data-jump-filter="masculino">Explorar coleção →</button>
-        </div>
-      </article>
-
-      <article class="collection-card collection-woman">
-        <div class="collection-image"></div>
-        <div class="collection-vignette"></div>
-        <div class="collection-copy">
-          <p class="eyebrow">Collection II</p>
-          <h2>Feminino</h2>
-          <p>Florais luminosos, âmbar e sensualidade elegante.</p>
-          <button type="button" data-jump-filter="feminino">Explorar coleção →</button>
-        </div>
-      </article>
-    </section>
-
-    <section class="catalog" id="catalogo">
-      <div class="section-title">
+    <section class="catalog-section" id="catalogo">
+      <div class="catalog-heading">
         <div>
-          <p class="eyebrow">Curadoria privada</p>
-          <h2>Perfumes em destaque</h2>
+          <p class="eyebrow">DESTAQUES</p>
+          <h2>Perfumes Importados</h2>
         </div>
-        <p>
-          Clique em uma fragrância para ver composição, pirâmide olfativa,
-          estoque e avaliações de clientes.
-        </p>
+        <button type="button" class="view-all" data-jump-filter="todos">Ver todos →</button>
       </div>
 
-      <div class="catalog-search"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume..." autocomplete="off" aria-label="Buscar perfume"></div>
-
-      <div class="filters" role="group" aria-label="Filtrar perfumes">
-        <button class="filter is-active" type="button" data-filter="todos">Todos</button>
-        <button class="filter" type="button" data-filter="masculino">Masculino</button>
-        <button class="filter" type="button" data-filter="feminino">Feminino</button>
-        <button class="filter" type="button" data-filter="unissex">Unissex</button>
+      <div class="catalog-toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume..." autocomplete="off">
+        </label>
+        <div class="filters" role="group" aria-label="Filtrar perfumes">
+          <button class="filter is-active" type="button" data-filter="todos">Todos</button>
+          <button class="filter" type="button" data-filter="masculino">Masculino</button>
+          <button class="filter" type="button" data-filter="feminino">Feminino</button>
+          <button class="filter" type="button" data-filter="unissex">Unissex</button>
+        </div>
       </div>
 
       <p class="status" id="catalogStatus">Carregando catálogo...</p>
       <div class="product-grid" id="productGrid"></div>
     </section>
 
-    <section class="experience" id="experiencia">
-      <div class="experience-intro">
-        <p class="eyebrow">Nossa essência</p>
-        <h2>Mais que vender perfume.<br>Construir desejo.</h2>
-        <p>
-          Uma curadoria de fragrâncias marcantes, com informações claras sobre notas olfativas,
-          disponibilidade e uma experiência de compra elegante do início ao fim.
-        </p>
-      </div>
+    <section class="trust-section">
+      <article><span>◇</span><div><strong>Curadoria selecionada</strong><small>Fragrâncias escolhidas com cuidado</small></div></article>
+      <article><span>⌁</span><div><strong>Entrega presencial</strong><small>Receba pessoalmente com segurança</small></div></article>
+      <article><span>▣</span><div><strong>Pagamento seguro</strong><small>PIX e cartão no fechamento</small></div></article>
+      <article><span>✦</span><div><strong>Atendimento premium</strong><small>Da escolha até a entrega</small></div></article>
+    </section>
 
-      <div class="experience-steps">
-        <article>
-          <span>01</span>
-          <h3>Descoberta</h3>
-          <p>O cliente encontra sua assinatura por gênero, estilo e destaque.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>Imersão</h3>
-          <p>Topo, coração e fundo apresentam a personalidade da fragrância.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>Conversão</h3>
-          <p>Compra simples, objetiva e com entrega presencial informada.</p>
-        </article>
-      </div>
+    <section class="manifesto" id="contato">
+      <p class="eyebrow">A EXPERIÊNCIA</p>
+      <h2>Perfume não é detalhe.<br>É assinatura.</h2>
+      <p>Descubra a fragrância que traduz sua presença. Consulte disponibilidade, finalize sua escolha e receba com atendimento pessoal.</p>
+      <a class="gold-cta" href="#catalogo">Encontrar minha fragrância</a>
     </section>
   </main>
 
-  <footer>
-    <div class="logo">
-      <span class="logo-mark">✦</span>
-      <span>[NOME DA MARCA]</span>
+  <footer class="site-footer">
+    <div>
+      <strong>[NOME DA MARCA]</strong>
+      <span>Fragrâncias que marcam.</span>
     </div>
-    <p>Fragrâncias selecionadas · atendimento personalizado.</p>
+    <div class="footer-links">
+      <a href="#catalogo">Perfumes</a>
+      <button type="button" data-jump-filter="masculino">Masculino</button>
+      <button type="button" data-jump-filter="feminino">Feminino</button>
+      <a href="admin.html">Área do vendedor</a>
+    </div>
   </footer>
 
   <div class="overlay" id="productOverlay" hidden>
@@ -172,20 +141,14 @@
 
   <aside class="drawer" id="bagDrawer" aria-hidden="true">
     <div class="drawer-head">
-      <div>
-        <p class="eyebrow">Sua seleção</p>
-        <h2>Sacola</h2>
-      </div>
+      <div><p class="eyebrow">SUA SELEÇÃO</p><h2>Sacola</h2></div>
       <button class="close" type="button" id="closeBag" aria-label="Fechar">×</button>
     </div>
     <div id="bagItems" class="bag-items"></div>
     <div class="drawer-foot">
-      <div class="bag-total">
-        <span>Total</span>
-        <strong id="bagTotal">R$ 0,00</strong>
-      </div>
-      <p>Entrega e forma de pagamento são confirmadas no fechamento do pedido.</p>
-      <button class="btn btn-gold btn-full" id="checkoutBtn" type="button">Finalizar compra</button>
+      <div class="bag-total"><span>Total</span><strong id="bagTotal">R$ 0,00</strong></div>
+      <p>Entrega presencial · pagamento confirmado no fechamento.</p>
+      <button class="gold-cta full" id="checkoutBtn" type="button">Finalizar compra</button>
     </div>
   </aside>
   <div class="drawer-mask" id="drawerMask" hidden></div>
@@ -193,58 +156,32 @@
   <div class="overlay" id="checkoutOverlay" hidden>
     <section class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
       <button class="close" type="button" data-close-checkout aria-label="Fechar">×</button>
-      <p class="eyebrow">Finalização</p>
+      <p class="eyebrow">FINALIZAÇÃO</p>
       <h2 id="checkoutTitle">Finalizar compra</h2>
       <div id="checkoutSummary" class="checkout-summary"></div>
 
       <div class="seller-picker-block">
-        <div class="seller-picker-head">
-          <strong>Quem te atendeu?</strong>
-          <span>Selecione o vendedor responsável pela sua compra</span>
-        </div>
-        <div class="seller-picker" id="sellerPicker">
-          <p class="seller-picker-empty">Carregando vendedores...</p>
-        </div>
+        <div class="seller-picker-head"><strong>Quem te atendeu?</strong><span>Selecione o vendedor responsável.</span></div>
+        <div class="seller-picker" id="sellerPicker"><p class="seller-picker-empty">Carregando vendedores...</p></div>
       </div>
 
       <div class="payment-tabs">
-        <button class="payment-tab is-active" type="button" data-payment="pix">
-          <strong>PIX</strong><span>Confirmação rápida</span>
-        </button>
-        <button class="payment-tab" type="button" data-payment="card">
-          <strong>Cartão</strong><span>Crédito</span>
-        </button>
+        <button class="payment-tab is-active" type="button" data-payment="pix"><strong>PIX</strong><span>Confirmação rápida</span></button>
+        <button class="payment-tab" type="button" data-payment="card"><strong>Cartão</strong><span>Crédito</span></button>
       </div>
 
       <form id="checkoutForm">
-        <label>
-          Nome completo
-          <input name="name" autocomplete="name" required placeholder="Seu nome">
-        </label>
-        <label>
-          WhatsApp
-          <input name="phone" autocomplete="tel" required placeholder="+595 ou +55">
-        </label>
-        <label>
-          E-mail <small>(opcional)</small>
-          <input name="email" type="email" autocomplete="email" placeholder="voce@email.com">
-        </label>
-
-        <div class="demo-box" id="paymentDemoBox">
-          <strong>PIX</strong>
-          <p>O pagamento é confirmado no atendimento após o envio do pedido.</p>
-        </div>
-
-        <button class="btn btn-gold btn-full" type="submit">Enviar pedido</button>
+        <label>Nome completo<input name="name" autocomplete="name" required placeholder="Seu nome"></label>
+        <label>WhatsApp<input name="phone" autocomplete="tel" required placeholder="+595 ou +55"></label>
+        <label>E-mail <small>(opcional)</small><input name="email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
+        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pagamento é confirmado no atendimento após o envio do pedido.</p></div>
+        <button class="gold-cta full" type="submit">Enviar pedido</button>
       </form>
-
-      <p class="fine-print">
-        Ao enviar, você confirma os dados do pedido para atendimento e fechamento da compra.
-      </p>
+      <p class="fine-print">Ao enviar, você confirma os dados do pedido para atendimento e fechamento da compra.</p>
     </section>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="app.js?v=20260930-2204"></script>
+  <script type="module" src="app.js?v=20261001-0130"></script>
 </body>
 </html>
