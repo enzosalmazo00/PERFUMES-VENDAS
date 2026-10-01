@@ -19,6 +19,20 @@
 - [x] Nota de produto aceita 0 a 5 estrelas + comentário; avaliações verificadas aprovadas entram no cálculo e na exibição pública do produto.
 - [x] Modal pós-pagamento possui botão de fechar e reaparece apenas em nova sessão se ainda houver produto pago sem avaliação.
 
+## Gestão administrativa de mercadorias — rodada atual
+- [x] Abas do ADM reorganizadas em visão geral, compras, estoque, produtos, pedidos, caixa, vendedores, relatórios e segurança.
+- [x] Cadastro e edição de fornecedor roteados por RPC autenticado de uso exclusivo do servidor; dados privados não foram expostos na Data API.
+- [x] Entrada de compra, lote, saldo, custo privado, percentual de acréscimo e preço público vinculados em uma única transação atômica.
+- [x] Proteção contra lançamento duplicado usando identificador único de operação.
+- [x] Botões de entrada e saída manual com quantidade sempre positiva; saída exige motivo e justificativa.
+- [x] Motivos de baixa: quebra, perda, avaria, apreensão, brinde, perda no transporte, inventário e outros.
+- [x] Baixa não pode consumir unidades reservadas em pedidos pendentes.
+- [x] Preço pode ser reajustado pelo último custo sem lançar nova compra; promoção anterior é desativada quando o preço calculado muda.
+- [x] Histórico de compras, fornecedores e últimas movimentações no ADM.
+- [x] Custo unitário mantido em tabelas privadas, com rotinas públicas acessíveis só pela credencial do servidor.
+- [x] Testes de regressão do banco realizados em transações revertidas (sem criar compras ou fornecedores reais).
+- [ ] Conferir pelo navegador, usando a conta do administrador, um lançamento real de fornecedor e uma entrada de produto no estoque.
+
 ## Pendências anteriores à primeira venda
 - [ ] No Supabase Auth, ativar proteção contra senhas vazadas (se disponível no plano). Não há ação deste conector para alterar configuração do Auth.
 - [ ] Cadastrar estoque físico com saldo real em `inventory_locations` e `inventory_balances` por vendedor.

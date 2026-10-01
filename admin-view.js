@@ -1,15 +1,15 @@
 import {esc,money,option,table} from "./admin-api.js?v=20261001-password1";
 export function shell(){
-return `<nav class="tabs">
-<button class="tab is-active" data-tab="visao">Visão geral</button>
-<button class="tab" data-tab="perfumes">Perfumes / Body Splash</button>
-<button class="tab" data-tab="rede">Vendedores/Cidades</button>
-<button class="tab" data-tab="estoque">Estoques</button>
-<button class="tab" data-tab="pedidos">Pedidos/Envios</button>
-<button class="tab" data-tab="caixa">Caixa / Dinheiro</button>
-<button class="tab" data-tab="compras">Compras/Risco</button>
-<button class="tab" data-tab="relatorios">Relatórios</button>
-<button class="tab" data-tab="emergencia">Emergência</button>
+return `<nav class="tabs" aria-label="Áreas da administração">
+<button class="tab is-active" data-tab="visao">Visão da loja</button>
+<button class="tab" data-tab="compras">Compras e fornecedores</button>
+<button class="tab" data-tab="estoque">Estoque e movimentações</button>
+<button class="tab" data-tab="perfumes">Produtos e preços</button>
+<button class="tab" data-tab="pedidos">Pedidos e pagamentos</button>
+<button class="tab" data-tab="caixa">Caixa presencial</button>
+<button class="tab" data-tab="rede">Vendedores e regiões</button>
+<button class="tab" data-tab="relatorios">Resultados e relatórios</button>
+<button class="tab" data-tab="emergencia">Segurança e emergência</button>
 </nav>
 <section class="tab-panel" data-panel="visao"><div id="metrics" class="metrics"></div><div class="card"><p class="eyebrow">Alertas</p><h2>Estoque baixo</h2><div id="lowStock"></div></div></section>
 <section class="tab-panel" data-panel="perfumes" hidden>
@@ -100,8 +100,40 @@ return `<nav class="tabs">
 </form>
 </div>
 </section>
-<section class="tab-panel" data-panel="estoque" hidden><div class="grid2"><div class="card"><p class="eyebrow">Local</p><h2>Novo estoque</h2><form id="locationForm"><label>Nome<input name="name" required></label><label>Cidade<select name="city_id" id="locationCity"></select></label><label>Vendedor<select name="seller_id" id="locationSeller"></select></label><button class="btn btn-primary">Criar estoque</button></form></div>
-<div class="card"><p class="eyebrow">Regulador auditável</p><h2>Movimentar estoque</h2><form id="adjustForm"><label>Estoque<select name="location_id" id="adjustLocation"></select></label><label>Produto<select name="product_id" id="adjustProduct"></select></label><label>Quantidade (+ entrada / − saída)<input name="qty" type="number" required></label><label>Motivo<select name="reason"><option value="restock">Reposição</option><option value="breakage">Quebra</option><option value="damage">Avaria</option><option value="loss">Perda</option><option value="gift">Brinde</option><option value="road_loss">Perda na estrada</option><option value="inventory_count">Contagem</option><option value="return">Devolução</option><option value="other">Outro</option></select></label><label>Impacto financeiro (R$)<input name="impact" type="number" min="0" step=".01"></label><label>Justificativa<textarea name="note"></textarea></label><button class="btn btn-primary">Registrar</button></form></div></div><div class="card" id="inventory"></div></section>
+<section class="tab-panel" data-panel="estoque" hidden>
+  <div class="admin-intro"><p class="eyebrow">OPERAÇÃO DIÁRIA</p><h2>Estoque e movimentações</h2><p>Escolha entrada ou saída clicando no botão. Saídas sem venda exigem motivo e justificativa, e todas as movimentações ficam no histórico.</p></div>
+  <div class="grid2">
+    <div class="card"><p class="eyebrow">PASSO 1</p><h2>Cadastrar local de estoque</h2>
+      <p class="muted">Ex.: depósito, vitrine, loja física ou estoque de um vendedor.</p>
+      <form id="locationForm">
+        <label>Nome do estoque<input name="name" required maxlength="110" placeholder="Ex.: Depósito principal"></label>
+        <label>Cidade ou região<select name="city_id" id="locationCity"></select></label>
+        <label>Vendedor responsável<select name="seller_id" id="locationSeller"></select></label>
+        <button class="btn btn-primary" type="submit">Criar local de estoque</button>
+      </form>
+    </div>
+    <div class="card"><p class="eyebrow">PASSO 2</p><h2>Entrada ou saída manual</h2>
+      <p class="muted">Para compras de fornecedor, use <strong>Compras e fornecedores</strong>: lá a entrada é registrada junto com custo e preço de venda.</p>
+      <form id="adjustForm" class="form-grid">
+        <div class="stock-direction span2" role="group" aria-label="Tipo de movimentação">
+          <button type="button" class="stock-direction-btn is-active" data-stock-direction="entry" aria-pressed="true">↓ Entrada</button>
+          <button type="button" class="stock-direction-btn" data-stock-direction="exit" aria-pressed="false">↑ Saída sem venda</button>
+          <input type="hidden" name="direction" value="entry">
+        </div>
+        <label>Local de estoque<select name="location_id" id="adjustLocation" required></select></label>
+        <label>Produto<select name="product_id" id="adjustProduct" required></select></label>
+        <label>Quantidade (somente números positivos)<input name="qty" type="number" min="1" max="10000" step="1" required placeholder="Ex.: 3"></label>
+        <label>Motivo<select name="reason" id="adjustReason" required></select></label>
+        <label id="adjustImpactLabel" hidden>Valor da perda (R$)<input name="impact" type="number" min="0" step=".01" placeholder="Automático pelo último custo"><small>Se deixar em branco, usamos o último custo de compra registrado.</small></label>
+        <label class="span2">Justificativa<textarea name="note" id="adjustNote" rows="3" maxlength="1200" placeholder="Informe o motivo, as condições e o responsável."></textarea><small id="adjustNoteHelp">Para entrada de mercadoria comprada, utilize a aba Compras e fornecedores.</small></label>
+        <p class="span2 admin-feedback" id="adjustFeedback" role="status"></p>
+        <button class="btn btn-primary span2" type="submit" id="adjustSubmit">Registrar entrada</button>
+      </form>
+    </div>
+  </div>
+  <div class="card"><p class="eyebrow">SALDOS ATUAIS</p><h2>Produtos por estoque</h2><div id="inventory"></div></div>
+<div class="card"><p class="eyebrow">AUDITORIA</p><h2>Últimas movimentações</h2><p class="muted">Saídas sem venda mostram a justificativa e o valor do prejuízo registrado.</p><div id="inventoryHistory"><p class="muted">Abra esta aba para carregar o histórico.</p></div></div>
+</section>
 <section class="tab-panel" data-panel="pedidos" hidden>
 <div class="grid2">
   <div class="card"><p class="eyebrow">Frete</p><h2>Configuração de envios</h2>
@@ -127,8 +159,63 @@ return `<nav class="tabs">
  <p class="muted">Todas as vendas recebidas em dinheiro vivo ficam registradas com o vendedor responsável, desconto autorizado, valor recebido, troco e baixa de estoque. PIX e cartão só pelo Mercado Pago da AZZENA.</p>
  <div id="cashSalesSummary" class="metrics"></div><div id="cashSalesTable"></div>
  </div></section>
-<section class="tab-panel" data-panel="compras" hidden><div class="grid2"><div class="card"><p class="eyebrow">Privado</p><h2>Novo fornecedor</h2><form id="supplierForm"><label>Nome<input name="name" required></label><label>Contato<input name="contact"></label><label>Telefone<input name="phone"></label><label>Notas<textarea name="notes"></textarea></label><button class="btn btn-primary">Salvar</button></form></div>
-<div class="card"><p class="eyebrow">Entrada</p><h2>Novo lote</h2><form id="lotForm"><label>Fornecedor<select name="supplier_id" id="lotSupplier"></select></label><label>Destino<select name="location_id" id="lotLocation"></select></label><label>Produto<select name="product_id" id="lotProduct"></select></label><label>Quantidade<input name="qty" type="number" min="1" required></label><label>Custo unitário (R$)<input name="cost" type="number" min="0" step=".01" required></label><label>Risco<select name="risk"><option value="">Sem risco</option><option value="travel">Viagem</option><option value="seizure">Apreensão</option><option value="damage">Dano</option><option value="loss">Perda</option><option value="other">Outro</option></select></label><label>Valor do risco (R$)<input name="risk_value" type="number" min="0" step=".01"></label><label>Nota<textarea name="risk_note"></textarea></label><button class="btn btn-primary">Registrar lote + estoque</button></form></div></div></section>
+<section class="tab-panel" data-panel="compras" hidden>
+ <div class="admin-intro"><p class="eyebrow">GESTÃO DE MERCADORIAS</p><h2>Compras e fornecedores</h2><p>Cadastre quem fornece, registre quanto pagou e dê entrada no estoque sem precisar movimentar as unidades uma segunda vez. Os custos ficam privados na administração.</p></div>
+ <div class="card">
+   <p class="eyebrow">1 · CADASTRO</p><h2>Fornecedores</h2>
+   <form id="supplierForm" class="form-grid">
+     <input type="hidden" name="id">
+     <label>Nome do fornecedor<input name="name" required maxlength="150" placeholder="Nome da empresa ou fornecedor"></label>
+     <label>Pessoa de contato<input name="contact" maxlength="150" placeholder="Responsável pelo atendimento"></label>
+     <label>Telefone / WhatsApp<input name="phone" type="tel" maxlength="40" placeholder="+55 ..."></label>
+     <label>E-mail<input name="email" type="email" maxlength="180"></label>
+     <label>CPF/CNPJ ou documento<input name="tax_id" maxlength="60" placeholder="Se aplicável"></label>
+     <label>Endereço ou local de origem<input name="address" maxlength="350"></label>
+     <label class="span2">Observações<textarea name="notes" maxlength="1500" rows="2"></textarea></label>
+     <label class="checkline" id="supplierActiveLabel" hidden><input type="checkbox" name="is_active" checked> Fornecedor ativo</label>
+     <p id="supplierFeedback" class="span2 admin-feedback" role="status"></p>
+     <div class="span2 row-actions"><button class="btn btn-primary" type="submit" id="supplierSubmit">Cadastrar fornecedor</button><button class="btn" type="button" id="cancelSupplierEdit" hidden>Cancelar edição</button></div>
+   </form>
+   <div class="admin-table-section"><h3>Fornecedores cadastrados</h3><div id="supplierList"><p class="muted">Carregando fornecedores...</p></div></div>
+ </div>
+ <div class="card">
+   <p class="eyebrow">2 · REGISTRAR COMPRA E RECEBER</p><h2>Entrada de produtos</h2>
+   <p class="muted">Uma única operação grava a compra, vincula o fornecedor e o estoque escolhido, atualiza o custo privado e calcula o preço público. Nada de registrar a mesma entrada duas vezes. Promoções antigas serão desativadas para não esconder o novo preço calculado.</p>
+   <form id="lotForm" class="form-grid">
+     <label>Fornecedor<select name="supplier_id" id="lotSupplier" required></select></label>
+     <label>Destino: estoque<select name="location_id" id="lotLocation" required></select></label>
+     <label class="span2">Produto<select name="product_id" id="lotProduct" required></select></label>
+     <label>Quantidade de unidades recebidas<input name="qty" type="number" min="1" max="10000" step="1" required placeholder="Ex.: 10"><small>Inclua somente unidades recebidas de fato. Perdas e apreensões não entram no saldo.</small></label>
+     <label>Valor pago por unidade (R$)<input name="cost" type="number" min=".01" max="10000000" step=".01" required placeholder="Ex.: 100,00"></label>
+     <label>Lucro aplicado sobre a compra (%)<input name="markup" type="number" min="0" max="1000" step=".01" value="40" required placeholder="Ex.: 40"></label>
+     <label>Preço de venda calculado (R$)<input name="sale_price_preview" id="lotSalePreview" type="text" readonly placeholder="Preencha o custo e a porcentagem"></label>
+     <div class="span2 pricing-preview" id="lotPriceSummary" aria-live="polite">O preço de venda será calculado automaticamente a partir do valor pago por unidade.</div>
+     <label>Data da compra<input name="purchased_at" type="date" required></label>
+     <label>Número da nota / referência<input name="reference_code" maxlength="90" placeholder="Opcional"></label>
+     <label>Frete da compra (R$)<input name="freight" type="number" min="0" step=".01" value="0"></label>
+     <label>Outras despesas (R$)<input name="other_costs" type="number" min="0" step=".01" value="0"></label>
+     <label>Ocorrência na compra<select name="risk"><option value="">Nenhuma</option><option value="travel">Transporte</option><option value="seizure">Apreensão</option><option value="damage">Avaria</option><option value="loss">Perda</option><option value="other">Outro</option></select></label>
+     <label>Valor da ocorrência (R$)<input name="risk_value" type="number" min="0" step=".01" value="0"></label>
+     <label class="span2">Notas da compra<textarea name="notes" rows="2" maxlength="1200" placeholder="Observações sobre a compra, embalagem ou procedência"></textarea></label>
+     <label class="span2">Descrição da ocorrência<textarea name="risk_note" rows="2" maxlength="500" placeholder="Somente se houve ocorrência"></textarea></label>
+     <p class="span2 admin-feedback" id="lotFeedback" role="status"></p>
+     <button class="btn btn-primary span2" type="submit" id="lotSubmit">Registrar compra + entrada no estoque</button>
+   </form>
+ </div>
+ <div class="card">
+   <p class="eyebrow">3 · PREÇOS</p><h2>Reajustar preço pelo último custo</h2>
+   <p class="muted">Altere a porcentagem quando quiser, sem precisar dar nova entrada. O último custo de compra continua privado.</p>
+   <form id="repriceForm" class="form-grid">
+     <label class="span2">Produto com custo registrado<select id="repriceProduct" name="product_id" required></select></label>
+     <label>Último custo por unidade<input id="repriceCost" type="text" readonly placeholder="Selecione o produto"></label>
+     <label>Porcentagem sobre o custo (%)<input id="repriceMarkup" name="markup" type="number" min="0" max="1000" step=".01" required></label>
+     <label>Preço de venda recalculado<input id="repricePreview" type="text" readonly placeholder="R$ 0,00"></label>
+     <p class="span2 admin-feedback" id="repriceFeedback" role="status"></p>
+     <button class="btn btn-primary span2" type="submit" id="repriceSubmit">Salvar novo preço de venda</button>
+   </form>
+ </div>
+ <div class="card"><p class="eyebrow">4 · CONFERÊNCIA</p><h2>Histórico de compras</h2><div id="purchaseHistory"><p class="muted">Carregando compras...</p></div></div>
+</section>
 <section class="tab-panel" data-panel="relatorios" hidden><div class="card"><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2><div class="form-grid"><label>De<input type="date" id="from"></label><label>Até<input type="date" id="to"></label><label>Vendedor<select id="reportSeller"></select></label><label>Produto<select id="reportProduct"></select></label><label>Cidade<select id="reportCity"></select></label></div><button class="btn btn-primary" id="runReport">Gerar relatório</button></div><div id="reportMetrics" class="metrics"></div><div class="card" id="reportMoves"></div><div class="card" id="reportRisks"></div></section>
 <section class="tab-panel" data-panel="emergencia" hidden><div class="grid2"><div class="card danger-card"><p class="eyebrow">Emergência</p><h2>Retirar loja do ar</h2><label>Categoria<select id="outageKind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor</option><option value="operational_pause">Pausa operacional</option><option value="permanent_closure">Encerramento definitivo</option></select></label><label>Justificativa<textarea id="outageReason"></textarea></label><label>Mensagem pública<textarea id="publicMessage"></textarea></label><button class="btn btn-danger" id="disableSite">Desativar loja</button></div><div class="card"><p class="eyebrow">Status</p><div class="status-line"><span class="status-dot" id="statusDot"></span><strong id="statusText">—</strong></div><p id="statusDetail" class="muted"></p><label>Nota para reativação<textarea id="restoreReason"></textarea></label><button class="btn btn-primary" id="enableSite">Colocar online</button></div></div></section>`;}
 export function renderDashboard(d){
@@ -213,6 +300,7 @@ document.querySelector("#adjustLocation").innerHTML=option(d.locations,"id","nam
 document.querySelector("#adjustProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
 document.querySelector("#lotLocation").innerHTML=option(d.locations,"id","name");
 document.querySelector("#lotProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
+document.querySelector("#repriceProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL");
 document.querySelector("#reportSeller").innerHTML=option(d.sellers,"id","name","Todos");
 document.querySelector("#reportProduct").innerHTML=option(d.products,"id",x=>x.name+" · "+x.volume_ml+" mL","Todos");
 document.querySelector("#reportCity").innerHTML=option(d.cities,"id","city_name","Todas");
