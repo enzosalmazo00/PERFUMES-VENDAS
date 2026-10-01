@@ -5,6 +5,7 @@ const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
 const views=["loadingView","loginView","confirmView","applyView","pendingView","app"];
 let refreshing=null,loading=false;
+let sellerDashboard=null,cashCart=[],cashSaleKey=crypto.randomUUID(),salesPollingStarted=false;
 const feedback=(target,message)=>{$(target).textContent=message||""};
 function show(view){
   for(const id of views)$("#"+id).hidden=id!==view;
@@ -169,9 +170,16 @@ async function refreshInventory(){
       '<p>'+esc(order.delivery_method==="presencial"?"Retirada presencial":"Entrega")+' · '+esc(payments[order.payment_status]||order.payment_status)+
       ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
       '<p class="seller-order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+'× '+esc(item.product_name)+' · '+esc(item.volume_ml)+' mL').join('<br>')+'</p>'+ 
-      '<div class="seller-dashboard-actions">'+(phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
+      '<div class="seller-dashboard-actions"><a class="seller-outline" href="etiqueta.html?pedido='+encodeURIComponent(order.id)+'" target="_blank" rel="noopener noreferrer">Gerar etiqueta</a>'+ (phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
       (canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
   }).join(""):'<p class="muted">Ainda não há pedidos vinculados a você.</p>';
+  sellerDashboard=data;
+  renderSellerNotifications(data);
+  renderCashProductOptions(data);
+  if(!salesPollingStarted){
+    salesPollingStarted=true;
+    window.setInterval(()=>{if(document.visibilityState==="visible"&&!$("#app").hidden)refreshInventory().catch(()=>{})},60000);
+  }
   const pickup=data.pickup||{};
   const pickupForm=$("#sellerPickupForm");
   for(const key of ["display_name","country_code","street","street_number","neighborhood","city","state","postal_code","complement","google_maps_url","instructions"]){
@@ -183,6 +191,93 @@ async function refreshInventory(){
   show("app");
   if(data.seller?.can_toggle_site_emergency)await loadStatus();
 }
+
+function renderSellerNotifications(data){
+  const list=$("#sellerNotificationList");
+  const notes=data.notifications||[],count=Math.max(0,Number(data.unread_notifications||0));
+  $("#sellerNotificationCount").textContent=count>99?"99+":String(count);
+  $("#sellerNotificationCount").hidden=count===0;
+  $("#sellerNotificationBell").setAttribute("aria-label",count?count+" notificações não lidas":"Nenhuma notificação não lida");
+  $("#sellerMarkAllRead").disabled=count===0;
+  list.innerHTML=notes.length?notes.map(n=>
+    '<article class="seller-notification '+(!n.is_read?'is-unread':'')+'">'+
+      '<div><strong>'+esc(n.title)+'</strong><time>'+new Date(n.created_at).toLocaleString("pt-BR")+'</time></div>'+
+      '<p>'+esc(n.message)+'</p>'+
+      '<div class="seller-dashboard-actions"><a class="seller-outline" href="etiqueta.html?pedido='+encodeURIComponent(n.order_id)+'" target="_blank" rel="noopener noreferrer">Ver etiqueta</a>'+
+      (!n.is_read?'<button type="button" class="seller-outline" data-read-note="'+esc(n.id)+'">Marcar como lida</button>':'<span class="seller-read">Lida</span>')+'</div></article>'
+  ).join(""):'<p class="muted">Nenhuma venda ou notificação por enquanto.</p>';
+}
+const brlCents=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n||0)/100);
+const parseMoney=v=>{const amount=Number(String(v??"").trim().replace(",","."));return Number.isFinite(amount)&&amount>=0&&Math.abs(Math.round(amount*100)-amount*100)<.01?Math.round(amount*100):NaN};
+const prices=p=>Number(p.sale_price_cents??p.price_cents??0);
+function cashProducts(){
+  const rows=sellerDashboard?.inventory||[];
+  const map=new Map();
+  for(const row of rows){
+    if(!row.is_active||!Number(row.quantity||0))continue;
+    const p=map.get(row.product_id)||{
+      id:row.product_id,name:row.product_name,volume_ml:row.volume_ml,quantity:0,
+      unit:prices(row),maxDiscount:Number(row.max_discount_percent||0)
+    };
+    p.quantity+=Number(row.quantity||0);
+    map.set(p.id,p);
+  }
+  return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
+}
+function renderCashProductOptions(){
+  const select=$("#sellerCashProduct"),previous=select.value;
+  const products=cashProducts();
+  select.replaceChildren(new Option("Selecione um produto disponível",""));
+  for(const p of products)select.add(new Option(p.name+" · "+p.volume_ml+" mL · "+brlCents(p.unit)+" · "+p.quantity+" un.",p.id));
+  if(products.some(p=>p.id===previous))select.value=previous;
+  renderCashDiscountLimit();
+  renderCash();
+}
+function renderCashDiscountLimit(){
+  const product=cashProducts().find(p=>p.id===$("#sellerCashProduct").value);
+  $("#sellerCashDiscount").max=String(product?.maxDiscount??0);
+  $("#sellerCashDiscountLimit").textContent=product?"Limite do ADM: "+product.maxDiscount.toLocaleString("pt-BR")+"%":"Limite definido no ADM";
+}
+function cashTotals(){
+  const subtotal=cashCart.reduce((n,p)=>n+p.unit*p.quantity,0);
+  const discount=cashCart.reduce((n,p)=>n+Math.round(p.unit*p.quantity*p.discount/100),0);
+  return {subtotal,discount,total:subtotal-discount};
+}
+function renderCash(){
+  const totals=cashTotals();
+  $("#sellerCashItems").innerHTML=cashCart.length?cashCart.map(p=>
+    '<tr><td>'+esc(p.name)+' · '+esc(p.volume_ml)+' mL</td><td>'+p.quantity+
+    '</td><td>'+brlCents(p.unit)+'</td><td>'+p.discount.toLocaleString("pt-BR")+'%</td><td>'+
+    brlCents(p.unit*p.quantity-Math.round(p.unit*p.quantity*p.discount/100))+
+    '</td><td><button type="button" class="seller-remove-cash" data-remove-cash="'+esc(p.id)+'" aria-label="Remover produto">×</button></td></tr>'
+  ).join(""):'<tr><td colspan="6">Escolha os produtos acima.</td></tr>';
+  $("#sellerCashSubtotal").textContent=brlCents(totals.subtotal);
+  $("#sellerCashTotalDiscount").textContent=brlCents(totals.discount);
+  $("#sellerCashTotal").textContent=brlCents(totals.total);
+  const cash=parseMoney($("#sellerCashReceived").value);
+  $("#sellerCashChange").textContent=brlCents(Number.isFinite(cash)?Math.max(0,cash-totals.total):0);
+}
+function addCashItem(){
+  const p=cashProducts().find(x=>x.id===$("#sellerCashProduct").value);
+  if(!p)return notify("Selecione um produto com estoque.");
+  const quantity=Number($("#sellerCashQuantity").value),discount=Number(String($("#sellerCashDiscount").value).replace(",","."));
+  if(!Number.isSafeInteger(quantity)||quantity<1||quantity>p.quantity||quantity>100)return notify("Quantidade inválida ou maior do que o estoque disponível.");
+  if(!Number.isFinite(discount)||discount<0||discount>p.maxDiscount)return notify("Desconto acima do limite de "+p.maxDiscount+"% definido no ADM.");
+  const other=cashCart.find(x=>x.id===p.id);
+  if(other){
+    if(other.quantity+quantity>p.quantity)return notify("Estoque insuficiente para incluir mais unidades.");
+    if(other.discount!==discount)return notify("Remova o item anterior antes de mudar seu desconto.");
+    other.quantity+=quantity;
+  }else cashCart.push({...p,quantity,discount});
+  $("#sellerCashProduct").value="";
+  $("#sellerCashQuantity").value="1";$("#sellerCashDiscount").value="0";
+  renderCashDiscountLimit();renderCash();notify("Produto adicionado à venda.");
+}
+function cashAddress(form){
+ const formData=new FormData(form),keys=["street","number","neighborhood","city","state","postal_code"];
+ return Object.fromEntries(keys.map(k=>[k,String(formData.get("address_"+k)||"").trim()]));
+}
+
 async function openSeller(){
   if(loading)return;
   loading=true;
@@ -275,6 +370,60 @@ document.querySelectorAll("[data-password]").forEach(button=>{
     button.setAttribute("aria-label",visible?"Ocultar senha":"Mostrar senha");
   };
 });
+$("#sellerNotificationBell").onclick=()=>$("#sellerNotificationCenter").scrollIntoView({behavior:"smooth",block:"start"});
+$("#sellerRefreshNotifications").onclick=()=>refreshInventory().catch(error=>notify(friendlyError(error)));
+$("#sellerMarkAllRead").onclick=async()=>{
+  const unread=(sellerDashboard?.notifications||[]).filter(n=>!n.is_read).map(n=>n.id);
+  if(!unread.length)return;
+  try{await call("seller-portal",{action:"mark_notifications_read",ids:unread});await refreshInventory()}
+  catch(error){notify(friendlyError(error))}
+};
+$("#sellerNotificationList").onclick=async event=>{
+  const button=event.target.closest("[data-read-note]");if(!button)return;
+  button.disabled=true;
+  try{await call("seller-portal",{action:"mark_notifications_read",ids:[button.dataset.readNote]});await refreshInventory()}
+  catch(error){notify(friendlyError(error));button.disabled=false}
+};
+$("#sellerCashProduct").onchange=renderCashDiscountLimit;
+$("#sellerAddCashItem").onclick=addCashItem;
+$("#sellerCashReceived").oninput=renderCash;
+$("#sellerCashItems").onclick=event=>{
+  const button=event.target.closest("[data-remove-cash]");if(!button)return;
+  cashCart=cashCart.filter(x=>x.id!==button.dataset.removeCash);renderCash()
+};
+$("#sellerCashForm").onsubmit=async event=>{
+  event.preventDefault();
+  const form=event.currentTarget,button=$("#sellerRegisterCash"),totals=cashTotals();
+  const data=new FormData(form),customer=String(data.get("customer_name")||"").trim(),
+    phone=String(data.get("customer_phone")||"").trim();
+  const received=parseMoney(data.get("cash_received"));
+  const out=$("#sellerCashMessage");
+  if(!cashCart.length)return notify("Adicione ao menos um perfume à venda.");
+  if(customer.length<2||phone.replace(/\D/g,"").length<10)return notify("Informe nome e WhatsApp do cliente com DDD.");
+  if(!Number.isFinite(received)||received<totals.total)return notify("Informe o dinheiro recebido, suficiente para o total da venda.");
+  if(!confirm("Confirma que você RECEBEU "+brlCents(received)+" em DINHEIRO VIVO? Total "+brlCents(totals.total)+", troco "+brlCents(received-totals.total)+". Esta venda será registrada com baixa de estoque."))return;
+  button.disabled=true;button.textContent="REGISTRANDO VENDA...";out.textContent="Registrando no caixa...";
+  try{
+    const result=await call("seller-portal",{
+      action:"register_cash_sale",customer_name:customer,customer_phone:phone,
+      items:cashCart.map(item=>({id:item.id,quantity:item.quantity,discount_percent:item.discount})),
+      cash_received_cents:received,sale_key:cashSaleKey,customer_address:cashAddress(form)
+    });
+    const sale=result.data||{};
+    out.innerHTML="Venda "+esc(sale.public_id)+" registrada! Troco: "+brlCents(sale.cash_change_cents)+
+      ' · <a href="etiqueta.html?pedido='+encodeURIComponent(sale.id)+'" target="_blank" rel="noopener noreferrer">Imprimir etiqueta da venda</a>';
+    cashSaleKey=crypto.randomUUID();cashCart=[];form.reset();renderCash();
+    await refreshInventory();notify("Venda registrada e estoque atualizado.");
+  }catch(error){
+    const messages={DISCOUNT_EXCEEDS_ALLOWED:"Desconto acima do limite autorizado no ADM.",
+      INSUFFICIENT_SELLER_STOCK:"Estoque insuficiente. Confira as reservas e tente novamente.",
+      CASH_INSUFFICIENT:"O valor recebido é menor que o total.",
+      CASH_SALE_FAILED:"A venda não pôde ser registrada. Confira seu painel antes de tentar novamente."};
+    out.textContent=messages[error.message]||friendlyError(error);
+    notify(out.textContent);
+  }finally{button.disabled=false;button.textContent="REGISTRAR VENDA EM DINHEIRO"}
+};
+
 $("#sellerOrders").addEventListener("click",async event=>{
   const button=event.target.closest("[data-seller-order-save]");
   if(!button)return;
