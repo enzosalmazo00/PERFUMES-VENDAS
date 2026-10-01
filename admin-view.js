@@ -108,8 +108,8 @@ return `<nav class="tabs">
     <form id="shippingSettingsForm">
       <label>CEP de origem<input name="origin_postal_code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label>
       <label>Ambiente<select name="provider_environment"><option value="sandbox">Sandbox / testes</option><option value="production">Produção</option></select></label>
-      <label class="checkline"><input type="checkbox" name="shipping_enabled"> Liberar cálculo de frete no site</label>
-      <label>Mensagem ao cliente<textarea name="public_note">Envios disponíveis para o Estado de São Paulo. O rastreio detalhado será configurado em uma próxima etapa.</textarea></label>
+      <label class="checkline"><input type="checkbox" name="shipping_enabled" disabled> Envios para São Paulo desativados nesta fase</label><p class="muted">A loja opera somente com vendedores e retirada. O cálculo de frete permanecerá bloqueado até a ativação futura.</p>
+      <label>Mensagem ao cliente<textarea name="public_note">Atendimento atual somente com vendedores e retirada presencial.</textarea></label>
       <button class="btn btn-primary">Salvar configuração</button>
     </form>
   </div>
