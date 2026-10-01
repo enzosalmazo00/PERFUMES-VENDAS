@@ -36,3 +36,19 @@
 .account-pickup p{color:#e5d5bb;line-height:1.65;margin:8px 0;font-size:12px}
 .account-pickup a{color:#efcd8f;font-weight:600;text-decoration:underline;text-underline-offset:4px}
 .account-pickup .account-warning{color:#e6c684;padding-top:7px;border-top:1px solid rgba(218,176,105,.22)}
+
+/* Código pessoal de retirada e comprovante permanente no histórico */
+.customer-pickup-code{border:2px solid #b9985b;border-radius:4px;background:linear-gradient(135deg,#241806,#120e08);margin:17px 0;padding:clamp(19px,4vw,28px);display:grid;gap:12px;color:#f9eac9}
+.customer-pickup-eyebrow{font-size:11px!important;letter-spacing:.13em;color:#e7ca91!important;font-weight:800}
+.customer-pickup-number{font:700 clamp(20px,3vw,29px)/1.25 Poppins,Arial,sans-serif;letter-spacing:.085em;overflow-wrap:anywhere;color:#fff8e7}
+.customer-copy-code{display:inline-flex;align-items:center;justify-content:center;justify-self:start;min-height:43px;padding:9px 17px;border:1px solid #edcd94;border-radius:4px;background:#e8c17c;color:#201407;font:700 12px Poppins,Arial,sans-serif;cursor:pointer}
+.customer-pickup-code>p{margin:0;color:#e7d4b2;line-height:1.65;font-size:12px}
+.customer-pickup-ready{padding:11px;background:#1f351e;border:1px solid #699b68;color:#cbf1c7!important;font-weight:800;letter-spacing:.03em}
+.customer-pickup-waiting{padding:13px 17px;margin:17px 0;border:1px solid #ad8a51;background:#1d170e;color:#f2dbaa;font-size:12px;line-height:1.6}
+.customer-pickup-waiting p{margin:6px 0 0}
+.customer-pickup-instruction{border-top:1px solid #77603e;padding-top:11px}
+.customer-pickup-code.is-redeemed{border-color:#7d967e;background:linear-gradient(135deg,#172219,#101710)}
+.customer-delivery-proof{background:#f0f5ec;color:#162319;padding:17px;border-radius:3px;line-height:1.7}
+.customer-delivery-proof>strong{font-size:clamp(15px,2.2vw,20px)}
+.customer-delivery-proof p{font-size:13px;margin:8px 0 0;color:#1c3322}
+@media(max-width:640px){.customer-pickup-number{font-size:clamp(15px,4.2vw,22px);letter-spacing:.02em}.customer-copy-code{width:100%}}
