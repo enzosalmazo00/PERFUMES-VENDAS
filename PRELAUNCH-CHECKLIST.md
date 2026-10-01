@@ -32,3 +32,11 @@
 - Nesta revisão não foram criados estoques, endereços, pagamentos ou pedidos fictícios.
 - O checkout existente permanece desabilitado até gateway configurado e estoque/ponto de retirada disponíveis.
 - O deploy deve ser conferido em ambiente publicado e no navegador do cliente após merge; verificações estáticas não substituem teste real.
+
+
+## Decisões comerciais registradas — 2026-10-01
+- [x] Meios de pagamento definidos: PIX e cartão de crédito, processados pelo Mercado Pago quando o gateway for ativado.
+- [x] Checkout informa que eventuais juros e custos do cartão variam conforme o número de parcelas e são apresentados pelo Mercado Pago antes da confirmação.
+- [x] Produtos esgotados podem exibir “Solicitar por encomenda” quando o vendedor habilitar encomendas.
+- [x] Solicitação de encomenda abre atendimento via WhatsApp e não cria cobrança nem reserva de estoque automaticamente.
+- [x] Área do vendedor reorganizada em Visão geral, Pedidos, Estoque, Encomendas, Retiradas, Venda presencial e Minha loja.
