@@ -278,7 +278,8 @@
       <form id="checkoutForm">
         <div class="demo-box" id="paymentDemoBox"><strong>Pagamento seguro</strong><p>Após selecionar o vendedor e confirmar o local de retirada, você será encaminhado ao Mercado Pago.</p></div>
         <div id="checkoutFinalTotal" class="checkout-final-total"></div>
-        <button class="gold-button full" id="checkoutSubmit" type="submit" disabled>IR PARA PAGAMENTO SEGURO</button>
+        <p id="paymentSetupNotice" class="payment-setup-notice" role="status" hidden>Pagamento seguro AZZENA em configuração. Nenhum PIX pessoal é autorizado.</p>
+<button class="gold-button full" id="checkoutSubmit" type="submit" disabled>IR PARA PAGAMENTO SEGURO</button>
       </form>
       <div class="checkout-tracking-note"><strong>Rastreio:</strong> a estrutura do pedido já está preparada; a automação do rastreamento de entrega será estudada na próxima etapa.</div>
     </section>
@@ -287,6 +288,6 @@
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
   <script type="module" src="app.js?v=20261001-storev5"></script>
-  <script type="module" src="customer-checkout.js?v=20261001-storev5"></script>
+  <script type="module" src="customer-checkout.js?v=20261001-gatewayready2"></script>
 </body>
 </html>
