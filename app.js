@@ -114,9 +114,3 @@ function initHeroCarousel(){
 
 initHeroCarousel();
 loadSiteStatus();loadCatalog();loadSellers();
-// Hero carousel
-const heroSlides=[...document.querySelectorAll("[data-hero-slide]")],heroDots=[...document.querySelectorAll("[data-hero-dot]")];let heroIndex=0,heroTimer;
-function showHero(i){if(!heroSlides.length)return;heroIndex=(i+heroSlides.length)%heroSlides.length;heroSlides.forEach((s,n)=>s.classList.toggle("is-active",n===heroIndex));heroDots.forEach((d,n)=>d.classList.toggle("is-active",n===heroIndex))}
-function startHero(){clearInterval(heroTimer);heroTimer=setInterval(()=>showHero(heroIndex+1),6500)}
-heroDots.forEach((d,i)=>d.addEventListener("click",()=>{showHero(i);startHero()}));
-const heroCarousel=document.querySelector("#heroCarousel");if(heroCarousel){let sx=0;heroCarousel.addEventListener("touchstart",e=>{sx=e.changedTouches[0].clientX},{passive:true});heroCarousel.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45){showHero(heroIndex+(dx<0?1:-1));startHero()}},{passive:true});startHero();}
