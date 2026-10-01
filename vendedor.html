@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
-<link rel="stylesheet" href="vendedor.css?v=20261001-pickup1">
+<link rel="stylesheet" href="vendedor.css?v=20261001-pickup2">
 </head><body class="seller-page">
 <div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
 <header class="seller-top">
@@ -69,7 +69,12 @@
  <div id="metrics" class="metrics"></div>
  <div class="card"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
  <div class="card"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
- <div class="card seller-share-card">
+ <div class="card seller-orders-card">
+<p class="eyebrow">ATENDIMENTO</p><h2>Pedidos dos meus clientes</h2>
+<p class="muted">Confira os pedidos recebidos pelo seu catálogo. A retirada só pode ser liberada depois da aprovação do pagamento.</p>
+<div id="sellerOrders"></div>
+</div>
+<div class="card seller-share-card">
 <p class="eyebrow">MEU CATÁLOGO</p><h2>Compartilhar produtos disponíveis</h2>
 <p class="muted">Este link exibe apenas seus perfumes e body splash com estoque positivo. O cliente também poderá abrir o catálogo geral da AZZENA.</p>
 <label>Link exclusivo do meu catálogo<input type="url" id="sellerCatalogUrl" readonly aria-label="Link do meu catálogo" placeholder="Seu link aparecerá aqui após aprovação"></label>
@@ -102,5 +107,5 @@
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261001-pickup1"></script>
+<script type="module" src="vendedor.js?v=20261001-pickup2"></script>
 </body></html>
