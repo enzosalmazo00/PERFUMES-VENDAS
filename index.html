@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090806">
-  <meta name="description" content="Protótipo premium de e-commerce de fragrâncias.">
+  <meta name="description" content="Loja premium de fragrâncias selecionadas.">
   <title>[NOME DA MARCA] — Parfums</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,11 +108,13 @@
         </div>
         <p>
           Clique em uma fragrância para ver composição, pirâmide olfativa,
-          estoque e avaliações de demonstração.
+          estoque e avaliações de clientes.
         </p>
       </div>
 
-      <div class="catalog-search"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume..." autocomplete="off" aria-label="Buscar perfume"></div>\n\n      <div class="filters" role="group" aria-label="Filtrar perfumes">
+      <div class="catalog-search"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume..." autocomplete="off" aria-label="Buscar perfume"></div>
+
+      <div class="filters" role="group" aria-label="Filtrar perfumes">
         <button class="filter is-active" type="button" data-filter="todos">Todos</button>
         <button class="filter" type="button" data-filter="masculino">Masculino</button>
         <button class="filter" type="button" data-filter="feminino">Feminino</button>
@@ -125,12 +127,11 @@
 
     <section class="experience" id="experiencia">
       <div class="experience-intro">
-        <p class="eyebrow">A proposta</p>
+        <p class="eyebrow">Nossa essência</p>
         <h2>Mais que vender perfume.<br>Construir desejo.</h2>
         <p>
-          O protótipo combina uma vitrine premium com dados reais do catálogo:
-          preço, estoque, notas olfativas, avaliações e um fluxo de compra
-          pronto para evoluir para Mercado Pago.
+          Uma curadoria de fragrâncias marcantes, com informações claras sobre notas olfativas,
+          disponibilidade e uma experiência de compra elegante do início ao fim.
         </p>
       </div>
 
@@ -159,7 +160,7 @@
       <span class="logo-mark">✦</span>
       <span>[NOME DA MARCA]</span>
     </div>
-    <p>Protótipo comercial · produtos e avaliações demonstrativos.</p>
+    <p>Fragrâncias selecionadas · atendimento personalizado.</p>
   </footer>
 
   <div class="overlay" id="productOverlay" hidden>
@@ -183,7 +184,7 @@
         <span>Total</span>
         <strong id="bagTotal">R$ 0,00</strong>
       </div>
-      <p>Entrega presencial. Pagamento real ainda não ativado neste protótipo.</p>
+      <p>Entrega e forma de pagamento são confirmadas no fechamento do pedido.</p>
       <button class="btn btn-gold btn-full" id="checkoutBtn" type="button">Finalizar compra</button>
     </div>
   </aside>
@@ -192,7 +193,7 @@
   <div class="overlay" id="checkoutOverlay" hidden>
     <section class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
       <button class="close" type="button" data-close-checkout aria-label="Fechar">×</button>
-      <p class="eyebrow">Demonstração</p>
+      <p class="eyebrow">Finalização</p>
       <h2 id="checkoutTitle">Finalizar compra</h2>
       <div id="checkoutSummary" class="checkout-summary"></div>
 
@@ -230,15 +231,15 @@
         </label>
 
         <div class="demo-box" id="paymentDemoBox">
-          <strong>PIX demonstrativo</strong>
-          <p>Nenhuma cobrança real será feita nesta versão.</p>
+          <strong>PIX</strong>
+          <p>O pagamento é confirmado no atendimento após o envio do pedido.</p>
         </div>
 
-        <button class="btn btn-gold btn-full" type="submit">Simular pedido</button>
+        <button class="btn btn-gold btn-full" type="submit">Enviar pedido</button>
       </form>
 
       <p class="fine-print">
-        Mercado Pago será conectado somente depois da aprovação do negócio.
+        Ao enviar, você confirma os dados do pedido para atendimento e fechamento da compra.
       </p>
     </section>
   </div>
