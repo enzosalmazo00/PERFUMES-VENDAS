@@ -7,7 +7,8 @@ const knownErrors=new Set([
  "FORBIDDEN","SUPPLIER_NAME_REQUIRED","SUPPLIER_ALREADY_EXISTS","SUPPLIER_FIELDS_REQUIRED",
  "SUPPLIER_NOT_FOUND","SUPPLIER_NOT_ACTIVE","LOCATION_NOT_FOUND","PRODUCT_NOT_FOUND",
  "PRODUCT_COST_NOT_REGISTERED","REQUEST_ID_REQUIRED","PURCHASE_FIELDS_INVALID",
- "PURCHASE_COSTS_INVALID","PURCHASE_RISK_INVALID","MARKUP_INVALID","INVALID_LOT_ITEM"
+ "PURCHASE_COSTS_INVALID","PURCHASE_RISK_INVALID","MARKUP_INVALID","INVALID_LOT_ITEM",
+ "PURCHASE_ITEMS_INVALID","DUPLICATE_PURCHASE_PRODUCT"
 ]);
 export default {
  fetch:withSupabase({auth:"user"},async(req,ctx)=>{
@@ -31,7 +32,12 @@ export default {
   if(action==="receive_purchase"&&!/^[0-9a-f-]{36}$/i.test(String(payload.request_id||"")))
    return json({error:"REQUEST_ID_REQUIRED"},400);
   let data:any,error:any;
-  if(action==="reprice_product"){
+  if(action==="receive_purchase"&&Array.isArray(payload.items)){
+   if(payload.items.length<1||payload.items.length>30)return json({error:"PURCHASE_ITEMS_INVALID"},400);
+   ({data,error}=await ctx.supabaseAdmin.rpc("azzena_admin_receive_purchase_items",{
+     p_payload:payload,p_actor_id:userId
+   }));
+  }else if(action==="reprice_product"){
    ({data,error}=await ctx.supabaseAdmin.rpc("azzena_admin_reprice_product",{
      p_actor_id:userId,p_product_id:body?.product_id,p_markup_percent:body?.markup_percent
    }));
