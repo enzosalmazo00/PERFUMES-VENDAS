@@ -203,7 +203,8 @@ async function submitOrder(event){
   const url=String(response.data?.checkout_url||"");
   let target;
   try{target=new URL(url)}catch{throw new Error("PAYMENT_LINK_MISSING")}
-  if(target.protocol!=="https:"||!/(^|\\.)mercadopago\\.com(\\.br)?$/.test(target.hostname))
+  const host=target.hostname.toLowerCase();
+  if(target.protocol!=="https:"||!["mercadopago.com","mercadopago.com.br"].some(domain=>host===domain||host.endsWith("."+domain)))
     throw new Error("PAYMENT_LINK_INVALID");
   location.assign(target.href);
  }catch(error){message(explain(error));renderReady()}
