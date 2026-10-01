@@ -18,3 +18,49 @@
 @media(max-width:1200px){.site-header{grid-template-columns:250px 1fr}.main-nav{display:none}.header-actions{grid-column:2}.product-grid{grid-template-columns:repeat(3,1fr)}.showcase-hero{grid-template-columns:1fr 1fr}.benefit-row{grid-template-columns:1fr 1fr;gap:18px}}
 @media(max-width:760px){.luxury-strip{justify-content:flex-start;overflow:hidden;white-space:nowrap;gap:28px;padding-left:14px}.site-header{grid-template-columns:1fr auto;padding:0 15px}.brand-copy strong{font-size:18px}.crown{font-size:23px}.header-search{display:none}.showcase-hero{grid-template-columns:1fr;min-height:auto}.hero-copy{padding:48px 22px}.hero-copy h1{font-size:48px}.hero-products{height:330px}.category-grid{grid-template-columns:1fr;padding:12px}.category-card{height:260px}.benefit-row{grid-template-columns:1fr;padding:14px}.benefit-row article{border-right:0;border-bottom:1px solid #27231c;padding:12px}.catalog-section{padding:20px 12px 34px}.catalog-toolbar{display:block}.search-box{width:100%}.filters{overflow:auto;margin-top:10px}.product-grid{grid-template-columns:repeat(2,1fr);gap:8px}.product-media{height:190px}.site-footer{display:block;text-align:center}.footer-links{justify-content:center;flex-wrap:wrap;margin-top:14px}.product-detail{grid-template-columns:1fr}.detail-media{min-height:360px;height:360px}.detail-copy{padding:28px 20px}.notes{grid-template-columns:1fr}.checkout-modal{padding:30px 18px}.checkout-modal form{grid-template-columns:1fr}.checkout-modal label:nth-child(3),.demo-box,.checkout-modal form button{grid-column:auto}.seller-picker{grid-template-columns:1fr}}
 @media(max-width:430px){.product-media{height:165px}.product-info{padding:9px}.quick-buy{padding:9px 8px;font-size:8px}.price{font-size:14px}.category-copy strong{font-size:32px}.hero-benefits{gap:12px}}
+
+/* Visual aprovado: imagem gerada usada como asset do site, com áreas clicáveis reais */
+.target-hero{
+  display:block;
+  min-height:0;
+  aspect-ratio:1000/287;
+  background:#090806 url("assets/hero-target.webp") center/cover no-repeat;
+  position:relative;
+  border-bottom:1px solid var(--line);
+}
+.target-hero .hero-hotspot{
+  position:absolute;
+  left:6.2%;
+  top:61%;
+  width:16%;
+  height:12%;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  border-radius:4px;
+}
+.target-hero .hero-hotspot:focus-visible{outline:2px solid #f2c96e;outline-offset:3px}
+.target-categories{
+  display:block;
+  position:relative;
+  aspect-ratio:900/190;
+  margin:16px 2.2vw 0;
+  padding:0;
+  background:#080807 url("assets/category-target.webp") center/100% 100% no-repeat;
+}
+.target-categories .category-hotspot{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:49.5%;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+}
+.target-categories .category-hotspot-men{left:0}
+.target-categories .category-hotspot-women{right:0}
+.target-categories .category-hotspot:focus-visible{outline:2px solid #f2c96e;outline-offset:-3px}
+@media(max-width:760px){
+  .target-hero{aspect-ratio:1000/287;background-size:cover;background-position:center}
+  .target-categories{aspect-ratio:900/190;margin:10px 10px 0}
+}

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-0215">
+  <link rel="stylesheet" href="styles.css?v=20261001-0245">
 </head>
 <body>
   <div class="site-unavailable" id="siteUnavailable" hidden>
@@ -55,46 +55,13 @@
   </header>
 
   <main>
-    <section class="showcase-hero" id="inicio">
-      <div class="hero-copy">
-        <p class="hero-kicker">ESSÊNCIAS QUE MARCAM HISTÓRIAS</p>
-        <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
-        <p>Descubra fragrâncias marcantes com uma curadoria premium, atendimento personalizado e uma experiência à altura da sua escolha.</p>
-        <button type="button" class="hero-cta" data-jump-filter="todos">VER COLEÇÃO <span>→</span></button>
-        <div class="hero-benefits">
-          <span>◇ Curadoria premium</span>
-          <span>▣ Compra segura</span>
-          <span>✦ Atendimento personalizado</span>
-        </div>
-      </div>
-      <div class="hero-products" aria-hidden="true">
-        <div class="hero-glow"></div>
-        <div class="hero-bottle hero-bottle-a sprite-art sprite-3"></div>
-        <div class="hero-bottle hero-bottle-b sprite-art sprite-1"></div>
-        <div class="hero-bottle hero-bottle-c sprite-art sprite-4"></div>
-      </div>
+    <section class="showcase-hero target-hero" id="inicio" aria-label="Mais que perfumes, é a sua assinatura.">
+      <button class="hero-hotspot" type="button" data-jump-filter="todos" aria-label="Ver coleção completa"></button>
     </section>
 
-    <section class="category-grid" aria-label="Categorias">
-      <button class="category-card category-men" type="button" data-jump-filter="masculino">
-        <span class="category-shade"></span>
-        <span class="category-copy">
-          <small>PERFUMES</small>
-          <strong>MASCULINOS</strong>
-          <em>FORÇA · ELEGÂNCIA · PRESENÇA</em>
-          <b>EXPLORAR →</b>
-        </span>
-      </button>
-
-      <button class="category-card category-women" type="button" data-jump-filter="feminino">
-        <span class="category-shade"></span>
-        <span class="category-copy">
-          <small>PERFUMES</small>
-          <strong>FEMININOS</strong>
-          <em>BELEZA · SOFISTICAÇÃO · PERSONALIDADE</em>
-          <b>EXPLORAR →</b>
-        </span>
-      </button>
+    <section class="category-grid target-categories" aria-label="Categorias">
+      <button class="category-hotspot category-hotspot-men" type="button" data-jump-filter="masculino" aria-label="Explorar perfumes masculinos"></button>
+      <button class="category-hotspot category-hotspot-women" type="button" data-jump-filter="feminino" aria-label="Explorar perfumes femininos"></button>
     </section>
 
     <section class="benefit-row">
@@ -176,6 +143,6 @@
     </section>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="app.js?v=20261001-0215"></script>
+  <script type="module" src="app.js?v=20261001-0245"></script>
 </body>
 </html>
