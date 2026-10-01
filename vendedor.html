@@ -1,1 +1,77 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Painel do Vendedor — AZZENA PARFUMS</title><link rel="stylesheet" href="painel.css"><link rel="stylesheet" href="admin.css"></head><body><main class="shell"><section class="auth-card" id="loginView"><div class="brand">✦ <span>PARFUMS</span></div><p class="eyebrow">Vendedor</p><h1>Meu painel</h1><form id="loginForm"><label>E-mail<input id="email" type="email" required></label><label>Senha<input id="password" type="password" minlength="8" required></label><button class="btn btn-primary">Entrar</button><button class="btn btn-ghost" id="createAccess" type="button">Criar primeiro acesso</button></form><p id="loginMessage" class="form-message"></p></section><section id="app" hidden><header class="panel-head"><div><div class="brand">✦ <span>PARFUMS</span></div><p class="eyebrow">Vendedor</p><h1 id="sellerName">Meu estoque</h1></div><div class="admin-actions"><a class="btn btn-ghost" href="index.html" target="_blank">Abrir loja</a><button class="btn btn-ghost" id="logout">Sair</button></div></header><div id="metrics" class="metrics"></div><div class="card"><p class="eyebrow">Central de notificações</p><h2>Alertas de estoque baixo</h2><div id="alerts"></div></div><div class="card"><p class="eyebrow">Estoque</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div></div><div class="card" id="emergencyCard" hidden><p class="eyebrow">Área de emergência</p><h2>Controle da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><button class="btn btn-danger" id="disable">Desativar temporariamente</button><button class="btn btn-primary" id="enable">Colocar online</button><p id="status" class="muted"></p></div></section></main><div class="toast" id="toast"></div><script type="module" src="vendedor.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090806">
+<title>Área do Vendedor — AZZENA PARFUMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
+<link rel="stylesheet" href="vendedor.css?v=20261001-sellerflow1">
+</head><body class="seller-page">
+<div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
+<header class="seller-top">
+ <a href="index.html" class="seller-brand" aria-label="AZZENA PARFUMS"><strong>AZZENA</strong><small>PARFUMS</small></a>
+ <a href="index.html" class="seller-return">← Voltar à loja</a>
+</header>
+<main class="seller-shell">
+<section class="seller-loading" id="loadingView" role="status" aria-live="polite">
+ <div class="seller-loading-icon"></div><p class="eyebrow">AZZENA PARFUMS</p><h1>Verificando seu acesso...</h1>
+ <p id="loadingMessage">Um momento. Estamos confirmando sua conta com segurança.</p>
+ <div id="loadingRetry" hidden><button class="seller-outline" id="retryLoad" type="button">Tentar novamente</button><button class="seller-outline" id="loadingLogout" type="button">Trocar conta</button></div>
+</section>
+<section id="loginView" class="seller-auth" hidden>
+ <div class="seller-intro"><p class="eyebrow">EQUIPE AZZENA</p><h1>Área do Vendedor</h1><p>Crie sua conta e aguarde a aprovação do administrador para acessar seu estoque.</p></div>
+ <div class="seller-auth-grid">
+ <form class="seller-card" id="loginForm">
+  <p class="eyebrow">JÁ TENHO CONTA</p><h2>Entrar</h2>
+  <label>E-mail<input id="email" type="email" autocomplete="email" required placeholder="seuemail@exemplo.com"></label>
+  <label>Senha<span class="seller-password"><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Sua senha"><button type="button" class="seller-eye" data-password="password" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></svg></button></span></label>
+  <button class="seller-primary" type="submit">ENTRAR</button>
+  <button class="seller-text-action" type="button" id="resetPassword">Esqueceu sua senha?</button>
+  <p class="seller-feedback" id="loginMessage" role="status"></p>
+ </form>
+ <form class="seller-card" id="signupForm">
+  <p class="eyebrow">PRIMEIRO ACESSO</p><h2>Solicitar cadastro</h2>
+  <label>Nome completo<input name="name" autocomplete="name" required placeholder="Como deseja ser identificado"></label>
+  <label>WhatsApp com DDD<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(11) 99999-9999"></label>
+  <label>E-mail de acesso<input name="email" type="email" autocomplete="email" required placeholder="seuemail@exemplo.com"></label>
+  <label>Criar senha<span class="seller-password"><input name="password" id="signupPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="Mínimo de 8 caracteres"><button type="button" class="seller-eye" data-password="signupPassword" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></svg></button></span></label>
+  <button class="seller-primary" type="submit">CRIAR CONTA E SOLICITAR ACESSO</button>
+  <p class="seller-feedback" id="signupMessage" role="status"></p>
+ </form>
+ </div>
+</section>
+<section class="seller-card seller-state" id="confirmView" hidden>
+ <p class="eyebrow">CONFIRMAÇÃO DE E-MAIL</p><h2>Confira sua caixa de entrada</h2>
+ <p>Enviamos um link de confirmação. Após confirmar o endereço de e-mail, volte a esta página e entre com sua senha para enviar sua solicitação ao administrador.</p>
+ <button class="seller-primary" type="button" id="backToLogin">Ir para o login</button>
+</section>
+<section class="seller-card seller-state" id="applyView" hidden>
+ <p class="eyebrow">SOLICITAÇÃO DE ACESSO</p><h2>Complete seu cadastro</h2>
+ <p>Você já tem uma conta AZZENA. Para acessar o painel de vendedor, envie seus dados para aprovação.</p>
+ <form id="applyForm">
+   <label>Nome completo<input name="name" required autocomplete="name"></label>
+   <label>WhatsApp com DDD<input name="phone" required type="tel" autocomplete="tel"></label>
+   <button class="seller-primary" type="submit">ENVIAR PARA APROVAÇÃO</button>
+   <p class="seller-feedback" id="applyMessage"></p>
+ </form>
+ <button class="seller-outline" id="applyLogout" type="button">Sair</button>
+</section>
+<section class="seller-card seller-state" id="pendingView" hidden>
+ <p class="eyebrow">SUA SOLICITAÇÃO</p><h2 id="pendingTitle">Aguardando aprovação</h2>
+ <p id="pendingDescription">Seu cadastro foi enviado. O administrador precisa aprovar seu acesso.</p>
+ <p class="seller-account-line" id="pendingEmail"></p>
+ <div class="seller-state-actions"><button class="seller-primary" type="button" id="checkApproval">Verificar aprovação</button><button class="seller-outline" type="button" id="pendingLogout">Sair</button></div>
+</section>
+<section id="app" hidden>
+ <header class="seller-dashboard-head"><div><p class="eyebrow">PAINEL DO VENDEDOR</p><h1 id="sellerName">Meu estoque</h1></div><div class="seller-dashboard-actions"><a class="seller-outline" href="index.html" target="_blank" rel="noopener">Abrir loja</a><button class="seller-outline" id="logout" type="button">Sair</button></div></header>
+ <div id="metrics" class="metrics"></div>
+ <div class="card"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
+ <div class="card"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
+ <div class="card" id="emergencyCard" hidden><p class="eyebrow">ACESSO AUTORIZADO</p><h2>Emergência da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><div class="seller-dashboard-actions"><button class="btn btn-danger" id="disable" type="button">Desativar temporariamente</button><button class="btn btn-primary" id="enable" type="button">Colocar online</button></div><p id="status" class="muted"></p></div>
+</section>
+</main>
+<div id="toast" class="toast"></div>
+<script type="module" src="vendedor.js?v=20261001-sellerflow1"></script>
+</body></html>
