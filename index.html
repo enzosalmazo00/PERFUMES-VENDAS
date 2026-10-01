@@ -14,10 +14,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-headerlux2">
+  <link rel="stylesheet" href="styles.css?v=20261001-accountui3">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
+  <script>if(location.hash&&new URLSearchParams(location.hash.slice(1)).get('type')==='recovery'){location.replace('conta.html'+location.hash)}</script>
   <div class="site-unavailable" id="siteUnavailable" hidden>
     <div class="site-unavailable-card">
 <h1 id="siteUnavailableTitle">Site temporariamente indisponível</h1>
@@ -94,7 +95,11 @@
             <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
             <span class="hero-desc">Descubra fragrâncias marcantes com uma experiência de compra elegante, pessoal e segura.</span>
             <button class="gold-button hero-button" type="button" data-jump-filter="todos">VER COLEÇÃO <b>→</b></button>
-            <div class="hero-trust"><span>◇ <b>Curadoria selecionada</b></span><span>▣ <b>Pagamento seguro</b></span><span>✦ <b>Atendimento premium</b></span></div>
+            <div class="hero-trust">
+  <span><span class="trust-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 5-7 13L5 8l7-5Z"/><path d="M5 8h14M9 8l3 13 3-13"/></svg></span><b>Curadoria selecionada</b></span>
+  <span><span class="trust-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><b>Pagamento seguro</b></span>
+  <span><span class="trust-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5h-4v-5h4M4 13v5h4v-5H4Z"/><path d="M16 20c-1 1-2 1-4 1"/></svg></span><b>Atendimento premium</b></span>
+</div>
           </div>
         </article>
 
@@ -163,7 +168,7 @@
 
       <div class="catalog-controls">
         <label class="catalog-search">
-          <span>⌕</span>
+          <span class="tool-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.8 4.8"/></svg></span>
           <input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume...">
         </label>
         <div class="filters">
