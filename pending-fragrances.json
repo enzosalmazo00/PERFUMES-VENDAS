@@ -2,153 +2,8 @@
   "generated_for": "PERFUMES-VENDAS enrichment",
   "items": [
     {
-      "brand": "Antonio Banderas",
-      "name": "Blue Seduction",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Antonio Banderas",
-      "name": "Her Secret",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Antonio Banderas",
-      "name": "King of Seduction",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Antonio Banderas",
-      "name": "Queen of Seduction",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Antonio Banderas",
-      "name": "The Golden Secret",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Arabiyat",
-      "name": "Ameer Al Oudh",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Arabiyat",
-      "name": "Lamsat Harir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Arabiyat",
-      "name": "Prestige Marwa",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Arabiyat",
-      "name": "Prestige Nyla",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Al Dirgham",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Bint Hooran",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Dirham",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Dirham Wardi",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Midnight Oud",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Oud 24 Hours",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ard Al Zaafaran",
-      "name": "Oud 24 Hours Majestic Gold",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Club de Nuit Bling",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Club de Nuit Intense Man Pure Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Club de Nuit Intense Overdose",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Hunter Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Odyssey Aqua",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Odyssey Candee",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Odyssey Homme",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "Odyssey Homme White Edition",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "The Lion's Club Courageux",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "The Lion's Club Feroce",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "The Lion's Club Monarque",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Armaf",
-      "name": "The Lion's Club Rugir",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Avon",
       "name": "300 Km/h",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Avon",
-      "name": "Attraction",
       "product_type": "perfume"
     },
     {
@@ -168,287 +23,12 @@
     },
     {
       "brand": "Avon",
-      "name": "Pur Blanca",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Avon",
-      "name": "Segno",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Avon",
       "name": "Segno Impact",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Avon",
-      "name": "Today",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Azzaro",
-      "name": "The Most Wanted Eau de Parfum Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Azzaro",
-      "name": "The Most Wanted Eau de Toilette Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Azzaro",
-      "name": "Wanted by Night",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Azzaro",
-      "name": "Wanted Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "A Thousand Wishes",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "A Thousand Wishes Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Butterfly",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Champagne Toast",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Dark Kiss",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Gingham",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Gingham Fresh",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Gingham Gorgeous",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "In the Stars",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Into the Night",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Into the Night Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Bath & Body Works",
-      "name": "Strawberry Pound Cake",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bodycology",
-      "name": "Cherry Blossom",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bodycology",
-      "name": "Coconut Hibiscus",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bodycology",
-      "name": "Pink Vanilla Wish",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bodycology",
-      "name": "Sweet Love",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Bodycology",
-      "name": "Whipped Vanilla",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Brit Rhythm",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Burberry Brit",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Burberry Goddess",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Goddess Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Her Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Hero Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Hero Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Burberry",
-      "name": "Hero Parfum",
       "product_type": "perfume"
     },
     {
       "brand": "Bvlgari",
       "name": "Man in Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Calvin Klein",
-      "name": "CK Everyone",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Calvin Klein",
-      "name": "Eternity for Women",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Calvin Klein",
-      "name": "Euphoria Women",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 Men Heroes",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 Men NYC",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 Men NYC Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 Sexy Men",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 VIP Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 VIP Men",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 VIP Rosé",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 VIP Rosé Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Carolina Herrera",
-      "name": "212 Women NYC",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Chanel",
-      "name": "Bleu de Chanel Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Chanel",
-      "name": "Bleu de Chanel Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Chanel",
-      "name": "Chance Eau Fraîche",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Chanel",
-      "name": "Chance Eau Splendide",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Chanel",
-      "name": "Gabrielle Chanel",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Dior",
-      "name": "Sauvage Eau Forte",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Dior",
-      "name": "Sauvage Extrait",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Dolce & Gabbana",
-      "name": "K by Dolce & Gabbana",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Dolce & Gabbana",
-      "name": "Light Blue Pour Femme",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Dolce & Gabbana",
-      "name": "Q by Dolce & Gabbana",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Club 6",
       "product_type": "perfume"
     },
     {
@@ -458,17 +38,7 @@
     },
     {
       "brand": "Eudora",
-      "name": "Club 6 Voyage",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
       "name": "Eudora Rouge",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Impression",
       "product_type": "perfume"
     },
     {
@@ -492,108 +62,8 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Ferrari",
-      "name": "Ferrari Black Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Ferrari Blue Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Ferrari Red Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Scuderia Black Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Scuderia Red Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Scuderia SF21 Black Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Ferrari",
-      "name": "Scuderia SF21 Sport Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "After Effect",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Barakkat Gentle Gold",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Fragrance World",
       "name": "Barakkat Gentle Silver",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Barakkat Rouge 540",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Barakkat Satin Oud",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Cocktail Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "French Portrait",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Imperium",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Jack of Clubs",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Mocha Wood",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Star Men Nebula",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Fragrance World",
-      "name": "Suits",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Aether",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "After Effect",
       "product_type": "perfume"
     },
     {
@@ -623,32 +93,7 @@
     },
     {
       "brand": "French Avenue",
-      "name": "Spectre Wraith",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
       "name": "Vulcan Feu",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Giorgio Armani",
-      "name": "Stronger With You",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Giorgio Armani",
-      "name": "Stronger With You Absolutely",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Giorgio Armani",
-      "name": "Stronger With You Intensely",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Giorgio Armani",
-      "name": "Stronger With You Tobacco",
       "product_type": "perfume"
     },
     {
@@ -663,11 +108,6 @@
     },
     {
       "brand": "Granado",
-      "name": "Époque Tropical",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Granado",
       "name": "Rosa Damascena",
       "product_type": "perfume"
     },
@@ -677,53 +117,8 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Hermès",
-      "name": "H24 Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "H24 Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "Terre d'Hermès Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "Terre d'Hermès Eau Intense Vétiver",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "Terre d'Hermès Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "Twilly d'Hermès",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hermès",
-      "name": "Un Jardin sur le Nil",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Hinode",
       "name": "Empire",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hinode",
-      "name": "Empire Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hinode",
-      "name": "Empire Sport",
       "product_type": "perfume"
     },
     {
@@ -742,71 +137,6 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Hugo Boss",
-      "name": "Boss The Scent",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hugo Boss",
-      "name": "Boss The Scent Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Hugo Boss",
-      "name": "Hugo Man",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Divine",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Le Beau Narcisse",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Le Beau Paradise Garden",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Le Male Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Le Male Elixir Absolu",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jean Paul Gaultier",
-      "name": "Le Male in Blue",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jo Malone London",
-      "name": "English Pear & Freesia",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jo Malone London",
-      "name": "Oud & Bergamot",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jo Malone London",
-      "name": "Peony & Blush Suede",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Jo Malone London",
-      "name": "Pomegranate Noir",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Khadlaj",
       "name": "Shiyaaka Blue",
       "product_type": "perfume"
@@ -819,16 +149,6 @@
     {
       "brand": "Khadlaj",
       "name": "Shiyaaka Gold",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka Shadow",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Khadlaj",
-      "name": "Shiyaaka Sky",
       "product_type": "perfume"
     },
     {
@@ -867,23 +187,8 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Lancôme",
-      "name": "La Vie Est Belle",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Lancôme",
-      "name": "Trésor",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Lattafa",
       "name": "Bade'e Al Oud Noble Oud",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Loewe",
-      "name": "Loewe 001 Man",
       "product_type": "perfume"
     },
     {
@@ -913,27 +218,7 @@
     },
     {
       "brand": "Louis Vuitton",
-      "name": "Afternoon Swim",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
       "name": "Attrape-Rêves",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "City of Stars",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "Imagination",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "L'Immensité",
       "product_type": "perfume"
     },
     {
@@ -943,62 +228,7 @@
     },
     {
       "brand": "Louis Vuitton",
-      "name": "Ombre Nomade",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "Pacific Chill",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
       "name": "Spell On You",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mahogany",
-      "name": "English Rose",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mahogany",
-      "name": "Make Me Fever Gold",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mahogany",
-      "name": "Make Me Fever Rose",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mahogany",
-      "name": "Stark",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Amber & Leather",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Baroque Rouge 540",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Bright Peach",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Fabulo Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Jean Lowe Immortal",
       "product_type": "perfume"
     },
     {
@@ -1008,47 +238,7 @@
     },
     {
       "brand": "Maison Alhambra",
-      "name": "Jean Lowe Noir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
       "name": "Jean Lowe Nouveau",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Jean Lowe Ombre",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Kismet Angel",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Kismet for Men",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Kismet Magic",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Lovely Chèrie",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Porto Neroli",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Maison Alhambra",
-      "name": "Salvo Elixir",
       "product_type": "perfume"
     },
     {
@@ -1064,41 +254,6 @@
     {
       "brand": "Maison Alhambra",
       "name": "Yeah!",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mugler",
-      "name": "A*Men",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Mugler",
-      "name": "Angel",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Narciso Rodriguez",
-      "name": "Bleu Noir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Narciso Rodriguez",
-      "name": "Bleu Noir Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Narciso Rodriguez",
-      "name": "For Her Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Narciso Rodriguez",
-      "name": "For Her Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Narciso Rodriguez",
-      "name": "For Her Pure Musc",
       "product_type": "perfume"
     },
     {
@@ -1118,31 +273,6 @@
     },
     {
       "brand": "Natura",
-      "name": "Essencial Feminino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Essencial Masculino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Essencial Oud Feminino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Essencial Oud Masculino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Humor a Dois",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
       "name": "Humor Próprio",
       "product_type": "perfume"
     },
@@ -1158,117 +288,12 @@
     },
     {
       "brand": "Natura",
-      "name": "Kaiak Feminino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Kaiak Masculino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Luna",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Luna Absoluta",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Luna Intenso",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Tododia Algodão",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Natura",
-      "name": "Tododia Ameixa e Flor de Baunilha",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Natura",
-      "name": "Tododia Cereja e Avelã",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Natura",
       "name": "Tododia Macadâmia",
       "product_type": "body_splash"
     },
     {
-      "brand": "Natura",
-      "name": "Una Artisan",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Natura",
-      "name": "Una Senses",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Arbo",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Cuide-se Bem Boa Noite",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Cuide-se Bem Morango e Leite",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Cuide-se Bem Nuvem",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Egeo Dolce",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Floratta Blue",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Floratta Rose",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Lily",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Lily Lumière",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "O Boticário",
-      "name": "Malbec Noir",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Paris Corner",
       "name": "Emir Celestial",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Khair",
       "product_type": "perfume"
     },
     {
@@ -1283,137 +308,12 @@
     },
     {
       "brand": "Paris Corner",
-      "name": "Qissa",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Qissa Delicious",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
-      "name": "Taskeen",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Paris Corner",
       "name": "Taskeen Caramel Cascade",
       "product_type": "perfume"
     },
     {
       "brand": "Prada",
       "name": "L'Homme Prada",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Prada",
-      "name": "Luna Rossa Carbon",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "1 Million Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "1 Million Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Fame Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Invictus Legend",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Invictus Platinum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Invictus Victory Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Lady Million",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Olympea Solar",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rabanne",
-      "name": "Phantom Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Fattan Pour Homme",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Diva",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Elixir",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Fire",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Ice",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Pink",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Tropical",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "Hawas Verde",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Rasasi",
-      "name": "La Yuqawam",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Sol de Janeiro",
-      "name": "Cheirosa 62",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Sol de Janeiro",
-      "name": "Cheirosa 62 Eau de Parfum",
       "product_type": "perfume"
     },
     {
@@ -1432,203 +332,8 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Swiss Arabian",
-      "name": "Shaghaf Oud Royale Gold",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "The Body Shop",
-      "name": "Black Musk Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "The Body Shop",
-      "name": "Mango Body Mist",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "The Body Shop",
-      "name": "Moringa Body Mist",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "The Body Shop",
-      "name": "Shea Body Mist",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "The Body Shop",
-      "name": "Strawberry Body Mist",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Tom Ford",
-      "name": "Fucking Fabulous",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Tom Ford",
-      "name": "Lost Cherry",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Tom Ford",
-      "name": "Neroli Portofino",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Tom Ford",
-      "name": "Tobacco Vanille",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Tom Ford",
-      "name": "Vanilla Sex",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Donna",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Donna Coral Fantasy",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Donna Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Uomo",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Uomo Coral Fantasy",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Uomo Green Stravaganza",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Valentino",
-      "name": "Born in Roma Uomo Intense",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Versace",
-      "name": "Dylan Blue Pour Femme",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Versace",
-      "name": "Dylan Blue Pour Homme",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Versace",
-      "name": "Dylan Purple",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Aqua Kiss",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Bare Vanilla",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Bare Vanilla Cashmere",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Coconut Passion",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Love Spell",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Midnight Bloom",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "PINK Fresh & Clean",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "PINK Warm & Cozy",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Pure Seduction",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Pure Seduction Sol",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Tease Eau de Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Victoria's Secret",
-      "name": "Velvet Petals",
-      "product_type": "body_splash"
-    },
-    {
-      "brand": "Viktor & Rolf",
-      "name": "Flowerbomb",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Viktor & Rolf",
-      "name": "Spicebomb Infrared",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Viktor & Rolf",
       "name": "Spicebomb Night Vision",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Yves Saint Laurent",
-      "name": "Mon Paris",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Yves Saint Laurent",
-      "name": "MYSLF Le Parfum",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Yves Saint Laurent",
-      "name": "Y Eau de Toilette",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Yves Saint Laurent",
-      "name": "Y Elixir",
       "product_type": "perfume"
     }
   ]
