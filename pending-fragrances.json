@@ -3,11 +3,6 @@
   "items": [
     {
       "brand": "Avon",
-      "name": "300 Km/h",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Avon",
       "name": "Avon Naturals Baunilha",
       "product_type": "body_splash"
     },
@@ -22,83 +17,8 @@
       "product_type": "body_splash"
     },
     {
-      "brand": "Avon",
-      "name": "Segno Impact",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Bvlgari",
-      "name": "Man in Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Club 6 Intenso",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Eudora Rouge",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Impression In Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "Instance",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "La Victorie",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Eudora",
-      "name": "La Victorie Intense",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Fragrance World",
       "name": "Barakkat Gentle Silver",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Atlantis",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Liquid Brun",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Royal Blend",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Royal Blend Nero",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Spectre Ghost",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "French Avenue",
-      "name": "Vulcan Feu",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Givenchy",
-      "name": "Irresistible",
       "product_type": "perfume"
     },
     {
@@ -217,21 +137,6 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Louis Vuitton",
-      "name": "Attrape-Rêves",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "Météore",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Louis Vuitton",
-      "name": "Spell On You",
-      "product_type": "perfume"
-    },
-    {
       "brand": "Maison Alhambra",
       "name": "Jean Lowe Matière",
       "product_type": "perfume"
@@ -312,16 +217,6 @@
       "product_type": "perfume"
     },
     {
-      "brand": "Prada",
-      "name": "L'Homme Prada",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Sol de Janeiro",
-      "name": "Cheirosa 68",
-      "product_type": "body_splash"
-    },
-    {
       "brand": "Swiss Arabian",
       "name": "Shaghaf Oud",
       "product_type": "perfume"
@@ -329,11 +224,6 @@
     {
       "brand": "Swiss Arabian",
       "name": "Shaghaf Oud Royale Black",
-      "product_type": "perfume"
-    },
-    {
-      "brand": "Viktor & Rolf",
-      "name": "Spicebomb Night Vision",
       "product_type": "perfume"
     }
   ]
