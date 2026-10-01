@@ -167,6 +167,7 @@ async function refreshInventory(){
       '<p><b>'+esc(order.customer_name)+'</b> · '+money(order.total_cents)+'</p>'+
       '<p>'+esc(order.delivery_method==="presencial"?"Retirada presencial":"Entrega")+' · '+esc(payments[order.payment_status]||order.payment_status)+
       ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
+      '<p class="seller-order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+'× '+esc(item.product_name)+' · '+esc(item.volume_ml)+' mL').join('<br>')+'</p>'+ 
       '<div class="seller-dashboard-actions">'+(phone?'<a class="seller-outline" target="_blank" rel="noopener" href="https://wa.me/'+phone+'?text='+encodeURIComponent("Olá "+order.customer_name+", sobre seu pedido "+order.public_id+" na AZZENA PARFUMS.")+'">Conversar no WhatsApp</a>':'')+
       (canAdvance?'<button type="button" class="seller-outline" data-seller-order-save="'+esc(order.id)+'" data-next-status="'+next+'">'+labels[next]+'</button>':'')+'</div></article>';
   }).join(""):'<p class="muted">Ainda não há pedidos vinculados a você.</p>';
@@ -303,7 +304,7 @@ $("#sellerPickupForm").onsubmit=async event=>{
     $("#sellerPickupMessage").textContent="Endereço atualizado. "+(pickup.is_enabled?"Clientes podem escolher retirar neste local.":"Retirada desativada no momento.");
     notify("Ponto de retirada salvo.");
   }catch(error){
-    const message=error.message==="GOOGLE_MAPS_LINK_INVALID"?"Use um link válido do Google Maps.":friendlyError(error);
+    const message=error.message==="GOOGLE_MAPS_LINK_REQUIRED"?"Informe o link do Google Maps para habilitar a retirada.":error.message==="GOOGLE_MAPS_LINK_INVALID"?"Use um link válido do Google Maps.":friendlyError(error);
     $("#sellerPickupMessage").textContent=message;notify(message);
   }finally{submit.disabled=false}
 };
