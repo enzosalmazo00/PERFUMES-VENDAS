@@ -114,7 +114,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
     </div>
     <div class="card"><p class="eyebrow">PASSO 2</p><h2>Entrada ou saída manual</h2>
       <p class="muted">Para compras de fornecedor, use <strong>Compras e fornecedores</strong>: lá a entrada é registrada junto com custo e preço de venda.</p>
-      <form id="adjustForm">
+      <form id="adjustForm" class="form-grid">
         <div class="stock-direction span2" role="group" aria-label="Tipo de movimentação">
           <button type="button" class="stock-direction-btn is-active" data-stock-direction="entry" aria-pressed="true">↓ Entrada</button>
           <button type="button" class="stock-direction-btn" data-stock-direction="exit" aria-pressed="false">↑ Saída sem venda</button>
@@ -132,6 +132,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
     </div>
   </div>
   <div class="card"><p class="eyebrow">SALDOS ATUAIS</p><h2>Produtos por estoque</h2><div id="inventory"></div></div>
+<div class="card"><p class="eyebrow">AUDITORIA</p><h2>Últimas movimentações</h2><p class="muted">Saídas sem venda mostram a justificativa e o valor do prejuízo registrado.</p><div id="inventoryHistory"><p class="muted">Abra esta aba para carregar o histórico.</p></div></div>
 </section>
 <section class="tab-panel" data-panel="pedidos" hidden>
 <div class="grid2">
