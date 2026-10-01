@@ -381,6 +381,7 @@ function addToBag(product) {
       id: product.id,
       name: product.name,
       slug: product.slug,
+      image_url: product.image_url || null,
       volume_ml: product.volume_ml,
       unit_price_cents: product.sale_price_cents ?? product.price_cents,
       quantity: 1
