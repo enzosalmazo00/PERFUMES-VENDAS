@@ -78,6 +78,7 @@ function renderNotifications(){
  const unread=notifications.filter(n=>!n.is_read).length;
  const badge=$("#sellerNotificationCount");
  badge.hidden=unread===0;badge.textContent=unread>99?"99+":String(unread);
+ const nav=$("#sellerNavUnread");if(nav){nav.hidden=unread===0;nav.textContent=unread>99?"99+":String(unread)}
  $("#sellerNotificationBell").setAttribute("aria-label",unread+" notificação(ões) não lida(s)");
  $("#sellerMarkAllRead").disabled=unread===0;
  $("#sellerNotificationList").innerHTML=notifications.length?
