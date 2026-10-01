@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
-<link rel="stylesheet" href="vendedor.css?v=20261001-sellerflow1">
+<link rel="stylesheet" href="vendedor.css?v=20261001-pickup1">
 </head><body class="seller-page">
 <div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
 <header class="seller-top">
@@ -69,9 +69,38 @@
  <div id="metrics" class="metrics"></div>
  <div class="card"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
  <div class="card"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
- <div class="card" id="emergencyCard" hidden><p class="eyebrow">ACESSO AUTORIZADO</p><h2>Emergência da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><div class="seller-dashboard-actions"><button class="btn btn-danger" id="disable" type="button">Desativar temporariamente</button><button class="btn btn-primary" id="enable" type="button">Colocar online</button></div><p id="status" class="muted"></p></div>
+ <div class="card seller-share-card">
+<p class="eyebrow">MEU CATÁLOGO</p><h2>Compartilhar produtos disponíveis</h2>
+<p class="muted">Este link exibe apenas seus perfumes e body splash com estoque positivo. O cliente também poderá abrir o catálogo geral da AZZENA.</p>
+<label>Link exclusivo do meu catálogo<input type="url" id="sellerCatalogUrl" readonly aria-label="Link do meu catálogo" placeholder="Seu link aparecerá aqui após aprovação"></label>
+<div class="seller-dashboard-actions seller-share-actions">
+<button type="button" id="copySellerCatalog" class="seller-primary">Copiar link do catálogo</button>
+<a id="sendSellerCatalog" class="seller-outline" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+<a id="openSellerCatalog" class="seller-outline" href="#" target="_blank" rel="noopener">Visualizar meu catálogo</a>
+</div><p id="sellerShareStatus" class="muted" aria-live="polite"></p>
+</div>
+<div class="card seller-pickup-card">
+<p class="eyebrow">RETIRADA PRESENCIAL</p><h2>Endereço de retirada dos produtos</h2>
+<p class="muted">Cadastre um local comercial ou autorizado para retirada. Ele só será exibido para o cliente se você ativar a opção. Não use seu endereço residencial caso não queira torná-lo público.</p>
+<form id="sellerPickupForm" class="seller-pickup-grid">
+<label>Nome do ponto de retirada<input name="display_name" required placeholder="Ex.: Loja do Centro"></label>
+<label>País<select name="country_code"><option value="BR">Brasil</option><option value="PY">Paraguai</option></select></label>
+<label>Rua / Avenida<input name="street" required autocomplete="street-address"></label>
+<label>Número<input name="street_number" required></label>
+<label>Bairro<input name="neighborhood" required></label>
+<label>Cidade<input name="city" required></label>
+<label>Estado / Departamento<input name="state" required></label>
+<label>CEP (opcional)<input name="postal_code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label>
+<label class="seller-full-span">Complemento (opcional)<input name="complement" placeholder="Loja, sala, galeria..."></label>
+<label class="seller-full-span">Link do Google Maps<input name="google_maps_url" type="url" placeholder="https://maps.app.goo.gl/... ou https://www.google.com/maps/..."></label>
+<label class="seller-full-span">Instruções para retirada<textarea name="instructions" rows="3" placeholder="Horário de atendimento, portaria, orientações..."></textarea></label>
+<label class="seller-full-span seller-toggle"><input name="is_enabled" type="checkbox"> Permitir que clientes escolham retirar neste endereço</label>
+<div class="seller-full-span"><button type="submit" class="seller-primary">Salvar ponto de retirada</button></div>
+</form><p id="sellerPickupMessage" class="muted" aria-live="polite"></p>
+</div>
+<div class="card" id="emergencyCard" hidden><p class="eyebrow">ACESSO AUTORIZADO</p><h2>Emergência da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><div class="seller-dashboard-actions"><button class="btn btn-danger" id="disable" type="button">Desativar temporariamente</button><button class="btn btn-primary" id="enable" type="button">Colocar online</button></div><p id="status" class="muted"></p></div>
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261001-sellerflow2"></script>
+<script type="module" src="vendedor.js?v=20261001-pickup1"></script>
 </body></html>
