@@ -1,5 +1,5 @@
-import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-0045";
-import{shell,renderDashboard}from"./admin-view.js?v=20261001-0045";
+import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-bodysplash1";
+import{shell,renderDashboard}from"./admin-view.js?v=20261001-bodysplash1";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const login=$("#loginView"),app=$("#app"),content=$("#adminContent"),msg=$("#loginMessage"),toast=$("#toast");
 let data=null;
