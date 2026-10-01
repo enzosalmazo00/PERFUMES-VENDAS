@@ -111,3 +111,10 @@ body.seller-page{font-family:Poppins,Arial,sans-serif;background:radial-gradient
 .seller-order-lines{font-size:11px;color:#bca989}
 @media(max-width:880px){.seller-cash-picker{grid-template-columns:1fr 1fr}.seller-cash-picker label:first-child{grid-column:1/-1}}
 @media(max-width:600px){.seller-cash-customer,.seller-cash-picker{grid-template-columns:1fr}.seller-cash-picker label:first-child{grid-column:1}}
+
+.seller-dashboard-tabs{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin;margin:8px 0 23px;padding-bottom:7px}
+.seller-dashboard-tabs a{position:relative;flex:none;border:1px solid rgba(216,172,94,.34);background:#100c07;padding:12px 15px;color:#e9cca0;text-decoration:none;font:600 11px Poppins,Arial,sans-serif;border-radius:2px;white-space:nowrap}
+.seller-dashboard-tabs a:hover,.seller-dashboard-tabs a:focus-visible{background:#26190a;border-color:#e1b978}
+.seller-nav-badge{display:inline-flex;margin-left:5px;padding:2px 6px;border-radius:20px;background:#bd222b;color:#fff;font-size:10px}
+.seller-nav-badge[hidden]{display:none!important}
+#sellerNotificationCenter,#sellerOrdersCard,#sellerCashCard,#sellerPickupCard{scroll-margin-top:16px}
