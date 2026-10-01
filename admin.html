@@ -1,1 +1,63 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Painel ADM — AZZENA PARFUMS</title><link rel="stylesheet" href="painel.css?v=20261001-0045"><link rel="stylesheet" href="admin.css?v=20261001-accountui3"></head><body><main class="shell"><section class="auth-card" id="loginView"><h1>Painel ADM</h1><form id="loginForm"><label>E-mail<input id="email" type="email" required></label><label>Senha<div class="admin-password-field"><input id="password" type="password" minlength="8" required><button class="admin-password-eye" id="adminPasswordEye" type="button" aria-label="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="2.7"></circle></svg></button></div></label><button class="admin-forgot-link" id="forgotAdminPassword" type="button">Esqueceu sua senha?</button><button class="btn btn-primary">Entrar</button><button class="btn btn-ghost" id="createAccess" type="button">Criar conta</button><button class="btn btn-ghost" id="resendConfirm" type="button">Reenviar confirmação</button></form><p id="loginMessage"></p></section><section id="app" hidden><header class="panel-head"><h1>Administração</h1><button id="logout" class="btn btn-ghost">Sair</button></header><div id="adminContent"></div></section></main><div class="toast" id="toast"></div><script type="module" src="admin.js?v=20261001-accountui3"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090806">
+  <title>Painel ADM — AZZENA PARFUMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="painel.css?v=20261001-0045">
+  <link rel="stylesheet" href="admin.css?v=20261001-loginlayout1">
+</head>
+<body>
+  <main class="shell">
+    <section class="auth-card" id="loginView" aria-labelledby="adminLoginHeading">
+      <div class="admin-login-brand" aria-label="AZZENA PARFUMS">
+        <svg class="admin-login-mark" viewBox="0 0 88 56" aria-hidden="true">
+          <path d="M8 10H39L22 28l17 18H8M80 10H49l17 18-17 18h31M44 15l6 13-6 13-6-13 6-13Z"/>
+        </svg>
+        <div class="admin-login-brand-name"><strong>AZZENA</strong><small>PARFUMS</small></div>
+      </div>
+      <div class="admin-login-heading">
+        <p class="admin-login-kicker">ACESSO RESTRITO</p>
+        <h1 id="adminLoginHeading">Painel ADM</h1>
+        <p>Entre com sua conta para administrar a loja.</p>
+      </div>
+      <form id="loginForm" autocomplete="on">
+        <label for="email">E-mail
+          <input id="email" type="email" required autocomplete="username" placeholder="seuemail@exemplo.com" inputmode="email">
+        </label>
+        <label for="password">Senha
+          <span class="admin-password-field">
+            <input id="password" type="password" minlength="8" required autocomplete="current-password" placeholder="Digite sua senha">
+            <button class="admin-password-eye" id="adminPasswordEye" type="button" aria-label="Mostrar senha" aria-controls="password">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/>
+                <circle cx="12" cy="12" r="2.7"/>
+              </svg>
+            </button>
+          </span>
+        </label>
+        <div class="admin-forgot-row">
+          <button class="admin-forgot-link" id="forgotAdminPassword" type="button">Esqueceu sua senha?</button>
+        </div>
+        <button class="btn btn-primary admin-enter" type="submit">Entrar no painel</button>
+        <div class="admin-login-divider"><span>PRIMEIRO ACESSO OU CONFIRMAÇÃO</span></div>
+        <div class="admin-secondary-actions">
+          <button class="btn btn-ghost" id="createAccess" type="button">Criar conta</button>
+          <button class="btn btn-ghost" id="resendConfirm" type="button">Reenviar confirmação</button>
+        </div>
+      </form>
+      <p id="loginMessage" class="admin-login-message" role="status" aria-live="polite"></p>
+    </section>
+    <section id="app" hidden>
+      <header class="panel-head"><h1>Administração</h1><button id="logout" class="btn btn-ghost" type="button">Sair</button></header>
+      <div id="adminContent"></div>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="admin.js?v=20261001-accountui3"></script>
+</body>
+</html>
