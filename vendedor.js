@@ -15,6 +15,19 @@ function busy(message="Verificando seu acesso..."){
   $("#loadingMessage").textContent=message;
   show("loadingView");
 }
+function setSellerTab(name,{scroll=true}={}){
+ const valid=["overview","orders","stock","preorders","pickup","cash","store"];if(!valid.includes(name))name="overview";
+ document.querySelectorAll("[data-seller-panel]").forEach(panel=>panel.hidden=panel.dataset.sellerPanel!==name);
+ document.querySelectorAll("[data-seller-tab]").forEach(button=>{const active=button.dataset.sellerTab===name;button.classList.toggle("is-active",active);button.setAttribute("aria-selected",String(active))});
+ try{sessionStorage.setItem("azzena-seller-tab",name)}catch{}
+ if(scroll)document.querySelector(".seller-ops-nav")?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function initSellerTabs(){
+ document.querySelectorAll("[data-seller-tab]").forEach(button=>button.onclick=()=>setSellerTab(button.dataset.sellerTab));
+ document.querySelectorAll("[data-open-seller-tab]").forEach(button=>button.onclick=()=>setSellerTab(button.dataset.openSellerTab));
+ let saved="overview";try{saved=sessionStorage.getItem("azzena-seller-tab")||"overview"}catch{}
+ setSellerTab(saved,{scroll:false});
+}
 function notify(message){
   const toast=$("#toast");
   toast.textContent=message;
@@ -135,7 +148,8 @@ function showPending(status,info){
 async function refreshInventory(){
   const response=await call("seller-portal",{});
   const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
-  $("#sellerName").textContent=data.seller?.name||"Meu estoque";
+  $("#sellerName").textContent=data.seller?.name||"Meu painel";
+   const preorderToggle=$("#sellerAllowPreorders");if(preorderToggle)preorderToggle.checked=data.seller?.allow_preorders===true;
   $("#metrics").innerHTML=[
     ["Produtos",inventory.length],
     ["Unidades",inventory.reduce((sum,item)=>sum+Number(item.quantity||0),0)],
@@ -297,6 +311,12 @@ $("#copySellerCatalog").onclick=async()=>{
   try{await navigator.clipboard.writeText(url);notify("Link do catálogo copiado!")}
   catch{$("#sellerCatalogUrl").focus();$("#sellerCatalogUrl").select();notify("Selecione e copie o link exibido no campo.")}
 };
+$("#sellerAllowPreorders").onchange=async event=>{
+ const input=event.currentTarget,previous=!input.checked;input.disabled=true;$("#sellerPreorderStatus").textContent="Salvando preferência...";
+ try{const result=await call("seller-portal",{action:"update_preorder_settings",enabled:input.checked});input.checked=result.data?.enabled===true;$("#sellerPreorderStatus").textContent=input.checked?"Encomendas ativadas. Produtos esgotados poderão gerar solicitações pelo WhatsApp.":"Encomendas desativadas.";notify("Preferência de encomendas atualizada.")}
+ catch(error){input.checked=previous;$("#sellerPreorderStatus").textContent=friendlyError(error);notify("Não foi possível alterar as encomendas.")}
+ finally{input.disabled=false}
+};
 $("#sellerPickupForm").onsubmit=async event=>{
   event.preventDefault();
   const form=event.currentTarget,submit=form.querySelector('[type="submit"]');
@@ -337,6 +357,7 @@ $("#sellerLabelSize").onchange=()=>{
   let current={};try{current=JSON.parse(localStorage.getItem("azzena-label-prefs")||"{}")}catch{}
   localStorage.setItem("azzena-label-prefs",JSON.stringify({...current,size:$("#sellerLabelSize").value}));
 };
+initSellerTabs();
 initSellerSales({call,notify,onSale:refreshInventory});
 initPickupVerifier({call,notify,onDelivered:refreshInventory});
 if(readSession())openSeller();else show("loginView");
