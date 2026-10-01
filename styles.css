@@ -1130,3 +1130,5 @@ body{font-family:Poppins,Arial,sans-serif}
 .pickup-location-card p{font:400 11px/1.7 Poppins,Arial,sans-serif;color:#d0c3ae;margin:0}
 .pickup-location-card a{color:#edc783;text-decoration:underline;text-underline-offset:3px;font-size:12px}
 @media(max-width:540px){.checkout-method-options{grid-template-columns:1fr}.checkout-method{min-height:70px}}
+
+.checkout-payment-provider{padding:15px 17px;border:1px solid rgba(219,177,105,.4);background:linear-gradient(110deg,#201609,#090806);margin:17px 0}.checkout-payment-provider strong{font-size:13px;color:#eed29b}.checkout-payment-provider p{font-size:11px;line-height:1.65;color:#cbbb9d;margin:7px 0 0}.checkout-method[hidden],.payment-tabs[hidden],.shipping-checkout[hidden]{display:none!important}
