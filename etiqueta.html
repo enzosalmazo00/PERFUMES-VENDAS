@@ -1,0 +1,46 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#15110c"><title>Etiquetas de vendas — AZZENA PARFUMS</title>
+<style>
+*{box-sizing:border-box}body{font:14px/1.5 Arial,Helvetica,sans-serif;color:#f6e9cc;background:#090806;margin:0}
+[hidden]{display:none!important}button,select,input{font:inherit}a{color:#e9ca8e}
+.wrap{width:min(1100px,95vw);margin:auto;padding:30px 0 90px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-bottom:1px solid #5c4b30;padding-bottom:15px}
+.brand{font:700 28px/1.2 Georgia,serif;letter-spacing:.15em;color:#e9c781}.brand small{display:block;font:10px Arial;letter-spacing:.4em;text-align:center}
+h1{font:normal 38px Georgia,serif;margin:25px 0 10px}.muted{color:#beae97;font-size:12px}
+.controls{display:flex;align-items:end;flex-wrap:wrap;gap:14px;border:1px solid #5c4b30;background:#18130b;padding:20px;margin:25px 0}
+.controls label{display:grid;gap:6px;font-size:12px;color:#d5bd8f}.controls select,.controls input{width:180px;max-width:100%;height:42px;background:#090806;color:#f9ecd2;border:1px solid #7c6842;padding:8px;border-radius:3px}
+button{padding:11px 19px;border:1px solid #dfc48a;background:#e0bc74;color:#201508;font-weight:bold;cursor:pointer;border-radius:3px}
+#status{color:#e8c68d;font-size:13px}.preview{overflow:auto;padding:24px;background:#35302a;border:1px solid #76614b;display:grid;justify-content:center}
+.label{width:100mm;min-height:150mm;background:white;color:#111;padding:5mm;border:1px solid #999;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:3mm;font-size:10pt;--scale:100}
+.label[data-size="100x100"]{width:100mm;min-height:100mm;gap:2mm}.label[data-size="a4"]{width:210mm;min-height:297mm;padding:12mm}
+.label .lh{display:flex;align-items:center;justify-content:space-between;gap:6px;border-bottom:2px solid #111;padding-bottom:2mm}
+.label .brandprint{font:bold 15pt Georgia,serif;letter-spacing:.1em}.label .brandprint small{font:bold 7pt Arial;letter-spacing:.3em;display:block}
+.label .order-code{font:bold 14pt Arial}.label h2{font-size:11pt;margin:0 0 2mm}
+.label p{margin:0 0 1.5mm}.label .label-block{border:1px solid #111;padding:2mm}.label .label-block strong{display:block;font-size:9pt}
+.label .label-items{width:100%;border-collapse:collapse;font-size:9pt}.label-items th,.label-items td{padding:1.5mm .5mm;border-bottom:1px solid #aaa;text-align:left}.label-items th:last-child,.label-items td:last-child{text-align:right}
+.label .label-total{font:bold 13pt Arial;text-align:right}.label .label-warning{padding:2.5mm;border:2px solid #111;text-align:center;font-weight:bold;font-size:11pt}
+.label .label-foot{border-top:1px dashed #555;padding-top:2mm;margin-top:auto;font-size:8pt}.label .label-datetime{font-size:8pt}
+.label[data-size="100x100"] .label-items{font-size:7.5pt}.label[data-size="100x100"] .label-warning{font-size:9pt;padding:1mm}.label[data-size="100x100"] .label-block{padding:1mm}
+@media print{
+ @page{size:100mm 150mm;margin:0}
+ html,body{padding:0!important;margin:0!important;background:#fff!important}
+ .top,.controls,h1,.muted,#status{display:none!important}.wrap{padding:0;width:auto;max-width:none;margin:0}
+ .preview{border:0;padding:0;display:block;background:#fff;overflow:visible}
+ .label{border:0!important;box-shadow:none!important;margin:0!important;break-inside:avoid}
+ .label[data-size="a4"]{width:210mm;min-height:297mm}.label[data-size="100x100"]{width:100mm;min-height:100mm}
+}
+@media(max-width:600px){.controls{display:grid}.controls label select,.controls label input{width:100%}}
+</style></head><body><main class="wrap">
+<div class="top"><div class="brand">AZZENA<small>PARFUMS</small></div><a href="vendedor.html">← Painel do vendedor</a></div>
+<h1>Gerador de etiquetas</h1><p class="muted">Dados restritos à conta do vendedor responsável pelo pedido. Ajuste o formato antes de imprimir; revise a escala na janela da impressora.</p>
+<div class="controls">
+<label>Tamanho padrão<select id="labelSize"><option value="100x150">100 × 150 mm (4 × 6 pol.)</option><option value="100x100">100 × 100 mm</option><option value="a4">Folha A4</option></select></label>
+<label>Escala do conteúdo<select id="labelScale"><option value="85">85%</option><option value="90">90%</option><option value="95">95%</option><option value="100" selected>100%</option><option value="105">105%</option><option value="110">110%</option></select></label>
+<label>Margem interna<select id="labelPadding"><option value="3">3 mm</option><option value="5" selected>5 mm</option><option value="7">7 mm</option><option value="10">10 mm</option></select></label>
+<button id="printLabel" type="button" disabled>Imprimir etiqueta</button>
+</div>
+<p id="status" role="status">Verificando acesso e preparando etiqueta...</p>
+<div class="preview"><article class="label" id="printSheet" data-size="100x150" aria-label="Prévia da etiqueta"><p>Carregando...</p></article></div>
+</main>
+<script type="module" src="etiqueta.js?v=20261001-saleops1"></script>
+</body></html>
