@@ -1,5 +1,5 @@
 import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-accountui3";
-import{shell,renderDashboard}from"./admin-view.js?v=20261001-catalog1";
+import{shell,renderDashboard}from"./admin-view.js?v=20261001-sellerflow1";
 import{initializeCatalogForm,catalogLoadProduct,catalogResetForm,catalogReadBrand,catalogReadVolume}from"./fragrance-selectors.js?v=20261001-catalog1";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const login=$("#loginView"),app=$("#app"),content=$("#adminContent"),msg=$("#loginMessage"),toast=$("#toast");
@@ -26,7 +26,22 @@ $("#productForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarg
 $("#editProductForm").onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget),id=f.get("id"),file=f.get("image");try{notify("Salvando alterações...");await adminApi({action:"update_product",id,...productPayload(f,true)});if(file instanceof File&&file.size){const imageUrl=await uploadProductImage(file);await productImageApi({product_id:id,image_url:imageUrl})}await refresh();closeProductEditor();notify("Perfume atualizado.")}catch(x){notify(x.message)}};
 $("#cancelEditProduct").onclick=closeProductEditor;
 
-content.addEventListener("click",async e=>{const saveOrder=e.target.closest("[data-save-order]"),editSeller=e.target.closest("[data-edit-seller]"),edit=e.target.closest("[data-edit-product]"),del=e.target.closest("[data-delete-product]"),restore=e.target.closest("[data-restore-product]");if(saveOrder){const id=saveOrder.dataset.saveOrder,fulfillment=document.querySelector('[data-order-fulfillment="'+id+'"]')?.value,payment=document.querySelector('[data-order-payment="'+id+'"]')?.value;try{await adminApi({action:"update_order_status",id,fulfillment_status:fulfillment,payment_status:payment});await refresh();notify("Pedido atualizado.")}catch(x){notify(x.message)}return}if(editSeller){openSellerEditor(editSeller.dataset.editSeller);return}if(edit){openProductEditor(edit.dataset.editProduct);return}if(del){const p=data?.products?.find(x=>x.id===del.dataset.deleteProduct);if(!confirm('Excluir "'+(p?.name||"este perfume")+'" da loja? O histórico será preservado.'))return;try{await adminApi({action:"delete_product",id:del.dataset.deleteProduct});await refresh();closeProductEditor();notify("Perfume removido da loja.")}catch(x){notify(x.message)}return}if(restore){try{await adminApi({action:"restore_product",id:restore.dataset.restoreProduct});await refresh();notify("Perfume restaurado na loja.")}catch(x){notify(x.message)}}});
+content.addEventListener("click",async e=>{
+const review=e.target.closest("[data-review-seller]");
+if(review){
+  const seller=data?.sellers?.find(x=>x.id===review.dataset.reviewSeller);
+  const decision=review.dataset.decision;
+  if(!seller||!["approve","reject"].includes(decision))return;
+  if(!confirm(decision==="approve"?"Aprovar o acesso de "+seller.name+" ao painel do vendedor?":"Recusar a solicitação de "+seller.name+"?"))return;
+  review.disabled=true;
+  try{
+    await adminApi({action:"review_seller",id:seller.id,decision});
+    await refresh();
+    notify(decision==="approve"?"Vendedor aprovado! Ele já pode entrar.":"Solicitação recusada.");
+  }catch(error){notify(error.message||"Não foi possível atualizar a solicitação.");review.disabled=false}
+  return;
+}
+const saveOrder=e.target.closest("[data-save-order]"),editSeller=e.target.closest("[data-edit-seller]"),edit=e.target.closest("[data-edit-product]"),del=e.target.closest("[data-delete-product]"),restore=e.target.closest("[data-restore-product]");if(saveOrder){const id=saveOrder.dataset.saveOrder,fulfillment=document.querySelector('[data-order-fulfillment="'+id+'"]')?.value,payment=document.querySelector('[data-order-payment="'+id+'"]')?.value;try{await adminApi({action:"update_order_status",id,fulfillment_status:fulfillment,payment_status:payment});await refresh();notify("Pedido atualizado.")}catch(x){notify(x.message)}return}if(editSeller){openSellerEditor(editSeller.dataset.editSeller);return}if(edit){openProductEditor(edit.dataset.editProduct);return}if(del){const p=data?.products?.find(x=>x.id===del.dataset.deleteProduct);if(!confirm('Excluir "'+(p?.name||"este perfume")+'" da loja? O histórico será preservado.'))return;try{await adminApi({action:"delete_product",id:del.dataset.deleteProduct});await refresh();closeProductEditor();notify("Perfume removido da loja.")}catch(x){notify(x.message)}return}if(restore){try{await adminApi({action:"restore_product",id:restore.dataset.restoreProduct});await refresh();notify("Perfume restaurado na loja.")}catch(x){notify(x.message)}}});
 
 $("#cityForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;const f=new FormData(form);try{const r=await adminApi({action:"create_city",city_name:f.get("city_name"),state_name:f.get("state_name"),country_code:f.get("country_code")});form.reset();await refresh();notify(r?.already_exists?"Cidade já estava cadastrada e continua ativa.":r?.restored?"Cidade reativada.":"Cidade cadastrada.");$("#cities")?.scrollIntoView({behavior:"smooth",block:"nearest"})}catch(x){notify(x.message==="CITY_CREATE_FAILED"?"Não foi possível cadastrar a cidade. Verifique os dados e tente novamente.":x.message)}};
 $("#sellerForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;const f=new FormData(form);try{await adminApi({action:"create_seller",name:f.get("name"),email:f.get("email"),whatsapp_number:f.get("whatsapp_number"),avatar_url:f.get("avatar_url"),bio:f.get("bio"),city_ids:f.get("city_id")?[f.get("city_id")]:[],can_toggle_site_emergency:f.get("can_toggle")==="on"});form.reset();await refresh();notify("Vendedor cadastrado.")}catch(x){notify(x.message)}};
