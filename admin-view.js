@@ -15,7 +15,11 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <section class="tab-panel" data-panel="perfumes" hidden>
 <div class="card"><p class="eyebrow">Catálogo</p><h2>Novo produto</h2>
 <form id="productForm" class="form-grid">
-<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label class="span2 catalog-global-label">🔎 Buscar perfume, linha ou marca
+<input class="catalog-global-search" type="search" placeholder="Ex.: Ferrari Black, Club de Nuit, Khamrah, 9PM..." autocomplete="off" aria-label="Pesquisar perfume ou marca">
+<small>Pesquise o nome completo ou apenas parte dele. Clique no resultado para preencher o cadastro.</small></label>
+<div class="catalog-global-results span2" role="group" aria-label="Resultados da busca de perfumes" hidden></div>
+<label>Ou filtre pela marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
@@ -47,7 +51,11 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <p class="eyebrow">Edição</p><h2>Editar produto</h2>
 <form id="editProductForm" class="form-grid">
 <input type="hidden" name="id">
-<label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
+<label class="span2 catalog-global-label">🔎 Buscar perfume, linha ou marca
+<input class="catalog-global-search" type="search" placeholder="Ex.: Ferrari Black, Club de Nuit, Khamrah, 9PM..." autocomplete="off" aria-label="Pesquisar perfume ou marca">
+<small>Pesquise o nome completo ou apenas parte dele. Clique no resultado para preencher o cadastro.</small></label>
+<div class="catalog-global-results span2" role="group" aria-label="Resultados da busca de perfumes" hidden></div>
+<label>Ou filtre pela marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
 <label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
