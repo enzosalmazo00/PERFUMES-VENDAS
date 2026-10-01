@@ -17,7 +17,7 @@ return `<nav class="tabs">
 <label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
-<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label>
+<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
 <label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
@@ -49,7 +49,7 @@ return `<nav class="tabs">
 <label>Pesquisar marca<input class="catalog-brand-search" type="search" placeholder="Ex.: Dior, Lattafa, Chanel..." autocomplete="off"><small class="catalog-count-hint">Carregando catálogo...</small></label>
 <label>Marca<select name="brand_preset" class="catalog-brand-select" required><option value="">Carregando marcas...</option></select></label>
 <label class="catalog-custom-brand span2" hidden>Outra marca<input name="brand_custom" placeholder="Digite o nome da marca" autocomplete="off"></label>
-<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label>
+<label class="span2">Perfume ou fragrância da marca<select name="fragrance_preset" class="catalog-fragrance-select"><option value="">Escolha uma marca primeiro</option></select></label><div class="span2 catalog-reference-note" role="status">Ao escolher uma fragrância com ficha oficial validada, os dados serão preenchidos automaticamente.</div>
 <label class="span2">Nome do produto<input name="name" required placeholder="Preenchido automaticamente; você pode editar"><small>Ao selecionar uma fragrância, o nome aparece aqui. Para outra, digite o nome.</small></label>
 <label>Tipo de produto<select name="product_type"><option value="perfume">Perfume</option><option value="body_splash">Body Splash</option></select></label>
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
