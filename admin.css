@@ -238,3 +238,32 @@
 @media(max-width:440px){.stock-direction-btn{font-size:11px;padding:11px 5px}}
 
 #supplierActiveLabel[hidden],#adjustImpactLabel[hidden]{display:none!important}
+
+
+/* Busca direta de fragrâncias: resultados clicáveis, legíveis em qualquer tela. */
+.catalog-global-label{position:relative;margin:8px 0}
+.catalog-global-label .catalog-global-search{min-height:53px!important;border:1px solid rgba(230,189,112,.6)!important;background:#1d170d!important;font-size:15px!important}
+.catalog-global-label small{display:block;color:#c1b096;font-size:11px;line-height:1.55;margin:5px 0}
+.catalog-global-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:345px;overflow-y:auto;padding:10px;background:#100d08;border:1px solid rgba(214,176,107,.45);box-shadow:0 14px 32px rgba(0,0,0,.4);margin:0 0 15px}
+.catalog-global-results[hidden]{display:none!important}
+.catalog-search-status{grid-column:1/-1;color:#e3c592;font-size:11px;line-height:1.5;margin:2px 4px 8px}
+.catalog-search-hit{display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;padding:12px;border:1px solid rgba(227,191,121,.2);background:#1d1811;color:#f4eadd;min-height:60px;cursor:pointer}
+.catalog-search-hit:hover,.catalog-search-hit:focus-visible{border-color:#dec27e;background:#312414;outline:none}
+.catalog-search-hit strong{font:600 12px/1.4 Poppins,Arial,sans-serif}
+.catalog-search-hit small{font:400 10px/1.4 Poppins,Arial,sans-serif;color:#bdab8f}
+/* Recebimento com múltiplos produtos no mesmo fornecedor/estoque */
+.purchase-lines-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#eed5a3;margin:15px 0 3px;font-size:16px}
+.purchase-lines-head small{font-size:11px;color:#afa390}
+.purchase-lines{display:grid;gap:15px}
+.purchase-line{min-width:0;padding:20px;border:1px solid rgba(224,181,99,.35);background:linear-gradient(130deg,#1c150d,#0e0c09)}
+.purchase-line-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px;color:#e9ca8b;font-size:15px}
+.purchase-line-title .purchase-remove{color:#efb6ab;border-color:rgba(222,102,82,.55);font-size:11px;min-height:36px}
+.purchase-line .form-grid{gap:12px;align-items:end}
+.purchase-line input[name="sale_price_preview"]{color:#e9c679!important;background:#231c0f!important;font:700 17px Poppins,Arial,sans-serif!important}
+.purchase-line-search{min-height:45px!important}
+.purchase-line-summary{font-size:12px;line-height:1.65;color:#c5b5a2;margin-top:12px;padding:11px;background:#16110b;border:1px solid rgba(215,174,100,.2)}
+.purchase-line-summary.is-valid{border-color:rgba(127,179,123,.35);color:#e1d2b1}
+.purchase-add-row{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:2px 0 8px;color:#c2ae86;font-size:11px}
+.purchase-add-row button{border-color:#c4a05d;background:#241a0d;color:#e6ca91;font-weight:600;min-height:45px}
+.purchase-add-row button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:760px){.catalog-global-results{grid-template-columns:1fr}.purchase-line{padding:16px 12px}.purchase-lines-head{align-items:flex-start}.purchase-line .form-grid{grid-template-columns:1fr}.purchase-line .span2{grid-column:auto}}
