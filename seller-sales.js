@@ -1,7 +1,7 @@
 import {openSellerLabel} from "./seller-labels.js?v=20261001-sales5";
 const $=s=>document.querySelector(s);
 const brl=c=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100);
-let services=null,initialized=false,poll=null,orderData=[],inventory=[],cart=[],notifications=[],saleKey=null;
+let services=null,initialized=false,poll=null,orderData=[],inventory=[],heldStock=[],cart=[],notifications=[],saleKey=null;
 const int=value=>{
  const number=Number(String(value??"0").trim().replace(",","."));
  return Number.isFinite(number)?Math.round(number*100):NaN;
@@ -19,7 +19,11 @@ function grouped(){
     max_discount_percent:Number(row.max_discount_percent||0)};map.set(row.product_id,p)}
   p.quantity+=Number(row.quantity);
  }
- return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
+ for(const hold of heldStock){
+   const p=map.get(hold.product_id);
+   if(p)p.quantity=Math.max(0,p.quantity-Number(hold.quantity||0));
+ }
+ return [...map.values()].filter(p=>p.quantity>0).sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
 }
 function product(id){return grouped().find(x=>x.id===id)}
 function moneyInfo(){
@@ -187,7 +191,7 @@ export function initSellerSales(dependencies){
  initialized=true;bind();
 }
 export function renderSellerSales(data){
- inventory=data.inventory||[];orderData=data.orders||[];notifications=data.notifications||[];
+ inventory=data.inventory||[];heldStock=data.held_stock||[];orderData=data.orders||[];notifications=data.notifications||[];
  prepareInventory();renderNotifications();renderCart();
  const orders=document.querySelectorAll("#sellerOrders .seller-order");
  orders.forEach((card,index)=>{
