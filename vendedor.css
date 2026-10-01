@@ -25,3 +25,10 @@ body.seller-page{font-family:Poppins,Arial,sans-serif;background:radial-gradient
 .seller-pickup-grid .seller-toggle input{min-height:auto;width:18px;height:18px;margin:2px 0 0;flex:none;accent-color:#d9b571}
 .seller-share-card .muted,.seller-pickup-card .muted{line-height:1.65}
 @media(max-width:680px){.seller-pickup-grid{grid-template-columns:1fr}.seller-full-span{grid-column:1}.seller-share-actions .seller-primary{width:100%}}
+
+.seller-order{display:grid;gap:7px;padding:15px;margin:11px 0;border:1px solid rgba(218,178,101,.32);background:#120e08}
+.seller-order header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.seller-order header strong{color:#efd198;font:600 16px Poppins,Arial,sans-serif}
+.seller-order header small{color:#a99a85}
+.seller-order p{font-size:12px;color:#cbbca7;margin:0;line-height:1.6}
+.seller-order .seller-dashboard-actions{margin-top:9px}
