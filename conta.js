@@ -107,6 +107,37 @@ const storeDate=value=>{
    day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false
  }).format(date)+" (horário de Brasília)";
 };
+function pendingReviewOrders(){
+ return (boot?.orders||[]).filter(order=>order.payment_channel==="mercadopago"&&order.payment_status==="approved"&&(order.items||[]).some(item=>!(order.reviews||[]).some(review=>review.product_id===item.product_id)));
+}
+function closeReviewModal(){const modal=$("#reviewOverlay");if(modal)modal.hidden=true;document.body.style.overflow=""}
+function renderReviewModal(order){
+ const list=$("#reviewProductList");if(!list)return;
+ const reviewed=new Set((order.reviews||[]).map(r=>r.product_id));
+ list.replaceChildren();
+ for(const item of order.items||[]){
+   const card=document.createElement("section");card.className="review-product";
+   if(reviewed.has(item.product_id)){card.innerHTML="<h3>"+esc(item.product_name)+"</h3><p class=\"review-done\">Avaliação enviada como compra verificada.</p>";list.append(card);continue}
+   const title=document.createElement("h3");title.textContent=item.product_name;
+   const meta=document.createElement("small");meta.textContent=(item.volume_ml?item.volume_ml+" mL · ":"")+"Compra verificada";
+   const stars=document.createElement("div");stars.className="review-stars";stars.setAttribute("role","group");stars.setAttribute("aria-label","Nota de zero a cinco estrelas");
+   const label=document.createElement("span");label.className="review-rating-label";label.textContent="0 de 5";
+   let rating=0;
+   for(let value=1;value<=5;value++){const star=document.createElement("button");star.type="button";star.className="review-star";star.textContent="★";star.setAttribute("aria-label",value+" estrela"+(value>1?"s":""));star.onclick=()=>{rating=value;[...stars.querySelectorAll(".review-star")].forEach((s,i)=>s.classList.toggle("is-active",i<rating));label.textContent=rating+" de 5"};stars.append(star)}
+   const zero=document.createElement("button");zero.type="button";zero.className="account-mini-btn";zero.textContent="0 estrela";zero.onclick=()=>{rating=0;stars.querySelectorAll(".review-star").forEach(s=>s.classList.remove("is-active"));label.textContent="0 de 5"};
+   const comment=document.createElement("textarea");comment.maxLength=1200;comment.minLength=5;comment.placeholder="Escreva seu comentário sobre o produto...";
+   const submit=document.createElement("button");submit.type="button";submit.className="review-submit";submit.textContent="PUBLICAR AVALIAÇÃO";
+   submit.onclick=async()=>{const text=comment.value.trim();if(text.length<5){$("#reviewMessage").textContent="Escreva pelo menos 5 caracteres no comentário.";return}submit.disabled=true;try{await customerPortal({action:"review_product",order_id:order.id,product_id:item.product_id,rating,comment:text});$("#reviewMessage").textContent="Avaliação publicada. Obrigado por compartilhar sua experiência.";const response=await customerPortal({action:"orders"});if(boot&&Array.isArray(response.data)){boot.orders=response.data;renderOrders();const updated=boot.orders.find(o=>o.id===order.id);if(updated)renderReviewModal(updated)}}catch(error){$("#reviewMessage").textContent=error?.message==="REVIEW_ALREADY_EXISTS"?"Este produto já foi avaliado.":"Não foi possível publicar a avaliação agora."}finally{submit.disabled=false}};
+   card.append(title,meta,stars,label,zero,comment,submit);list.append(card);
+ }
+ $("#reviewOverlay").hidden=false;document.body.style.overflow="hidden";
+}
+function maybePromptReview(){
+ const order=pendingReviewOrders()[0];if(!order)return;
+ const key="azzena-review-prompt-"+order.id;
+ if(sessionStorage.getItem(key))return;
+ sessionStorage.setItem(key,"shown");renderReviewModal(order);
+}
 function renderOrders(){
  const orders=boot?.orders||[];
  const maps=raw=>{
@@ -182,7 +213,7 @@ async function refreshCustomerOrders(){
  orderRefreshBusy=true;
  try{
    const response=await customerPortal({action:"orders"});
-   if(boot&&Array.isArray(response.data)){boot.orders=response.data;renderOrders()}
+   if(boot&&Array.isArray(response.data)){const had=pendingReviewOrders().length;boot.orders=response.data;renderOrders();if(!had&&pendingReviewOrders().length)maybePromptReview()}
  }catch(error){console.warn("Pedidos: atualização temporariamente indisponível.",error?.message||"")}
  finally{orderRefreshBusy=false}
 }
@@ -203,6 +234,9 @@ $("#orderList").addEventListener("click",async event=>{
    notify(copied?"Código de retirada copiado.":"Mantenha o código visível para apresentá-lo ao vendedor.");
  }
 });
+$("#closeReview").onclick=closeReviewModal;
+$("#reviewOverlay").onclick=event=>{if(event.target===$("#reviewOverlay"))closeReviewModal()};
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!$("#reviewOverlay").hidden)closeReviewModal()});
 window.setInterval(refreshCustomerOrders,30000);
 document.addEventListener("visibilitychange",()=>{
  if(document.visibilityState==="visible")refreshCustomerOrders();
@@ -220,6 +254,7 @@ function renderAccount(){
   fillAddress(selected);
   renderAddresses();
   renderOrders();
+  window.setTimeout(maybePromptReview,350);
   $("#accountSaveMessage").textContent="Altere seus dados e endereço e salve tudo em um só lugar.";
   authView.hidden=true;recoveryView.hidden=true;accountView.hidden=false;
   hideChecking();
