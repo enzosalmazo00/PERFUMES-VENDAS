@@ -57,10 +57,25 @@ return `<nav class="tabs">
 <section class="tab-panel" data-panel="rede" hidden>
 <div class="grid2">
   <div class="card"><p class="eyebrow">Cobertura</p><h2>Nova cidade</h2><form id="cityForm"><label>Cidade<input name="city_name" required placeholder="Ex.: Pedro Juan Caballero"></label><label>Estado/Departamento<input name="state_name" placeholder="Ex.: Amambay"></label><label>País<select name="country_code"><option value="BR">Brasil</option><option value="PY">Paraguai</option></select></label><button class="btn btn-primary">Cadastrar cidade</button></form></div>
-  <div class="card"><p class="eyebrow">Equipe</p><h2>Novo vendedor</h2><form id="sellerForm"><label>Nome<input name="name" required></label><label>E-mail de acesso<input name="email" type="email"></label><label>WhatsApp<input name="whatsapp_number" required></label><label>Foto (URL)<input name="avatar_url"></label><label>Cidade<select name="city_id" id="sellerCity"></select></label><label><input type="checkbox" name="can_toggle"> Pode usar emergência</label><button class="btn btn-primary">Cadastrar vendedor</button></form></div>
+  <div class="card"><p class="eyebrow">Equipe</p><h2>Novo vendedor</h2><form id="sellerForm"><label>Nome<input name="name" required></label><label>E-mail de acesso<input name="email" type="email"></label><label>WhatsApp<input name="whatsapp_number" required></label><label>Foto (URL)<input name="avatar_url"></label><label>Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label><label>Cidade<select name="city_id" id="sellerCity"></select></label><label><input type="checkbox" name="can_toggle"> Pode usar emergência</label><button class="btn btn-primary">Cadastrar vendedor</button></form></div>
 </div>
 <div class="card"><p class="eyebrow">Cobertura cadastrada</p><h2>Cidades</h2><div id="cities"></div></div>
 <div class="card"><p class="eyebrow">Equipe cadastrada</p><h2>Vendedores</h2><div id="sellers"></div></div>
+<div class="card edit-product-card" id="editSellerCard" hidden>
+<p class="eyebrow">Edição</p><h2>Editar vendedor</h2>
+<form id="editSellerForm" class="form-grid">
+<input type="hidden" name="id">
+<label>Nome<input name="name" required></label>
+<label>E-mail de acesso<input name="email" type="email"></label>
+<label>WhatsApp<input name="whatsapp_number" required></label>
+<label>Foto (URL)<input name="avatar_url"></label>
+<label class="span2">Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label>
+<label>Cidade<select name="city_id" id="editSellerCity"></select></label>
+<label class="checkline"><input type="checkbox" name="can_toggle"> Pode usar emergência</label>
+<label class="checkline"><input type="checkbox" name="is_active"> Vendedor ativo</label>
+<div class="span2 edit-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn" type="button" id="cancelEditSeller">Cancelar</button></div>
+</form>
+</div>
 </section>
 <section class="tab-panel" data-panel="estoque" hidden><div class="grid2"><div class="card"><p class="eyebrow">Local</p><h2>Novo estoque</h2><form id="locationForm"><label>Nome<input name="name" required></label><label>Cidade<select name="city_id" id="locationCity"></select></label><label>Vendedor<select name="seller_id" id="locationSeller"></select></label><button class="btn btn-primary">Criar estoque</button></form></div>
 <div class="card"><p class="eyebrow">Regulador auditável</p><h2>Movimentar estoque</h2><form id="adjustForm"><label>Estoque<select name="location_id" id="adjustLocation"></select></label><label>Produto<select name="product_id" id="adjustProduct"></select></label><label>Quantidade (+ entrada / − saída)<input name="qty" type="number" required></label><label>Motivo<select name="reason"><option value="restock">Reposição</option><option value="breakage">Quebra</option><option value="damage">Avaria</option><option value="loss">Perda</option><option value="gift">Brinde</option><option value="road_loss">Perda na estrada</option><option value="inventory_count">Contagem</option><option value="return">Devolução</option><option value="other">Outro</option></select></label><label>Impacto financeiro (R$)<input name="impact" type="number" min="0" step=".01"></label><label>Justificativa<textarea name="note"></textarea></label><button class="btn btn-primary">Registrar</button></form></div></div><div class="card" id="inventory"></div></section>
@@ -82,9 +97,18 @@ document.querySelector("#products").innerHTML=table([
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Excluir</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'</div>']
 ],d.products);
 document.querySelector("#cities").innerHTML=table([["Cidade",r=>esc(r.city_name)],["Estado/Departamento",r=>esc(r.state_name||"—")],["País",r=>r.country_code==="PY"?"Paraguai":"Brasil"],["Status",r=>r.is_active?'<span class="badge-ok">Ativa</span>':'<span class="badge-off">Inativa</span>']],d.cities);
-document.querySelector("#sellers").innerHTML=table([["Nome",r=>esc(r.name)],["E-mail",r=>esc(r.email||"—")],["WhatsApp",r=>esc(r.whatsapp_number)],["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"]],d.sellers);
+document.querySelector("#sellers").innerHTML=table([
+["Nome",r=>'<strong>'+esc(r.name)+'</strong>'],
+["E-mail",r=>esc(r.email||"—")],
+["WhatsApp",r=>esc(r.whatsapp_number)],
+["Cidade",r=>{const id=(r.city_ids||[])[0];const c=d.cities.find(x=>x.id===id);return esc(c?.city_name||"—")}],
+["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Inativo</span>'],
+["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],
+["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
+],d.sellers);
 document.querySelector("#inventory").innerHTML=table([["Produto",r=>esc(r.product_name)],["Local",r=>esc(r.location_name)],["Cidade",r=>esc(r.city_name||"—")],["Vendedor",r=>esc(r.seller_name||"—")],["Saldo",r=>r.low_stock?'<span class="badge-warn">⚠ '+r.quantity+'</span>':r.quantity],["Limite",r=>r.low_stock_threshold]],d.inventory);
-document.querySelector("#sellerCity").innerHTML=option(d.cities,"id","city_name","Sem cidade");
+document.querySelector("#sellerCity").innerHTML=option(d.cities.filter(x=>x.is_active),"id","city_name","Sem cidade");
+document.querySelector("#editSellerCity").innerHTML=option(d.cities.filter(x=>x.is_active),"id","city_name","Sem cidade");
 document.querySelector("#locationCity").innerHTML=option(d.cities,"id","city_name","Sem cidade");
 document.querySelector("#locationSeller").innerHTML=option(d.sellers,"id","name","Sem vendedor");
 document.querySelector("#adjustLocation").innerHTML=option(d.locations,"id","name");
