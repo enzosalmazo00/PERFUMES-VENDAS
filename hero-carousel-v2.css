@@ -252,3 +252,42 @@
 @media(max-width:900px){
   #inicio .hero-desc{font-size:16px!important}
 }
+
+
+/* WIDE READABLE POPPINS 20261001 */
+#inicio .hero-copy,
+#inicio .hero-copy>p,
+#inicio .hero-copy h1,
+#inicio .hero-copy h1 em,
+#inicio .hero-desc,
+#inicio .hero-button,
+#inicio .hero-button b,
+#inicio .hero-trust{
+  font-family:"Poppins",Arial,sans-serif!important;
+}
+#inicio .hero-copy h1{
+  font-weight:600!important;
+  letter-spacing:-.025em!important;
+  line-height:1.02!important;
+}
+#inicio .hero-copy h1 em{
+  font-style:italic!important;
+  font-weight:500!important;
+}
+#inicio .hero-copy>p{
+  font-weight:600!important;
+  letter-spacing:.12em!important;
+}
+#inicio .hero-desc{
+  font-weight:400!important;
+  letter-spacing:0!important;
+  line-height:1.55!important;
+}
+#inicio .hero-button{
+  font-weight:600!important;
+  letter-spacing:.055em!important;
+}
+#inicio .hero-trust{
+  font-weight:500!important;
+  letter-spacing:0!important;
+}
