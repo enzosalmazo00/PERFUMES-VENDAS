@@ -99,38 +99,114 @@ function renderAddresses(){
     }catch(error){notify(error.message||"Não foi possível excluir o endereço.")}
   });
 }
+const storeDate=value=>{
+ if(!value)return "Aguardando confirmação";
+ const date=new Date(value);
+ if(!Number.isFinite(date.getTime()))return "Data indisponível";
+ return new Intl.DateTimeFormat("pt-BR",{timeZone:"America/Sao_Paulo",
+   day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:false
+ }).format(date)+" (horário de Brasília)";
+};
 function renderOrders(){
-  const orders=boot?.orders||[];
-  const maps=raw=>{
-    try{
-      const u=new URL(raw);
-      if(u.protocol!=="https:"||(!/^(maps\.app\.goo\.gl|goo\.gl)$/.test(u.hostname)&&!/^((www|maps)\.)?google\.[a-z.]+$/.test(u.hostname)))return null;
-      return u.href;
-    }catch{return null}
-  };
-  $("#orderList").innerHTML=orders.length?orders.map(order=>{
-    const isPickup=order.delivery_method==="presencial"&&order.pickup_location_snapshot;
-    const loc=isPickup?order.pickup_location_snapshot:null;
-    const map=loc?maps(loc.google_maps_url):null;
-    const location=loc?
-      '<div class="account-pickup"><strong>Local de retirada: '+esc(loc.display_name||"Retirada com o vendedor")+'</strong><p>'+
-      esc(loc.street)+', '+esc(loc.street_number)+(loc.complement?' · '+esc(loc.complement):'')+
-      '<br>'+esc(loc.neighborhood)+' · '+esc(loc.city)+'/'+esc(loc.state)+
-      (loc.postal_code?'<br>CEP: '+esc(loc.postal_code):'')+'</p>'+
-      (map?'<a href="'+esc(map)+'" target="_blank" rel="noopener noreferrer">Abrir Google Maps ↗</a>':'')+
-      (loc.instructions?'<p>'+esc(loc.instructions)+'</p>':'')+
-      '<p class="account-warning">Aguarde a confirmação do pagamento e a liberação da retirada antes de se deslocar.</p></div>':"";
-    const paymentLabels={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
-    return '<article class="order-item"><div class="order-head"><div><strong>'+esc(order.public_id)+
-      '</strong><p>'+new Date(order.created_at).toLocaleString("pt-BR")+'</p></div><span class="order-status">'+esc(statusLabel(order.fulfillment_status))+'</span></div>'+
-      '<div class="order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+"× "+esc(item.product_name)+" · "+brl(item.line_total_cents)).join("<br>")+
-      '</div><p><strong>'+esc(paymentLabels[order.payment_status]||order.payment_status)+'</strong><br>'+
-      (isPickup?'Retirada presencial · sem frete':'Entrega · Frete: '+brl(order.shipping_price_cents)+' · '+esc(order.shipping_carrier||"—")+" / "+esc(order.shipping_service||"—"))+
-      '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
-      (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
-      (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+'</p>'+location+'</article>';
-  }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
+ const orders=boot?.orders||[];
+ const maps=raw=>{
+   try{
+     const url=new URL(raw);
+     if(url.protocol!=="https:"||(!/^(maps\.app\.goo\.gl|goo\.gl)$/.test(url.hostname)&&
+       !/^((www|maps)\.)?google\.[a-z.]+$/.test(url.hostname)))return null;
+     return url.href;
+   }catch{return null}
+ };
+ $("#orderList").innerHTML=orders.length?orders.map(order=>{
+   const isPickup=order.delivery_method==="presencial"&&!!order.pickup_location_snapshot;
+   const isOnlinePickup=isPickup&&order.payment_channel==="mercadopago";
+   const loc=isPickup?order.pickup_location_snapshot:null;
+   const map=loc?maps(loc.google_maps_url):null;
+   const paid=order.payment_status==="approved";
+   const redeemed=isOnlinePickup&&!!order.pickup_redeemed_at;
+   const units=(order.items||[]).reduce((n,item)=>n+Number(item.quantity||0),0);
+   const pickupDetails=loc?
+     '<div class="account-pickup"><strong>Local de retirada: '+esc(loc.display_name||"Retirada com o vendedor")+'</strong><p>'+
+     esc(loc.street)+', '+esc(loc.street_number)+(loc.complement?' · '+esc(loc.complement):'')+
+     '<br>'+esc(loc.neighborhood)+' · '+esc(loc.city)+'/'+esc(loc.state)+
+     (loc.postal_code?'<br>CEP: '+esc(loc.postal_code):'')+'</p>'+
+     (map?'<a href="'+esc(map)+'" target="_blank" rel="noopener noreferrer">Abrir Google Maps ↗</a>':'')+
+     (loc.instructions?'<p>'+esc(loc.instructions)+'</p>':'')+
+     (!redeemed?'<p class="account-warning">Aguarde o pagamento ser confirmado e o pedido ficar pronto antes de ir ao local.</p>':'')+'</div>':"";
+   let pickupCodeCard="";
+   if(isOnlinePickup){
+     if(redeemed){
+       pickupCodeCard='<section class="customer-pickup-code is-redeemed" aria-label="Comprovante de entrega">'+
+         '<p class="customer-pickup-eyebrow">RETIRADA CONCLUÍDA · CÓDIGO BAIXADO</p>'+
+         '<strong class="customer-pickup-number">'+esc(order.pickup_code||"CÓDIGO UTILIZADO")+'</strong>'+
+         '<div class="customer-delivery-proof"><strong>PRODUTO(S) ENTREGUE(S)</strong><p>'+esc(units)+' unidade(s) entregue(s) a <b>'+
+         esc(order.customer_name)+'</b> pelo vendedor <b>'+esc(order.delivered_by_seller_name||"autorizado AZZENA")+
+         '</b> em <b>'+esc(storeDate(order.delivered_at||order.pickup_redeemed_at))+'</b>.</p>'+
+         '<p>A entrega foi registrada e este código não pode ser utilizado novamente.</p></div></section>';
+     }else if(paid&&order.pickup_code){
+       pickupCodeCard='<section class="customer-pickup-code" aria-label="Código de retirada do pedido">'+
+         '<p class="customer-pickup-eyebrow">SEU CÓDIGO ÚNICO DE RETIRADA</p>'+
+         '<strong class="customer-pickup-number">'+esc(order.pickup_code)+'</strong>'+
+         '<button type="button" class="customer-copy-code" data-copy-pickup-code="'+esc(order.pickup_code)+'">COPIAR CÓDIGO</button>'+
+         '<p><b>Pagamento confirmado:</b> '+esc(storeDate(order.payment_confirmed_at))+'</p>'+
+         '<p><b>Produtos:</b> '+units+' unidade(s). Mostre este código ao vendedor quando retirar.</p>'+
+         (order.fulfillment_status==="ready"?'<p class="customer-pickup-ready">PEDIDO PRONTO PARA RETIRADA</p>':
+           '<p class="customer-pickup-waiting">Aguarde o vendedor liberar a retirada dos produtos.</p>')+
+         '<p class="customer-pickup-instruction">O código é pessoal. Não envie a desconhecidos nem entregue seus produtos a terceiros sem conferir a compra.</p>'+
+         '</section>';
+     }else if(paid){
+       pickupCodeCard='<div class="customer-pickup-waiting">Pagamento confirmado. Estamos preparando seu código de retirada. Esta página atualizará o pedido automaticamente.</div>';
+     }else{
+       pickupCodeCard='<div class="customer-pickup-waiting"><strong>PAGAMENTO AINDA NÃO CONFIRMADO</strong><p>Seu código será emitido automaticamente após a confirmação do pagamento pela AZZENA. Não faça PIX pessoal ao vendedor.</p></div>';
+     }
+   }
+   const paymentLabels={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",
+     cancelled:"Cancelado",refunded:"Estornado"};
+   return '<article class="order-item"><div class="order-head"><div><strong>'+esc(order.public_id)+
+     '</strong><p>'+new Date(order.created_at).toLocaleString("pt-BR")+'</p></div>'+
+     '<span class="order-status">'+esc(redeemed?"Entregue ao cliente":statusLabel(order.fulfillment_status))+'</span></div>'+
+     '<div class="order-lines">'+(order.items||[]).map(item=>esc(item.quantity)+"× "+esc(item.product_name)+
+        (item.volume_ml?" · "+esc(item.volume_ml)+" mL":"")+" · "+brl(item.line_total_cents)).join("<br>")+'</div>'+
+     '<p><strong>'+esc(paymentLabels[order.payment_status]||order.payment_status)+'</strong><br>'+
+     (isPickup?'Retirada presencial · sem frete':'Entrega · Frete: '+brl(order.shipping_price_cents)+
+       ' · '+esc(order.shipping_carrier||"—")+' / '+esc(order.shipping_service||"—"))+
+     '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
+     (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
+     (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+
+     '</p>'+pickupCodeCard+pickupDetails+'</article>';
+ }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
 }
+let orderRefreshBusy=false;
+async function refreshCustomerOrders(){
+ if(orderRefreshBusy||accountView.hidden||!loadCustomerSession()||document.visibilityState!=="visible")return;
+ orderRefreshBusy=true;
+ try{
+   const response=await customerPortal({action:"orders"});
+   if(boot&&Array.isArray(response.data)){boot.orders=response.data;renderOrders()}
+ }catch(error){console.warn("Pedidos: atualização temporariamente indisponível.",error?.message||"")}
+ finally{orderRefreshBusy=false}
+}
+$("#orderList").addEventListener("click",async event=>{
+ const button=event.target.closest("[data-copy-pickup-code]");
+ if(!button)return;
+ const code=button.dataset.copyPickupCode;
+ try{
+   if(!navigator.clipboard?.writeText)throw new Error("Clipboard unavailable");
+   await navigator.clipboard.writeText(code);
+   notify("Código de retirada copiado.");
+ }catch{
+   const field=document.createElement("input");
+   field.value=code;field.readOnly=true;
+   field.style.position="fixed";field.style.left="-9999px";
+   document.body.append(field);field.select();
+   const copied=document.execCommand("copy");field.remove();
+   notify(copied?"Código de retirada copiado.":"Mantenha o código visível para apresentá-lo ao vendedor.");
+ }
+});
+window.setInterval(refreshCustomerOrders,30000);
+document.addEventListener("visibilitychange",()=>{
+ if(document.visibilityState==="visible")refreshCustomerOrders();
+});
 function renderAccount(){
   const profile=boot?.profile||{};
   $("#welcomeName").textContent=profile.full_name?"Olá, "+profile.full_name.split(" ")[0]:"Minha conta";
