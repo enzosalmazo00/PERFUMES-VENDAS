@@ -4,145 +4,197 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070604">
-  <meta name="description" content="Perfumes importados com curadoria premium e atendimento personalizado.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Enzo Salmazo Perfumes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-0245">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261001-0206">
 </head>
 <body>
   <div class="site-unavailable" id="siteUnavailable" hidden>
-    <div class="site-unavailable-card" role="status" aria-live="polite">
-      <span class="site-unavailable-mark">✦</span>
-      <p class="eyebrow">ENZO SALMAZO PERFUMES</p>
+    <div class="site-unavailable-card">
+      <div class="mini-crown">♛</div>
       <h1 id="siteUnavailableTitle">Site temporariamente indisponível</h1>
       <p id="siteUnavailableMessage">Estamos realizando um ajuste operacional. Voltamos em breve.</p>
     </div>
   </div>
 
-  <div class="luxury-strip">
-    <span>▣ <b>FRETE GRÁTIS</b> em compras selecionadas</span>
-    <span>◇ <b>PRODUTOS ORIGINAIS</b> com garantia de procedência</span>
-    <span>▤ <b>PARCELE EM ATÉ 12X</b> no cartão</span>
+  <div class="benefit-bar">
+    <div><span class="benefit-icon">◆</span><strong>ENTREGA PRESENCIAL</strong><small>Atendimento combinado com o vendedor</small></div>
+    <div><span class="benefit-icon">◇</span><strong>PRODUTOS SELECIONADOS</strong><small>Curadoria e procedência informada</small></div>
+    <div><span class="benefit-icon">▣</span><strong>PIX E CARTÃO</strong><small>Pagamento no fechamento da compra</small></div>
   </div>
 
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Ir para o início">
-      <span class="crown">♛</span>
-      <span class="brand-copy"><strong>ENZO SALMAZO</strong><small>PERFUMES</small></span>
+  <header class="header">
+    <a class="logo" href="#inicio">
+      <span class="logo-crown">♛</span>
+      <span class="logo-name">ENZO SALMAZO</span>
+      <small>PERFUMES</small>
     </a>
 
-    <nav class="main-nav" aria-label="Navegação principal">
-      <a class="is-active" href="#inicio">Início</a>
+    <nav class="nav">
+      <a class="active" href="#inicio">Início</a>
       <button type="button" data-jump-filter="masculino">Masculinos</button>
       <button type="button" data-jump-filter="feminino">Femininos</button>
       <a href="#catalogo">Promoções</a>
-      <a href="#catalogo">Mais vendidos</a>
-      <a href="#contato">Novidades</a>
+      <a href="#catalogo">Mais Vendidos</a>
+      <a href="#catalogo">Novidades</a>
     </nav>
 
-    <div class="header-actions">
+    <div class="header-tools">
       <label class="header-search">
         <span>⌕</span>
-        <input type="search" id="headerSearch" placeholder="Buscar perfumes...">
+        <input id="topSearch" type="search" placeholder="Buscar perfumes...">
       </label>
-      <a class="account-link" href="admin.html" aria-label="Área do vendedor">♙</a>
-      <button class="bag-btn" id="bagBtn" type="button" aria-label="Abrir sacola">
-        <span class="bag-symbol">♧</span><span class="bag-count" id="bagCount">0</span>
+      <a class="user-icon" href="admin.html" aria-label="Área do vendedor">♙</a>
+      <button class="cart-icon" id="bagBtn" type="button" aria-label="Abrir sacola">
+        ♧<span id="bagCount">0</span>
       </button>
     </div>
   </header>
 
   <main>
-    <section class="showcase-hero target-hero" id="inicio" aria-label="Mais que perfumes, é a sua assinatura.">
-      <button class="hero-hotspot" type="button" data-jump-filter="todos" aria-label="Ver coleção completa"></button>
-    </section>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p>ESSÊNCIAS QUE MARCAM HISTÓRIAS</p>
+        <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
+        <span class="hero-desc">Descubra fragrâncias marcantes com uma experiência de compra elegante, pessoal e segura.</span>
+        <button class="gold-button hero-button" type="button" data-jump-filter="todos">VER COLEÇÃO <b>→</b></button>
 
-    <section class="category-grid target-categories" aria-label="Categorias">
-      <button class="category-hotspot category-hotspot-men" type="button" data-jump-filter="masculino" aria-label="Explorar perfumes masculinos"></button>
-      <button class="category-hotspot category-hotspot-women" type="button" data-jump-filter="feminino" aria-label="Explorar perfumes femininos"></button>
-    </section>
-
-    <section class="benefit-row">
-      <article><span>◇</span><div><b>FRAGRÂNCIAS ORIGINAIS</b><small>Seleção e procedência</small></div></article>
-      <article><span>△</span><div><b>GRANDES MARCAS</b><small>Perfumes desejados e atuais</small></div></article>
-      <article><span>☆</span><div><b>ATENDIMENTO ESPECIALIZADO</b><small>Ajuda para escolher sua fragrância</small></div></article>
-      <article><span>♢</span><div><b>SATISFAÇÃO E CUIDADO</b><small>Atendimento do início ao fim</small></div></article>
-    </section>
-
-    <section class="catalog-section" id="catalogo">
-      <div class="catalog-heading">
-        <div><p class="eyebrow">DESTAQUES</p><h2>Mais vendidos</h2></div>
-        <button type="button" class="view-all" data-jump-filter="todos">VER TODOS →</button>
+        <div class="hero-trust">
+          <span>◇ <b>Curadoria selecionada</b></span>
+          <span>▣ <b>Pagamento seguro</b></span>
+          <span>✦ <b>Atendimento premium</b></span>
+        </div>
       </div>
-      <div class="catalog-toolbar">
-        <label class="search-box"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume..." autocomplete="off"></label>
-        <div class="filters" role="group" aria-label="Filtrar perfumes">
+
+      <div class="hero-stage" aria-hidden="true">
+        <div class="rock-glow"></div>
+        <div class="hero-bottle bottle-a"></div>
+        <div class="hero-bottle bottle-b"></div>
+        <span class="hero-orbit one"></span>
+        <span class="hero-orbit two"></span>
+        <span class="hero-orbit three"></span>
+        <span class="hero-orbit four"></span>
+      </div>
+    </section>
+
+    <section class="category-grid">
+      <button class="category-card male-card" type="button" data-jump-filter="masculino">
+        <div class="category-overlay"></div>
+        <div class="category-text">
+          <p>PERFUMES</p>
+          <h2>MASCULINOS</h2>
+          <span>Força, elegância e personalidade<br>para todas as ocasiões.</span>
+          <b>EXPLORAR &nbsp;→</b>
+        </div>
+        <div class="category-bottle male-bottle"></div>
+      </button>
+
+      <button class="category-card female-card" type="button" data-jump-filter="feminino">
+        <div class="category-overlay"></div>
+        <div class="category-text">
+          <p>PERFUMES</p>
+          <h2>FEMININOS</h2>
+          <span>Beleza, sofisticação e sensualidade<br>em cada fragrância.</span>
+          <b>EXPLORAR &nbsp;→</b>
+        </div>
+        <div class="category-bottle female-bottle"></div>
+      </button>
+    </section>
+
+    <section class="catalog" id="catalogo">
+      <div class="catalog-title">
+        <div>
+          <h2>Mais Vendidos</h2>
+          <span></span>
+        </div>
+        <button type="button" data-jump-filter="todos">Ver todos &nbsp;→</button>
+      </div>
+
+      <div class="catalog-controls">
+        <label class="catalog-search">
+          <span>⌕</span>
+          <input id="catalogSearch" type="search" placeholder="Buscar perfume, marca ou volume...">
+        </label>
+        <div class="filters">
           <button class="filter is-active" type="button" data-filter="todos">Todos</button>
-          <button class="filter" type="button" data-filter="masculino">Masculino</button>
-          <button class="filter" type="button" data-filter="feminino">Feminino</button>
+          <button class="filter" type="button" data-filter="masculino">Masculinos</button>
+          <button class="filter" type="button" data-filter="feminino">Femininos</button>
           <button class="filter" type="button" data-filter="unissex">Unissex</button>
         </div>
       </div>
-      <p class="status" id="catalogStatus">Carregando catálogo...</p>
+
+      <p class="catalog-status" id="catalogStatus">Carregando catálogo...</p>
       <div class="product-grid" id="productGrid"></div>
     </section>
 
-    <section class="manifesto" id="contato">
-      <p class="eyebrow">A EXPERIÊNCIA</p>
-      <h2>Perfume não é detalhe.<br>É assinatura.</h2>
-      <p>Escolha sua fragrância, consulte a disponibilidade e finalize com atendimento personalizado.</p>
-      <a class="gold-cta" href="#catalogo">Encontrar minha fragrância</a>
+    <section class="service-row">
+      <div><span>◇</span><div><b>CURADORIA PREMIUM</b><small>Seleção cuidadosa de fragrâncias</small></div></div>
+      <div><span>♧</span><div><b>ATENDIMENTO PERSONALIZADO</b><small>Escolha acompanhada do início ao fim</small></div></div>
+      <div><span>▣</span><div><b>PAGAMENTO SEGURO</b><small>PIX e cartão no fechamento</small></div></div>
+      <div><span>✦</span><div><b>ENTREGA PRESENCIAL</b><small>Combinada diretamente com o vendedor</small></div></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div><strong>ENZO SALMAZO PERFUMES</strong><span>Fragrâncias que marcam.</span></div>
+  <footer>
+    <div class="footer-logo">ENZO SALMAZO <span>PERFUMES</span></div>
     <div class="footer-links">
-      <a href="#catalogo">Perfumes</a>
-      <button type="button" data-jump-filter="masculino">Masculino</button>
-      <button type="button" data-jump-filter="feminino">Feminino</button>
+      <button type="button" data-jump-filter="masculino">Masculinos</button>
+      <button type="button" data-jump-filter="feminino">Femininos</button>
+      <a href="#catalogo">Mais vendidos</a>
       <a href="admin.html">Área do vendedor</a>
     </div>
   </footer>
 
   <div class="overlay" id="productOverlay" hidden>
-    <section class="modal product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="close" type="button" data-close-product aria-label="Fechar">×</button>
+    <section class="modal product-modal" role="dialog" aria-modal="true">
+      <button class="close" type="button" data-close-product>×</button>
       <div id="productModalContent"></div>
     </section>
   </div>
 
   <aside class="drawer" id="bagDrawer" aria-hidden="true">
-    <div class="drawer-head"><div><p class="eyebrow">SUA SELEÇÃO</p><h2>Sacola</h2></div><button class="close" type="button" id="closeBag" aria-label="Fechar">×</button></div>
+    <div class="drawer-head">
+      <div><p>SUA SELEÇÃO</p><h2>Minha sacola</h2></div>
+      <button class="close" type="button" id="closeBag">×</button>
+    </div>
     <div id="bagItems" class="bag-items"></div>
     <div class="drawer-foot">
       <div class="bag-total"><span>Total</span><strong id="bagTotal">R$ 0,00</strong></div>
-      <p>Entrega presencial · pagamento confirmado no fechamento.</p>
-      <button class="gold-cta full" id="checkoutBtn" type="button">Finalizar compra</button>
+      <button class="gold-button full" id="checkoutBtn" type="button">FINALIZAR COMPRA</button>
     </div>
   </aside>
   <div class="drawer-mask" id="drawerMask" hidden></div>
 
   <div class="overlay" id="checkoutOverlay" hidden>
-    <section class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
-      <button class="close" type="button" data-close-checkout aria-label="Fechar">×</button>
-      <p class="eyebrow">FINALIZAÇÃO</p><h2 id="checkoutTitle">Finalizar compra</h2>
+    <section class="modal checkout-modal" role="dialog" aria-modal="true">
+      <button class="close" type="button" data-close-checkout>×</button>
+      <p class="eyebrow">FINALIZAÇÃO</p>
+      <h2>Finalizar compra</h2>
       <div id="checkoutSummary" class="checkout-summary"></div>
-      <div class="seller-picker-block"><div class="seller-picker-head"><strong>Quem te atendeu?</strong><span>Selecione o vendedor responsável.</span></div><div class="seller-picker" id="sellerPicker"><p class="seller-picker-empty">Carregando vendedores...</p></div></div>
-      <div class="payment-tabs"><button class="payment-tab is-active" type="button" data-payment="pix"><strong>PIX</strong><span>Confirmação rápida</span></button><button class="payment-tab" type="button" data-payment="card"><strong>Cartão</strong><span>Crédito</span></button></div>
+      <div class="seller-picker-block">
+        <strong>Quem te atendeu?</strong>
+        <div class="seller-picker" id="sellerPicker"><p>Carregando vendedores...</p></div>
+      </div>
+      <div class="payment-tabs">
+        <button class="payment-tab is-active" type="button" data-payment="pix">PIX</button>
+        <button class="payment-tab" type="button" data-payment="card">Cartão</button>
+      </div>
       <form id="checkoutForm">
-        <label>Nome completo<input name="name" autocomplete="name" required placeholder="Seu nome"></label>
-        <label>WhatsApp<input name="phone" autocomplete="tel" required placeholder="+595 ou +55"></label>
-        <label>E-mail <small>(opcional)</small><input name="email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
-        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pagamento é confirmado no atendimento após o envio do pedido.</p></div>
-        <button class="gold-cta full" type="submit">Enviar pedido</button>
+        <label>Nome completo<input name="name" required></label>
+        <label>WhatsApp<input name="phone" required></label>
+        <label>E-mail <small>(opcional)</small><input name="email" type="email"></label>
+        <div class="demo-box" id="paymentDemoBox"><strong>PIX</strong><p>O pagamento é confirmado no atendimento.</p></div>
+        <button class="gold-button full" type="submit">ENVIAR PEDIDO</button>
       </form>
-      <p class="fine-print">Ao enviar, você confirma os dados do pedido para atendimento e fechamento da compra.</p>
     </section>
   </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="app.js?v=20261001-0245"></script>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="app.js?v=20261001-0206"></script>
 </body>
 </html>
