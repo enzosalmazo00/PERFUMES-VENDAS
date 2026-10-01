@@ -1,10 +1,11 @@
-import {esc,money,option,table} from "./admin-api.js?v=20261001-0045";
+import {esc,money,option,table} from "./admin-api.js?v=20261001-shippingadmin1";
 export function shell(){
 return `<nav class="tabs">
 <button class="tab is-active" data-tab="visao">Visão geral</button>
 <button class="tab" data-tab="perfumes">Perfumes / Body Splash</button>
 <button class="tab" data-tab="rede">Vendedores/Cidades</button>
 <button class="tab" data-tab="estoque">Estoques</button>
+<button class="tab" data-tab="pedidos">Pedidos/Envios</button>
 <button class="tab" data-tab="compras">Compras/Risco</button>
 <button class="tab" data-tab="relatorios">Relatórios</button>
 <button class="tab" data-tab="emergencia">Emergência</button>
@@ -18,6 +19,10 @@ return `<nav class="tabs">
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
+<label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" value=".500" required></label>
+<label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" value="12" required></label>
+<label>Altura (cm)<input name="height_cm" type="number" min="1" step=".1" value="15" required></label>
+<label>Comprimento (cm)<input name="length_cm" type="number" min="1" step=".1" value="8" required></label>
 <label class="span2 product-image-field">Foto do produto<input name="image" id="productImage" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG ou WebP · até 10 MB</small><img id="productImagePreview" class="product-image-preview" alt="Prévia da foto do perfume" hidden></label>
 <label class="span2">Resumo curto<textarea name="short_description" placeholder="Texto curto que aparece no destaque do produto"></textarea></label>
 <label class="span2">Descrição completa<textarea name="description"></textarea></label>
@@ -41,6 +46,10 @@ return `<nav class="tabs">
 <label>Categoria<select name="category"><option value="masculino">Masculino</option><option value="feminino">Feminino</option><option value="unissex">Unissex</option></select></label>
 <label>Volume (mL)<input name="volume_ml" type="number" min="1" required></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label>
+<label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" required></label>
+<label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" required></label>
+<label>Altura (cm)<input name="height_cm" type="number" min="1" step=".1" required></label>
+<label>Comprimento (cm)<input name="length_cm" type="number" min="1" step=".1" required></label>
 <label class="span2 product-image-field">Trocar foto <small>(opcional)</small><input name="image" id="editProductImage" type="file" accept="image/jpeg,image/png,image/webp"><small>Se não escolher outra foto, a atual será mantida.</small><img id="editProductImagePreview" class="product-image-preview" alt="Foto atual do perfume" hidden></label>
 <label class="span2">Resumo curto<textarea name="short_description"></textarea></label>
 <label class="span2">Descrição completa<textarea name="description"></textarea></label>
@@ -79,6 +88,24 @@ return `<nav class="tabs">
 </section>
 <section class="tab-panel" data-panel="estoque" hidden><div class="grid2"><div class="card"><p class="eyebrow">Local</p><h2>Novo estoque</h2><form id="locationForm"><label>Nome<input name="name" required></label><label>Cidade<select name="city_id" id="locationCity"></select></label><label>Vendedor<select name="seller_id" id="locationSeller"></select></label><button class="btn btn-primary">Criar estoque</button></form></div>
 <div class="card"><p class="eyebrow">Regulador auditável</p><h2>Movimentar estoque</h2><form id="adjustForm"><label>Estoque<select name="location_id" id="adjustLocation"></select></label><label>Produto<select name="product_id" id="adjustProduct"></select></label><label>Quantidade (+ entrada / − saída)<input name="qty" type="number" required></label><label>Motivo<select name="reason"><option value="restock">Reposição</option><option value="breakage">Quebra</option><option value="damage">Avaria</option><option value="loss">Perda</option><option value="gift">Brinde</option><option value="road_loss">Perda na estrada</option><option value="inventory_count">Contagem</option><option value="return">Devolução</option><option value="other">Outro</option></select></label><label>Impacto financeiro (R$)<input name="impact" type="number" min="0" step=".01"></label><label>Justificativa<textarea name="note"></textarea></label><button class="btn btn-primary">Registrar</button></form></div></div><div class="card" id="inventory"></div></section>
+<section class="tab-panel" data-panel="pedidos" hidden>
+<div class="grid2">
+  <div class="card"><p class="eyebrow">Frete</p><h2>Configuração de envios</h2>
+    <form id="shippingSettingsForm">
+      <label>CEP de origem<input name="origin_postal_code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label>
+      <label>Ambiente<select name="provider_environment"><option value="sandbox">Sandbox / testes</option><option value="production">Produção</option></select></label>
+      <label class="checkline"><input type="checkbox" name="shipping_enabled"> Liberar cálculo de frete no site</label>
+      <label>Mensagem ao cliente<textarea name="public_note">Envios disponíveis para o Estado de São Paulo. O rastreio detalhado será configurado em uma próxima etapa.</textarea></label>
+      <button class="btn btn-primary">Salvar configuração</button>
+    </form>
+  </div>
+  <div class="card"><p class="eyebrow">Integração</p><h2>Status do Melhor Envio</h2>
+    <div id="shippingProviderStatus" class="shipping-admin-status"></div>
+    <div class="tracking-admin-note"><strong>Rastreio automático</strong><p>A estrutura do banco já possui campos para código e link de rastreio. A integração automática de rastreamento será estudada e implementada em uma próxima etapa.</p></div>
+  </div>
+</div>
+<div class="card"><p class="eyebrow">Pedidos</p><h2>Pedidos de clientes</h2><div id="orders"></div></div>
+</section>
 <section class="tab-panel" data-panel="compras" hidden><div class="grid2"><div class="card"><p class="eyebrow">Privado</p><h2>Novo fornecedor</h2><form id="supplierForm"><label>Nome<input name="name" required></label><label>Contato<input name="contact"></label><label>Telefone<input name="phone"></label><label>Notas<textarea name="notes"></textarea></label><button class="btn btn-primary">Salvar</button></form></div>
 <div class="card"><p class="eyebrow">Entrada</p><h2>Novo lote</h2><form id="lotForm"><label>Fornecedor<select name="supplier_id" id="lotSupplier"></select></label><label>Destino<select name="location_id" id="lotLocation"></select></label><label>Produto<select name="product_id" id="lotProduct"></select></label><label>Quantidade<input name="qty" type="number" min="1" required></label><label>Custo unitário (R$)<input name="cost" type="number" min="0" step=".01" required></label><label>Risco<select name="risk"><option value="">Sem risco</option><option value="travel">Viagem</option><option value="seizure">Apreensão</option><option value="damage">Dano</option><option value="loss">Perda</option><option value="other">Outro</option></select></label><label>Valor do risco (R$)<input name="risk_value" type="number" min="0" step=".01"></label><label>Nota<textarea name="risk_note"></textarea></label><button class="btn btn-primary">Registrar lote + estoque</button></form></div></div></section>
 <section class="tab-panel" data-panel="relatorios" hidden><div class="card"><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2><div class="form-grid"><label>De<input type="date" id="from"></label><label>Até<input type="date" id="to"></label><label>Vendedor<select id="reportSeller"></select></label><label>Produto<select id="reportProduct"></select></label><label>Cidade<select id="reportCity"></select></label></div><button class="btn btn-primary" id="runReport">Gerar relatório</button></div><div id="reportMetrics" class="metrics"></div><div class="card" id="reportMoves"></div><div class="card" id="reportRisks"></div></section>
@@ -93,6 +120,7 @@ document.querySelector("#products").innerHTML=table([
 ["Tipo",r=>r.product_type==="body_splash"?"Body Splash":"Perfume"],
 ["Categoria",r=>esc(r.category)],
 ["Preço",r=>money(r.sale_price_cents??r.price_cents)],
+["Envio",r=>Number(r.weight_kg||0).toFixed(3)+" kg · "+Number(r.width_cm||0)+"×"+Number(r.height_cm||0)+"×"+Number(r.length_cm||0)+" cm"],
 ["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Fora da loja</span>'],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Excluir</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'</div>']
 ],d.products);
@@ -106,6 +134,21 @@ document.querySelector("#sellers").innerHTML=table([
 ["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
+const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
+const paymentLabels={pending:"Pendente",approved:"Aprovado",rejected:"Recusado",cancelled:"Cancelado",refunded:"Estornado"};
+document.querySelector("#orders").innerHTML=table([
+["Pedido",r=>'<strong>'+esc(r.public_id)+'</strong><br><span class="muted">'+new Date(r.created_at).toLocaleString("pt-BR")+'</span>'],
+["Cliente",r=>'<strong>'+esc(r.customer_name)+'</strong><br><span class="muted">'+esc(r.customer_phone)+'</span>'],
+["Entrega",r=>r.delivery_method==="shipping"?'<span>'+esc(r.shipping_city||"—")+'/'+esc(r.shipping_state||"")+'<br><span class="muted">'+esc(r.shipping_carrier||"—")+' · '+esc(r.shipping_service||"—")+' · '+money(r.shipping_price_cents)+'</span></span>':"Presencial"],
+["Total",r=>money(r.total_cents)],
+["Pagamento",r=>'<select class="admin-inline-select" data-order-payment="'+esc(r.id)+'">'+["pending","approved","rejected","cancelled","refunded"].map(x=>'<option value="'+x+'" '+(r.payment_status===x?"selected":"")+'>'+paymentLabels[x]+'</option>').join("")+'</select>'],
+["Pedido",r=>'<select class="admin-inline-select" data-order-fulfillment="'+esc(r.id)+'">'+["pending","preparing","ready","shipped","delivered","cancelled"].map(x=>'<option value="'+x+'" '+(r.fulfillment_status===x?"selected":"")+'>'+orderStatusLabels[x]+'</option>').join("")+'</select>'],
+["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-save-order="'+esc(r.id)+'">Salvar status</button><a class="btn btn-small" target="_blank" rel="noopener" href="https://wa.me/'+String(r.customer_phone||"").replace(/\\D/g,"")+'?text='+encodeURIComponent("Olá "+r.customer_name+", estamos entrando em contato sobre o pedido "+r.public_id+".")+'">WhatsApp</a></div>']
+],d.orders||[]);
+const ss=d.shipping_settings||{};
+const sf=document.querySelector("#shippingSettingsForm");
+if(sf){sf.elements.origin_postal_code.value=ss.origin_postal_code||"";sf.elements.provider_environment.value=ss.provider_environment||"sandbox";sf.elements.shipping_enabled.checked=!!ss.shipping_enabled;sf.elements.public_note.value=ss.public_note||"Envios disponíveis para o Estado de São Paulo."}
+document.querySelector("#shippingProviderStatus").innerHTML='<div class="status-line"><span class="status-dot '+(d.shipping_provider_configured?"online":"offline")+'"></span><strong>'+(d.shipping_provider_configured?"Token do Melhor Envio configurado":"Token do Melhor Envio pendente")+'</strong></div><p class="muted">CEP de origem: '+esc(ss.origin_postal_code||"não configurado")+' · Ambiente: '+esc(ss.provider_environment||"sandbox")+' · Envios: '+(ss.shipping_enabled?"liberados":"bloqueados")+'</p>';
 document.querySelector("#inventory").innerHTML=table([["Produto",r=>esc(r.product_name)],["Local",r=>esc(r.location_name)],["Cidade",r=>esc(r.city_name||"—")],["Vendedor",r=>esc(r.seller_name||"—")],["Saldo",r=>r.low_stock?'<span class="badge-warn">⚠ '+r.quantity+'</span>':r.quantity],["Limite",r=>r.low_stock_threshold]],d.inventory);
 document.querySelector("#sellerCity").innerHTML=option(d.cities.filter(x=>x.is_active),"id","city_name","Sem cidade");
 document.querySelector("#editSellerCity").innerHTML=option(d.cities.filter(x=>x.is_active),"id","city_name","Sem cidade");
