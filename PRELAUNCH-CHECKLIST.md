@@ -34,9 +34,26 @@
 - O deploy deve ser conferido em ambiente publicado e no navegador do cliente após merge; verificações estáticas não substituem teste real.
 
 
-## Decisões comerciais registradas — 2026-10-01
-- [x] Meios de pagamento definidos: PIX e cartão de crédito, processados pelo Mercado Pago quando o gateway for ativado.
-- [x] Checkout informa que eventuais juros e custos do cartão variam conforme o número de parcelas e são apresentados pelo Mercado Pago antes da confirmação.
-- [x] Produtos esgotados podem exibir “Solicitar por encomenda” quando o vendedor habilitar encomendas.
-- [x] Solicitação de encomenda abre atendimento via WhatsApp e não cria cobrança nem reserva de estoque automaticamente.
-- [x] Área do vendedor reorganizada em Visão geral, Pedidos, Estoque, Encomendas, Retiradas, Venda presencial e Minha loja.
+## Atualização: pagamentos, encomendas e painel do vendedor (2026-10-01)
+
+### Modalidades do futuro checkout
+- [x] PIX e cartão de crédito registrados como modalidades na interface. O botão de pagar continua condicionado à habilitação segura das credenciais do Mercado Pago.
+- [x] Transparência sobre parcelamento: texto prévio explica que eventuais juros/encargos variam por número de parcelas e condições da conta e que o checkout do Mercado Pago exibirá o total antes da confirmação.
+- [ ] Antes de publicar cobranças, validar na conta real quem arca com as tarifas, parcelamentos permitidos, opções sem juros e valor final. Nunca divulgar taxa fixa sem confirmação.
+- [ ] Revisar meios de pagamento efetivamente ofertados no Checkout Pro: conforme documentação, dinheiro em conta do Mercado Pago não pode ser totalmente excluído da tela do provedor.
+- [ ] Testar PIX, cartão de crédito, parcela com encargos, pagamento recusado, cancelamento e estorno após ativação.
+
+### Encomendas sem estoque — contato direto e autorizado
+- [x] No produto esgotado, cliente pode solicitar por encomenda via WhatsApp de vendedor autorizado. Mensagem menciona nome, volume, consulta de disponibilidade, preço e prazo.
+- [x] Na página exclusiva do vendedor, produtos ativos sem estoque aparecem para consulta; comprar e pagar continuam bloqueados sem disponibilidade.
+- [x] Função pública somente retorna ID, nome de exibição e telefone de WhatsApp de vendedores aprovados, ativos e com adesão habilitada.
+- [x] Vendedor pode ativar/desativar seu contato em Configurações por sessão autenticada. Vendedor ativo atual foi habilitado inicialmente pela decisão comercial desta revisão; futuros cadastros começam desativados.
+- [x] Pedido de encomenda via WhatsApp não cria pedido, não reserva estoque e não cobra o cliente; vendedor deve confirmar as condições antes de qualquer pagamento.
+- [ ] Se desejar rastreamento de leads no sistema futuramente, criar módulo autorizado de encomendas, com consentimento e histórico próprio (não confundir mensagens de WhatsApp com compras aprovadas).
+
+### Operação do vendedor
+- [x] Área reestruturada em oito abas: Visão geral, Pedidos, Retiradas, Estoque, Caixa, Encomendas, Meu catálogo e Configurações.
+- [x] Visão geral com prioridades calculadas de pedidos, estoque, retirada e contato por WhatsApp.
+- [x] Atalho na notificação abre a aba de pedidos; pedido pronto pode abrir a aba de verificação da retirada.
+- [x] Navegação por teclado/ARIA, layout adaptado para mobile e manutenção dos formulários existentes.
+- [ ] Verificar manualmente no navegador iPad e smartphone, com contas autorizadas, os fluxos de formulários, impressão, atualização e retorno à aba anteriormente aberta.

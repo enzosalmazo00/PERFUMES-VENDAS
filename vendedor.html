@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
-<link rel="stylesheet" href="vendedor.css?v=20261001-pickupcode1">
+<link rel="stylesheet" href="vendedor.css?v=20261001-tabs-preorders1">
 </head><body class="seller-page">
 <div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
 <header class="seller-top">
@@ -67,32 +67,19 @@
 </section>
 <section id="app" hidden>
  <header class="seller-dashboard-head"><div><p class="eyebrow">PAINEL DO VENDEDOR</p><h1 id="sellerName">Meu estoque</h1></div><div class="seller-dashboard-actions"><a class="seller-outline" href="index.html" target="_blank" rel="noopener">Abrir loja</a><button class="seller-outline" id="logout" type="button">Sair</button></div></header>
- <nav class="seller-ops-nav" aria-label="Áreas de trabalho">
-<button class="seller-ops-tab is-active" type="button" data-seller-tab="overview">Visão geral <span id="sellerNavUnread" class="seller-nav-badge" hidden>0</span></button>
-<button class="seller-ops-tab" type="button" data-seller-tab="orders">Pedidos</button>
-<button class="seller-ops-tab" type="button" data-seller-tab="stock">Estoque</button>
-<button class="seller-ops-tab" type="button" data-seller-tab="preorders">Encomendas</button>
-<button class="seller-ops-tab" type="button" data-seller-tab="pickup">Retiradas</button>
-<button class="seller-ops-tab" type="button" data-seller-tab="cash">Venda presencial</button>
-<button class="seller-ops-tab" type="button" data-seller-tab="store">Minha loja</button>
-</nav>
-<div id="metrics" class="metrics"></div>
-<section class="seller-tab-panel" data-seller-panel="overview">
-<div class="seller-workflow-note"><strong>Fluxo recomendado:</strong> veja os alertas → confira novos pedidos → prepare somente pedidos pagos → libere a retirada → confirme o código do cliente na entrega.</div>
-<div class="seller-quick-grid">
-<button class="seller-quick-card" type="button" data-open-seller-tab="orders"><strong>Pedidos</strong><span>Pagamentos, preparação e etiquetas</span></button>
-<button class="seller-quick-card" type="button" data-open-seller-tab="stock"><strong>Estoque</strong><span>Saldos e alertas de reposição</span></button>
-<button class="seller-quick-card" type="button" data-open-seller-tab="pickup"><strong>Retiradas</strong><span>Conferir código e entregar</span></button>
-<button class="seller-quick-card" type="button" data-open-seller-tab="store"><strong>Minha loja</strong><span>Catálogo e ponto de retirada</span></button>
+ <nav class="seller-dashboard-tabs" aria-label="Áreas de trabalho do vendedor"><p class="muted">Organizando o seu painel...</p></nav>
+<div class="card seller-workflow-card" id="sellerWorkflow">
+ <p class="eyebrow">PRIORIDADES DO DIA</p><h2>O que fazer agora</h2>
+ <p class="muted">Escolha uma atividade para abrir diretamente a área correspondente. As informações abaixo são atualizadas a partir do seu painel.</p>
+ <div id="sellerWorkflowCards" class="seller-workflow-grid"></div>
 </div>
+<div id="metrics" class="metrics"></div>
  <div class="card seller-notifications-card" id="sellerNotificationCenter">
 <div class="seller-section-title"><div><p class="eyebrow">CENTRAL DE VENDAS</p><h2>Notificações</h2><p class="muted">Pedidos novos, pagamentos confirmados e vendas presenciais.</p></div>
 <button id="sellerNotificationBell" class="seller-bell" type="button" aria-label="Ver notificações de vendas"><svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span id="sellerNotificationCount" class="seller-unread" hidden>0</span></button></div>
 <div class="seller-dashboard-actions"><button type="button" class="seller-outline" id="sellerMarkAllRead">Marcar todas como lidas</button><button class="seller-outline" type="button" id="sellerRefreshNotifications">Atualizar</button></div>
 <div id="sellerNotificationList" class="seller-notification-list"><p class="muted">Carregando notificações...</p></div>
 </div>
-</section>
-<section class="seller-tab-panel" data-seller-panel="pickup" hidden>
 <div class="card seller-pickup-verifier" id="sellerPickupVerifier">
 <p class="eyebrow">ENTREGA SEGURA · CÓDIGO ÚNICO</p>
 <h2>Conferir código de retirada</h2>
@@ -111,15 +98,9 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <button id="pickupConfirmDelivery" class="seller-primary" type="button" disabled>CONFIRMAR ENTREGA E BAIXAR CÓDIGO</button>
 </div>
 </div>
-
-</section>
-<section class="seller-tab-panel" data-seller-panel="stock" hidden>
-<div class="card"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
- <div class="card"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
- 
-</section>
-<section class="seller-tab-panel" data-seller-panel="orders" hidden>
-<div class="card seller-orders-card" id="sellerOrdersCard">
+<div class="card" id="sellerLowStockCard"><p class="eyebrow">ALERTAS</p><h2>Estoque baixo</h2><div id="alerts"></div></div>
+ <div class="card" id="sellerInventoryCard"><p class="eyebrow">MEU ESTOQUE</p><h2>Produtos sob minha responsabilidade</h2><div id="inventory"></div><p class="muted">Se ainda não aparecem produtos, peça ao administrador para vincular um estoque à sua conta.</p></div>
+ <div class="card seller-orders-card" id="sellerOrdersCard">
 <p class="eyebrow">ATENDIMENTO</p><h2>Pedidos dos meus clientes</h2>
 <p class="muted">Confira os pedidos recebidos pelo seu catálogo. A retirada só pode ser liberada depois da aprovação do pagamento.</p>
 <div class="seller-label-settings"><label>Formato da etiqueta para impressão
@@ -127,12 +108,9 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <p class="muted">Imprima a etiqueta de cada pedido com identificação, endereço, produtos e valor. Pedidos pendentes recebem o aviso “Não entregar”.</p></div>
 <div id="sellerOrders"></div>
 </div>
-
-</section>
-<section class="seller-tab-panel" data-seller-panel="cash" hidden>
 <div class="card seller-cash-card" id="sellerCashCard">
 <p class="eyebrow">CAIXA · VENDA PRESENCIAL</p><h2>Registrar venda em dinheiro</h2>
-<p class="muted">Exclusivo para recebimento presencial de dinheiro vivo. Pix e cartão de clientes são pagos somente pelo checkout da AZZENA. A venda gera pedido, notificação, etiqueta e baixa automática no seu estoque.</p>
+<p class="muted">Exclusivo para recebimento presencial de dinheiro vivo. Quando habilitados, PIX e cartão de crédito são pagos diretamente no checkout seguro do Mercado Pago, nunca no PIX pessoal do vendedor. A venda em dinheiro gera pedido, etiqueta e baixa automática no estoque.</p>
 <form id="sellerCashForm" class="seller-cash-form">
 <div class="seller-cash-customer"><label>Nome do cliente<input name="customer_name" required placeholder="Nome completo" autocomplete="off"></label>
 <label>WhatsApp com DDD<input name="customer_phone" required inputmode="tel" placeholder="(11) 99999-9999" autocomplete="off"></label></div>
@@ -153,17 +131,9 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <p id="sellerCashMessage" class="seller-feedback" role="status"></p>
 </form>
 </div>
-
-</section>
-<section class="seller-tab-panel" data-seller-panel="preorders" hidden>
-<div class="card"><p class="eyebrow">ENCOMENDAS</p><h2>Produtos esgotados sob consulta</h2>
-<label class="seller-preorder-toggle"><input id="sellerAllowPreorders" type="checkbox"><span><strong>Aceitar solicitações de encomenda</strong><small>Quando ativado, produtos esgotados exibem ao cliente o botão “Solicitar por encomenda”. O cliente inicia uma conversa no WhatsApp; isso não reserva estoque nem gera cobrança automática.</small></span></label>
-<p id="sellerPreorderStatus" class="muted" role="status"></p></div>
-</section>
-<section class="seller-tab-panel" data-seller-panel="store" hidden>
-<div class="card seller-share-card">
+<div class="card seller-share-card" id="sellerShareCard">
 <p class="eyebrow">MEU CATÁLOGO</p><h2>Compartilhar produtos disponíveis</h2>
-<p class="muted">Este link exibe apenas seus perfumes e body splash com estoque positivo. O cliente também poderá abrir o catálogo geral da AZZENA.</p>
+<p class="muted">Seu catálogo mostra os itens disponíveis para retirada e permite solicitar por encomenda os itens esgotados. O cliente também pode abrir o catálogo geral da AZZENA.</p>
 <label>Link exclusivo do meu catálogo<input type="url" id="sellerCatalogUrl" readonly aria-label="Link do meu catálogo" placeholder="Seu link aparecerá aqui após aprovação"></label>
 <div class="seller-dashboard-actions seller-share-actions">
 <button type="button" id="copySellerCatalog" class="seller-primary">Copiar link do catálogo</button>
@@ -171,7 +141,33 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <a id="openSellerCatalog" class="seller-outline" href="#" target="_blank" rel="noopener">Visualizar meu catálogo</a>
 </div><p id="sellerShareStatus" class="muted" aria-live="polite"></p>
 </div>
-
+<div class="card seller-preorder-guide" id="sellerPreorderCard">
+ <p class="eyebrow">CONSULTAS PELO WHATSAPP</p><h2>Como atender encomendas</h2>
+ <p id="sellerPreordersStatus" class="seller-preorder-status">Consultando suas preferências de atendimento...</p>
+ <ol class="seller-preorder-steps">
+  <li><strong>O cliente solicita.</strong> Quando um perfume está esgotado, o cliente pode abrir seu WhatsApp com o nome e o volume do produto preenchidos.</li>
+  <li><strong>Você confirma.</strong> Informe disponibilidade com seu fornecedor, preço final e prazo estimado. Não prometa reserva sem confirmação.</li>
+  <li><strong>Atualize o estoque.</strong> Assim que o produto chegar, peça ao administrador que registre as unidades no seu estoque.</li>
+  <li><strong>Finalize pelo site.</strong> Oriente o cliente a comprar com PIX ou cartão de crédito quando o checkout da AZZENA estiver habilitado. A conversa não gera pedido nem cobrança.</li>
+ </ol>
+ <div class="seller-dashboard-actions">
+  <button type="button" class="seller-outline" data-seller-go="configuracoes">Habilitar / desativar contato</button>
+  <button type="button" class="seller-outline" data-seller-go="estoque">Ver meu estoque</button>
+ </div>
+</div>
+<div class="card seller-preorder-settings-card" id="sellerPreorderSettingsCard">
+ <p class="eyebrow">ATENDIMENTO A CLIENTES</p><h2>Receber solicitações de encomenda</h2>
+ <p class="muted">Somente vendedores aprovados podem aparecer na lista de contatos. Ao ativar, seu WhatsApp de cadastro poderá ser aberto pelos visitantes do catálogo. Desative a qualquer momento.</p>
+ <p class="seller-preorder-phone">WhatsApp cadastrado: <strong id="sellerPreorderPhone">Carregando...</strong></p>
+ <form id="sellerPreorderSettingsForm" class="seller-preorder-optin-form">
+  <label class="seller-preorder-toggle" for="sellerPreorderOptIn">
+    <input id="sellerPreorderOptIn" type="checkbox">
+    <span><strong>Quero receber encomendas pelo meu WhatsApp</strong><small>Autorizo que meu número seja disponibilizado aos clientes que clicarem para solicitar um perfume esgotado.</small></span>
+  </label>
+  <button type="submit" id="sellerPreorderSave" class="seller-primary">Salvar preferência de encomendas</button>
+  <p id="sellerPreorderSettingsStatus" class="seller-feedback" role="status" aria-live="polite"></p>
+ </form>
+</div>
 <div class="card seller-pickup-card" id="sellerPickupCard">
 <p class="eyebrow">RETIRADA PRESENCIAL</p><h2>Endereço de retirada dos produtos</h2>
 <p class="muted">Cadastre um local comercial ou autorizado para retirada. Ele só será exibido para o cliente se você ativar a opção. Não use seu endereço residencial caso não queira torná-lo público.</p>
@@ -191,11 +187,9 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <div class="seller-full-span"><button type="submit" class="seller-primary">Salvar ponto de retirada</button></div>
 </form><p id="sellerPickupMessage" class="muted" aria-live="polite"></p>
 </div>
-
 <div class="card" id="emergencyCard" hidden><p class="eyebrow">ACESSO AUTORIZADO</p><h2>Emergência da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><div class="seller-dashboard-actions"><button class="btn btn-danger" id="disable" type="button">Desativar temporariamente</button><button class="btn btn-primary" id="enable" type="button">Colocar online</button></div><p id="status" class="muted"></p></div>
-
-</section></section>
+</section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261001-workspace1"></script>
+<script type="module" src="vendedor.js?v=20261001-tabs-preorders1"></script>
 </body></html>

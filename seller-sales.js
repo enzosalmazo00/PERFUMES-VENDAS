@@ -180,6 +180,7 @@ function bind(){
   const id=button.dataset.notificationId;
   try{await markRead([id])}catch(error){services.notify(error.message)}
   const index=orderData.findIndex(o=>o.id===button.dataset.orderId);
+  if(index>=0&&services.navigate)services.navigate("pedidos");
   const rows=document.querySelectorAll("#sellerOrders .seller-order");
   if(index>=0&&rows[index])rows[index].scrollIntoView({behavior:"smooth",block:"center"});
  });

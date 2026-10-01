@@ -239,9 +239,8 @@ function start(){
  $("#sellerPicker").addEventListener("click",()=>{if(state.method==="pickup")setTimeout(loadPickup,0)});
  document.addEventListener("azzena:seller-changed",()=>{if(state.method==="pickup")loadPickup()});
  $("#checkoutBtn").addEventListener("click",()=>{setTimeout(loadCustomer,0)});
- document.querySelectorAll(".payment-tab").forEach(btn=>btn.addEventListener("click",()=>{
-  setTimeout(()=>{const box=$("#paymentDemoBox");if(box)box.innerHTML='<strong>'+payment().toUpperCase()+'</strong><p>PIX e cartão são processados pelo Mercado Pago. No cartão, eventuais juros e custos variam conforme o número de parcelas e serão exibidos antes da confirmação.</p>'},0);
- }));
+ // A aba de pagamento e a divulgação dos encargos são sincronizadas pelo app.js.
+ // Nunca anunciar confirmação manual: a cobrança depende do retorno oficial do gateway.
  renderReady();
 }
 start();
