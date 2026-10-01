@@ -1,4 +1,4 @@
-import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-password1";
+import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261001-accountui3";
 import{shell,renderDashboard}from"./admin-view.js?v=20261001-password1";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const login=$("#loginView"),app=$("#app"),content=$("#adminContent"),msg=$("#loginMessage"),toast=$("#toast");
@@ -48,5 +48,3 @@ $("#createAccess").onclick=async()=>{msg.textContent="";try{const d=await create
 $("#resendConfirm").onclick=async()=>{msg.textContent="";try{await resendConfirmation($("#email").value.trim());msg.textContent="E-mail de confirmação reenviado. Abra sua caixa de entrada, confirme o acesso e depois entre normalmente."}catch(x){msg.textContent=x.message}};
 $("#logout").onclick=()=>{saveSession(null);location.reload()};
 (async()=>{if(!loadSession()?.access_token)return;try{await open()}catch(e){if(e?.status===401){saveSession(null);login.hidden=false;app.hidden=true;msg.textContent="Sua sessão expirou. Entre novamente."}else{login.hidden=false;app.hidden=true;msg.textContent=e?.message||"Não foi possível carregar o painel. Tente novamente."}}})();
-$("#adminPasswordToggle")?.addEventListener("click",()=>{const i=$("#password"),b=$("#adminPasswordToggle");const show=i.type==="password";i.type=show?"text":"password";b.classList.toggle("is-visible",show);b.setAttribute("aria-label",show?"Ocultar senha":"Mostrar senha")});
-$("#adminForgotPassword")?.addEventListener("click",async()=>{msg.textContent="";const email=$("#email").value.trim();if(!email){msg.textContent="Digite seu e-mail acima para recuperar a senha.";$("#email").focus();return}try{await requestPasswordReset(email);msg.textContent="Enviamos o link de recuperação para seu e-mail."}catch(e){msg.textContent=e.message}});
