@@ -344,3 +344,11 @@
   .hero-slide{transition:opacity .2s ease,visibility .2s ease;transform:none}
   .hero-slide.is-active{transform:none}
 }
+
+
+/* LUXURY NAV TYPOGRAPHY 20261001 */
+.nav a,.nav button{
+  font-family:"Cinzel",Georgia,serif;
+  font-weight:600;
+  letter-spacing:.075em;
+}
