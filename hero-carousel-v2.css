@@ -32,13 +32,13 @@
   transition:opacity .65s ease,visibility .65s ease!important;
 }
 #inicio .hero-slide:nth-of-type(1){
-  background-image:url("assets/hero-signature.webp?v=20261001-realhero2")!important;
+  background-image:url("assets/hero-signature.webp?v=20261001-hd75")!important;
 }
 #inicio .hero-slide:nth-of-type(2){
-  background-image:url("assets/hero-feminine.webp?v=20261001-realhero2")!important;
+  background-image:url("assets/hero-feminine.webp?v=20261001-hd75")!important;
 }
 #inicio .hero-slide:nth-of-type(3){
-  background-image:url("assets/hero-masculine.webp?v=20261001-realhero2")!important;
+  background-image:url("assets/hero-masculine.webp?v=20261001-hd75")!important;
 }
 #inicio .hero-slide.is-active{
   opacity:1!important;
