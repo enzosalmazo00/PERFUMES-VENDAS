@@ -10,9 +10,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261001-accountui3">
-<link rel="stylesheet" href="conta.css?v=20261001-accountui3">
+<link rel="stylesheet" href="conta.css?v=20261001-sessionfix1">
+<style>html,body{margin:0;background:#070605}#accountSessionScreen{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 42%,#25190e,#070605 67%);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#e8cb86;font-family:Arial,sans-serif}#accountSessionScreen[hidden]{display:none!important}#accountSessionScreen .session-mark{font-family:Georgia,serif;letter-spacing:.22em;font-size:clamp(36px,7vw,62px)}#accountSessionScreen .session-subtitle{font-size:10px;letter-spacing:.52em;margin-top:5px}#accountSessionScreen .session-status{font-size:12px;letter-spacing:.08em;color:#c1b29b;margin-top:35px}#accountSessionScreen .session-loader{width:39px;height:39px;margin:30px auto 0;border:2px solid #645334;border-top-color:#f1cd82;border-radius:50%;animation:accountSpin .9s linear infinite}@keyframes accountSpin{to{transform:rotate(360deg)}}#accountSessionScreen button{margin:15px 6px 0;padding:10px 20px;border:1px solid #c5a061;background:transparent;color:#f0d494}#accountSessionScreen .session-actions[hidden]{display:none!important}</style>
 </head>
 <body class="account-page">
+<div id="accountSessionScreen" role="status" aria-live="polite">
+  <div class="session-content">
+    <div class="session-mark">AZZENA</div><div class="session-subtitle">PARFUMS</div>
+    <div class="session-loader" id="sessionLoader" aria-hidden="true"></div>
+    <p class="session-status" id="sessionStatus">Verificando seu acesso com segurança...</p>
+    <div class="session-actions" id="sessionActions" hidden><button id="retryAccountLoad" type="button">Tentar novamente</button><button id="leaveAccount" type="button">Sair da conta</button></div>
+  </div>
+</div>
 <div class="account-benefit-strip">
   <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.7 8.1-7 10-4.3-1.9-7-5.4-7-10V6l7-3Zm-3 9 2 2 4-4"/></svg> Compra segura</span>
   <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg> Entregas em São Paulo</span>
@@ -35,7 +44,7 @@
 </header>
 
 <main class="account-wrap">
-  <section id="authView" class="account-auth">
+  <section id="authView" class="account-auth" hidden>
     <div class="account-intro">
       <p class="eyebrow">MINHA CONTA</p>
       <h1>Bem-vindo à AZZENA.</h1>
@@ -102,33 +111,36 @@
       <div class="account-top-actions"><a class="outline-account-btn" href="index.html">Continuar comprando</a><button class="outline-account-btn" id="logoutBtn" type="button">Sair</button></div>
     </div>
 
-    <div class="account-grid">
-      <section class="account-card">
-        <p class="eyebrow">MEUS DADOS</p><h2>Perfil</h2>
-        <form id="profileForm">
-          <label>Nome completo<input name="full_name" required autocomplete="name"></label>
-          <label>Telefone / WhatsApp com DDD<input name="phone" required placeholder="(11) 99999-9999" autocomplete="tel"></label>
-          <label class="account-check"><input type="checkbox" name="whatsapp_opt_in" checked> Autorizo contato sobre meus pedidos pelo WhatsApp</label>
-          <button class="gold-button" type="submit">SALVAR DADOS</button>
-        </form>
-      </section>
-
-      <section class="account-card">
-        <p class="eyebrow">ENTREGA</p><h2>Novo endereço</h2>
-        <form id="addressForm">
-          <input type="hidden" name="id">
-          <label>Identificação<input name="label" value="Principal" placeholder="Casa, Trabalho..."></label>
-          <div class="account-two"><label>CEP<input name="postal_code" id="addressCep" inputmode="numeric" maxlength="9" required placeholder="00000-000"></label><label>Número<input name="number" required></label></div>
-          <label>Rua<input name="street" required></label>
-          <label>Bairro<input name="neighborhood" required></label>
-          <div class="account-two"><label>Cidade<input name="city" required readonly></label><label>UF<input name="state" required readonly></label></div>
-          <label>Complemento<input name="complement"></label>
-          <label class="account-check"><input type="checkbox" name="is_default" checked> Usar como endereço principal</label>
-          <button class="gold-button" type="submit">SALVAR ENDEREÇO</button>
-        </form>
-        <p class="account-hint">No momento, os envios estão preparados para endereços do Estado de São Paulo.</p>
-      </section>
-    </div>
+    <form id="accountDetailsForm" class="account-details-form">
+      <div class="account-grid">
+        <section class="account-card">
+          <p class="eyebrow">MEUS DADOS</p><h2>Editar meus dados</h2>
+          <div class="account-fields" id="profileFields">
+            <label>Nome completo<input name="full_name" required autocomplete="name"></label>
+            <label>E-mail de acesso<input name="email_display" type="email" readonly tabindex="-1" aria-label="E-mail de acesso"></label>
+            <label>Telefone / WhatsApp com DDD<input name="phone" inputmode="tel" required placeholder="(11) 99999-9999" autocomplete="tel"></label>
+            <label class="account-check"><input type="checkbox" name="whatsapp_opt_in" checked> Autorizo contato sobre meus pedidos pelo WhatsApp</label>
+          </div>
+          <p class="account-hint">Seu telefone fica salvo para atendimento e atualizações do pedido.</p>
+        </section>
+        <section class="account-card">
+          <p class="eyebrow">ENTREGA</p><h2>Endereço principal</h2>
+          <div class="account-fields" id="addressFields">
+            <input type="hidden" name="id">
+            <label>Identificação<input name="label" value="Principal" placeholder="Casa, trabalho..."></label>
+            <div class="account-two"><label>CEP<input name="postal_code" id="addressCep" inputmode="numeric" maxlength="9" placeholder="00000-000"></label><label>Número<input name="number" autocomplete="address-line2"></label></div>
+            <label>Rua<input name="street" autocomplete="address-line1"></label>
+            <label>Bairro<input name="neighborhood"></label>
+            <div class="account-two"><label>Cidade<input name="city" readonly></label><label>UF<input name="state" readonly></label></div>
+            <label>Complemento<input name="complement"></label>
+            <label class="account-check"><input type="checkbox" name="is_default" checked> Usar como endereço principal</label>
+          </div>
+          <p class="account-hint">Preencha o CEP para localizar o endereço. No momento, enviamos somente para São Paulo.</p>
+          <button type="button" id="newAddressBtn" class="outline-account-btn">Cadastrar outro endereço</button>
+        </section>
+      </div>
+      <div class="account-save-actions"><p id="accountSaveMessage" aria-live="polite">Atualize seus dados e endereço quando precisar.</p><button class="gold-button" id="saveAccountButton" type="submit">SALVAR ALTERAÇÕES</button></div>
+    </form>
 
     <section class="account-card account-wide">
       <div class="account-section-head"><div><p class="eyebrow">ENDEREÇOS</p><h2>Meus endereços</h2></div></div>
@@ -147,6 +159,6 @@
   </section>
   <div id="accountToast" class="toast"></div>
 </main>
-<script type="module" src="conta.js?v=20261001-accountui3"></script>
+<script type="module" src="conta.js?v=20261001-sessionfix1"></script>
 </body>
 </html>
