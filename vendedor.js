@@ -146,6 +146,21 @@ function loadCustomSalesFromDashboard(data){
 }
 function renderCustomSales(){const box=$("#sellerCustomSales");if(!box)return;box.innerHTML=customSales.length?customSales.map(s=>'<article class="seller-custom-row"><div><strong>'+esc(s.public_id)+' · '+esc(s.product_name)+'</strong><small>'+esc(s.volume_ml||"")+" mL · "+esc(s.customer_name)+' · '+esc(s.customer_email)+'</small></div><div><strong>'+money(s.total_cents)+'</strong><span>'+esc(s.status==="pending_payment"?"Aguardando pagamento":s.status==="paid"?"Pago":s.status==="shipped"?"Enviado":s.status)+'</span></div>'+(s.status==="pending_payment"?'<button class="seller-outline" type="button" data-custom-cancel="'+esc(s.id)+'">Cancelar</button>':"")+'</article>').join(""):'<p class="muted">Nenhuma venda personalizada criada.</p>'}
 async function createCustomSale(event){event.preventDefault();const form=event.currentTarget,btn=$("#sellerCreateCustomSale"),productId=$("#sellerCustomProduct").value,price=customCents($("#sellerCustomPrice").value),shipping=customCents($("#sellerCustomShipping").value),quantity=Number($("#sellerCustomQuantity").value||1);if(!productId||price<0||quantity<1)return notify("Confira produto, quantidade e preço.");btn.disabled=true;$("#sellerCustomSaleMessage").textContent="Gerando cobrança personalizada...";try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/functions/v1/seller-portal",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({action:"create_custom_sale",customer_email:form.elements.customer_email.value,customer_name:form.elements.customer_name.value,customer_phone:form.elements.customer_phone.value,customer_postal_code:form.elements.customer_postal_code.value,product_id:productId,quantity,unit_price_cents:price,shipping_price_cents:shipping,notes:$("#sellerCustomNotes").value})});const body=await res.json().catch(()=>({}));if(!res.ok)throw new Error(body.message||body.error||"Não foi possível criar a venda.");$("#sellerCustomSaleMessage").textContent="Venda "+body.public_id+" criada. Ela aparecerá na conta AZZENA vinculada ao e-mail informado. O botão de pagamento ficará bloqueado até configurarmos o Mercado Pago deste vendedor.";form.reset();$("#sellerCustomQuantity").value="1";$("#sellerCustomShipping").value="0";renderCustomTotal();notify("Venda personalizada criada.");await refreshInventory()}catch(error){$("#sellerCustomSaleMessage").textContent=friendlyError(error)}finally{btn.disabled=false}}
+function configureOwnStock(data){
+ const allowed=data?.seller?.stock_management_mode==="seller",controls=$("#sellerOwnStockControls"),notice=$("#sellerStockAdminNotice");
+ if(controls)controls.hidden=!allowed;if(notice)notice.hidden=allowed;if(!allowed)return;
+ const inv=Array.isArray(data.inventory)?data.inventory:[],locations=new Map(),products=new Map();
+ for(const x of inv){locations.set(x.location_id,x.location_name);products.set(x.product_id,{name:x.product_name,volume:x.volume_ml})}
+ const loc=$("#sellerStockLocation"),prod=$("#sellerStockProduct");loc.replaceChildren(...[...locations].map(([id,name])=>new Option(name,id)));
+ prod.replaceChildren(...[...products].map(([id,p])=>new Option(p.name+(p.volume?" · "+p.volume+" mL":""),id)));
+}
+async function submitOwnStock(event){
+ event.preventDefault();const btn=event.currentTarget.querySelector("button[type=submit]");btn.disabled=true;$("#sellerStockMessage").textContent="Registrando...";
+ try{await call("seller-portal",{action:"adjust_own_inventory",location_id:$("#sellerStockLocation").value,product_id:$("#sellerStockProduct").value,
+   direction:$("#sellerStockDirection").value,quantity:Number($("#sellerStockQty").value),reason_code:$("#sellerStockReason").value,note:$("#sellerStockNote").value});
+  $("#sellerStockMessage").textContent="Movimentação registrada com sucesso.";$("#sellerStockNote").value="";await refreshInventory();notify("Estoque atualizado.")
+ }catch(error){$("#sellerStockMessage").textContent=friendlyError(error)}finally{btn.disabled=false}
+}
 async function refreshInventory(){
   const response=await call("seller-portal",{});
   const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
@@ -173,7 +188,7 @@ async function refreshInventory(){
   $("#openSellerCatalog").href=catalogUrl.href;
   const statuses={pending:"Recebido",preparing:"Preparando",ready:"Pronto para retirar",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
   const payments={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
-  loadCustomSalesFromDashboard(data);\n  const orders=data.orders||[];
+  configureOwnStock(data);\n  loadCustomSalesFromDashboard(data);\n  const orders=data.orders||[];
   $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
     const canAdvance=order.delivery_method==="presencial"&&order.payment_status==="approved"&&
       !["cancelled","delivered"].includes(order.fulfillment_status);
@@ -372,10 +387,10 @@ $("#sellerLabelSize").onchange=()=>{
   let current={};try{current=JSON.parse(localStorage.getItem("azzena-label-prefs")||"{}")}catch{}
   localStorage.setItem("azzena-label-prefs",JSON.stringify({...current,size:$("#sellerLabelSize").value}));
 };
-$("#sellerCustomSaleForm").onsubmit=createCustomSale;
+$("#sellerStockAdjustForm").onsubmit=submitOwnStock;\n$("#sellerCustomSaleForm").onsubmit=createCustomSale;
 $("#sellerCustomProductSearch").oninput=e=>fillCustomProducts(e.target.value);
 ["#sellerCustomQuantity","#sellerCustomPrice","#sellerCustomShipping"].forEach(id=>$(id).oninput=renderCustomTotal);
-$("#sellerCustomSales").onclick=async e=>{const b=e.target.closest("[data-custom-cancel]");if(!b)return;if(!confirm("Cancelar esta cobrança pendente?"))return;try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/functions/v1/seller-portal",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({action:"cancel_custom_sale",id:b.dataset.customCancel})});if(!res.ok)throw new Error("Não foi possível cancelar.");await refreshInventory();notify("Cobrança cancelada e estoque liberado.")}catch(error){notify(error.message)}};
+$("#sellerStockDirection").onchange=()=>{const exit=$("#sellerStockDirection").value==="exit",reason=$("#sellerStockReason");reason.innerHTML=exit?'<option value="breakage">Quebra</option><option value="loss">Perda</option><option value="damage">Avaria</option><option value="gift">Brinde</option><option value="inventory_count">Ajuste de contagem</option><option value="other">Outro</option>':'<option value="restock">Reposição</option><option value="return">Devolução</option><option value="inventory_count">Ajuste de contagem</option><option value="other">Outro</option>'};\n$("#sellerCustomSales").onclick=async e=>{const b=e.target.closest("[data-custom-cancel]");if(!b)return;if(!confirm("Cancelar esta cobrança pendente?"))return;try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/functions/v1/seller-portal",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({action:"cancel_custom_sale",id:b.dataset.customCancel})});if(!res.ok)throw new Error("Não foi possível cancelar.");await refreshInventory();notify("Cobrança cancelada e estoque liberado.")}catch(error){notify(error.message)}};
 setupSellerWorkspace();
 initSellerSales({call,notify,onSale:refreshInventory,navigate:activateSellerTab});
 initPickupVerifier({call,notify,onDelivered:refreshInventory});
