@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="painel.css?v=20261001-sellerflow1">
-<link rel="stylesheet" href="vendedor.css?v=20261001-tabs-preorders1">
+<link rel="stylesheet" href="vendedor.css?v=20261002-customsales1">
 </head><body class="seller-page">
 <div class="seller-benefits">AZZENA PARFUMS <span>·</span> ACESSO EXCLUSIVO DA EQUIPE</div>
 <header class="seller-top">
@@ -108,6 +108,21 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <p class="muted">Imprima a etiqueta de cada pedido com identificação, endereço, produtos e valor. Pedidos pendentes recebem o aviso “Não entregar”.</p></div>
 <div id="sellerOrders"></div>
 </div>
+<div class="card seller-custom-sale-card" id="sellerCustomSaleCard">
+<p class="eyebrow">VENDA PERSONALIZADA · ENCOMENDA</p><h2>Gerar cobrança personalizada</h2>
+<p class="muted">Selecione qualquer perfume cadastrado na AZZENA, informe os dados do cliente, preço negociado e frete manual. A cobrança aparecerá na conta do cliente. O pagamento automático por PIX/cartão ficará disponível após a conexão individual do Mercado Pago de cada vendedor.</p>
+<div class="seller-mp-status"><div><strong>Mercado Pago do vendedor</strong><span id="sellerMpStatus">Integração preparada · chaves ainda não configuradas</span></div><button class="seller-outline" type="button" id="sellerConnectMp" disabled>CONECTAR MERCADO PAGO — EM BREVE</button></div>
+<form id="sellerCustomSaleForm" class="seller-custom-sale-form">
+<div class="seller-cash-customer"><label>E-mail da conta AZZENA do cliente<input name="customer_email" type="email" required placeholder="cliente@email.com"></label><label>Nome do cliente<input name="customer_name" required></label></div>
+<div class="seller-cash-customer"><label>WhatsApp<input name="customer_phone" inputmode="tel"></label><label>CEP para entrega<input name="customer_postal_code" inputmode="numeric" maxlength="9" placeholder="00000-000"></label></div>
+<label>Perfume do catálogo<input id="sellerCustomProductSearch" type="search" placeholder="Digite nome, marca ou mL..." autocomplete="off"><select id="sellerCustomProduct" required><option value="">Selecione um perfume cadastrado</option></select></label>
+<div class="seller-custom-money"><label>Quantidade<input id="sellerCustomQuantity" type="number" min="1" max="100" value="1" required></label><label>Preço unitário negociado (R$)<input id="sellerCustomPrice" type="number" min="0" step=".01" inputmode="decimal" required></label><label>Frete manual (R$)<input id="sellerCustomShipping" type="number" min="0" step=".01" value="0" inputmode="decimal" required></label></div>
+<label>Observação<textarea id="sellerCustomNotes" rows="3" maxlength="1000" placeholder="Prazo combinado, transportadora ou observações da encomenda."></textarea></label>
+<div class="seller-custom-total"><span>Total da cobrança</span><strong id="sellerCustomTotal">R$ 0,00</strong></div>
+<button class="seller-primary" id="sellerCreateCustomSale" type="submit">GERAR VENDA PERSONALIZADA</button><p id="sellerCustomSaleMessage" class="seller-feedback" role="status"></p>
+</form>
+<div class="seller-custom-sales-list"><h3>Vendas personalizadas</h3><div id="sellerCustomSales"><p class="muted">Nenhuma venda personalizada carregada.</p></div></div>
+</div>
 <div class="card seller-cash-card" id="sellerCashCard">
 <p class="eyebrow">CAIXA · VENDA PRESENCIAL</p><h2>Registrar venda em dinheiro</h2>
 <p class="muted">Exclusivo para recebimento presencial de dinheiro vivo. Quando habilitados, PIX e cartão de crédito são pagos diretamente no checkout seguro do Mercado Pago, nunca no PIX pessoal do vendedor. A venda em dinheiro gera pedido, etiqueta e baixa automática no estoque.</p>
@@ -191,5 +206,5 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261001-tabs-preorders1"></script>
+<script type="module" src="vendedor.js?v=20261002-customsales1"></script>
 </body></html>
