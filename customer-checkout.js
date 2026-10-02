@@ -108,12 +108,13 @@ async function loadPickup(){
    (pickup.postal_code?'<br>CEP: '+escapeHtml(pickup.postal_code):'')+'</p>'+
    (map?'<a href="'+escapeHtml(map)+'" target="_blank" rel="noopener noreferrer">Ver endereço no Google Maps ↗</a>':'')+
    (pickup.instructions?'<p><strong>Orientações:</strong> '+escapeHtml(pickup.instructions)+'</p>':'')+
-   '<div class="pickup-schedule-options"><strong>Escolha a data e o horário da retirada</strong>'+
-   ((catalog.pickup_schedule||[]).filter(x=>x.is_open).length?(catalog.pickup_schedule||[]).filter(x=>x.is_open).map(row=>{
-     const date=new Date(row.service_date+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
-     const periods=[[1,row.period1_start,row.period1_end],[2,row.period2_start,row.period2_end]].filter(x=>x[1]&&x[2]);
-     return '<div class="pickup-schedule-day"><b>'+escapeHtml(date)+'</b>'+periods.map(x=>'<button type="button" class="checkout-method pickup-slot" data-pickup-date="'+escapeHtml(row.service_date)+'" data-pickup-period="'+x[0]+'">'+escapeHtml(String(x[1]).slice(0,5))+'–'+escapeHtml(String(x[2]).slice(0,5))+'</button>').join("")+'</div>';
-   }).join(""):'<p>Nenhuma data de retirada disponível. O vendedor precisa liberar a agenda.</p>')+'</div>'+
+   '<div class="pickup-schedule-options"><strong>Disponibilidade para retirada</strong>'+
+   (()=>{const exceptions=new Map((catalog.pickup_schedule||[]).map(x=>[x.service_date,x]));const days=[];const base=new Date();base.setHours(12,0,0,0);
+     for(let i=0;i<7;i++){const d=new Date(base);d.setDate(base.getDate()+i);const iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");const exception=exceptions.get(iso);const open=d.getDay()!==0&&exception?.is_open!==false;
+       days.push({d,iso,open});}
+     return '<div class="pickup-week">'+days.map(day=>'<div class="pickup-week-day '+(day.open?'is-open':'is-closed')+'" title="'+(day.open?'Disponível para retirada · 08:00–12:00 e 14:00–18:00':'Não atendendo')+'"><span>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short"}))+'</span><i aria-hidden="true"></i><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}))+'</b><small>'+(day.open?'Disponível':'Não atendendo')+'</small></div>').join("")+'</div>'+
+       days.filter(day=>day.open).map(day=>'<div class="pickup-schedule-day"><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"}))+'</b><button type="button" class="checkout-method pickup-slot" data-pickup-date="'+day.iso+'" data-pickup-period="1">08:00–12:00</button><button type="button" class="checkout-method pickup-slot" data-pickup-date="'+day.iso+'" data-pickup-period="2">14:00–18:00</button></div>').join("");
+   })()+'</div>'+
    '<p>Retirada somente após confirmação do pagamento e liberação pelo vendedor.</p></div>';
   state.pickup=pickup;
   box.querySelectorAll(".pickup-slot").forEach(btn=>btn.onclick=()=>{
