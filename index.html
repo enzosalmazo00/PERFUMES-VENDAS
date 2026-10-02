@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-storefilters1?v=20261001-sellerlogin2">
+  <link rel="stylesheet" href="styles.css?v=20261002-pickupcalendar1">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -159,6 +159,19 @@
       </button>
     </section>
 
+    <section class="catalog-model" aria-label="Como funciona a AZZENA">
+  <p class="eyebrow">COMPRE ONLINE · RETIRE PESSOALMENTE</p>
+  <h2>A AZZENA é um catálogo de perfumes com retirada local</h2>
+  <p>Você escolhe e compra pelo site e retira pessoalmente nas cidades onde há vendedores AZZENA cadastrados. Não realizamos envio pelos Correios nem entrega domiciliar.</p>
+  <div class="catalog-model-grid">
+    <div><strong>1. Escolha</strong><span>Veja o estoque disponível dos vendedores cadastrados.</span></div>
+    <div><strong>2. Pague com segurança</strong><span>PIX ou cartão de crédito processados pelo Mercado Pago.</span></div>
+    <div><strong>3. Aguarde a liberação</strong><span>O vendedor prepara o pedido e libera a retirada após a confirmação do pagamento.</span></div>
+    <div><strong>4. Retire no ponto indicado</strong><span>Compareça ao ponto de retirada somente em uma data e período de atendimento informados pelo vendedor.</span></div>
+  </div>
+  <p class="catalog-payment-fees"><strong>Taxas de referência do Mercado Pago para checkout online:</strong> PIX 0,99% com recebimento na hora. Cartão de crédito: 4,98% na hora, 4,49% em 14 dias ou 3,98% em 30 dias. As condições efetivas podem variar conforme a configuração da conta e o prazo de recebimento do Mercado Pago.</p>
+</section>
+
     <section class="catalog" id="catalogo">
       <div id="sellerCatalogBanner" class="seller-catalog-banner" hidden><p class="eyebrow">CATÁLOGO EXCLUSIVO</p><h2 id="sellerCatalogTitle">Catálogo do vendedor</h2><p id="sellerCatalogDescription"></p><a class="seller-general-link" href="index.html#catalogo">Ver catálogo completo da AZZENA →</a></div>
       <div class="catalog-title">
@@ -279,7 +292,7 @@
           </button>
         </div>
       </div>
-      <div class="checkout-payment-provider"><strong>PIX e cartão de crédito via Mercado Pago</strong><p>Os pagamentos online ainda estão em configuração. No cartão parcelado, eventuais juros ou encargos dependem do número de parcelas e das condições do Mercado Pago. Confira o valor total antes de confirmar. Nunca faça PIX para a conta pessoal de um vendedor.</p></div>
+      <div class="checkout-payment-provider"><strong>PIX e cartão de crédito via Mercado Pago</strong><p>A AZZENA funciona com compra online e retirada presencial. PIX e cartão de crédito são processados pelo Mercado Pago. Taxas de referência do checkout: PIX 0,99% na hora; crédito 4,98% na hora, 4,49% em 14 dias ou 3,98% em 30 dias. Condições podem variar conforme a conta e o prazo de recebimento. Nunca faça PIX para a conta pessoal de um vendedor.</p></div>
       <div class="payment-tabs" role="group" aria-label="Forma de pagamento">
         <button class="payment-tab is-active" type="button" data-payment="pix" aria-pressed="true">PIX</button>
         <button class="payment-tab" type="button" data-payment="card" aria-pressed="false">Cartão de crédito</button>
@@ -295,7 +308,7 @@
       </div>
       <div id="pickupArea" class="pickup-checkout" hidden>
         <div class="pickup-checkout-heading"><strong>Retirada presencial</strong><small>Escolha o vendedor responsável acima.</small></div>
-        <div id="pickupAvailability" class="shipping-message">Selecione um vendedor para ver os produtos disponíveis e o local de retirada.</div>
+        <div id="pickupAvailability" class="shipping-message">Selecione um vendedor para ver os produtos disponíveis e o local de retirada.</div><div id="pickupSchedule" class="pickup-schedule-public"><p>Selecione um vendedor para consultar os próximos dias e horários de atendimento.</p></div>
         <p class="shipping-note">O pedido e o pagamento ficarão pendentes até a confirmação. Aguarde a liberação do vendedor antes de se deslocar.</p>
       </div>
       <form id="checkoutForm">
@@ -310,7 +323,7 @@
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-storefilters1"></script>
+  <script type="module" src="app.js?v=20261002-pickupcalendar1"></script>
   <script type="module" src="customer-checkout.js?v=20261001-payment-methods1"></script>
 </body>
 </html>
