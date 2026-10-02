@@ -152,7 +152,7 @@ function reviewSummary(id){const r=state.reviews.filter(x=>x.product_id===id);if
 function renderProducts(){
  const rows=filteredProducts(),contacts=preorderContacts();
  els.catalogStatus.textContent=rows.length?rows.length+" fragrância"+(rows.length===1?"":"s")+" no catálogo · "+rows.filter(p=>Number(p.available_stock)>0).length+" com retirada disponível":"Nenhuma fragrância encontrada.";
- els.productGrid.innerHTML=(sellerScopeId?rows:rows.slice(0,12)).map(p=>{
+ els.productGrid.innerHTML=rows.map(p=>{
    const price=p.sale_price_cents??p.price_cents,r=reviewSummary(p.id),soldOut=Number(p.available_stock||0)<1;
    const preorder=soldOut?(contacts.length?
      '<button class="preorder-cta" type="button" data-preorder="'+esc(p.id)+'">Solicitar por encomenda ↗</button>':
@@ -281,7 +281,7 @@ function initHeroCarousel(){
   start();
 }
 
-loadSiteStatus();loadCatalog();loadSellers();loadPreorderContacts();
+bindCatalogRefiners();loadSiteStatus();loadCatalog();loadSellers();loadPreorderContacts();
 
 // Refresh approved customer reviews when returning to the storefront.
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalog()});
