@@ -46,7 +46,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <label>Volume (mL)<select name="volume_preset" class="catalog-volume-select" required><option value="">Selecione o volume</option></select><small>Confira o tamanho na embalagem antes de anunciar.</small></label>
 <label class="catalog-custom-volume" hidden>Outro volume (mL)<input name="custom_volume_ml" type="number" min="1" max="10000" step="1" placeholder="Ex.: 85"></label>
 <label>Preço venda (R$)<input name="price" type="number" min="0" step=".01" required></label><label>Preço promocional (R$)<input name="sale_price" type="number" min="0" step=".01"></label><label>Desconto máximo do vendedor (%)<input name="max_discount_percent" type="number" min="0" max="100" step=".01" value="0" required><small>Limite para vendas presenciais em dinheiro. Acima desse valor, o servidor recusa a venda.</small></label>
-<label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" value=".500" required></label>
+<label>Peso embalado (kg)<input name="weight_kg" type="number" min=".001" step=".001" value=".250" required></label>
 <label>Largura (cm)<input name="width_cm" type="number" min="1" step=".1" value="12" required></label>
 <label>Altura (cm)<input name="height_cm" type="number" min="1" step=".1" value="15" required></label>
 <label>Comprimento (cm)<input name="length_cm" type="number" min="1" step=".1" value="8" required></label>
