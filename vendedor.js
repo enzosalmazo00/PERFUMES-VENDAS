@@ -157,7 +157,7 @@ function configureOwnStock(data){
 async function submitOwnStock(event){
  event.preventDefault();const btn=event.currentTarget.querySelector("button[type=submit]");btn.disabled=true;$("#sellerStockMessage").textContent="Registrando...";
  try{await call("seller-portal",{action:"adjust_own_inventory",location_id:$("#sellerStockLocation").value,product_id:$("#sellerStockProduct").value,
-   direction:$("#sellerStockDirection").value,quantity:Number($("#sellerStockQty").value),reason_code:$("#sellerStockReason").value,note:$("#sellerStockNote").value});
+   direction:$("#sellerStockDirection").value,quantity:Number($("#sellerStockQty").value),reason_code:$("#sellerStockReason").value,note:$("#sellerStockNote").value,unit_cost_cents:$("#sellerStockDirection").value==="entry"&&$("#sellerStockReason").value==="restock"?Math.round(Number($("#sellerStockUnitCost").value||0)*100):null});
   $("#sellerStockMessage").textContent="Movimentação registrada com sucesso.";$("#sellerStockNote").value="";await refreshInventory();notify("Estoque atualizado.")
  }catch(error){$("#sellerStockMessage").textContent=friendlyError(error)}finally{btn.disabled=false}
 }
@@ -188,7 +188,13 @@ async function refreshInventory(){
   $("#openSellerCatalog").href=catalogUrl.href;
   const statuses={pending:"Recebido",preparing:"Preparando",ready:"Pronto para retirar",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
   const payments={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
-  configureOwnStock(data);\n  loadCustomSalesFromDashboard(data);\n  const orders=data.orders||[];
+  configureOwnStock(data);
+  const fin=Array.isArray(data.financial_sales)?data.financial_sales:[];
+  const sums=fin.reduce((a,x)=>{a.gross+=Number(x.gross_revenue_cents||0);a.cost+=Number(x.product_cost_cents||0);a.fee+=Number(x.payment_fee_cents||0)+Number(x.financing_fee_cents||0)+Number(x.taxes_cents||0);a.profit+=Number(x.profit_cents||0);return a},{gross:0,cost:0,fee:0,profit:0});
+  $("#sellerFinanceSummary").innerHTML='<div class="metrics"><div class="metric"><span>Vendas brutas</span><strong>'+money(sums.gross)+'</strong></div><div class="metric"><span>Custo dos produtos</span><strong>'+money(sums.cost)+'</strong></div><div class="metric"><span>Taxas MP</span><strong>'+money(sums.fee)+'</strong></div><div class="metric"><span>Lucro líquido</span><strong>'+money(sums.profit)+'</strong></div></div>';
+  $("#sellerFinanceSales").innerHTML=fin.length?table([["Data",x=>x.paid_at?new Date(x.paid_at).toLocaleString("pt-BR"):"—"],["Forma",x=>esc(x.payment_method||"—")],["Bruto",x=>money(x.gross_revenue_cents)],["Custo",x=>money(x.product_cost_cents)],["Taxas",x=>x.fee_source==="provider_actual"?money(Number(x.payment_fee_cents||0)+Number(x.financing_fee_cents||0)+Number(x.taxes_cents||0)):"Pendente"],["Líquido",x=>x.net_received_cents==null?"Pendente":money(x.net_received_cents)],["Lucro",x=>x.profit_cents==null?"Pendente":money(x.profit_cents)]],fin):'<p class="muted">Nenhuma venda paga contabilizada ainda.</p>';
+  loadCustomSalesFromDashboard(data);
+  const orders=data.orders||[];
   $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
     const canAdvance=order.delivery_method==="presencial"&&order.payment_status==="approved"&&
       !["cancelled","delivered"].includes(order.fulfillment_status);
