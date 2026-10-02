@@ -194,8 +194,8 @@ function setPayment(m){
  const pix=m==="pix";state.payment=pix?"pix":"card";
  $(".payment-tab").forEach(b=>{const active=b.dataset.payment===state.payment;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
  const disclosure=$("#paymentMethodDisclosure");
- if(disclosure)disclosure.textContent=pix?"PIX: o pagamento será realizado diretamente no Mercado Pago quando o checkout estiver disponível.":"Cartão de crédito: podem existir juros ou encargos que variam com o número de parcelas e as condições do Mercado Pago. Confira valor de cada parcela e total antes de confirmar.";
- els.paymentDemoBox.innerHTML=pix?"<strong>PIX via Mercado Pago</strong><p>Quando ativado, o pagamento será realizado exclusivamente no checkout seguro da AZZENA. Não envie PIX pessoal ao vendedor.</p>":"<strong>Cartão de crédito via Mercado Pago</strong><p>Escolha o parcelamento no ambiente do Mercado Pago e confira eventuais encargos e o total antes de pagar.</p>";
+ if(disclosure)disclosure.textContent=pix?"PIX: o QR Code e o Pix Copia e Cola serão exibidos aqui na AZZENA; a confirmação do pagamento é feita automaticamente pelo Mercado Pago.":"Cartão de crédito: podem existir juros ou encargos que variam com o número de parcelas e as condições do Mercado Pago. Confira valor de cada parcela e total antes de confirmar.";
+ els.paymentDemoBox.innerHTML=pix?"<strong>PIX via Mercado Pago</strong><p>O QR Code e o Pix Copia e Cola serão exibidos dentro da AZZENA. A confirmação do pagamento acontece automaticamente. Não envie PIX pessoal ao vendedor.</p>":"<strong>Cartão de crédito via Mercado Pago</strong><p>Escolha o parcelamento no ambiente do Mercado Pago e confira eventuais encargos e o total antes de pagar.</p>";
 }
 function syncSearch(v){state.search=v;els.catalogSearch.value=v;els.topSearch.value=v;renderProducts();$("#catalogo").scrollIntoView({behavior:"smooth"})}
 els.catalogSearch.oninput=e=>{state.search=e.target.value;els.topSearch.value=state.search;renderProducts()};els.topSearch.oninput=e=>syncSearch(e.target.value);
