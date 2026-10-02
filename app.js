@@ -53,7 +53,7 @@ function preorderContacts(){return sellerScopeId?state.preorderSellers.filter(s=
 function preorderLink(seller,product){
  const phone=String(seller.whatsapp||"").replace(/[^0-9]/g,"");
  if(!/^\d{10,15}$/.test(phone))return null;
- const message="Olá! Encontrei "+product.name+" ("+product.volume_ml+" mL) na AZZENA PARFUMS e gostaria de solicitar por encomenda. Poderia confirmar a disponibilidade, o preço final e o prazo de entrega? Sei que a solicitação não é uma compra nem reserva automática.";
+ const cep=String(localStorage.getItem("azzena-preorder-cep")||"").replace(/\\D/g,"");\n const fullName=[product.brand,product.name].filter(Boolean).join(" · ");\n const message="Olá! Tenho interesse em encomendar pela AZZENA PARFUMS.\\n\\nPerfume: "+fullName+"\\nVolume: "+product.volume_ml+" mL\\nQuantidade: 1 unidade\\nCEP para estimativa de entrega: "+(cep||"não informado")+"\\n\\nGostaria de confirmar disponibilidade, valor final e previsão de envio.";
  return "https://wa.me/"+phone+"?text="+encodeURIComponent(message);
 }
 async function loadPreorderContacts(){
