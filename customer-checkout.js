@@ -6,7 +6,7 @@ const API_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const escapeHtml=(v="")=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const brl=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n||0));
 const money=c=>brl(Number(c||0)/100);
-const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,pickupDate:null,pickupPeriod:null,checking:false,gatewayReady:false};
+const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,pickupDate:null,pickupPeriod:null,checking:false,gatewayReady:false,paymentTimer:null};
 const scopeId=new URLSearchParams(location.search).get("vendedor");
 const uuid=value=>/^[0-9a-f-]{36}$/i.test(String(value||""))?String(value):null;
 const cart=()=>{try{return JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]")}catch{return []}};
@@ -210,6 +210,17 @@ async function calculateShipping(){
  }catch(error){box.textContent=explain(error)}
  renderReady();
 }
+function showPixPayment(data){
+ const order=data?.order||{},qr=String(data?.qr_code||""),base64=String(data?.qr_code_base64||"").replace(/^data:image\\/png;base64,/,"");
+ if(!order.id||!qr||!base64)throw new Error("PAYMENT_LINK_MISSING");
+ document.querySelector("#azzenaPixOverlay")?.remove();
+ const overlay=document.createElement("div");overlay.id="azzenaPixOverlay";overlay.className="overlay azzena-pix-overlay";
+ overlay.innerHTML='<section class="azzena-pix-card"><p class="eyebrow">PAGAMENTO PIX</p><h2>Finalize seu pagamento</h2><div class="pix-status is-waiting" id="azzenaPixStatus"><i></i><span><strong>Aguardando pagamento</strong><small>A confirmação acontece automaticamente.</small></span></div><img class="pix-qr" alt="QR Code Pix" src="data:image/png;base64,'+base64+'"><p class="pix-help">Escaneie o QR Code no aplicativo do seu banco ou use o Pix Copia e Cola.</p><div class="pix-copy-row"><input id="azzenaPixCode" readonly value="'+escapeHtml(qr)+'"><button type="button" id="azzenaCopyPix">COPIAR</button></div><p class="pix-security">Pagamento processado com segurança pelo Mercado Pago. Não faça outro Pix enquanto este pedido estiver aguardando confirmação.</p><a class="pix-later" href="conta.html#pedidos">Acompanhar depois em Minha Conta</a></section>';
+ document.body.append(overlay);
+ overlay.querySelector("#azzenaCopyPix").onclick=async()=>{try{await navigator.clipboard.writeText(qr);message("Código Pix copiado.")}catch{message("Selecione o código para copiar.")}};
+ const check=async()=>{try{const r=await customerCheckout({action:"payment_status",order_id:order.id});if(r.data?.payment_status==="approved"){clearInterval(state.paymentTimer);state.paymentTimer=null;const status=overlay.querySelector("#azzenaPixStatus");status.className="pix-status is-approved";status.innerHTML="<i>✓</i><span><strong>Pagamento aprovado</strong><small>Seu pedido foi confirmado pela AZZENA.</small></span>";localStorage.removeItem("perfumes-demo-bag");setTimeout(()=>location.href="conta.html?pedido="+encodeURIComponent(order.id)+"#pedidos",1800)}}catch{}};
+ check();if(state.paymentTimer)clearInterval(state.paymentTimer);state.paymentTimer=setInterval(check,3000);
+}
 async function submitOrder(event){
  event.preventDefault();
  if(!state.customer){location.href="conta.html";return}
@@ -231,7 +242,7 @@ async function submitOrder(event){
     payment_method:payment(),items:items()
    });
   }
-  const url=String(response.data?.checkout_url||"");
+  if(payment()==="pix"){showPixPayment(response.data);return}\n  const url=String(response.data?.checkout_url||"");
   let target;
   try{target=new URL(url)}catch{throw new Error("PAYMENT_LINK_MISSING")}
   const host=target.hostname.toLowerCase();
