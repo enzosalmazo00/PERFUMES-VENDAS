@@ -110,6 +110,28 @@ export default {
       return json({data});
     }
 
+    if(action==="hard_delete_product"){
+      const id=txt(body?.id),confirmation=txt(body?.confirmation).toUpperCase();
+      if(!id) return json({error:"PRODUCT_ID_REQUIRED"},400);
+      if(confirmation!=="EXCLUIR") return json({error:"HARD_DELETE_CONFIRMATION_REQUIRED"},400);
+      const {data:product,error:productError}=await ctx.supabaseAdmin.from("products").select("id,name").eq("id",id).maybeSingle();
+      if(productError) return json({error:"PRODUCT_DELETE_CHECK_FAILED"},500);
+      if(!product) return json({error:"PRODUCT_NOT_FOUND"},404);
+      const historyChecks=await Promise.all([
+        ctx.supabaseAdmin.schema("private").from("purchase_lot_items").select("id",{count:"exact",head:true}).eq("product_id",id),
+        ctx.supabaseAdmin.schema("private").from("review_purchase_links").select("id",{count:"exact",head:true}).eq("product_id",id),
+        ctx.supabaseAdmin.from("inventory_movements").select("id",{count:"exact",head:true}).eq("product_id",id),
+        ctx.supabaseAdmin.from("order_items").select("id",{count:"exact",head:true}).eq("product_id",id),
+        ctx.supabaseAdmin.from("seller_stock_reservations").select("id",{count:"exact",head:true}).eq("product_id",id),
+        ctx.supabaseAdmin.from("reviews").select("id",{count:"exact",head:true}).eq("product_id",id)
+      ]);
+      if(historyChecks.some((r:any)=>r.error)) return json({error:"PRODUCT_DELETE_CHECK_FAILED"},500);
+      if(historyChecks.some((r:any)=>Number(r.count||0)>0)) return json({error:"PRODUCT_HAS_HISTORY"},409);
+      const {error}=await ctx.supabaseAdmin.from("products").delete().eq("id",id);
+      if(error) return json({error:error.code==="23503"?"PRODUCT_HAS_HISTORY":"PRODUCT_HARD_DELETE_FAILED"},error.code==="23503"?409:500);
+      return json({data:{id,name:product.name,deleted:true}});
+    }
+
     if(action==="restore_product"){
       const id=txt(body?.id);
       if(!id) return json({error:"PRODUCT_ID_REQUIRED"},400);
