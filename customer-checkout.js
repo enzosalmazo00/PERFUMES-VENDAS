@@ -112,14 +112,15 @@ async function loadPickup(){
    (()=>{const exceptions=new Map((catalog.pickup_schedule||[]).map(x=>[x.service_date,x]));const days=[];const base=new Date();base.setHours(12,0,0,0);
      for(let i=0;i<7;i++){const d=new Date(base);d.setDate(base.getDate()+i);const iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");const exception=exceptions.get(iso);const open=d.getDay()!==0&&exception?.is_open!==false;
        days.push({d,iso,open});}
-     return '<div class="pickup-week">'+days.map(day=>'<div class="pickup-week-day '+(day.open?'is-open':'is-closed')+'" title="'+(day.open?'Disponível para retirada · 08:00–12:00 e 14:00–18:00':'Não atendendo')+'"><span>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short"}))+'</span><i aria-hidden="true"></i><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}))+'</b><small>'+(day.open?'Disponível':'Não atendendo')+'</small></div>').join("")+'</div>'+
-       days.filter(day=>day.open).map(day=>'<div class="pickup-schedule-day"><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"}))+'</b><button type="button" class="checkout-method pickup-slot" data-pickup-date="'+day.iso+'" data-pickup-period="1">08:00–12:00</button><button type="button" class="checkout-method pickup-slot" data-pickup-date="'+day.iso+'" data-pickup-period="2">14:00–18:00</button></div>').join("");
+     return '<div class="pickup-week">'+days.map(day=>'<button type="button" class="pickup-week-day '+(day.open?'is-open':'is-closed')+'" data-pickup-date="'+day.iso+'" '+(day.open?'':'disabled')+' title="'+(day.open?'Disponível para retirada · 08:00–12:00 e 14:00–18:00':'Não atendendo')+'"><span>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short"}))+'</span><i aria-hidden="true"></i><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}))+'</b><small>'+(day.open?'Disponível':'Não atendendo')+'</small></button>').join("")+'</div><div class="pickup-hours-card" hidden><strong>Horário de retirada</strong><span>08:00–12:00 e 14:00–18:00</span></div>';
    })()+'</div>'+
    '<p>Retirada somente após confirmação do pagamento e liberação pelo vendedor.</p></div>';
   state.pickup=pickup;
-  box.querySelectorAll(".pickup-slot").forEach(btn=>btn.onclick=()=>{
-    state.pickupDate=btn.dataset.pickupDate;state.pickupPeriod=Number(btn.dataset.pickupPeriod);
-    box.querySelectorAll(".pickup-slot").forEach(x=>x.classList.toggle("is-active",x===btn));renderReady();
+  box.querySelectorAll(".pickup-week-day.is-open").forEach(btn=>btn.onclick=()=>{
+    state.pickupDate=btn.dataset.pickupDate;state.pickupPeriod=1;
+    box.querySelectorAll(".pickup-week-day").forEach(x=>x.classList.toggle("is-active",x===btn));
+    const hours=box.querySelector(".pickup-hours-card");if(hours)hours.hidden=false;
+    renderReady();
   });
  }catch(error){box.textContent=explain(error)}
  renderReady();
