@@ -201,8 +201,7 @@ function syncSearch(v){state.search=v;els.catalogSearch.value=v;els.topSearch.va
 els.catalogSearch.oninput=e=>{state.search=e.target.value;els.topSearch.value=state.search;renderProducts()};els.topSearch.oninput=e=>syncSearch(e.target.value);
 $$(".filter").forEach(b=>b.onclick=()=>setFilter(b.dataset.filter));$$("[data-jump-filter]").forEach(b=>b.onclick=()=>{setFilter(b.dataset.jumpFilter);$("#catalogo").scrollIntoView({behavior:"smooth"})});
 $("[data-close-product]").onclick=closeProduct;els.productOverlay.onclick=e=>{if(e.target===els.productOverlay)closeProduct()};els.bagBtn.onclick=openBag;els.closeBag.onclick=closeBag;els.drawerMask.onclick=closeBag;els.checkoutBtn.onclick=openCheckout;$("[data-close-checkout]").onclick=closeCheckout;els.checkoutOverlay.onclick=e=>{if(e.target===els.checkoutOverlay)closeCheckout()};$$(".payment-tab").forEach(b=>b.onclick=()=>setPayment(b.dataset.payment));
-// Segurança: o carrinho não pode simular uma venda se o módulo de pagamento falhar.
-els.checkoutForm.onsubmit=e=>{e.preventDefault();toast("O pagamento deve ser concluído pelo checkout seguro da AZZENA. Recarregue a página se a etapa de pagamento não abrir.");};
+// O envio do pedido é controlado exclusivamente por customer-checkout.js, que valida sessão, estoque e gateway no backend.
 
 $("#closePreorder").onclick=closePreorder;
 $("#preorderOverlay").onclick=e=>{if(e.target===$("#preorderOverlay"))closePreorder()};
