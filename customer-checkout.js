@@ -6,7 +6,7 @@ const API_KEY="sb_publishable_XkqHZE_hdTNrNXE0O9tvRA_rWdw5pPE";
 const escapeHtml=(v="")=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const brl=n=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(n||0));
 const money=c=>brl(Number(c||0)/100);
-const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,checking:false,gatewayReady:false};
+const state={customer:null,method:"pickup",quote:null,pickup:null,pickupCatalog:null,pickupDate:null,pickupPeriod:null,checking:false,gatewayReady:false};
 const scopeId=new URLSearchParams(location.search).get("vendedor");
 const uuid=value=>/^[0-9a-f-]{36}$/i.test(String(value||""))?String(value):null;
 const cart=()=>{try{return JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]")}catch{return []}};
@@ -24,6 +24,8 @@ function explain(error){return ({
  STATE_NOT_SUPPORTED:"Por enquanto a entrega é apenas para São Paulo.",
  NO_SHIPPING_OPTIONS:"Nenhuma transportadora disponível para este CEP.",
  PICKUP_NOT_AVAILABLE:"Este vendedor ainda não ativou um ponto de retirada.",
+ PICKUP_SCHEDULE_REQUIRED:"Escolha uma data e um horário para retirada.",
+ PICKUP_SCHEDULE_UNAVAILABLE:"A data ou horário escolhido não está mais disponível. Escolha novamente.",
  SELLER_UNAVAILABLE:"O vendedor escolhido não está disponível.",
  SELLER_OUT_OF_STOCK:"Este vendedor ainda não tem estoque disponível para retirada.",
  SELLER_STOCK_UNAVAILABLE:"Um ou mais produtos não estão disponíveis na quantidade escolhida com este vendedor.",
@@ -54,7 +56,7 @@ function renderTotals(){
 }
 function canSubmit(){
  const ready=customerReady()&&items().length>0;
- return ready&&(state.method==="pickup"?!!state.pickup:!!state.quote);
+ return ready&&(state.method==="pickup"?!!state.pickup&&!!state.pickupDate&&!!state.pickupPeriod:!!state.quote);
 }
 function renderReady(){
  const button=$("#checkoutSubmit");
@@ -77,7 +79,7 @@ async function publicSellerCatalog(sellerId){
 }
 async function loadPickup(){
  const box=$("#pickupAvailability");
- state.pickup=null;state.pickupCatalog=null;renderReady();
+ state.pickup=null;state.pickupCatalog=null;state.pickupDate=null;state.pickupPeriod=null;renderReady();
  const sellerId=chosenSeller();
  if(!sellerId){
   box.textContent="Selecione acima o vendedor com quem deseja retirar seu pedido.";
@@ -106,8 +108,18 @@ async function loadPickup(){
    (pickup.postal_code?'<br>CEP: '+escapeHtml(pickup.postal_code):'')+'</p>'+
    (map?'<a href="'+escapeHtml(map)+'" target="_blank" rel="noopener noreferrer">Ver endereço no Google Maps ↗</a>':'')+
    (pickup.instructions?'<p><strong>Orientações:</strong> '+escapeHtml(pickup.instructions)+'</p>':'')+
+   '<div class="pickup-schedule-options"><strong>Escolha a data e o horário da retirada</strong>'+
+   ((catalog.pickup_schedule||[]).filter(x=>x.is_open).length?(catalog.pickup_schedule||[]).filter(x=>x.is_open).map(row=>{
+     const date=new Date(row.service_date+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
+     const periods=[[1,row.period1_start,row.period1_end],[2,row.period2_start,row.period2_end]].filter(x=>x[1]&&x[2]);
+     return '<div class="pickup-schedule-day"><b>'+escapeHtml(date)+'</b>'+periods.map(x=>'<button type="button" class="checkout-method pickup-slot" data-pickup-date="'+escapeHtml(row.service_date)+'" data-pickup-period="'+x[0]+'">'+escapeHtml(String(x[1]).slice(0,5))+'–'+escapeHtml(String(x[2]).slice(0,5))+'</button>').join("")+'</div>';
+   }).join(""):'<p>Nenhuma data de retirada disponível. O vendedor precisa liberar a agenda.</p>')+'</div>'+
    '<p>Retirada somente após confirmação do pagamento e liberação pelo vendedor.</p></div>';
   state.pickup=pickup;
+  box.querySelectorAll(".pickup-slot").forEach(btn=>btn.onclick=()=>{
+    state.pickupDate=btn.dataset.pickupDate;state.pickupPeriod=Number(btn.dataset.pickupPeriod);
+    box.querySelectorAll(".pickup-slot").forEach(x=>x.classList.toggle("is-active",x===btn));renderReady();
+  });
  }catch(error){box.textContent=explain(error)}
  renderReady();
 }
@@ -208,7 +220,7 @@ async function submitOrder(event){
   if(state.method==="pickup"){
    response=await customerCheckout({
     action:"create_pickup_order",seller_id:chosenSeller(),
-    payment_method:payment(),items:items()
+    payment_method:payment(),pickup_date:state.pickupDate,pickup_period:state.pickupPeriod,items:items()
    });
   }else{
    response=await customerCheckout({
