@@ -119,8 +119,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <label>Foto (URL)<input name="avatar_url"></label>
 <label class="span2">Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label>
 <label>Cidade<select name="city_id" id="editSellerCity"></select></label>
-<label class="checkline"><input type="checkbox" name="can_toggle"> Pode usar emergência</label>
-<label class="checkline"><input type="checkbox" name="is_active"> Vendedor ativo</label>
+<label class="checkline"><input type="checkbox" name="can_toggle"> Pode usar emergência</label>\n<label>Controle de estoque<select name="stock_management_mode"><option value="admin">Controlado pelo administrador</option><option value="seller">Vendedor controla o próprio estoque</option></select><small>O vendedor nunca acessa estoque de outros vendedores.</small></label>\n<label class="checkline"><input type="checkbox" name="is_active"> Vendedor ativo</label>
 <div class="span2 edit-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn" type="button" id="cancelEditSeller">Cancelar</button></div>
 </form>
 </div>
@@ -176,8 +175,8 @@ return `<nav class="tabs" aria-label="Áreas da administração">
   </div>
 </div>
 <div class="card"><p class="eyebrow">COBRANÇA DA LOJA</p><h2>Mercado Pago · Checkout Seguro</h2><div id="mercadoPagoStatus"></div>
-<p class="muted">PIX e cartão dos clientes são cobrados exclusivamente pela AZZENA. O vendedor só registra dinheiro vivo na aba Caixa do painel dele. Envio para São Paulo desativado.</p></div>
-<div class="card"><p class="eyebrow">Pedidos</p><h2>Pedidos de clientes</h2><div id="orders"></div></div>
+<p class="muted">Cada vendedor terá sua própria conta Mercado Pago conectada. Uma venda usa somente a conta e o estoque do vendedor responsável; não há caixa único da AZZENA para redistribuição.</p></div>
+<div class="card"><p class="eyebrow">Pedidos</p><h2>Pedidos de clientes</h2><div id="orders"></div></div>\n<div class="card"><p class="eyebrow">VENDAS PERSONALIZADAS</p><h2>Vendas geradas pelos vendedores</h2><p class="muted">Visão administrativa de todas as cobranças personalizadas. Cada venda permanece vinculada ao vendedor, ao estoque dele e à futura conta Mercado Pago dele.</p><div id="adminCustomSales"></div></div>
 </section>
 <section class="tab-panel" data-panel="caixa" hidden>
  <div class="card"><p class="eyebrow">CONTROLE FINANCEIRO</p><h2>Vendas presenciais em dinheiro</h2>
@@ -284,7 +283,7 @@ document.querySelector("#sellers").innerHTML=table([
 ["Cidade",r=>{const id=(r.city_ids||[])[0];const c=d.cities.find(x=>x.id===id);return esc(c?.city_name||"—")}],
 ["Status",r=>r.approval_status==="pending"?'<span class="badge-warn">Aguardando aprovação</span>':r.approval_status==="rejected"?'<span class="badge-off">Recusado</span>':r.is_active?'<span class="badge-ok">Aprovado</span>':'<span class="badge-off">Pausado</span>'],
 ["Login",r=>r.auth_user_id?"Conta vinculada":'<span class="muted">Aguardando primeiro acesso</span>'],
-["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],
+["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],\n["Estoque",r=>r.stock_management_mode==="seller"?"Vendedor controla":"ADM controla"],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
 const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
@@ -304,6 +303,14 @@ document.querySelector("#orders").innerHTML=table([
 ["Pedido",r=>'<select class="admin-inline-select" data-order-fulfillment="'+esc(r.id)+'">'+["pending","preparing","ready","shipped","delivered","cancelled"].map(x=>'<option value="'+x+'" '+(r.fulfillment_status===x?"selected":"")+'>'+orderStatusLabels[x]+'</option>').join("")+'</select>'],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-save-order="'+esc(r.id)+'">Salvar status</button><a class="btn btn-small" target="_blank" rel="noopener" href="https://wa.me/'+String(r.customer_phone||"").replace(/\D/g,"")+'?text='+encodeURIComponent("Olá "+r.customer_name+", estamos entrando em contato sobre o pedido "+r.public_id+".")+'">WhatsApp</a></div>']
 ],d.orders||[]);
+const customStatus={pending_payment:"Aguardando pagamento",paid:"Pago",cancelled:"Cancelado",expired:"Expirado",shipped:"Enviado",completed:"Concluído",refunded:"Estornado"};
+document.querySelector("#adminCustomSales").innerHTML=table([
+ ["Data",r=>new Date(r.created_at).toLocaleString("pt-BR")],["Venda",r=>'<strong>'+esc(r.public_id)+'</strong>'],
+ ["Vendedor",r=>esc(d.sellers.find(s=>s.id===r.seller_id)?.name||"—")],["Cliente",r=>esc(r.customer_name)+'<br><span class="muted">'+esc(r.customer_email)+'</span>'],
+ ["Produto",r=>esc(r.quantity)+'× '+esc(r.product_name)+(r.volume_ml?" · "+esc(r.volume_ml)+" mL":"")],
+ ["Produto",r=>money(Number(r.unit_price_cents)*Number(r.quantity))],["Frete",r=>money(r.shipping_price_cents)],["Total",r=>money(r.total_cents)],
+ ["Status",r=>esc(customStatus[r.status]||r.status)],["Pagamento",r=>esc(r.payment_method||"—")]
+],d.custom_sales||[]);
 const cashRows=(d.orders||[]).filter(o=>o.payment_channel==="seller_cash");
 const cashGross=cashRows.reduce((sum,o)=>sum+Number(o.subtotal_cents||0),0);
 const cashDiscount=cashRows.reduce((sum,o)=>sum+Number(o.discount_cents||0),0);
