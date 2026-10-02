@@ -96,6 +96,13 @@ function requestPreorder(product){
  $("#preorderOverlay").hidden=false;syncScrollLock();
 }
 async function supabaseGet(table,query=""){const r=await fetch(SUPABASE_URL+"/rest/v1/"+table+"?"+query,{headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Accept:"application/json"}});if(!r.ok)throw new Error(await r.text());return r.json()}
+function refreshCatalogExtras(){
+ Promise.allSettled([availableStockBySeller(),supabaseGet("reviews","select=id,product_id,customer_name,rating,comment,is_verified_purchase,is_approved,created_at&is_approved=eq.true&order=created_at.asc")]).then(([stock,reviews])=>{
+   if(stock.status==="fulfilled")state.products=state.products.map(p=>({...p,available_stock:Math.max(0,Number(stock.value.get(p.id))||0)}));
+   if(reviews.status==="fulfilled")state.reviews=reviews.value;
+   syncBagWithCatalog();renderProducts();renderBag();
+ }).catch(console.error);
+}
 async function loadSiteStatus(){try{const rows=await supabaseGet("site_status","select=is_online,outage_kind,public_message&id=eq.true&limit=1"),s=rows[0];if(!s||s.is_online){els.siteUnavailable.hidden=true;return}els.siteUnavailableTitle.textContent=s.outage_kind==="permanent_closure"?"Loja encerrada":"Site temporariamente indisponível";els.siteUnavailableMessage.textContent=s.public_message||"Estamos realizando um ajuste operacional. Voltamos em breve.";els.siteUnavailable.hidden=false}catch(e){console.error(e)}}
 async function loadSellers(){
  try{
@@ -116,38 +123,27 @@ async function loadSellers(){
 }
 function renderSellerPicker(){if(!state.sellers.length){els.sellerPicker.innerHTML="<p>Retirada indisponível: ainda não há vendedores com ponto de retirada e estoque confirmados.</p>";return}const shown=sellerScopeId?state.sellers.filter(s=>s.seller_id===sellerScopeId):state.sellers;els.sellerPicker.innerHTML=shown.map(s=>'<button class="seller-card '+(state.selectedSellerId===s.seller_id?"is-active":"")+'" type="button" data-seller-id="'+esc(s.seller_id)+'"><strong>'+esc(s.display_name)+'</strong></button>').join("");$$("[data-seller-id]",els.sellerPicker).forEach(b=>b.onclick=()=>{state.selectedSellerId=b.dataset.sellerId;renderSellerPicker();document.dispatchEvent(new CustomEvent("azzena:seller-changed",{detail:{sellerId:state.selectedSellerId}}))})}
 async function loadCatalog(){
-els.catalogStatus.textContent="Carregando catálogo...";
-try{
- const reviewRequest=supabaseGet("reviews","select=id,product_id,customer_name,rating,comment,is_verified_purchase,is_approved,created_at&is_approved=eq.true&order=created_at.asc");
- if(sellerScopeId){
-   const response=await fetch(SUPABASE_URL+"/rest/v1/rpc/public_seller_catalog",{
-     method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json",Accept:"application/json"},
-     body:JSON.stringify({p_seller_id:sellerScopeId})
-   });
-   if(!response.ok)throw new Error("SELLER_CATALOG_UNAVAILABLE");
-   const catalog=await response.json();
-   state.sellerScope=catalog||null;
-   if(catalog?.seller){
-   const base=await supabaseGet("products","select=*&is_active=eq.true&order=is_best_seller.desc,is_featured.desc,created_at.asc");
-   const sellerStock=new Map((catalog.pickup&&Array.isArray(catalog.products)?catalog.products:[]).map(p=>[p.id,Math.max(0,Number(p.stock)||0)]));
-   state.products=base.map(p=>({...p,available_stock:sellerStock.get(p.id)||0}));
- }else state.products=[];
-   const banner=$("#sellerCatalogBanner");
-   if(banner){
-     banner.hidden=false;
-     $("#sellerCatalogTitle").textContent=catalog?.seller?"Catálogo de "+catalog.seller.name:"Catálogo indisponível";
-     $("#sellerCatalogDescription").textContent=catalog?.seller?"Produtos disponíveis para retirada ou, quando esgotados, sob consulta por encomenda com este vendedor.":"Este vendedor não está disponível no momento.";
+ els.catalogStatus.textContent="Carregando catálogo...";
+ try{
+   if(sellerScopeId){
+     const [response,base]=await Promise.all([
+       fetch(SUPABASE_URL+"/rest/v1/rpc/public_seller_catalog",{method:"POST",headers:{apikey:SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({p_seller_id:sellerScopeId})}),
+       supabaseGet("products","select=id,slug,name,brand,product_type,category,volume_ml,sale_price_cents,price_cents,image_url,short_description,description,top_notes,heart_notes,base_notes,composition,is_best_seller,is_featured,created_at&is_active=eq.true&order=is_best_seller.desc,is_featured.desc,created_at.asc")
+     ]);
+     if(!response.ok)throw new Error("SELLER_CATALOG_UNAVAILABLE");
+     const catalog=await response.json();state.sellerScope=catalog||null;
+     const sellerStock=new Map((catalog?.pickup&&Array.isArray(catalog.products)?catalog.products:[]).map(p=>[p.id,Math.max(0,Number(p.stock)||0)]));
+     state.products=catalog?.seller?base.map(p=>({...p,available_stock:sellerStock.get(p.id)||0})):[];
+     const banner=$("#sellerCatalogBanner");if(banner){banner.hidden=false;$("#sellerCatalogTitle").textContent=catalog?.seller?"Catálogo de "+catalog.seller.name:"Catálogo indisponível";$("#sellerCatalogDescription").textContent=catalog?.seller?"Produtos disponíveis para retirada ou, quando esgotados, sob consulta por encomenda com este vendedor.":"Este vendedor não está disponível no momento.";}
+     const title=$(".catalog-title h2");if(title)title.textContent="Produtos disponíveis";
+     supabaseGet("reviews","select=id,product_id,customer_name,rating,comment,is_verified_purchase,is_approved,created_at&is_approved=eq.true&order=created_at.asc").then(rows=>{state.reviews=rows;renderProducts()}).catch(console.error);
+   }else{
+     const base=await supabaseGet("products","select=id,slug,name,brand,product_type,category,volume_ml,sale_price_cents,price_cents,image_url,short_description,description,top_notes,heart_notes,base_notes,composition,is_best_seller,is_featured,created_at&is_active=eq.true&order=is_best_seller.desc,is_featured.desc,created_at.asc");
+     state.products=base.map(p=>({...p,available_stock:0}));
+     refreshCatalogExtras();
    }
-   const title=$(".catalog-title h2");if(title)title.textContent="Produtos disponíveis";
- }else{
-    const base=await supabaseGet("products","select=*&is_active=eq.true&order=is_best_seller.desc,is_featured.desc,created_at.asc");
-    let available=new Map();
-    try{available=await availableStockBySeller()}catch(stockError){console.error("Disponibilidade indisponível: compra bloqueada até nova consulta",stockError);}
-    state.products=base.map(p=>({...p,available_stock:Math.max(0,Number(available.get(p.id))||0)}));
-  }
- state.reviews=await reviewRequest;
- syncBagWithCatalog();populateBrandFilter();renderProducts();renderBag();
-}catch(e){console.error(e);els.catalogStatus.textContent="Não foi possível carregar o catálogo agora."}
+   populateBrandFilter();renderProducts();renderBag();
+ }catch(e){console.error(e);els.catalogStatus.textContent="Não foi possível carregar o catálogo agora."}
 }
 function concentrationOf(p){const t=(" "+[p.name,p.short_description,p.description].filter(Boolean).join(" ")+" ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");if(/\b(extrait|extract|pure parfum|parfum)\b/.test(t))return"parfum";if(/\b(eau de parfum|edp)\b/.test(t))return"edp";if(/\b(eau de toilette|edt)\b/.test(t))return"edt";if(/\b(eau de cologne|edc|cologne)\b/.test(t))return"edc";return"other"}
 function populateBrandFilter(){if(!els.brandFilter)return;const selected=state.brand,brands=[...new Set(state.products.map(p=>String(p.brand||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"}));els.brandFilter.innerHTML='<option value="">Todas as marcas</option>'+brands.map(b=>'<option value="'+esc(b)+'">'+esc(b)+'</option>').join("");els.brandFilter.value=brands.includes(selected)?selected:"";if(!brands.includes(selected))state.brand=""}
