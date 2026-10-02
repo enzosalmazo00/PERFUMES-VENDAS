@@ -149,6 +149,16 @@ function maybePromptReview(){
  if(sessionStorage.getItem(key))return false;
  sessionStorage.setItem(key,"shown");renderReviewModal(order);return true;
 }
+async function loadCustomCustomerSales(){
+ const box=$("#customSaleList");if(!box)return;
+ try{
+  const session=loadCustomerSession();if(!session?.access_token)return;
+  const headers={apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"};
+  await fetch(SUPABASE_URL+"/rest/v1/rpc/claim_customer_custom_sales",{method:"POST",headers,body:"{}"});
+  const res=await fetch(SUPABASE_URL+"/rest/v1/custom_sales?select=*&order=created_at.desc",{headers});if(!res.ok)throw new Error();
+  const rows=await res.json();box.innerHTML=rows.length?rows.map(s=>'<article class="order-item custom-customer-sale"><div class="order-head"><div><strong>'+esc(s.public_id)+'</strong><p>'+new Date(s.created_at).toLocaleString("pt-BR")+'</p></div><span class="order-status">'+esc(s.status==="pending_payment"?"Aguardando pagamento":s.status==="paid"?"Pago":s.status==="shipped"?"Enviado":s.status)+'</span></div><div class="order-lines">'+esc(s.quantity)+'× '+esc(s.product_name)+(s.volume_ml?" · "+esc(s.volume_ml)+" mL":"")+'</div><p>Produto: <strong>'+brl(Number(s.unit_price_cents)*Number(s.quantity))+'</strong><br>Frete combinado: <strong>'+brl(s.shipping_price_cents)+'</strong><br>Total: <strong>'+brl(s.total_cents)+'</strong></p>'+(s.customer_postal_code?'<p>CEP informado: '+esc(s.customer_postal_code)+'</p>':"")+(s.status==="pending_payment"?'<div class="custom-payment-pending"><strong>Pagamento ainda não ativado</strong><p>PIX com QR Code e cartão serão habilitados aqui quando a conta Mercado Pago deste vendedor estiver conectada. Nenhuma taxa PIX será acrescentada ao seu total.</p><button type="button" disabled>PAGAR — AGUARDANDO MERCADO PAGO</button></div>':'<p><strong>Pagamento registrado:</strong> '+esc(s.payment_method||"Mercado Pago")+(s.payment_confirmed_at?" · "+esc(storeDate(s.payment_confirmed_at)):"")+'</p>')+(s.tracking_code?'<p>Rastreio informado: <strong>'+esc(s.tracking_code)+'</strong></p>':"")+'</article>').join(""):'<p class="account-hint">Nenhuma venda personalizada vinculada à sua conta.</p>';
+ }catch{box.innerHTML='<p class="account-hint">Não foi possível carregar as vendas personalizadas agora.</p>'}
+}
 function renderOrders(){
  const orders=boot?.orders||[];
  const maps=raw=>{
@@ -272,6 +282,7 @@ document.addEventListener("visibilitychange",()=>{
  if(document.visibilityState==="visible")refreshCustomerOrders();
 });
 function renderAccount(){
+  loadCustomCustomerSales();
   const profile=boot?.profile||{};
   $("#welcomeName").textContent=profile.full_name?"Olá, "+profile.full_name.split(" ")[0]:"Minha conta";
   field("full_name").value=profile.full_name||"";

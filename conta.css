@@ -63,3 +63,5 @@
 
 /* Review action available after dismissing the payment-confirmed dialog. */
 .order-review-action{margin:15px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px}.order-review-action button{background:transparent;color:#efd59b;border:1px solid #d6b676;padding:11px 15px;border-radius:5px;font:600 12px Poppins,Arial,sans-serif;cursor:pointer}.order-review-action button:focus-visible{outline:2px solid #eac87e;outline-offset:3px}.order-review-action span{font:400 12px Poppins,Arial,sans-serif;color:#bdad91}
+
+.custom-payment-pending{margin-top:14px;padding:14px;border:1px solid rgba(191,151,80,.45);background:#171109}.custom-payment-pending strong{color:#efca83}.custom-payment-pending p{font-size:12px;line-height:1.6}.custom-payment-pending button{width:100%;padding:12px;border:1px solid #6d6250;background:#211d17;color:#928775;cursor:not-allowed}.custom-customer-sale{border-color:rgba(199,159,91,.4)!important}

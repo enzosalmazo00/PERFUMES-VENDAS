@@ -6,7 +6,7 @@ import {setupSellerWorkspace,activateSellerTab,updateSellerWorkflow} from "./sel
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
 const views=["loadingView","loginView","confirmView","applyView","pendingView","app"];
-let refreshing=null,loading=false;
+let refreshing=null,loading=false,currentSeller=null,customCatalog=[],customSales=[];
 const feedback=(target,message)=>{$(target).textContent=message||""};
 function show(view){
   for(const id of views)$("#"+id).hidden=id!==view;
@@ -133,9 +133,22 @@ function showPending(status,info){
   $("#checkApproval").hidden=status==="rejected";
   show("pendingView");
 }
+const customCents=v=>Math.round((Number(v)||0)*100);
+function renderCustomTotal(){const q=Math.max(1,Number($("#sellerCustomQuantity")?.value||1)),p=customCents($("#sellerCustomPrice")?.value),f=customCents($("#sellerCustomShipping")?.value);if($("#sellerCustomTotal"))$("#sellerCustomTotal").textContent=money(q*p+f)}
+function fillCustomProducts(filter=""){const sel=$("#sellerCustomProduct");if(!sel)return;const old=sel.value,q=filter.trim().toLocaleLowerCase("pt-BR");sel.replaceChildren(new Option("Selecione um perfume cadastrado",""));for(const p of customCatalog.filter(p=>!q||[p.brand,p.name,p.volume_ml+" ml"].join(" ").toLocaleLowerCase("pt-BR").includes(q)).slice(0,300))sel.append(new Option([p.brand,p.name,p.volume_ml?p.volume_ml+" mL":""].filter(Boolean).join(" · "),p.id));if([...sel.options].some(o=>o.value===old))sel.value=old}
+async function loadCustomSales(){
+ if(!currentSeller)return;
+ const session=await validSession(),headers={apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token};
+ const [products,sales]=await Promise.all([fetch(SUPABASE_URL+"/rest/v1/products?select=id,name,brand,volume_ml,price_cents,sale_price_cents&is_active=eq.true&order=brand.asc,name.asc",{headers}),fetch(SUPABASE_URL+"/rest/v1/custom_sales?select=*&seller_id=eq."+encodeURIComponent(currentSeller.id)+"&order=created_at.desc&limit=100",{headers})]);
+ if(!products.ok||!sales.ok)throw new Error("Não foi possível carregar as vendas personalizadas.");
+ customCatalog=await products.json();customSales=await sales.json();fillCustomProducts();renderCustomSales();
+}
+function renderCustomSales(){const box=$("#sellerCustomSales");if(!box)return;box.innerHTML=customSales.length?customSales.map(s=>'<article class="seller-custom-row"><div><strong>'+esc(s.public_id)+' · '+esc(s.product_name)+'</strong><small>'+esc(s.volume_ml||"")+" mL · "+esc(s.customer_name)+' · '+esc(s.customer_email)+'</small></div><div><strong>'+money(s.total_cents)+'</strong><span>'+esc(s.status==="pending_payment"?"Aguardando pagamento":s.status==="paid"?"Pago":s.status==="shipped"?"Enviado":s.status)+'</span></div>'+(s.status==="pending_payment"?'<button class="seller-outline" type="button" data-custom-cancel="'+esc(s.id)+'">Cancelar</button>':"")+'</article>').join(""):'<p class="muted">Nenhuma venda personalizada criada.</p>'}
+async function createCustomSale(event){event.preventDefault();const form=event.currentTarget,btn=$("#sellerCreateCustomSale"),productId=$("#sellerCustomProduct").value,price=customCents($("#sellerCustomPrice").value),shipping=customCents($("#sellerCustomShipping").value),quantity=Number($("#sellerCustomQuantity").value||1);if(!productId||price<0||quantity<1)return notify("Confira produto, quantidade e preço.");btn.disabled=true;$("#sellerCustomSaleMessage").textContent="Gerando cobrança personalizada...";try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/rest/v1/rpc/create_seller_custom_sale",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({p_customer_email:form.elements.customer_email.value,p_customer_name:form.elements.customer_name.value,p_customer_phone:form.elements.customer_phone.value,p_customer_postal_code:form.elements.customer_postal_code.value,p_product_id:productId,p_quantity:quantity,p_unit_price_cents:price,p_shipping_price_cents:shipping,p_notes:$("#sellerCustomNotes").value})});const body=await res.json().catch(()=>({}));if(!res.ok)throw new Error(body.message||body.error||"Não foi possível criar a venda.");$("#sellerCustomSaleMessage").textContent="Venda "+body.public_id+" criada. Ela aparecerá na conta AZZENA vinculada ao e-mail informado. O botão de pagamento ficará bloqueado até configurarmos o Mercado Pago deste vendedor.";form.reset();$("#sellerCustomQuantity").value="1";$("#sellerCustomShipping").value="0";renderCustomTotal();notify("Venda personalizada criada.");await loadCustomSales()}catch(error){$("#sellerCustomSaleMessage").textContent=friendlyError(error)}finally{btn.disabled=false}}
 async function refreshInventory(){
   const response=await call("seller-portal",{});
   const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
+  currentSeller=data.seller||null;
   $("#sellerName").textContent=data.seller?.name||"Meu estoque";
   $("#metrics").innerHTML=[
     ["Produtos",inventory.length],
@@ -185,6 +198,7 @@ async function refreshInventory(){
   updateSellerWorkflow(data);
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
   show("app");activateSellerTab();
+  try{await loadCustomSales()}catch(error){console.warn(error.message)}
   if(data.seller?.can_toggle_site_emergency)await loadStatus();
 }
 
@@ -357,6 +371,10 @@ $("#sellerLabelSize").onchange=()=>{
   let current={};try{current=JSON.parse(localStorage.getItem("azzena-label-prefs")||"{}")}catch{}
   localStorage.setItem("azzena-label-prefs",JSON.stringify({...current,size:$("#sellerLabelSize").value}));
 };
+$("#sellerCustomSaleForm").onsubmit=createCustomSale;
+$("#sellerCustomProductSearch").oninput=e=>fillCustomProducts(e.target.value);
+["#sellerCustomQuantity","#sellerCustomPrice","#sellerCustomShipping"].forEach(id=>$(id).oninput=renderCustomTotal);
+$("#sellerCustomSales").onclick=async e=>{const b=e.target.closest("[data-custom-cancel]");if(!b)return;if(!confirm("Cancelar esta cobrança pendente?"))return;try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/rest/v1/rpc/cancel_seller_custom_sale",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({p_id:b.dataset.customCancel})});if(!res.ok)throw new Error("Não foi possível cancelar.");await loadCustomSales();notify("Cobrança cancelada.")}catch(error){notify(error.message)}};
 setupSellerWorkspace();
 initSellerSales({call,notify,onSale:refreshInventory,navigate:activateSellerTab});
 initPickupVerifier({call,notify,onDelivered:refreshInventory});

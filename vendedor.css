@@ -188,3 +188,14 @@ body.seller-page{font-family:Poppins,Arial,sans-serif;background:radial-gradient
 .seller-preorder-optin-form .seller-primary{max-width:350px}
 @media(max-width:850px){.seller-dashboard-tabs{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:10px;padding:12px 2px 16px}.seller-dashboard-tabs .seller-tab-button{flex:0 0 auto;width:auto;min-width:120px;padding:12px 16px;scroll-snap-align:start}.seller-workspace-panels{scroll-margin-top:90px}}
 @media(max-width:620px){.seller-workflow-grid{grid-template-columns:1fr}.seller-workspace-title p{font-size:13px}.seller-workspace-panel>.card{overflow-wrap:anywhere}.seller-preorder-optin-form .seller-primary{max-width:100%}}
+
+/* Venda personalizada e conexão futura por vendedor */
+.seller-custom-sale-card{border-color:rgba(218,178,101,.45)!important;background:linear-gradient(145deg,#171006,#0b0906)}
+.seller-mp-status{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px;margin:18px 0;border:1px solid rgba(217,173,100,.3);background:#0c0a07}
+.seller-mp-status div{display:grid;gap:5px}.seller-mp-status span{font-size:12px;color:#b8aa95}
+.seller-custom-sale-form{display:grid;gap:15px}.seller-custom-sale-form>label{display:grid;gap:7px;color:#e3d1b0;font-size:12px}
+.seller-custom-sale-form input,.seller-custom-sale-form select,.seller-custom-sale-form textarea{width:100%;box-sizing:border-box;min-height:46px;border:1px solid rgba(213,181,111,.3);background:#0a0907;color:#fff2df;padding:11px 13px;font:400 14px Poppins,Arial,sans-serif}
+.seller-custom-money{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.seller-custom-money label{display:grid;gap:7px;font-size:12px;color:#e3d1b0}
+.seller-custom-total{display:flex;justify-content:space-between;align-items:center;padding:16px;border:1px solid #b88d4c;background:#1b1208}.seller-custom-total strong{font-size:22px;color:#f0cc85}
+.seller-custom-sales-list{margin-top:28px;border-top:1px solid rgba(217,173,100,.25);padding-top:20px}.seller-custom-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:13px;border:1px solid rgba(217,173,100,.2);margin:8px 0}.seller-custom-row>div{display:grid;gap:4px}.seller-custom-row small,.seller-custom-row span{color:#aa9d8a;font-size:11px}
+@media(max-width:700px){.seller-mp-status{align-items:stretch;flex-direction:column}.seller-custom-money{grid-template-columns:1fr}.seller-custom-row{grid-template-columns:1fr}.seller-custom-row button{width:100%}}
