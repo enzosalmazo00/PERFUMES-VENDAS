@@ -205,16 +205,11 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 </form><p id="sellerPickupMessage" class="muted" aria-live="polite"></p>
 </div>
 <div class="card seller-pickup-schedule-card" id="sellerPickupScheduleCard">
-<p class="eyebrow">AGENDA DE RETIRADA</p><h2>Dias e horários disponíveis</h2>
-<p class="muted">Marque as datas em que haverá atendimento para retirada. Você pode abrir um ou dois períodos no mesmo dia ou marcar a data como fechada.</p>
+<p class="eyebrow">AGENDA DE RETIRADA</p><h2>Exceções de atendimento</h2>
+<p class="muted"><strong>Horário padrão:</strong> segunda a sábado, das 08:00 às 12:00 e das 14:00 às 18:00. Cadastre aqui somente as datas em que NÃO haverá atendimento para retirada.</p>
 <form id="sellerPickupScheduleForm" class="seller-pickup-grid">
-<label>Data<input id="sellerPickupDate" name="service_date" type="date" required></label>
-<label class="seller-toggle"><input id="sellerPickupOpen" name="is_open" type="checkbox" checked> Haverá retirada nesta data</label>
-<label>Início 1º período<input name="period1_start" type="time" value="09:00"></label>
-<label>Fim 1º período<input name="period1_end" type="time" value="12:00"></label>
-<label>Início 2º período (opcional)<input name="period2_start" type="time"></label>
-<label>Fim 2º período (opcional)<input name="period2_end" type="time"></label>
-<div class="seller-full-span"><button type="submit" class="seller-primary">SALVAR DATA E HORÁRIOS</button></div>
+<label>Data sem atendimento<input id="sellerPickupDate" name="service_date" type="date" required></label>
+<div class="seller-full-span"><button type="submit" class="seller-primary">MARCAR COMO NÃO ATENDENDO</button></div>
 </form>
 <p id="sellerPickupScheduleMessage" class="seller-feedback" role="status" aria-live="polite"></p>
 <div id="sellerPickupScheduleList"></div>
