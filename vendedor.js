@@ -1,7 +1,7 @@
 import {SUPABASE_URL,SUPABASE_KEY,money,esc,table} from "./admin-api.js?v=20261001-sellerflow2";
 import {initSellerSales,renderSellerSales} from "./seller-sales.js?v=20261001-sales8";
 import {initPickupVerifier} from "./seller-pickup.js?v=20261001-pickupcode1";
-import {setupSellerWorkspace,activateSellerTab,updateSellerWorkflow} from "./seller-workspace.js?v=20261001-workspace1";
+import {setupSellerWorkspace,activateSellerTab,updateSellerWorkflow} from "./seller-workspace.js?v=20261002-workspace2";
 
 const $=selector=>document.querySelector(selector);
 const SESSION_KEY="azzena-seller-session";
