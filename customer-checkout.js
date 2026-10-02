@@ -41,7 +41,7 @@ function mapsLink(raw){
  try{
   const url=new URL(raw);
   if(url.protocol!=="https:")return null;
-  if(!/^(maps\.app\.goo\.gl|goo\.gl)$/.test(url.hostname)&&!/^((www|maps)\.)?google\.[a-z.]+$/.test(url.hostname))return null;
+  if(!/^(maps\.app\.goo\.gl|goo\.gl|share\.google)$/.test(url.hostname)&&!/^((www|maps)\.)?google\.[a-z.]+$/.test(url.hostname))return null;
   return url.href;
  }catch{return null}
 }
