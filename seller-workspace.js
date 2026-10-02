@@ -1,14 +1,22 @@
 // AZZENA — workspace do vendedor. Organização visual sem alterar permissões ou transações.
 const $=selector=>document.querySelector(selector);
 const TABS=[
- {id:"visao",title:"Visão geral",hint:"Suas prioridades de hoje, alertas e notificações.",nodes:["sellerWorkflow","metrics","sellerNotificationCenter","sellerLowStockCard"]},
- {id:"pedidos",title:"Pedidos",hint:"Acompanhe pagamentos, preparação, etiquetas e mensagens dos clientes.",nodes:["sellerOrdersCard"]},
- {id:"retiradas",title:"Retiradas",hint:"Entregue somente com pagamento aprovado e código de retirada válido.",nodes:["sellerPickupVerifier"]},
- {id:"estoque",title:"Estoque",hint:"Confira os produtos e as unidades vinculados ao seu cadastro pelo administrador.",nodes:["sellerInventoryCard"]},
- {id:"caixa",title:"Caixa",hint:"Registre exclusivamente vendas presenciais recebidas em dinheiro vivo.",nodes:["sellerCashCard"]},
- {id:"encomendas",title:"Encomendas",hint:"Solicitações de produtos esgotados chegam ao seu WhatsApp; não geram venda automática.",nodes:["sellerPreorderCard"]},
+ {id:"visao",title:"Início",hint:"Resumo geral do seu painel e prioridades do dia.",nodes:["sellerWorkflow","metrics"]},
+ {id:"notificacoes",title:"Notificações",hint:"Pedidos novos, pagamentos confirmados e avisos das suas vendas.",nodes:["sellerNotificationCenter"]},
+ {id:"pedidos",title:"Pedidos",hint:"Acompanhe os pedidos recebidos pelo seu catálogo.",nodes:["sellerOrdersCard"]},
+ {id:"retiradas",title:"Retiradas",hint:"Confira o código do cliente antes de liberar uma retirada.",nodes:["sellerPickupVerifier"]},
+ {id:"agenda",title:"Agenda",hint:"Cadastre separadamente os dias e horários disponíveis.",nodes:["sellerPickupScheduleCard"]},
+ {id:"locais",title:"Locais de entrega",hint:"Cadastre e edite o local autorizado usado no atendimento ao cliente.",nodes:["sellerPickupCard"]},
+ {id:"estoque",title:"Meu estoque",hint:"Veja somente os produtos e unidades vinculados ao seu estoque.",nodes:["sellerInventoryCard"]},
+ {id:"alertas",title:"Alertas de estoque",hint:"Consulte separadamente os produtos com estoque baixo.",nodes:["sellerLowStockCard"]},
+ {id:"caixa",title:"Venda em dinheiro",hint:"Registre sua venda presencial recebida em dinheiro vivo.",nodes:["sellerCashCard"]},
+ {id:"cobranca",title:"Cobrança personalizada",hint:"Crie e acompanhe cobranças de encomendas que serão enviadas ao cliente.",nodes:["sellerCustomSaleCard"]},
+ {id:"vendas",title:"Minhas vendas",hint:"Consulte o histórico das suas vendas.",nodes:["sellerSalesHistoryCard"]},
+ {id:"financeiro",title:"Minhas finanças",hint:"Veja o resumo financeiro das suas próprias vendas.",nodes:["sellerFinanceCard"]},
+ {id:"encomendas",title:"Encomendas",hint:"Orientações para atendimento de produtos encomendados.",nodes:["sellerPreorderCard"]},
  {id:"catalogo",title:"Meu catálogo",hint:"Compartilhe sua página exclusiva com seus clientes.",nodes:["sellerShareCard"]},
- {id:"configuracoes",title:"Configurações",hint:"Defina seu local de retirada e escolha se deseja atender encomendas.",nodes:["sellerPreorderSettingsCard","sellerPickupCard","emergencyCard"]}
+ {id:"configuracoes",title:"Preferências de encomenda",hint:"Ative ou desative o recebimento de solicitações pelo seu WhatsApp.",nodes:["sellerPreorderSettingsCard"]},
+ {id:"emergencia",title:"Emergência da loja",hint:"Área restrita, exibida somente quando houver autorização.",nodes:["emergencyCard"]}
 ];
 let built=false,active="visao";
 export function activateSellerTab(id,{focus=false}={}){
@@ -29,6 +37,12 @@ export function setupSellerWorkspace(){
  if(built)return;
  const app=$("#app"),nav=$(".seller-dashboard-tabs");
  if(!app||!nav)return;
+ const finance=$("#sellerFinanceCard"),sales=$("#sellerFinanceSales");
+ if(finance&&sales&&!$("#sellerSalesHistoryCard")){
+   const salesCard=createElement("div","card");salesCard.id="sellerSalesHistoryCard";
+   const eyebrow=createElement("p","eyebrow","MINHAS VENDAS"),title=createElement("h2","","Histórico das minhas vendas");
+   salesCard.append(eyebrow,title,sales);finance.insertAdjacentElement("afterend",salesCard);
+ }
  const originals=new Map();
  for(const tab of TABS)for(const id of tab.nodes){
    const node=$("#"+id);if(!node)throw new Error("Painel do vendedor incompleto: "+id);
@@ -50,8 +64,8 @@ export function setupSellerWorkspace(){
    titleWrap.append(h,p);panel.append(titleWrap);
    if(tab.id==="retiradas"){
      const info=createElement("div","seller-workspace-help");
-     const action=createElement("button","seller-outline","Configurar ponto de retirada");
-     action.type="button";action.dataset.sellerGo="configuracoes";info.append(action);panel.append(info);
+     const action=createElement("button","seller-outline","Abrir locais de entrega");
+     action.type="button";action.dataset.sellerGo="locais";info.append(action);panel.append(info);
    }
    for(const id of tab.nodes)panel.append(originals.get(id));
    panels.append(panel);
@@ -83,7 +97,7 @@ export function updateSellerWorkflow(data){
  const configured=data.seller?.allow_preorders===true;
  const tasks=[
   {title:paid.length?paid.length+" pedido(s) pago(s) aguardando atendimento":"Conferir pedidos",detail:paid.length?"Prepare os produtos e depois libere a retirada.":"Acompanhe novos pagamentos e imprima etiquetas.",tab:"pedidos",button:"Abrir pedidos"},
-  {title:pickupEnabled?"Ponto de retirada ativo":"Configure seu ponto de retirada",detail:pickupEnabled?"O endereço está habilitado para clientes.":"Cadastre e habilite um endereço autorizado com link do Google Maps.",tab:"configuracoes",button:pickupEnabled?"Ver endereço":"Configurar retirada"},
+  {title:pickupEnabled?"Ponto de retirada ativo":"Configure seu ponto de retirada",detail:pickupEnabled?"O endereço está habilitado para clientes.":"Cadastre e habilite um endereço autorizado com link do Google Maps.",tab:"locais",button:pickupEnabled?"Ver local":"Cadastrar local"},
   {title:stock.length?stock.length+" produto(s) com saldo":"Sem estoque para venda",detail:stock.length?"Confira saldos e os alertas de reposição.":"Solicite ao ADM o vínculo e o lançamento do estoque físico.",tab:"estoque",button:"Conferir estoque"},
   {title:configured?"Encomendas por WhatsApp ativas":"Habilitar encomendas",detail:configured?"Produtos esgotados podem gerar conversas no seu WhatsApp.":"Ative o contato público caso deseje receber consultas sobre produtos esgotados.",tab:configured?"encomendas":"configuracoes",button:configured?"Ver orientações":"Ativar contato"}
  ];
