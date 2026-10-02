@@ -242,7 +242,8 @@ async function submitOrder(event){
     payment_method:payment(),items:items()
    });
   }
-  if(payment()==="pix"){showPixPayment(response.data);return}\n  const url=String(response.data?.checkout_url||"");
+  if(payment()==="pix"){showPixPayment(response.data);return}
+  const url=String(response.data?.checkout_url||"");
   let target;
   try{target=new URL(url)}catch{throw new Error("PAYMENT_LINK_MISSING")}
   const host=target.hostname.toLowerCase();
