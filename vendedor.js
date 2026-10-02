@@ -216,6 +216,13 @@ async function refreshInventory(){
     if(pickupForm.elements[key])pickupForm.elements[key].value=pickup[key]||(key==="country_code"?"BR":"");
   }
   pickupForm.elements.is_enabled.checked=pickup.is_enabled===true;
+  const schedule=Array.isArray(data.pickup_schedule)?data.pickup_schedule:[];
+  const scheduleBox=$("#sellerPickupScheduleList");
+  if(scheduleBox)scheduleBox.innerHTML=schedule.length?'<div class="seller-schedule-list">'+schedule.map(row=>{
+    const date=new Date(row.service_date+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"});
+    const periods=row.is_open?[String(row.period1_start||"").slice(0,5)+"–"+String(row.period1_end||"").slice(0,5),row.period2_start?String(row.period2_start).slice(0,5)+"–"+String(row.period2_end||"").slice(0,5):""].filter(Boolean).join(" · "):"Fechado";
+    return '<div class="seller-custom-row"><div><strong>'+esc(date)+'</strong><small>'+esc(periods)+'</small></div><button class="seller-outline" type="button" data-delete-pickup-date="'+esc(row.service_date)+'">Remover</button></div>';
+  }).join("")+'</div>':'<p class="muted">Nenhuma data de retirada cadastrada ainda.</p>';
   renderSellerSales(data);
   updateSellerWorkflow(data);
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
@@ -398,6 +405,32 @@ $("#sellerCustomSaleForm").onsubmit=createCustomSale;
 $("#sellerCustomProductSearch").oninput=e=>fillCustomProducts(e.target.value);
 ["#sellerCustomQuantity","#sellerCustomPrice","#sellerCustomShipping"].forEach(id=>$(id).oninput=renderCustomTotal);
 $("#sellerStockDirection").onchange=()=>{const exit=$("#sellerStockDirection").value==="exit",reason=$("#sellerStockReason");reason.innerHTML=exit?'<option value="breakage">Quebra</option><option value="loss">Perda</option><option value="damage">Avaria</option><option value="gift">Brinde</option><option value="inventory_count">Ajuste de contagem</option><option value="other">Outro</option>':'<option value="restock">Reposição</option><option value="return">Devolução</option><option value="inventory_count">Ajuste de contagem</option><option value="other">Outro</option>'};
+$("#sellerPickupScheduleForm").onsubmit=async event=>{
+  event.preventDefault();
+  const form=event.currentTarget,data=new FormData(form),button=form.querySelector('[type="submit"]');
+  const isOpen=form.elements.is_open.checked;
+  button.disabled=true;$("#sellerPickupScheduleMessage").textContent="Salvando agenda...";
+  try{
+    await call("seller-portal",{action:"save_pickup_schedule",service_date:data.get("service_date"),is_open:isOpen,
+      period1_start:isOpen?data.get("period1_start"):"",period1_end:isOpen?data.get("period1_end"):"",
+      period2_start:isOpen?data.get("period2_start"):"",period2_end:isOpen?data.get("period2_end"):""});
+    $("#sellerPickupScheduleMessage").textContent="Data e horários salvos.";
+    await refreshInventory();notify("Agenda de retirada atualizada.");
+  }catch(error){
+    const msg=error.message==="PICKUP_SCHEDULE_TIME_INVALID"?"Confira os horários: o início deve ser anterior ao fim.":friendlyError(error);
+    $("#sellerPickupScheduleMessage").textContent=msg;notify(msg);
+  }finally{button.disabled=false}
+};
+$("#sellerPickupOpen").onchange=event=>{
+  const disabled=!event.currentTarget.checked,form=$("#sellerPickupScheduleForm");
+  for(const name of ["period1_start","period1_end","period2_start","period2_end"])form.elements[name].disabled=disabled;
+};
+$("#sellerPickupScheduleList").onclick=async event=>{
+  const button=event.target.closest("[data-delete-pickup-date]");if(!button)return;
+  button.disabled=true;
+  try{await call("seller-portal",{action:"delete_pickup_schedule",service_date:button.dataset.deletePickupDate});await refreshInventory();notify("Data removida da agenda.")}
+  catch(error){button.disabled=false;notify(friendlyError(error))}
+};
 $("#sellerCustomSales").onclick=async e=>{const b=e.target.closest("[data-custom-cancel]");if(!b)return;if(!confirm("Cancelar esta cobrança pendente?"))return;try{const session=await validSession(),res=await fetch(SUPABASE_URL+"/functions/v1/seller-portal",{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({action:"cancel_custom_sale",id:b.dataset.customCancel})});if(!res.ok)throw new Error("Não foi possível cancelar.");await refreshInventory();notify("Cobrança cancelada e estoque liberado.")}catch(error){notify(error.message)}};
 setupSellerWorkspace();
 initSellerSales({call,notify,onSale:refreshInventory,navigate:activateSellerTab});
