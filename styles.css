@@ -1180,3 +1180,13 @@ footer .footer-seller-access:focus-visible{outline:2px solid #e6c47d;outline-off
 .clear-refiners:hover{border-color:#d6ae60;color:#f0cf88}
 @media(max-width:900px){.catalog-controls{align-items:stretch;flex-direction:column}.catalog-search{width:100%}.filters{width:100%;overflow-x:auto;padding-bottom:3px}.filter{white-space:nowrap}.catalog-refiners{grid-template-columns:repeat(2,minmax(0,1fr))}.clear-refiners{grid-column:1/-1}}
 @media(max-width:520px){.catalog-refiners{grid-template-columns:1fr 1fr;padding:9px;gap:7px}.catalog-refiners select{font-size:8px}.clear-refiners{grid-column:1/-1}}
+
+/* Disponibilidade semanal de retirada */
+.pickup-week{display:grid;grid-template-columns:repeat(7,minmax(62px,1fr));gap:8px;margin:14px 0 18px}
+.pickup-week-day{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 5px;border:1px solid rgba(255,255,255,.12);border-radius:12px;text-align:center}
+.pickup-week-day i{width:11px;height:11px;border-radius:50%;display:block;background:#b42318;box-shadow:0 0 0 3px rgba(180,35,24,.12)}
+.pickup-week-day.is-open i{background:#1f9d55;box-shadow:0 0 0 3px rgba(31,157,85,.14)}
+.pickup-week-day span,.pickup-week-day small{font-size:.72rem}
+.pickup-week-day b{font-size:.82rem}
+.pickup-week-day.is-open small{color:#64c987}.pickup-week-day.is-closed small{color:#e87979}
+@media(max-width:700px){.pickup-week{grid-template-columns:repeat(4,1fr)}}
