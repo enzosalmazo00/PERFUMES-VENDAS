@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261001-sellerlogin2">
+  <link rel="stylesheet" href="styles.css?v=20261001-storefilters1?v=20261001-sellerlogin2">
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
 </head>
 <body>
@@ -182,6 +182,14 @@
           <button class="filter" type="button" data-filter="body_splash">Body Splash</button>
         </div>
       </div>
+      <div class="catalog-refiners" aria-label="Filtros do catálogo">
+        <label><span>Marca</span><select id="brandFilter"><option value="">Todas as marcas</option></select></label>
+        <label><span>Preço</span><select id="priceFilter"><option value="">Qualquer preço</option><option value="0-200">Até R$ 200</option><option value="200-400">R$ 200 a R$ 400</option><option value="400-700">R$ 400 a R$ 700</option><option value="700+">Acima de R$ 700</option></select></label>
+        <label><span>Concentração</span><select id="concentrationFilter"><option value="">Todas</option><option value="parfum">Parfum / Extrait</option><option value="edp">Eau de Parfum (EDP)</option><option value="edt">Eau de Toilette (EDT)</option><option value="edc">Eau de Cologne (EDC)</option><option value="other">Outras / não informada</option></select></label>
+        <label><span>Ordenar</span><select id="sortFilter"><option value="az">Nome A–Z</option><option value="za">Nome Z–A</option><option value="price_asc">Menor preço</option><option value="price_desc">Maior preço</option></select></label>
+        <button class="clear-refiners" id="clearCatalogFilters" type="button">Limpar filtros</button>
+      </div>
+      </div>
 
       <p class="catalog-status" id="catalogStatus">Carregando catálogo...</p>
       <div class="product-grid" id="productGrid"></div>
@@ -302,7 +310,7 @@
 
   <div class="toast" id="toast"></div>
   <script src="hero-carousel-v2.js?v=20261001-2"></script>
-  <script type="module" src="app.js?v=20261001-reviewfollowup1"></script>
+  <script type="module" src="app.js?v=20261001-storefilters1"></script>
   <script type="module" src="customer-checkout.js?v=20261001-payment-methods1"></script>
 </body>
 </html>
