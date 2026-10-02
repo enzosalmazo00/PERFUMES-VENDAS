@@ -194,14 +194,14 @@ function renderOrders(){
          '<div class="customer-delivery-proof"><strong>PRODUTO(S) ENTREGUE(S)</strong><p>'+esc(units)+' unidade(s) entregue(s) a <b>'+
          esc(order.customer_name)+'</b> pelo vendedor <b>'+esc(order.delivered_by_seller_name||"autorizado AZZENA")+
          '</b> em <b>'+esc(storeDate(order.delivered_at||order.pickup_redeemed_at))+'</b>.</p>'+
-         '<p>A entrega foi registrada e este código não pode ser utilizado novamente.</p></div></section>';
+         '<p>A retirada foi registrada, a transação comercial referente a este pedido foi encerrada e este código não pode ser utilizado novamente.</p><p><b>Agradecemos sua compra na AZZENA PARFUMS.</b></p></div></section>';
      }else if(paid&&order.pickup_code){
        pickupCodeCard='<section class="customer-pickup-code" aria-label="Código de retirada do pedido">'+
          '<p class="customer-pickup-eyebrow">SEU CÓDIGO ÚNICO DE RETIRADA</p>'+
          '<strong class="customer-pickup-number">'+esc(order.pickup_code)+'</strong>'+
          '<button type="button" class="customer-copy-code" data-copy-pickup-code="'+esc(order.pickup_code)+'">COPIAR CÓDIGO</button>'+
          '<p><b>Pagamento confirmado:</b> '+esc(storeDate(order.payment_confirmed_at))+'</p>'+
-         '<p><b>Produtos:</b> '+units+' unidade(s). Mostre este código ao vendedor quando retirar.</p>'+
+         '<p><b>Produtos:</b> '+units+' unidade(s). Mostre este código ao vendedor somente no momento da retirada.</p><div class="customer-pickup-declaration"><strong>ATENÇÃO AO INFORMAR O CÓDIGO</strong><p>Ao informar este código ao vendedor, você declara que retirou o(s) produto(s) deste pedido. Após a validação do código, a retirada será registrada e a transação comercial referente a este pedido será considerada encerrada.</p><p>Agradecemos sua compra na AZZENA PARFUMS.</p></div>'+
          (order.fulfillment_status==="ready"?'<p class="customer-pickup-ready">PEDIDO PRONTO PARA RETIRADA</p>':
            '<p class="customer-pickup-waiting">Aguarde o vendedor liberar a retirada dos produtos.</p>')+
          '<p class="customer-pickup-instruction">O código é pessoal. Não envie a desconhecidos nem entregue seus produtos a terceiros sem conferir a compra.</p>'+
