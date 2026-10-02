@@ -11,6 +11,23 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <button class="tab" data-tab="relatorios">Resultados e relatórios</button>
 <button class="tab" data-tab="emergencia">Segurança e emergência</button>
 </nav>
+<div class="admin-action-overlay" id="productActionOverlay" hidden aria-live="assertive" aria-busy="true">
+ <div class="admin-action-card" role="status">
+  <div class="admin-action-spinner" aria-hidden="true"></div>
+  <div class="admin-action-success" aria-hidden="true">✓</div>
+  <p class="eyebrow">Cadastro de produto</p><h2 id="productActionTitle">Cadastrando produto</h2>
+  <p id="productActionMessage">Aguarde. Estamos salvando o produto e a foto com segurança.</p>
+ </div>
+</div>
+<div class="admin-confirm-overlay" id="hardDeleteOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="hardDeleteTitle">
+ <div class="admin-confirm-card">
+  <p class="eyebrow danger-eyebrow">Ação irreversível</p><h2 id="hardDeleteTitle">Excluir definitivamente?</h2>
+  <p id="hardDeleteText"></p>
+  <div class="hard-delete-warning"><strong>Esta opção apaga o cadastro permanentemente.</strong><span>Se existir histórico de compra, estoque, reserva ou avaliação, o servidor recusará a exclusão para preservar a rastreabilidade.</span></div>
+  <label>Para confirmar, digite <strong>EXCLUIR</strong><input id="hardDeleteConfirmText" autocomplete="off" spellcheck="false" placeholder="EXCLUIR"></label>
+  <div class="confirm-actions"><button class="btn" type="button" id="cancelHardDelete">Cancelar</button><button class="btn btn-danger-solid" type="button" id="confirmHardDelete" disabled>Excluir definitivamente</button></div>
+ </div>
+</div>
 <section class="tab-panel" data-panel="visao"><div id="metrics" class="metrics"></div><div class="card"><p class="eyebrow">Alertas</p><h2>Estoque baixo</h2><div id="lowStock"></div></div></section>
 <section class="tab-panel" data-panel="perfumes" hidden>
 <div class="card"><p class="eyebrow">Catálogo</p><h2>Novo produto</h2>
@@ -42,10 +59,10 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <label>Notas de fundo<input name="base_notes" placeholder="Ex.: âmbar, baunilha, patchouli"></label>
 <label class="checkline"><input type="checkbox" name="is_featured"> Produto em destaque</label>
 <label class="checkline"><input type="checkbox" name="is_best_seller"> Marcar como mais vendido</label>
-<button class="btn btn-primary">Cadastrar produto</button>
+<button class="btn btn-primary" id="productSubmit" type="submit">Cadastrar produto</button>
 </form></div>
 
-<div class="card"><p class="eyebrow">Produtos cadastrados</p><h2>Gerenciar catálogo</h2><p class="muted">Edite informações, notas olfativas, foto e preço. “Excluir” remove o card da loja sem apagar o histórico.</p><div id="products"></div></div>
+<div class="card"><p class="eyebrow">Produtos cadastrados</p><h2>Gerenciar catálogo</h2><p class="muted">Edite informações, notas olfativas, foto e preço. “Remover da loja” desativa o produto e preserva todo o histórico. “Excluir definitivamente” só é permitido quando não existe histórico vinculado.</p><div id="products"></div></div>
 
 <div class="card edit-product-card" id="editProductCard" hidden>
 <p class="eyebrow">Edição</p><h2>Editar produto</h2>
@@ -250,7 +267,7 @@ document.querySelector("#products").innerHTML=table([
 ["Desconto máx.",r=>Number(r.max_discount_percent||0).toLocaleString("pt-BR")+"%"],
 ["Envio",r=>Number(r.weight_kg||0).toFixed(3)+" kg · "+Number(r.width_cm||0)+"×"+Number(r.height_cm||0)+"×"+Number(r.length_cm||0)+" cm"],
 ["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Fora da loja</span>'],
-["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Excluir</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'</div>']
+["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Remover da loja</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'<button class="btn btn-small btn-danger-outline" type="button" data-hard-delete-product="'+esc(r.id)+'">Excluir definitivamente</button>'+'</div>']
 ],d.products);
 document.querySelector("#cities").innerHTML=table([["Cidade",r=>esc(r.city_name)],["Estado/Departamento",r=>esc(r.state_name||"—")],["País",r=>r.country_code==="PY"?"Paraguai":"Brasil"],["Status",r=>r.is_active?'<span class="badge-ok">Ativa</span>':'<span class="badge-off">Inativa</span>']],d.cities);
 const pendingSellers=d.sellers.filter(r=>r.approval_status==="pending");
