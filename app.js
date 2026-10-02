@@ -11,7 +11,7 @@ function brl(c){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:
 function spriteClass(p){return "sprite-"+(SPRITE_INDEX[p?.slug]??3)}
 function productArt(p,klass){
  const url=String(p?.image_url||"");
- if(/^https:\/\//i.test(url))return '<img class="'+klass+' product-real-photo" src="'+esc(url)+'" alt="'+esc(p.name)+'" loading="lazy">';
+ if(/^https:\/\//i.test(url))return '<img class="'+klass+' product-real-photo" src="'+esc(url)+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async">';
  return '<div class="'+klass+' '+spriteClass(p)+'"></div>';
 }
 function loadBag(){try{const raw=JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]");return Array.isArray(raw)?raw.filter(i=>i&&/^[0-9a-f-]{36}$/i.test(String(i.id||""))&&Number.isSafeInteger(Number(i.quantity))&&Number(i.quantity)>0).slice(0,30).map(i=>({id:String(i.id),name:String(i.name||"Produto"),slug:String(i.slug||""),volume_ml:Math.max(1,Number(i.volume_ml)||1),unit_price_cents:Math.max(0,Math.trunc(Number(i.unit_price_cents)||0)),quantity:Math.min(100,Number(i.quantity))})):[]}catch{return[]}}
