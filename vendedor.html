@@ -204,9 +204,24 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <div class="seller-full-span"><button type="submit" class="seller-primary">Salvar ponto de retirada</button></div>
 </form><p id="sellerPickupMessage" class="muted" aria-live="polite"></p>
 </div>
+<div class="card seller-pickup-schedule-card" id="sellerPickupScheduleCard">
+<p class="eyebrow">AGENDA DE RETIRADA</p><h2>Dias e horários disponíveis</h2>
+<p class="muted">Marque as datas em que haverá atendimento para retirada. Você pode abrir um ou dois períodos no mesmo dia ou marcar a data como fechada.</p>
+<form id="sellerPickupScheduleForm" class="seller-pickup-grid">
+<label>Data<input id="sellerPickupDate" name="service_date" type="date" required></label>
+<label class="seller-toggle"><input id="sellerPickupOpen" name="is_open" type="checkbox" checked> Haverá retirada nesta data</label>
+<label>Início 1º período<input name="period1_start" type="time" value="09:00"></label>
+<label>Fim 1º período<input name="period1_end" type="time" value="12:00"></label>
+<label>Início 2º período (opcional)<input name="period2_start" type="time"></label>
+<label>Fim 2º período (opcional)<input name="period2_end" type="time"></label>
+<div class="seller-full-span"><button type="submit" class="seller-primary">SALVAR DATA E HORÁRIOS</button></div>
+</form>
+<p id="sellerPickupScheduleMessage" class="seller-feedback" role="status" aria-live="polite"></p>
+<div id="sellerPickupScheduleList"></div>
+</div>
 <div class="card" id="emergencyCard" hidden><p class="eyebrow">ACESSO AUTORIZADO</p><h2>Emergência da loja</h2><p class="muted">Use somente quando houver problema operacional real.</p><label>Categoria<select id="kind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor disponível</option><option value="operational_pause">Pausa operacional</option></select></label><label>Justificativa<textarea id="reason"></textarea></label><div class="seller-dashboard-actions"><button class="btn btn-danger" id="disable" type="button">Desativar temporariamente</button><button class="btn btn-primary" id="enable" type="button">Colocar online</button></div><p id="status" class="muted"></p></div>
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261002-finance1"></script>
+<script type="module" src="vendedor.js?v=20261002-pickupschedule1"></script>
 </body></html>
