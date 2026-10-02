@@ -204,36 +204,6 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 <div class="seller-full-span"><button type="submit" class="seller-primary">Salvar ponto de retirada</button></div>
 </form><p id="sellerPickupMessage" class="muted" aria-live="polite"></p>
 </div>
-<div class="card seller-pickup-card" id="sellerPickupScheduleCard">
-<p class="eyebrow">AGENDA DE RETIRADA</p><h2>Dias e horários disponíveis</h2>
-<p class="muted">Cadastre cada data em que haverá atendimento para retirada. O cliente só poderá escolher datas e horários que você disponibilizar aqui.</p>
-<form id="sellerPickupScheduleForm" class="seller-pickup-grid">
-<label>Data de atendimento<input name="service_date" type="date" required></label>
-<label class="seller-toggle"><input id="sellerPickupOpen" name="is_open" type="checkbox" checked> Aberto para retirada nesta data</label>
-<label>1º período · início<input name="period1_start" type="time" required value="09:00"></label>
-<label>1º período · fim<input name="period1_end" type="time" required value="12:00"></label>
-<label>2º período · início (opcional)<input name="period2_start" type="time" value="14:00"></label>
-<label>2º período · fim (opcional)<input name="period2_end" type="time" value="18:00"></label>
-<div class="seller-full-span"><button type="submit" class="seller-primary">SALVAR DATA E HORÁRIOS</button></div>
-</form>
-<p id="sellerPickupScheduleMessage" class="seller-feedback" role="status" aria-live="polite"></p>
-<div id="sellerPickupScheduleList"><p class="muted">Carregando agenda...</p></div>
-</div>
-<div class="card seller-pickup-schedule-card" id="sellerPickupScheduleCard">
-<p class="eyebrow">AGENDA DE RETIRADA</p><h2>Dias e horários disponíveis</h2>
-<p class="muted">Cadastre cada data em que haverá atendimento para retirada. Você pode informar um ou dois períodos no mesmo dia ou marcar a data como fechada.</p>
-<form id="sellerPickupScheduleForm" class="seller-pickup-grid">
-<label>Data<input name="service_date" type="date" required></label>
-<label class="seller-toggle"><input id="sellerPickupOpen" name="is_open" type="checkbox" checked> Aberto para retirada nesta data</label>
-<label>1º período — início<input name="period1_start" type="time" required value="09:00"></label>
-<label>1º período — fim<input name="period1_end" type="time" required value="12:00"></label>
-<label>2º período — início (opcional)<input name="period2_start" type="time"></label>
-<label>2º período — fim (opcional)<input name="period2_end" type="time"></label>
-<div class="seller-full-span"><button type="submit" class="seller-primary">SALVAR DATA E HORÁRIOS</button></div>
-</form>
-<p id="sellerPickupScheduleMessage" class="seller-feedback" role="status" aria-live="polite"></p>
-<div id="sellerPickupScheduleList"><p class="muted">Carregando agenda...</p></div>
-</div>
 <div class="card seller-pickup-schedule-card" id="sellerPickupScheduleCard">
 <p class="eyebrow">AGENDA DE RETIRADA</p><h2>Dias e horários disponíveis</h2>
 <p class="muted">Marque as datas em que haverá atendimento para retirada. Você pode abrir um ou dois períodos no mesmo dia ou marcar a data como fechada.</p>
@@ -253,5 +223,5 @@ placeholder="AZZ-XXXX-XXXX-XXXX-XX" aria-describedby="pickupVerifyStatus" requir
 </section>
 </main>
 <div id="toast" class="toast"></div>
-<script type="module" src="vendedor.js?v=20261002-pickupschedule1"></script>
+<script type="module" src="vendedor.js?v=20261002-pickupschedule2"></script>
 </body></html>
