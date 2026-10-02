@@ -61,6 +61,21 @@ function openProductEditor(id){const p=data?.products?.find(x=>x.id===id);if(!p)
 function closeProductEditor(){const card=$("#editProductCard"),form=$("#editProductForm");if(form){form.reset();catalogResetForm(form)}if(card)card.hidden=true}
 function openSellerEditor(id){const s=data?.sellers?.find(x=>x.id===id);if(!s)return notify("Vendedor não encontrado.");const card=$("#editSellerCard"),form=$("#editSellerForm");form.elements.id.value=s.id;form.elements.name.value=s.name||"";form.elements.email.value=s.email||"";form.elements.whatsapp_number.value=s.whatsapp_number||"";form.elements.avatar_url.value=s.avatar_url||"";form.elements.bio.value=s.bio||"";form.elements.city_id.value=(s.city_ids||[])[0]||"";form.elements.can_toggle.checked=!!s.can_toggle_site_emergency;form.elements.is_active.checked=!!s.is_active;card.hidden=false;card.scrollIntoView({behavior:"smooth",block:"start"})}
 function closeSellerEditor(){const card=$("#editSellerCard"),form=$("#editSellerForm");if(form)form.reset();if(card)card.hidden=true}
+let productCreateBusy=false,hardDeleteTarget=null;
+function setProductAction(state,message){
+ const overlay=$("#productActionOverlay"),title=$("#productActionTitle"),body=$("#productActionMessage");
+ if(!overlay)return;
+ overlay.hidden=false;overlay.dataset.state=state;overlay.setAttribute("aria-busy",state==="loading"?"true":"false");
+ title.textContent=state==="success"?"Concluído":"Cadastrando produto";
+ body.textContent=message||(state==="success"?"Produto cadastrado com sucesso.":"Aguarde. Estamos salvando o produto e a foto com segurança.");
+}
+function closeProductAction(){const overlay=$("#productActionOverlay");if(overlay)overlay.hidden=true}
+function openHardDelete(product){
+ hardDeleteTarget=product;const overlay=$("#hardDeleteOverlay"),input=$("#hardDeleteConfirmText"),confirm=$("#confirmHardDelete");
+ $("#hardDeleteText").textContent='Você solicitou a exclusão definitiva de "'+(product?.name||"este produto")+'".';
+ input.value="";confirm.disabled=true;overlay.hidden=false;setTimeout(()=>input.focus(),30);
+}
+function closeHardDelete(){hardDeleteTarget=null;const overlay=$("#hardDeleteOverlay");if(overlay)overlay.hidden=true}
 function bindForms(){
 initializeCatalogForm($("#productForm"));
 initializeCatalogForm($("#editProductForm"));
@@ -68,10 +83,32 @@ setStockDirection=bindStockDirection();
 $("#productImage").onchange=e=>setPreview(e.target,$("#productImagePreview"));
 $("#editProductImage").onchange=e=>setPreview(e.target,$("#editProductImagePreview"));
 
-$("#productForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;const f=new FormData(form),file=f.get("image");try{notify("Enviando foto...");const imageUrl=await uploadProductImage(file);const created=await adminApi({action:"create_product",...productPayload(f)});await productImageApi({product_id:created.data.id,image_url:imageUrl});form.reset();catalogResetForm(form);const preview=$("#productImagePreview");preview.hidden=true;preview.removeAttribute("src");await refresh();notify("Produto cadastrado com foto e notas.")}catch(x){notify(x.message)}};
+$("#productForm").onsubmit=async e=>{
+ e.preventDefault();if(productCreateBusy)return;
+ const form=e.currentTarget,f=new FormData(form),file=f.get("image"),submit=$("#productSubmit");
+ productCreateBusy=true;submit.disabled=true;form.setAttribute("aria-busy","true");setProductAction("loading");
+ try{
+  const imageUrl=await uploadProductImage(file);
+  const created=await adminApi({action:"create_product",...productPayload(f)});
+  await productImageApi({product_id:created.data.id,image_url:imageUrl});
+  form.reset();catalogResetForm(form);const preview=$("#productImagePreview");preview.hidden=true;preview.removeAttribute("src");
+  await refresh();setProductAction("success","Produto cadastrado com sucesso. O cadastro e a foto foram salvos.");
+  notify("Produto cadastrado com sucesso.");setTimeout(closeProductAction,1800);
+ }catch(x){closeProductAction();notify(x.message||"Não foi possível cadastrar o produto.")}
+ finally{productCreateBusy=false;submit.disabled=false;form.removeAttribute("aria-busy")}
+};
 
 $("#editProductForm").onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget),id=f.get("id"),file=f.get("image");try{notify("Salvando alterações...");await adminApi({action:"update_product",id,...productPayload(f,true)});if(file instanceof File&&file.size){const imageUrl=await uploadProductImage(file);await productImageApi({product_id:id,image_url:imageUrl})}await refresh();closeProductEditor();notify("Perfume atualizado.")}catch(x){notify(x.message)}};
 $("#cancelEditProduct").onclick=closeProductEditor;
+$("#hardDeleteConfirmText").addEventListener("input",e=>{$("#confirmHardDelete").disabled=String(e.target.value).trim().toUpperCase()!=="EXCLUIR"});
+$("#cancelHardDelete").onclick=closeHardDelete;
+$("#confirmHardDelete").onclick=async()=>{
+ if(!hardDeleteTarget||String($("#hardDeleteConfirmText").value).trim().toUpperCase()!=="EXCLUIR")return;
+ const button=$("#confirmHardDelete"),id=hardDeleteTarget.id;button.disabled=true;button.textContent="Excluindo...";
+ try{await adminApi({action:"hard_delete_product",id,confirmation:"EXCLUIR"});closeHardDelete();closeProductEditor();await refresh();notify("Produto excluído definitivamente.")}
+ catch(error){button.disabled=false;notify(error.message==="PRODUCT_HAS_HISTORY"?"Este produto possui histórico e não pode ser apagado. Use Remover da loja para preservar os registros.":error.message||"Não foi possível excluir definitivamente.")}
+ finally{button.textContent="Excluir definitivamente"}
+};
 
 content.addEventListener("click",async e=>{
 const review=e.target.closest("[data-review-seller]");
@@ -88,7 +125,7 @@ if(review){
   }catch(error){notify(error.message||"Não foi possível atualizar a solicitação.");review.disabled=false}
   return;
 }
-const saveOrder=e.target.closest("[data-save-order]"),editSeller=e.target.closest("[data-edit-seller]"),edit=e.target.closest("[data-edit-product]"),del=e.target.closest("[data-delete-product]"),restore=e.target.closest("[data-restore-product]");if(saveOrder){const id=saveOrder.dataset.saveOrder,fulfillment=document.querySelector('[data-order-fulfillment="'+id+'"]')?.value,payment=document.querySelector('[data-order-payment="'+id+'"]')?.value;try{await adminApi({action:"update_order_status",id,fulfillment_status:fulfillment,payment_status:payment});await refresh();notify("Pedido atualizado.")}catch(x){notify(x.message)}return}if(editSeller){openSellerEditor(editSeller.dataset.editSeller);return}if(edit){openProductEditor(edit.dataset.editProduct);return}if(del){const p=data?.products?.find(x=>x.id===del.dataset.deleteProduct);if(!confirm('Excluir "'+(p?.name||"este perfume")+'" da loja? O histórico será preservado.'))return;try{await adminApi({action:"delete_product",id:del.dataset.deleteProduct});await refresh();closeProductEditor();notify("Perfume removido da loja.")}catch(x){notify(x.message)}return}if(restore){try{await adminApi({action:"restore_product",id:restore.dataset.restoreProduct});await refresh();notify("Perfume restaurado na loja.")}catch(x){notify(x.message)}}});
+const saveOrder=e.target.closest("[data-save-order]"),editSeller=e.target.closest("[data-edit-seller]"),edit=e.target.closest("[data-edit-product]"),del=e.target.closest("[data-delete-product]"),hardDel=e.target.closest("[data-hard-delete-product]"),restore=e.target.closest("[data-restore-product]");if(saveOrder){const id=saveOrder.dataset.saveOrder,fulfillment=document.querySelector('[data-order-fulfillment="'+id+'"]')?.value,payment=document.querySelector('[data-order-payment="'+id+'"]')?.value;try{await adminApi({action:"update_order_status",id,fulfillment_status:fulfillment,payment_status:payment});await refresh();notify("Pedido atualizado.")}catch(x){notify(x.message)}return}if(editSeller){openSellerEditor(editSeller.dataset.editSeller);return}if(edit){openProductEditor(edit.dataset.editProduct);return}if(del){const p=data?.products?.find(x=>x.id===del.dataset.deleteProduct);if(!confirm('Remover "'+(p?.name||"este perfume")+'" da loja? O histórico será preservado e você poderá restaurá-lo depois.'))return;try{await adminApi({action:"delete_product",id:del.dataset.deleteProduct});await refresh();closeProductEditor();notify("Perfume removido da loja.")}catch(x){notify(x.message)}return}if(hardDel){const p=data?.products?.find(x=>x.id===hardDel.dataset.hardDeleteProduct);if(p)openHardDelete(p);return}if(restore){try{await adminApi({action:"restore_product",id:restore.dataset.restoreProduct});await refresh();notify("Perfume restaurado na loja.")}catch(x){notify(x.message)}}});
 
 $("#cityForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;const f=new FormData(form);try{const r=await adminApi({action:"create_city",city_name:f.get("city_name"),state_name:f.get("state_name"),country_code:f.get("country_code")});form.reset();await refresh();notify(r?.already_exists?"Cidade já estava cadastrada e continua ativa.":r?.restored?"Cidade reativada.":"Cidade cadastrada.");$("#cities")?.scrollIntoView({behavior:"smooth",block:"nearest"})}catch(x){notify(x.message==="CITY_CREATE_FAILED"?"Não foi possível cadastrar a cidade. Verifique os dados e tente novamente.":x.message)}};
 $("#sellerForm").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget;const f=new FormData(form);try{await adminApi({action:"create_seller",name:f.get("name"),email:f.get("email"),whatsapp_number:f.get("whatsapp_number"),avatar_url:f.get("avatar_url"),bio:f.get("bio"),city_ids:f.get("city_id")?[f.get("city_id")]:[],can_toggle_site_emergency:f.get("can_toggle")==="on"});form.reset();await refresh();notify("Vendedor cadastrado.")}catch(x){notify(x.message)}};

@@ -267,3 +267,22 @@
 .purchase-add-row button{border-color:#c4a05d;background:#241a0d;color:#e6ca91;font-weight:600;min-height:45px}
 .purchase-add-row button:disabled{opacity:.5;cursor:not-allowed}
 @media(max-width:760px){.catalog-global-results{grid-template-columns:1fr}.purchase-line{padding:16px 12px}.purchase-lines-head{align-items:flex-start}.purchase-line .form-grid{grid-template-columns:1fr}.purchase-line .span2{grid-column:auto}}
+
+
+/* Estados bloqueantes para operações sensíveis no ADM */
+.admin-action-overlay,.admin-confirm-overlay{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:22px;background:rgba(4,3,2,.82);backdrop-filter:blur(7px)}
+.admin-action-overlay[hidden],.admin-confirm-overlay[hidden]{display:none!important}
+.admin-action-card,.admin-confirm-card{width:min(92vw,480px);border:1px solid rgba(222,187,115,.55);background:linear-gradient(145deg,#1c160d,#0d0b08);box-shadow:0 30px 90px rgba(0,0,0,.7);padding:30px;text-align:center}
+.admin-action-card h2,.admin-confirm-card h2{margin:5px 0 9px;color:#f5e8cf}.admin-action-card p:last-child,.admin-confirm-card p{color:#c7b9a1;line-height:1.65}
+.admin-action-spinner{width:54px;height:54px;margin:0 auto 20px;border-radius:50%;border:4px solid rgba(220,184,111,.2);border-top-color:#e0bb70;animation:adminSpin .75s linear infinite}
+.admin-action-success{display:none;width:58px;height:58px;margin:0 auto 20px;border-radius:50%;place-items:center;background:#1e6b3d;color:#fff;font-size:34px;font-weight:800;box-shadow:0 0 0 7px rgba(42,145,81,.14)}
+.admin-action-overlay[data-state="success"] .admin-action-card{border-color:#4aa86c;background:linear-gradient(145deg,#14301f,#0b170f)}
+.admin-action-overlay[data-state="success"] .admin-action-spinner{display:none}.admin-action-overlay[data-state="success"] .admin-action-success{display:grid}
+.admin-action-overlay[data-state="success"] .eyebrow,.admin-action-overlay[data-state="success"] h2{color:#91e4aa}
+@keyframes adminSpin{to{transform:rotate(360deg)}}
+.admin-confirm-card{text-align:left}.danger-eyebrow{color:#ee927f!important}.hard-delete-warning{display:grid;gap:6px;margin:18px 0;padding:14px;border:1px solid rgba(229,96,76,.45);background:rgba(101,27,20,.2);color:#e8c3ba;font-size:12px;line-height:1.55}
+.admin-confirm-card label{display:grid;gap:8px;color:#e8dbc5}.admin-confirm-card input{min-height:48px!important;text-transform:uppercase;font-weight:700;letter-spacing:.08em}
+.confirm-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px;flex-wrap:wrap}.btn-danger-solid{background:#9f3225!important;border-color:#c95140!important;color:#fff!important}.btn-danger-solid:disabled{opacity:.4;cursor:not-allowed}
+.btn-danger-outline{border-color:rgba(218,90,73,.55)!important;color:#efaa9d!important;background:transparent!important}
+#productForm[aria-busy="true"]{pointer-events:none;opacity:.72}
+@media(max-width:620px){.admin-action-card,.admin-confirm-card{padding:23px 18px}.confirm-actions .btn{flex:1 1 100%}}
