@@ -216,13 +216,12 @@ async function refreshInventory(){
     if(pickupForm.elements[key])pickupForm.elements[key].value=pickup[key]||(key==="country_code"?"BR":"");
   }
   pickupForm.elements.is_enabled.checked=pickup.is_enabled===true;
-  const schedule=Array.isArray(data.pickup_schedule)?data.pickup_schedule:[];
+  const schedule=(Array.isArray(data.pickup_schedule)?data.pickup_schedule:[]).filter(row=>row.is_open===false);
   const scheduleBox=$("#sellerPickupScheduleList");
   if(scheduleBox)scheduleBox.innerHTML=schedule.length?'<div class="seller-schedule-list">'+schedule.map(row=>{
-    const date=new Date(row.service_date+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"});
-    const periods=row.is_open?[String(row.period1_start||"").slice(0,5)+"–"+String(row.period1_end||"").slice(0,5),row.period2_start?String(row.period2_start).slice(0,5)+"–"+String(row.period2_end||"").slice(0,5):""].filter(Boolean).join(" · "):"Fechado";
-    return '<div class="seller-custom-row"><div><strong>'+esc(date)+'</strong><small>'+esc(periods)+'</small></div><button class="seller-outline" type="button" data-delete-pickup-date="'+esc(row.service_date)+'">Remover</button></div>';
-  }).join("")+'</div>':'<p class="muted">Nenhuma data de retirada cadastrada ainda.</p>';
+    const date=new Date(row.service_date+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"2-digit",year:"numeric"});
+    return '<div class="seller-custom-row"><div><strong>'+esc(date)+'</strong><small>Não atendendo · retirada indisponível</small></div><button class="seller-outline" type="button" data-delete-pickup-date="'+esc(row.service_date)+'">Voltar ao horário padrão</button></div>';
+  }).join("")+'</div>':'<p class="muted">Nenhuma exceção cadastrada. Atendimento padrão de segunda a sábado, 08:00–12:00 e 14:00–18:00.</p>';
   renderSellerSales(data);
   updateSellerWorkflow(data);
   $("#emergencyCard").hidden=!data.seller?.can_toggle_site_emergency;
@@ -408,22 +407,15 @@ $("#sellerStockDirection").onchange=()=>{const exit=$("#sellerStockDirection").v
 $("#sellerPickupScheduleForm").onsubmit=async event=>{
   event.preventDefault();
   const form=event.currentTarget,data=new FormData(form),button=form.querySelector('[type="submit"]');
-  const isOpen=form.elements.is_open.checked;
-  button.disabled=true;$("#sellerPickupScheduleMessage").textContent="Salvando agenda...";
+  button.disabled=true;$("#sellerPickupScheduleMessage").textContent="Salvando exceção...";
   try{
-    await call("seller-portal",{action:"save_pickup_schedule",service_date:data.get("service_date"),is_open:isOpen,
-      period1_start:isOpen?data.get("period1_start"):"",period1_end:isOpen?data.get("period1_end"):"",
-      period2_start:isOpen?data.get("period2_start"):"",period2_end:isOpen?data.get("period2_end"):""});
-    $("#sellerPickupScheduleMessage").textContent="Data e horários salvos.";
-    await refreshInventory();notify("Agenda de retirada atualizada.");
+    await call("seller-portal",{action:"save_pickup_schedule",service_date:data.get("service_date"),is_open:false,
+      period1_start:"",period1_end:"",period2_start:"",period2_end:""});
+    $("#sellerPickupScheduleMessage").textContent="Data marcada como não atendendo.";
+    form.reset();await refreshInventory();activateSellerTab("agenda");notify("Dia sem atendimento registrado.");
   }catch(error){
-    const msg=error.message==="PICKUP_SCHEDULE_TIME_INVALID"?"Confira os horários: o início deve ser anterior ao fim.":friendlyError(error);
-    $("#sellerPickupScheduleMessage").textContent=msg;notify(msg);
+    const msg=friendlyError(error);$("#sellerPickupScheduleMessage").textContent=msg;notify(msg);
   }finally{button.disabled=false}
-};
-$("#sellerPickupOpen").onchange=event=>{
-  const disabled=!event.currentTarget.checked,form=$("#sellerPickupScheduleForm");
-  for(const name of ["period1_start","period1_end","period2_start","period2_end"])form.elements[name].disabled=disabled;
 };
 $("#sellerPickupScheduleList").onclick=async event=>{
   const button=event.target.closest("[data-delete-pickup-date]");if(!button)return;
