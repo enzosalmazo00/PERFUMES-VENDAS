@@ -372,7 +372,7 @@ $("#sellerPickupForm").onsubmit=async event=>{
     $("#sellerPickupMessage").textContent="Endereço atualizado. "+(pickup.is_enabled?"Clientes podem escolher retirar neste local.":"Retirada desativada no momento.");
     notify("Ponto de retirada salvo.");
   }catch(error){
-    const message=error.message==="GOOGLE_MAPS_LINK_REQUIRED"?"Informe o link do Google Maps para habilitar a retirada.":error.message==="GOOGLE_MAPS_LINK_INVALID"?"Use um link válido do Google Maps.":friendlyError(error);
+    const message=error.message==="GOOGLE_MAPS_LINK_REQUIRED"?"Informe o link do Google Maps para habilitar a retirada.":error.message==="GOOGLE_MAPS_LINK_INVALID"?"Use um link do Google Maps, incluindo maps.app.goo.gl, maps.google.com ou share.google.":friendlyError(error);
     $("#sellerPickupMessage").textContent=message;notify(message);
   }finally{submit.disabled=false}
 };
