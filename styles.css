@@ -1198,3 +1198,11 @@ footer .footer-seller-access:focus-visible{outline:2px solid #e6c47d;outline-off
 
 /* PIX dentro da AZZENA */
 .azzena-pix-overlay{z-index:260}.azzena-pix-card{width:min(480px,94vw);max-height:92dvh;overflow:auto;background:#11100e;border:1px solid #8b6a38;border-radius:14px;padding:28px;text-align:center;box-shadow:0 30px 90px #000}.azzena-pix-card h2{font:500 34px "Cormorant Garamond",serif;margin:5px 0 18px}.pix-status{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border-radius:9px;background:#19150f;border:1px solid #5d4b2d;margin-bottom:16px}.pix-status i{width:16px;height:16px;border-radius:50%;background:#e2b85f;box-shadow:0 0 0 5px rgba(226,184,95,.12);flex:0 0 auto}.pix-status span{display:flex;flex-direction:column}.pix-status strong{font-size:13px}.pix-status small{color:#b9aa91;margin-top:3px}.pix-status.is-approved{border-color:#347a51;background:#102419}.pix-status.is-approved i{display:grid;place-items:center;width:24px;height:24px;background:#2d9b5c;color:#fff;font-style:normal;box-shadow:none}.pix-qr{display:block;width:min(260px,75vw);height:auto;margin:0 auto 12px;background:#fff;padding:10px;border-radius:10px}.pix-help,.pix-security{font-size:11px;line-height:1.55;color:#b9ad99}.pix-copy-row{display:flex;gap:8px;margin:14px 0}.pix-copy-row input{min-width:0;flex:1;background:#090806;border:1px solid #3d352a;color:#eee;padding:12px;border-radius:6px}.pix-copy-row button{border:1px solid #e4bf76;background:#d7a957;color:#100b05;font-weight:700;border-radius:6px;padding:0 15px}.pix-later{display:inline-block;margin-top:7px;color:#e5c17b;font-size:11px;text-decoration:underline}@media(max-width:520px){.azzena-pix-card{padding:20px 15px}.pix-copy-row{flex-direction:column}.pix-copy-row button{min-height:44px}}
+
+
+/* Catálogo: renderização progressiva e imagens leves sem alterar o visual premium. */
+.product-card{content-visibility:auto;contain-intrinsic-size:1px 310px}
+.product-real-photo{display:block;max-width:100%;height:100%;width:100%;object-fit:contain;content-visibility:auto}
+.product-grid{align-items:stretch}
+.catalog-load-more{display:block;margin:22px auto 8px;min-height:46px;max-width:100%;padding:12px 22px}
+@media(prefers-reduced-motion:reduce){.product-card{transition:none}.product-card:hover{transform:none}}
