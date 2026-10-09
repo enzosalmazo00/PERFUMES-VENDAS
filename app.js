@@ -283,6 +283,7 @@ function initHeroCarousel(){
   start();
 }
 
+const initialCategory=new URLSearchParams(location.search).get("categoria");if(["masculino","feminino","unissex","body_splash"].includes(initialCategory))state.filter=initialCategory;
 bindCatalogRefiners();loadSiteStatus();loadCatalog();loadSellers();loadPreorderContacts();
 
 // Refresh approved customer reviews when returning to the storefront.
