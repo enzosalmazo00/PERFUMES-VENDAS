@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="hero-carousel-v2.css?v=20261001-azzena1">
   <style>.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:9;width:46px;height:56px;border:1px solid #c5a36488;border-radius:8px;background:#0b0a09aa;color:#f4d48a;font-size:38px;cursor:pointer}.hero-arrow-prev{left:12px}.hero-arrow-next{right:12px}.hero-arrow:hover,.hero-arrow:focus-visible{background:#2e2417;outline:2px solid #e0b45f}@media(max-width:600px){.hero-arrow{width:34px;height:42px;font-size:28px}.hero-arrow-prev{left:3px}.hero-arrow-next{right:3px}}</style>
 <style>.imports-showcase{padding:54px clamp(16px,5vw,80px) 44px;background:linear-gradient(145deg,#080807,#1b160e);color:#f7f1e6}.imports-heading{text-align:center;margin-bottom:30px}.imports-heading p{color:#d9b66f;letter-spacing:.25em;font-size:12px}.imports-heading h2{font:600 clamp(30px,4vw,54px) Georgia,serif;margin:12px 0}.imports-heading span{color:#c9bfae}.imports-showcase-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px}.imports-feature{position:relative;display:block;min-height:260px;overflow:hidden;border:1px solid #a5814359;border-radius:14px;background:#1b1713;color:white;text-decoration:none}.imports-feature img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .35s}.imports-feature:hover img{transform:scale(1.04)}.imports-feature:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#070604dd,transparent 70%)}.imports-feature span{position:absolute;z-index:1;left:22px;bottom:22px;display:grid;gap:6px}.imports-feature b{font-size:21px;letter-spacing:.07em}.imports-feature small{color:#e7dac4}.imports-feature strong{color:#e8bc69;font-size:12px;margin-top:7px}.imports-category-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:25px}.imports-category-links a{color:#e8d7b8;text-decoration:none;padding:11px 16px;border:1px solid #806b49;border-radius:50px}.imports-category-links a:hover{background:#d7b46c;color:#15100a}@media(max-width:800px){.imports-showcase-grid{grid-template-columns:1fr 1fr}.imports-feature-wide{grid-column:1/-1}.imports-feature{min-height:230px}}@media(max-width:480px){.imports-showcase-grid{grid-template-columns:1fr}.imports-feature-wide{grid-column:auto}.imports-feature{min-height:215px}}</style>
-</head>
+<style>.hero-slide:has(img[src$=".svg"]) .hero-media{opacity:.38;object-fit:cover}.hero-slide:has(img[src$=".svg"]) .hero-shade{background:linear-gradient(90deg,#050505 0%,#0c0a07c9 48%,#0c0a0760 100%)}.imports-feature img[src$=".svg"]{opacity:.3;object-fit:cover}.imports-feature:after{background:linear-gradient(0deg,#080706f5,#08070655)}.imports-feature span{left:20px;right:15px}.imports-feature b{font-size:clamp(16px,2vw,22px)}.imports-feature small{font-size:12px}.hero-copy{position:relative;z-index:3}.hero-slide .hero-button{position:relative;z-index:5}</style></head>
 <body>
   <script src="recovery-redirect.js"></script>
   <div class="site-unavailable" id="siteUnavailable" hidden>
@@ -51,10 +51,10 @@
 
     <nav class="nav">
       <a class="active" href="#inicio">Início</a>
-      <button type="button" data-jump-filter="todos">Perfumes</button>
-      <button type="button" data-jump-filter="masculino">Masculinos</button>
-      <button type="button" data-jump-filter="feminino">Femininos</button>
-      <button type="button" data-jump-filter="body_splash">Body Splash</button><a href="categoria.html?tipo=fones">Fones de ouvido</a><a href="categoria.html?tipo=caixas">Caixas de som</a><a href="categoria.html?tipo=carregadores">Carregadores</a><a href="categoria.html?tipo=eletronicos">Eletrônicos</a><a href="categoria.html?tipo=todos">Todos os produtos</a>
+      <button type="button" onclick="location.href='categoria.html?tipo=perfumes'">Perfumes</button>
+      <button type="button" onclick="location.href='index.html?categoria=masculino#catalogo'">Masculinos</button>
+      <button type="button" onclick="location.href='index.html?categoria=feminino#catalogo'">Femininos</button>
+      <button type="button" onclick="location.href='index.html?categoria=body_splash#catalogo'">Body Splash</button><a href="categoria.html?tipo=fones">Fones de ouvido</a><a href="categoria.html?tipo=caixas">Caixas de som</a><a href="categoria.html?tipo=carregadores">Carregadores</a><a href="categoria.html?tipo=eletronicos">Eletrônicos</a><a href="categoria.html?tipo=todos">Todos os produtos</a>
       <a href="#catalogo">Promoções</a>
       <a href="#catalogo">Mais Vendidos</a>
       <a href="#catalogo">Novidades</a>
@@ -97,7 +97,7 @@
             <p>AZZENA IMPORTS</p>
             <h1>Mais que perfumes,<br><em>é a sua assinatura.</em></h1>
             <span class="hero-desc">Descubra fragrâncias marcantes com uma experiência de compra elegante, pessoal e segura.</span>
-            <button class="gold-button hero-button" type="button" data-jump-filter="todos">VER COLEÇÃO <b>→</b></button>
+            <button class="gold-button hero-button" type="button" onclick="location.href='categoria.html?tipo=perfumes'">VER COLEÇÃO <b>→</b></button>
             <div class="hero-trust">
   <span><span class="trust-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 5-7 13L5 8l7-5Z"/><path d="M5 8h14M9 8l3 13 3-13"/></svg></span><b>Curadoria selecionada</b></span>
   <span><span class="trust-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><b>Pagamento seguro</b></span>
@@ -113,7 +113,7 @@
             <p>ELEGÂNCIA QUE ENVOLVE</p>
             <h1>Sua presença,<br><em>sua essência.</em></h1>
             <span class="hero-desc">Fragrâncias femininas que transformam cada gesto em uma assinatura inesquecível.</span>
-            <button class="gold-button hero-button" type="button" data-jump-filter="feminino">VER FEMININOS <b>→</b></button>
+            <button class="gold-button hero-button" type="button" onclick="location.href='index.html?categoria=feminino#catalogo'">VER FEMININOS <b>→</b></button>
           </div>
         </article>
 
@@ -124,7 +124,7 @@
             <p>PERSONALIDADE EM CADA NOTA</p>
             <h1>Presença que<br><em>deixa marca.</em></h1>
             <span class="hero-desc">Perfumes masculinos intensos e sofisticados para uma identidade verdadeiramente marcante.</span>
-            <button class="gold-button hero-button" type="button" data-jump-filter="masculino">VER MASCULINOS <b>→</b></button>
+            <button class="gold-button hero-button" type="button" onclick="location.href='index.html?categoria=masculino#catalogo'">VER MASCULINOS <b>→</b></button>
           </div>
         </article>
 
@@ -146,7 +146,7 @@
 
 <section class="imports-showcase" aria-labelledby="importsShowcaseTitle"><div class="imports-heading"><p>AZZENA IMPORTS · NOVIDADES</p><h2 id="importsShowcaseTitle">Muito mais que perfumes.</h2><span>Explore tecnologia, acessórios e suas fragrâncias favoritas em um só lugar.</span></div><div class="imports-showcase-grid"><a class="imports-feature imports-feature-wide" href="categoria.html?tipo=fones"><img src="assets/azzena-earbuds.svg" alt="Fones de ouvido sem fio" loading="lazy"><span><b>FONES SEM FIO</b><small>JBL · AIWA · Ecopower</small><strong>EXPLORAR →</strong></span></a><a class="imports-feature" href="categoria.html?tipo=caixas"><img src="assets/azzena-speakers.svg" alt="Caixas de som" loading="lazy"><span><b>CAIXAS DE SOM</b><small>Áudio para todos os momentos</small><strong>VER CATEGORIA →</strong></span></a><a class="imports-feature" href="categoria.html?tipo=carregadores"><img src="assets/azzena-powerbanks.svg" alt="Carregadores portáteis" loading="lazy"><span><b>CARREGADORES</b><small>Energia para levar com você</small><strong>VER CATEGORIA →</strong></span></a></div><nav class="imports-category-links" aria-label="Comprar por categoria"><a href="categoria.html?tipo=perfumes">✦ Perfumes</a><a href="categoria.html?tipo=fones">♫ Fones</a><a href="categoria.html?tipo=caixas">◉ Caixas de som</a><a href="categoria.html?tipo=carregadores">⚡ Carregadores</a><a href="categoria.html?tipo=eletronicos">▣ Eletrônicos</a><a href="categoria.html?tipo=todos">→ Ver tudo</a></nav></section>
     <section class="category-grid">
-      <button class="category-card male-card" type="button" data-jump-filter="masculino">
+      <button class="category-card male-card" type="button" onclick="location.href='index.html?categoria=masculino#catalogo'">
         <div class="category-overlay"></div>
         <div class="category-text">
           <p>PERFUMES</p>
@@ -157,7 +157,7 @@
         <div class="category-bottle male-bottle"></div>
       </button>
 
-      <button class="category-card female-card" type="button" data-jump-filter="feminino">
+      <button class="category-card female-card" type="button" onclick="location.href='index.html?categoria=feminino#catalogo'">
         <div class="category-overlay"></div>
         <div class="category-text">
           <p>PERFUMES</p>
@@ -173,10 +173,10 @@
       <div id="sellerCatalogBanner" class="seller-catalog-banner" hidden><p class="eyebrow">CATÁLOGO EXCLUSIVO</p><h2 id="sellerCatalogTitle">Catálogo do vendedor</h2><p id="sellerCatalogDescription"></p><a class="seller-general-link" href="index.html#catalogo">Ver catálogo completo da AZZENA →</a></div>
       <div class="catalog-title">
         <div>
-          <h2>Catálogo AZZENA IMPORTS</h2>
+          <h2>Todos os produtos · AZZENA IMPORTS</h2>
           <span></span>
         </div>
-        <button type="button" data-jump-filter="todos">Ver todos &nbsp;→</button>
+        <button type="button" onclick="location.href='categoria.html?tipo=perfumes'">Ver todos &nbsp;→</button>
       </div>
 
       <div class="catalog-controls">
@@ -216,9 +216,9 @@
   <footer>
     <div class="footer-logo"><strong>AZZENA</strong><span>PARFUMS</span></div>
     <div class="footer-links">
-      <button type="button" data-jump-filter="masculino">Masculinos</button>
-      <button type="button" data-jump-filter="feminino">Femininos</button>
-      <button type="button" data-jump-filter="body_splash">Body Splash</button>
+      <button type="button" onclick="location.href='index.html?categoria=masculino#catalogo'">Masculinos</button>
+      <button type="button" onclick="location.href='index.html?categoria=feminino#catalogo'">Femininos</button>
+      <button type="button" onclick="location.href='index.html?categoria=body_splash#catalogo'">Body Splash</button>
       <a href="#catalogo">Mais vendidos</a>
       <a href="conta.html">Minha conta</a>
     </div>
@@ -319,8 +319,8 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <script src="hero-carousel-v2.js?v=20261008-imports1"></script>
-  <script type="module" src="app.js?v=20261008-imports1"></script>
+  <script src="hero-carousel-v2.js?v=20261008-navigation3"></script>
+  <script type="module" src="app.js?v=20261008-navigation3"></script>
   <script type="module" src="customer-checkout.js?v=20261002-checkoutfinal1"></script>
 </body>
 </html>
