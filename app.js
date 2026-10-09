@@ -293,7 +293,7 @@ function initHeroCarousel(){
 }
 
 const initialCategory=new URLSearchParams(location.search).get("categoria");if(["masculino","feminino","unissex","body_splash"].includes(initialCategory))state.filter=initialCategory;
-bindCatalogRefiners();loadSiteStatus();if(new URLSearchParams(location.search).has("produto")){const clean=new URL(location.href);clean.searchParams.delete("produto");history.replaceState(history.state,"",clean.pathname+clean.search+clean.hash)}loadCatalog();loadSellers();loadPreorderContacts();
+bindCatalogRefiners();loadSiteStatus();const startupParams=new URLSearchParams(location.search);const openCartOnArrival=startupParams.get("abrir_sacola")==="1";if(startupParams.has("produto")||startupParams.has("abrir_sacola")){const clean=new URL(location.href);clean.searchParams.delete("produto");clean.searchParams.delete("abrir_sacola");history.replaceState(history.state,"",clean.pathname+clean.search+clean.hash)}loadCatalog().then(()=>{if(openCartOnArrival)openBag()});loadSellers();loadPreorderContacts();
 
 // Refresh approved customer reviews when returning to the storefront.
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalog()});
