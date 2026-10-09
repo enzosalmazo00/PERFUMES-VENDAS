@@ -293,7 +293,7 @@ function initHeroCarousel(){
 }
 
 const initialCategory=new URLSearchParams(location.search).get("categoria");if(["masculino","feminino","unissex","body_splash"].includes(initialCategory))state.filter=initialCategory;
-bindCatalogRefiners();loadSiteStatus();loadCatalog().then(()=>{const id=new URLSearchParams(location.search).get("produto");if(id&&state.products.some(p=>String(p.id)===id)){state.filter="todos";state.search="";state.catalogLimit=state.products.length;renderProducts();openProduct(id)}});loadSellers();loadPreorderContacts();
+bindCatalogRefiners();loadSiteStatus();if(new URLSearchParams(location.search).has("produto")){const clean=new URL(location.href);clean.searchParams.delete("produto");history.replaceState(history.state,"",clean.pathname+clean.search+clean.hash)}loadCatalog();loadSellers();loadPreorderContacts();
 
 // Refresh approved customer reviews when returning to the storefront.
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalog()});
