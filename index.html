@@ -173,6 +173,41 @@
       </button>
     </section>
 
+    <section class="catalog" id="catalogo" hidden aria-hidden="true" style="display:none!important">
+      <div id="sellerCatalogBanner" class="seller-catalog-banner" hidden><p class="eyebrow">CATÁLOGO EXCLUSIVO</p><h2 id="sellerCatalogTitle">Catálogo do vendedor</h2><p id="sellerCatalogDescription"></p><a class="seller-general-link" href="index.html#catalogo">Ver catálogo completo da AZZENA →</a></div>
+      <div class="catalog-title">
+        <div>
+          <h2>Todos os produtos · AZZENA IMPORTS</h2>
+          <span></span>
+        </div>
+        <button type="button" onclick="location.href='categoria.html?tipo=perfumes'">Ver todos &nbsp;→</button>
+      </div>
+
+      <div class="catalog-controls">
+        <label class="catalog-search">
+          <span class="tool-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.8 4.8"/></svg></span>
+          <input id="catalogSearch" type="search" placeholder="Buscar produto ou marca...">
+        </label>
+        <div class="filters">
+          <button class="filter is-active" type="button" data-filter="todos">Todos</button>
+          <button class="filter" type="button" data-filter="masculino">Masculinos</button>
+          <button class="filter" type="button" data-filter="feminino">Femininos</button>
+          <button class="filter" type="button" data-filter="unissex">Unissex</button>
+          <button class="filter" type="button" data-filter="body_splash">Body Splash</button>
+        </div>
+      </div>
+      <div class="catalog-refiners" aria-label="Filtros do catálogo">
+        <label><span>Marca</span><select id="brandFilter"><option value="">Todas as marcas</option></select></label>
+        <label><span>Preço</span><select id="priceFilter"><option value="">Qualquer preço</option><option value="0-200">Até R$ 200</option><option value="200-400">R$ 200 a R$ 400</option><option value="400-700">R$ 400 a R$ 700</option><option value="700+">Acima de R$ 700</option></select></label>
+        <label><span>Concentração</span><select id="concentrationFilter"><option value="">Todas</option><option value="parfum">Parfum / Extrait</option><option value="edp">Eau de Parfum (EDP)</option><option value="edt">Eau de Toilette (EDT)</option><option value="edc">Eau de Cologne (EDC)</option><option value="other">Outras / não informada</option></select></label>
+        <label><span>Ordenar</span><select id="sortFilter"><option value="az">Nome A–Z</option><option value="za">Nome Z–A</option><option value="price_asc">Menor preço</option><option value="price_desc">Maior preço</option></select></label>
+        <button class="clear-refiners" id="clearCatalogFilters" type="button">Limpar filtros</button>
+      </div>
+
+      <p class="catalog-status" id="catalogStatus">Carregando catálogo...</p>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
     <section class="service-row">
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 5-7 13L5 8l7-5Z"/><path d="M5 8h14M9 8l3 13 3-13"/></svg></span><div><b>CURADORIA PREMIUM</b><small>Seleção cuidadosa de fragrâncias</small></div></div>
       <div><span class="service-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5h-4v-5h4M4 13v5h4v-5H4Z"/><path d="M16 20c-1 1-2 1-4 1"/></svg></span><div><b>ATENDIMENTO PERSONALIZADO</b><small>Escolha acompanhada do início ao fim</small></div></div>
