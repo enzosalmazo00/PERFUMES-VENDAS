@@ -16,6 +16,7 @@
       slide.classList.toggle("is-active",active);
       slide.setAttribute("aria-hidden",active?"false":"true");
     });
+    const nextImage=slides[(current+1)%slides.length]?.querySelector("img[loading=lazy]");if(nextImage)nextImage.loading="eager";
     dots.forEach((dot,i)=>{
       const active=i===current;
       dot.classList.toggle("is-active",active);
@@ -45,6 +46,8 @@
     });
   });
 
+  root.querySelector("[data-hero-prev]")?.addEventListener("click",e=>{e.preventDefault();show(current-1);start()});
+  root.querySelector("[data-hero-next]")?.addEventListener("click",e=>{e.preventDefault();show(current+1);start()});
   root.addEventListener("touchstart",(e)=>{
     touchX=e.changedTouches&&e.changedTouches[0]?e.changedTouches[0].clientX:null;
   },{passive:true});
