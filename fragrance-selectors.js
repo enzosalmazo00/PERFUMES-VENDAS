@@ -191,6 +191,7 @@ export function initializeCatalogForm(form){
     f.name.value="";
   });
   f.type.addEventListener("change",()=>{
+    if(!["perfume","body_splash"].includes(f.type.value)){f.brand.value=OTHER;syncCustomBrand(form);f.volume.value=OTHER;toggleVolume(form);f.customVolume.value="1";form.elements.namedItem("category").value=f.type.value;f.name.value="";return;}
     renderFragrances(form,"");
     renderVolumes(form);
     form.elements.namedItem("category").value="";
