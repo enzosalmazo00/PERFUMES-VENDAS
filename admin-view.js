@@ -4,7 +4,8 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <button class="tab is-active" data-tab="visao">Visão da loja</button>
 <button class="tab" data-tab="compras">Compras e fornecedores</button>
 <button class="tab" data-tab="estoque">Estoque e movimentações</button>
-<button class="tab" data-tab="perfumes">Produtos e preços</button>
+<button class="tab" data-tab="perfumes">Cadastro de Perfumes</button>
+<button class="tab" data-tab="eletronicos">Cadastro de Eletrônicos</button>
 <button class="tab" data-tab="pedidos">Pedidos e pagamentos</button>
 <button class="tab" data-tab="caixa">Caixa presencial</button>
 <button class="tab" data-tab="rede">Vendedores e regiões</button>
@@ -99,6 +100,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <div class="span2 edit-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn" type="button" id="cancelEditProduct">Cancelar</button></div>
 </form></div>
 </section>
+<section class="tab-panel" data-panel="eletronicos" hidden><div id="electronicsCatalogHost"></div></section>
 <section class="tab-panel" data-panel="rede" hidden>
 <div class="grid2">
   <div class="card"><p class="eyebrow">Cobertura</p><h2>Nova cidade</h2><form id="cityForm"><label>Cidade<input name="city_name" required placeholder="Ex.: Pedro Juan Caballero"></label><label>Estado/Departamento<input name="state_name" placeholder="Ex.: Amambay"></label><label>País<select name="country_code"><option value="BR">Brasil</option><option value="PY">Paraguai</option></select></label><button class="btn btn-primary">Cadastrar cidade</button></form></div>
