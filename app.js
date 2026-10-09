@@ -162,7 +162,7 @@ function renderProducts(){
    return '<article class="product-card" data-product-id="'+esc(p.id)+'"><div class="product-media"><span class="product-heart">♡</span>'+
      (soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art",index<4)+
      '</div><div class="product-body"><h3>'+esc(p.name).toUpperCase()+'</h3><div class="product-brand">'+
-     esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"AZZENA IMPORTS"))+(["perfume","body_splash"].includes(p.product_type)?" · "+esc(p.volume_ml)+" ml":"")+"</div>"<div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
+     esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"AZZENA IMPORTS"))+(["perfume","body_splash"].includes(p.product_type)?" · "+esc(p.volume_ml)+" ml":"")+'</div><div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
      brl(price)+'</strong><button class="buy-card" type="button" data-buy="'+esc(p.id)+'"'+
      (soldOut?' disabled aria-disabled="true"':'')+'>'+(soldOut?'ESGOTADO':'▱ &nbsp; COMPRAR')+
      '</button>'+preorder+'</div></article>';
@@ -284,7 +284,7 @@ function initHeroCarousel(){
 }
 
 const initialCategory=new URLSearchParams(location.search).get("categoria");if(["masculino","feminino","unissex","body_splash"].includes(initialCategory))state.filter=initialCategory;
-bindCatalogRefiners();loadSiteStatus();loadCatalog();loadSellers();loadPreorderContacts();
+bindCatalogRefiners();loadSiteStatus();loadCatalog().then(()=>{const id=new URLSearchParams(location.search).get("produto");if(id&&state.products.some(p=>String(p.id)===id)){state.filter="todos";state.search="";state.catalogLimit=state.products.length;renderProducts();openProduct(id)}});loadSellers();loadPreorderContacts();
 
 // Refresh approved customer reviews when returning to the storefront.
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalog()});
