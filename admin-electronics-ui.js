@@ -19,7 +19,25 @@ export function switchProductCatalog(kind){
    form.querySelectorAll(sel).forEach(el=>{const box=el.closest("label")||el;box.hidden=electronic;box.querySelectorAll("input,select").forEach(input=>input.disabled=electronic)});
   }
   for(const name of ["volume_preset","fragrance_preset","brand_preset"]){const field=form.elements[name];if(field){field.disabled=electronic;field.required=!electronic&&name!=="fragrance_preset"}}
-  const brand=form.elements.brand_custom;if(brand){brand.closest("label").hidden=!electronic;brand.disabled=!electronic;brand.required=electronic;}
+  const brand=form.elements.brand_custom;if(brand){
+   const label=brand.closest("label");
+   if(electronic){
+    label.hidden=false;brand.disabled=false;
+    let select=form.querySelector(".electronics-brand-preset");
+    if(!select){
+     select=document.createElement("select");select.className="electronics-brand-preset";
+     for(const v of ["","EcoPower","Aiwa","JBL","Apple","Samsung","Redragon","Outra marca"])select.add(new Option(v||"Selecione a marca",v));
+     label.insertBefore(select,brand);
+     select.addEventListener("change",()=>{const other=select.value==="Outra marca";brand.hidden=!other;brand.value=other?"":select.value;brand.required=other;});
+    }
+    select.hidden=false;select.disabled=false;
+    const known=[...select.options].some(o=>o.value===brand.value&&o.value);
+    select.value=known?brand.value:"";brand.hidden=known;brand.required=!known;
+   }else{
+    label.hidden=true;brand.disabled=true;brand.required=false;
+    const select=form.querySelector(".electronics-brand-preset");if(select){select.hidden=true;select.disabled=true;}
+   }
+  }
   for(const name of ["composition","top_notes","heart_notes","base_notes"]){const field=form.elements[name];if(field)field.closest("label").hidden=electronic}
   const heading=form.closest(".card")?.querySelector("h2");
   if(heading&&form.id==="productForm")heading.textContent=electronic?"Cadastrar eletrônico":"Novo perfume";
