@@ -124,6 +124,13 @@ async function loadSellers(){
 function renderSellerPicker(){if(!state.sellers.length){els.sellerPicker.innerHTML="<p>Retirada indisponível: ainda não há vendedores com ponto de retirada e estoque confirmados.</p>";return}const shown=sellerScopeId?state.sellers.filter(s=>s.seller_id===sellerScopeId):state.sellers;els.sellerPicker.innerHTML=shown.map(s=>'<button class="seller-card '+(state.selectedSellerId===s.seller_id?"is-active":"")+'" type="button" data-seller-id="'+esc(s.seller_id)+'"><strong>'+esc(s.display_name)+'</strong></button>').join("");$$("[data-seller-id]",els.sellerPicker).forEach(b=>b.onclick=()=>{state.selectedSellerId=b.dataset.sellerId;renderSellerPicker();document.dispatchEvent(new CustomEvent("azzena:seller-changed",{detail:{sellerId:state.selectedSellerId}}))})}
 async function loadCatalog(){
  els.catalogStatus.textContent="Carregando catálogo...";
+ const timeout=setTimeout(()=>{
+  if(els.catalogStatus.textContent==="Carregando catálogo..."){
+   els.catalogStatus.textContent="O catálogo está demorando. Verifique a conexão e toque aqui para tentar novamente.";
+   els.catalogStatus.style.cursor="pointer";
+   els.catalogStatus.onclick=()=>{els.catalogStatus.onclick=null;loadCatalog()};
+  }
+ },12000);
  try{
    if(sellerScopeId){
      const [response,base]=await Promise.all([
@@ -143,7 +150,8 @@ async function loadCatalog(){
      refreshCatalogExtras();
    }
    populateBrandFilter();renderProducts();renderBag();
- }catch(e){console.error(e);els.catalogStatus.textContent="Não foi possível carregar o catálogo agora."}
+ }catch(e){console.error(e);els.catalogStatus.textContent="Não foi possível carregar o catálogo. Toque aqui para tentar novamente.";els.catalogStatus.style.cursor="pointer";els.catalogStatus.onclick=()=>{els.catalogStatus.onclick=null;loadCatalog()}}
+ finally{clearTimeout(timeout)}
 }
 function concentrationOf(p){const t=(" "+[p.name,p.short_description,p.description].filter(Boolean).join(" ")+" ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");if(/\b(extrait|extract|pure parfum|parfum)\b/.test(t))return"parfum";if(/\b(eau de parfum|edp)\b/.test(t))return"edp";if(/\b(eau de toilette|edt)\b/.test(t))return"edt";if(/\b(eau de cologne|edc|cologne)\b/.test(t))return"edc";return"other"}
 function populateBrandFilter(){if(!els.brandFilter)return;const selected=state.brand,brands=[...new Set(state.products.map(p=>String(p.brand||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"}));els.brandFilter.innerHTML='<option value="">Todas as marcas</option>'+brands.map(b=>'<option value="'+esc(b)+'">'+esc(b)+'</option>').join("");els.brandFilter.value=brands.includes(selected)?selected:"";if(!brands.includes(selected))state.brand=""}
