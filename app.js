@@ -153,7 +153,7 @@ function reviewSummary(id){const r=state.reviews.filter(x=>x.product_id===id);if
 function renderProducts(){
  document.querySelector(".catalog-load-more")?.remove();
  const allRows=filteredProducts(),rows=allRows.slice(0,state.catalogLimit),contacts=preorderContacts();
- els.catalogStatus.textContent=allRows.length?allRows.length+" fragrância"+(allRows.length===1?"":"s")+" no catálogo · exibindo "+rows.length+" agora":"Nenhuma fragrância encontrada.";
+ els.catalogStatus.textContent=allRows.length?allRows.length+" produto(s) no catálogo · exibindo "+rows.length+" agora":"Nenhum produto encontrado.";
  els.productGrid.innerHTML=rows.map((p,index)=>{
    const price=p.sale_price_cents??p.price_cents,r=reviewSummary(p.id),soldOut=Number(p.available_stock||0)<1;
    const preorder=soldOut?(contacts.length?
@@ -162,8 +162,7 @@ function renderProducts(){
    return '<article class="product-card" data-product-id="'+esc(p.id)+'"><div class="product-media"><span class="product-heart">♡</span>'+
      (soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art",index<4)+
      '</div><div class="product-body"><h3>'+esc(p.name).toUpperCase()+'</h3><div class="product-brand">'+
-     esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"Perfume importado"))+' · '+esc(p.volume_ml)+
-     'ml</div><div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
+     esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"AZZENA IMPORTS"))+(["perfume","body_splash"].includes(p.product_type)?" · "+esc(p.volume_ml)+" ml":"")+"</div>"<div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
      brl(price)+'</strong><button class="buy-card" type="button" data-buy="'+esc(p.id)+'"'+
      (soldOut?' disabled aria-disabled="true"':'')+'>'+(soldOut?'ESGOTADO':'▱ &nbsp; COMPRAR')+
      '</button>'+preorder+'</div></article>';
