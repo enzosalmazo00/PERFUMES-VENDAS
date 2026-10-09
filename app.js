@@ -9,9 +9,9 @@ const els={productGrid:$("#productGrid"),catalogStatus:$("#catalogStatus"),catal
 function esc(v=""){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 function brl(c){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(c||0)/100)}
 function spriteClass(p){return "sprite-"+(SPRITE_INDEX[p?.slug]??3)}
-function productArt(p,klass){
+function productArt(p,klass,priority=false){
  const url=String(p?.image_url||"");
- if(/^https:\/\//i.test(url))return '<img class="'+klass+' product-real-photo" src="'+esc(url)+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" fetchpriority="low">';
+ if(/^https:\/\//i.test(url))return '<img class="'+klass+' product-real-photo" src="'+esc(url)+'" alt="'+esc(p.name)+'" loading="'+(priority?"eager":"lazy")+'" decoding="async" fetchpriority="'+(priority?"high":"low")+'"'+(priority?'':' sizes="(max-width: 600px) 45vw, (max-width: 1000px) 30vw, 17vw"')+'>';
  return '<div class="'+klass+' '+spriteClass(p)+'"></div>';
 }
 function loadBag(){try{const raw=JSON.parse(localStorage.getItem("perfumes-demo-bag")||"[]");return Array.isArray(raw)?raw.filter(i=>i&&/^[0-9a-f-]{36}$/i.test(String(i.id||""))&&Number.isSafeInteger(Number(i.quantity))&&Number(i.quantity)>0).slice(0,30).map(i=>({id:String(i.id),name:String(i.name||"Produto"),slug:String(i.slug||""),volume_ml:Math.max(1,Number(i.volume_ml)||1),unit_price_cents:Math.max(0,Math.trunc(Number(i.unit_price_cents)||0)),quantity:Math.min(100,Number(i.quantity))})):[]}catch{return[]}}
@@ -154,13 +154,13 @@ function renderProducts(){
  document.querySelector(".catalog-load-more")?.remove();
  const allRows=filteredProducts(),rows=allRows.slice(0,state.catalogLimit),contacts=preorderContacts();
  els.catalogStatus.textContent=allRows.length?allRows.length+" fragrância"+(allRows.length===1?"":"s")+" no catálogo · exibindo "+rows.length+" agora":"Nenhuma fragrância encontrada.";
- els.productGrid.innerHTML=rows.map(p=>{
+ els.productGrid.innerHTML=rows.map((p,index)=>{
    const price=p.sale_price_cents??p.price_cents,r=reviewSummary(p.id),soldOut=Number(p.available_stock||0)<1;
    const preorder=soldOut?(contacts.length?
      '<button class="preorder-cta" type="button" data-preorder="'+esc(p.id)+'">Solicitar por encomenda ↗</button>':
      '<p class="preorder-unavailable">Encomendas temporariamente indisponíveis</p>'):"";
    return '<article class="product-card" data-product-id="'+esc(p.id)+'"><div class="product-media"><span class="product-heart">♡</span>'+
-     (soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art")+
+     (soldOut?'<span class="stock-badge">ESGOTADO</span>':'')+productArt(p,"product-art",index<4)+
      '</div><div class="product-body"><h3>'+esc(p.name).toUpperCase()+'</h3><div class="product-brand">'+
      esc(p.brand||(p.product_type==="body_splash"?"Body Splash":"Perfume importado"))+' · '+esc(p.volume_ml)+
      'ml</div><div class="product-rating">'+r.stars+' <small>'+r.text+'</small></div><strong class="product-price">'+
