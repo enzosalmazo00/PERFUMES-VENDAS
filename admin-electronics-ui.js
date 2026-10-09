@@ -18,6 +18,7 @@ export function switchProductCatalog(kind){
   for(const sel of [".catalog-global-label",".catalog-global-results",".catalog-reference-note",".catalog-brand-search",".catalog-fragrance-select",".catalog-volume-select",".catalog-count-hint"]){
    form.querySelectorAll(sel).forEach(el=>{const box=el.closest("label")||el;box.hidden=electronic;box.querySelectorAll("input,select").forEach(input=>input.disabled=electronic)});
   }
+  for(const el of form.querySelectorAll(".catalog-custom-volume"))el.hidden=electronic;
   for(const name of ["volume_preset","fragrance_preset","brand_preset"]){const field=form.elements[name];if(field){field.disabled=electronic;field.required=!electronic&&name!=="fragrance_preset"}}
   const brand=form.elements.brand_custom;if(brand){
    const label=brand.closest("label");
