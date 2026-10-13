@@ -14,7 +14,7 @@ const items=()=>cart().filter(x=>uuid(x.id)).map(x=>({id:x.id,quantity:Number(x.
 const chosenSeller=()=>uuid($(".seller-card.is-active")?.dataset?.sellerId)||uuid(scopeId);
 const payment=()=>$(".payment-tab.is-active")?.dataset?.payment||"pix";
 const customerReady=()=>Boolean(state.customer?.profile?.full_name&&state.customer?.profile?.phone);
-function message(text){const toast=$("#toast");if(!toast)return;toast.textContent=text;toast.classList.add("show");clearTimeout(message.timer);message.timer=setTimeout(()=>toast.classList.remove("show"),3600)}
+function message(text){const toast=$("#toast");if(toast){toast.textContent=text;toast.classList.add("show");toast.style.zIndex="2147483647";clearTimeout(message.timer);message.timer=setTimeout(()=>toast.classList.remove("show"),6000)}const form=$("#checkoutForm");if(form){let alert=form.querySelector("#checkoutInlineError");if(!alert){alert=document.createElement("p");alert.id="checkoutInlineError";alert.setAttribute("role","alert");alert.style.cssText="padding:12px;margin:10px 0;color:#8a1717;background:#fff1ee;border:1px solid #d9958c;border-radius:8px;font-weight:700";form.querySelector("#checkoutSubmit")?.before(alert)}if(alert)alert.textContent=text}}
 function explain(error){return ({
  LOGIN_REQUIRED:"Entre na sua conta para continuar.",
  PROFILE_INCOMPLETE:"Informe nome e telefone com DDD em Minha Conta.",
@@ -235,7 +235,7 @@ async function submitOrder(event){
  if(!customerReady()){message("Complete seu perfil em Minha Conta.");return}
  if(!canSubmit()){message("Escolha e confirme uma opção de entrega ou retirada.");return}
  if(!state.gatewayReady){message("O pagamento seguro da AZZENA ainda não foi ativado.");return}
- const submit=$("#checkoutSubmit");submit.disabled=true;submit.textContent="REGISTRANDO PEDIDO...";
+ const submit=$("#checkoutSubmit");submit.disabled=true;submit.textContent="REGISTRANDO PEDIDO...";const inline=$("#checkoutInlineError");if(inline)inline.textContent="";
  try{
   let response;
   if(state.method==="pickup"){
@@ -266,13 +266,13 @@ function start(){
  document.querySelectorAll("[data-checkout-method]").forEach(b=>{b.hidden=b.dataset.checkoutMethod!=="pickup";b.classList.toggle("is-active",b.dataset.checkoutMethod==="pickup")});
  $("#shippingArea").hidden=true;
  $("#pickupArea").hidden=false;
- form.onsubmit=submitOrder;
+ form.addEventListener("submit",submitOrder);
  document.querySelectorAll("[data-checkout-method]").forEach(btn=>btn.onclick=()=>setMode(btn.dataset.checkoutMethod));
  $("#calculateShipping").onclick=calculateShipping;
  $("#checkoutAddressSelect").onchange=()=>{state.quote=null;$("#shippingQuotes").replaceChildren();renderReady()};
  $("#sellerPicker").addEventListener("click",()=>{if(state.method==="pickup")setTimeout(loadPickup,0)});
  document.addEventListener("azzena:seller-changed",()=>{if(state.method==="pickup")loadPickup()});
- $("#checkoutBtn").addEventListener("click",()=>{setTimeout(loadCustomer,0)});
+ $("#checkoutBtn").addEventListener("click",()=>{setTimeout(loadCustomer,0)});$("#checkoutSubmit").addEventListener("click",event=>{if(!event.currentTarget.disabled){event.preventDefault();submitOrder(event)}});
  // A aba de pagamento e a divulgação dos encargos são sincronizadas pelo app.js.
  // Nunca anunciar confirmação manual: a cobrança depende do retorno oficial do gateway.
  renderReady();
