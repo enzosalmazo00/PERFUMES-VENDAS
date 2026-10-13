@@ -182,7 +182,8 @@ async function reopenPix(orderId){
   tick();pixCountdown=setInterval(tick,1000);
  }catch(error){notify(error?.message==="PIX_EXPIRED"?"Este Pix expirou. O estoque será liberado.":error?.message||"Não foi possível recuperar o Pix original.")}
 }
-document.addEventListener("click",event=>{const pix=event.target.closest("[data-recover-pix]");if(pix)reopenPix(pix.dataset.recoverPix)});\nfunction renderOrders(){
+document.addEventListener("click",event=>{const pix=event.target.closest("[data-recover-pix]");if(pix)reopenPix(pix.dataset.recoverPix)});
+function renderOrders(){
  const orders=boot?.orders||[];
  const maps=raw=>{
    try{
