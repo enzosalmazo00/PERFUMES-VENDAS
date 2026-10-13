@@ -182,7 +182,7 @@ async function reopenPix(orderId){
   tick();pixCountdown=setInterval(tick,1000);
  }catch(error){notify(error?.message==="PIX_EXPIRED"?"Este Pix expirou. O estoque será liberado.":error?.message||"Não foi possível recuperar o Pix original.")}
 }
-function renderOrders(){
+document.addEventListener("click",event=>{const pix=event.target.closest("[data-recover-pix]");if(pix)reopenPix(pix.dataset.recoverPix)});\nfunction renderOrders(){
  const orders=boot?.orders||[];
  const maps=raw=>{
    try{
@@ -257,7 +257,7 @@ function renderOrders(){
      cancelled:"Cancelado",refunded:"Estornado"};
    const reviewedProducts=new Set((order.reviews||[]).map(r=>r.product_id));
     const stillToRate=[...new Set((order.items||[]).map(i=>i.product_id).filter(Boolean))].filter(id=>!reviewedProducts.has(id));
-    const recoverButton=!paid&&order.payment_status==="pending"&&order.payment_method==="pix"&&order.mercado_pago_order_id
+    const recoverButton=!paid&&order.payment_status==="pending"&&order.payment_method==="pix"
       ?'<button type="button" class="account-mini-btn" data-recover-pix="'+esc(order.id)+'">VER PIX E TEMPO RESTANTE</button>':'';
    const reviewButton=paid&&order.payment_channel==="mercadopago"
       ?'<div class="order-review-action">'+(stillToRate.length
