@@ -466,7 +466,7 @@ fields.onsubmit=async event=>{
     message.textContent="Seus dados"+(address?" e endereço":"")+" foram atualizados com sucesso.";
     notify("Alterações salvas.");
   }catch(error){
-    message.textContent=(profileSaved?"Seus dados pessoais foram salvos, mas houve um problema com o endereço ou a atualização: ":"Não foi possível salvar: ")+(error.message||"tente novamente.");
+    message.textContent=(profileSaved?"Seus dados pessoais foram salvos, mas houve um problema com o endereço ou a atualização: ":"Não foi possível salvar: ")+(error.message==="Failed to fetch"?"Falha de conexão com o servidor. Verifique a internet e tente novamente.":error.message||"tente novamente.");
   }finally{button.disabled=false;button.textContent="SALVAR ALTERAÇÕES"}
 };
 
