@@ -180,7 +180,7 @@ async function reopenPix(orderId){
   clearInterval(pixCountdown);
   const tick=()=>{const remaining=Math.max(0,Date.parse(data.expires_at)-Date.now());timer.textContent=remaining?("Tempo restante: "+String(Math.floor(remaining/60000)).padStart(2,"0")+":"+String(Math.floor(remaining%60000/1000)).padStart(2,"0")):"Pix expirado";if(!remaining){clearInterval(pixCountdown);img.remove();input.remove();copy.remove();refreshCustomerOrders()}};
   tick();pixCountdown=setInterval(tick,1000);
- }catch(error){notify(error?.message==="PIX_EXPIRED"?"Este Pix expirou. O estoque será liberado.":error?.message||"Não foi possível recuperar o Pix original.")}
+ }catch(error){notify(error?.message==="PIX_EXPIRED"?"Este Pix expirou. Por favor, realize uma nova compra.":error?.message||"Não foi possível recuperar o Pix original.")}
 }
 document.addEventListener("click",event=>{const pix=event.target.closest("[data-recover-pix]");if(pix)reopenPix(pix.dataset.recoverPix)});
 function renderOrders(){
