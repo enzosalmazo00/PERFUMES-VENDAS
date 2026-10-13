@@ -195,7 +195,27 @@ function closeProduct(){els.productOverlay.hidden=true;syncScrollLock()}
 function addToBag(p){const max=Math.max(0,Number(p.available_stock)||0),e=state.bag.find(i=>i.id===p.id);if(max<1||(e?.quantity||0)>=max){toast(max<1?"Produto sob encomenda. Consulte o vendedor antes de comprar.":"Quantidade disponível já está na sacola.");return false}if(e)e.quantity++;else state.bag.push({id:p.id,name:p.name,slug:p.slug,volume_ml:p.volume_ml,unit_price_cents:p.sale_price_cents??p.price_cents,quantity:1});saveBag();renderBag();toast(p.name+" adicionado à sacola");return true}
 function removeFromBag(id){state.bag=state.bag.filter(i=>i.id!==id);saveBag();renderBag()}
 function total(){return state.bag.reduce((s,i)=>s+Number(i.unit_price_cents)*Number(i.quantity),0)}
-function renderBag(){const qty=state.bag.reduce((s,i)=>s+i.quantity,0);els.bagCount.textContent=qty;els.bagTotal.textContent=brl(total());if(!state.bag.length){els.bagItems.innerHTML='<div class="empty-bag-state"><span class="empty-bag-icon-wrap"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.3 11.2h17.4l-1.45 15H8.75l-1.45-15Z"/><path d="M11.4 12V9.3A4.6 4.6 0 0 1 16 4.7a4.6 4.6 0 0 1 4.6 4.6V12"/><path d="M8.1 13.2h15.8"/><path d="M16 16.2l2.1 2.5-2.1 2.5-2.1-2.5 2.1-2.5Z"/></svg></span><strong>Sua sacola está vazia</strong><span>Escolha suas fragrâncias favoritas e elas aparecerão aqui.</span></div>';els.checkoutBtn.disabled=true;return}els.checkoutBtn.disabled=false;els.bagItems.innerHTML=state.bag.map(i=>'<div class="bag-item"><div class="bag-art '+spriteClass(i)+'"></div><div><h4>'+esc(i.name)+'</h4><p> · qtd. '+i.quantity+' · '+brl(i.unit_price_cents*i.quantity)+'</p></div><button data-remove="'+esc(i.id)+'">×</button></div>').join("");$$("[data-remove]",els.bagItems).forEach(b=>b.onclick=()=>removeFromBag(b.dataset.remove))}
+function changeBagQuantity(id,delta){
+ const row=state.bag.find(i=>i.id===id);if(!row)return;
+ const product=state.products.find(p=>p.id===id);
+ const max=Math.max(0,Math.trunc(Number(product?.available_stock)||0));
+ if(delta>0&&row.quantity>=max){toast("Quantidade máxima disponível em estoque.");return}
+ if(row.quantity+delta<=0){removeFromBag(id);return}
+ row.quantity=Math.min(max,row.quantity+delta);saveBag();renderBag();
+}
+function renderBag(){
+ const qty=state.bag.reduce((sum,i)=>sum+i.quantity,0);
+ els.bagCount.textContent=qty;els.bagTotal.textContent=brl(total());
+ if(!state.bag.length){
+  els.bagItems.innerHTML='<div class="empty-bag-state"><strong>Sua sacola está vazia</strong><span>Escolha seus produtos favoritos.</span></div>';
+  els.checkoutBtn.disabled=true;return;
+ }
+ els.checkoutBtn.disabled=false;
+ els.bagItems.innerHTML=state.bag.map(i=>'<div class="bag-item"><div class="bag-art '+spriteClass(i)+'"></div><div><h4>'+esc(i.name)+'</h4><p>'+brl(i.unit_price_cents*i.quantity)+'</p><div class="bag-quantity" style="display:flex;align-items:center;gap:10px;margin-top:8px"><button type="button" data-qty-minus="'+esc(i.id)+'" aria-label="Diminuir quantidade" style="min-width:34px;min-height:34px">−</button><strong aria-label="Quantidade">'+i.quantity+'</strong><button type="button" data-qty-plus="'+esc(i.id)+'" aria-label="Aumentar quantidade" style="min-width:34px;min-height:34px">+</button></div></div><button type="button" data-remove="'+esc(i.id)+'" aria-label="Remover produto">×</button></div>').join("");
+ $$("[data-remove]",els.bagItems).forEach(b=>b.onclick=()=>removeFromBag(b.dataset.remove));
+ $$("[data-qty-minus]",els.bagItems).forEach(b=>b.onclick=()=>changeBagQuantity(b.dataset.qtyMinus,-1));
+ $$("[data-qty-plus]",els.bagItems).forEach(b=>b.onclick=()=>changeBagQuantity(b.dataset.qtyPlus,1));
+}
 function openBag(){els.bagDrawer.classList.add("is-open");els.drawerMask.hidden=false;syncScrollLock()}
 function closeBag(){els.bagDrawer.classList.remove("is-open");els.drawerMask.hidden=true;syncScrollLock()}
 function openCheckout(){if(!state.bag.length)return toast("Sua sacola está vazia.");if(state.bag.some(row=>{const p=state.products.find(item=>item.id===row.id);return !p||Number(p.available_stock)<Number(row.quantity)}))return toast("Um produto ficou indisponível. Atualize o catálogo antes de continuar.");closeBag();els.checkoutSummary.innerHTML=state.bag.map(i=>'<div>'+i.quantity+'× '+esc(i.name)+' — '+brl(i.unit_price_cents*i.quantity)+'</div>').join("")+'<strong>Total: '+brl(total())+'</strong>';renderSellerPicker();els.checkoutOverlay.hidden=false;syncScrollLock()}
