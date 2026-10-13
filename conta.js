@@ -198,7 +198,7 @@ function renderOrders(){
        '<h3>Acompanhar status do meu pedido</h3>'+
        '<div class="customer-order-journey-track" role="progressbar" aria-valuemin="0" aria-valuemax="3" aria-valuenow="'+stage+'" aria-valuetext="'+esc(phases[stage].label)+'">'+
        '<div class="customer-order-journey-fill" style="width:'+progress+'%"></div>'+
-       '<span class="customer-order-journey-traveler" style="left:'+progress+'%" aria-hidden="true">🚶</span>'+
+       '<span class="customer-order-journey-traveler" style="left:'+progress+'%" aria-hidden="true">🚶‍♂️</span>'+
        '</div><div class="customer-order-journey-steps">'+
        phases.map((phase,i)=>'<div class="customer-order-journey-step '+(i<=stage?'is-complete ':'')+(i===stage?'is-current':'')+'"><span aria-hidden="true">'+phase.icon+'</span><strong>'+phase.label+'</strong></div>').join("")+
        '</div><p class="customer-order-journey-current">Etapa atual: <strong>'+esc(phases[stage].label)+'</strong></p></section>';
