@@ -414,7 +414,7 @@ $("#addressCep").addEventListener("blur",async event=>{
     if(!response.ok)throw new Error("Falha ao consultar o CEP.");
     const address=await response.json();
     if(address.erro)throw new Error("CEP não encontrado.");
-    if(String(address.uf).toUpperCase()!=="SP")throw new Error("Por enquanto, os envios são apenas para São Paulo.");
+    // O cadastro de endereço não depende da região atendida pelo frete.
     if(digits($("#addressCep").value)!==postal)return;
     field("street").value=address.logradouro||"";
     field("neighborhood").value=address.bairro||"";
@@ -445,7 +445,7 @@ fields.onsubmit=async event=>{
       city:field("city").value.trim(),state:field("state").value.trim(),
       complement:field("complement").value.trim(),is_default:field("is_default").checked
     };
-    if(address.postal_code.length!==8||!address.street||!address.number||!address.neighborhood||!address.city||address.state!=="SP"){
+    if(address.postal_code.length!==8||!address.street||!address.number||!address.neighborhood||!address.city||!/^[A-Z]{2}$/.test(address.state.toUpperCase())){
       message.textContent="Endereço não salvo: confira o CEP e os campos obrigatórios. Para retirada presencial, você pode salvar somente nome e telefone apagando os campos de endereço.";
       return;
     }
