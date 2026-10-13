@@ -115,11 +115,19 @@ async function loadPickup(){
      return '<div class="pickup-week">'+days.map(day=>'<button type="button" class="pickup-week-day '+(day.open?'is-open':'is-closed')+'" data-pickup-date="'+day.iso+'" '+(day.open?'':'disabled')+' title="'+(day.open?'Disponível para retirada · 08:00–12:00 e 14:00–18:00':'Não atendendo')+'"><span>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{weekday:"short"}))+'</span><i aria-hidden="true"></i><b>'+escapeHtml(day.d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}))+'</b><small>'+(day.open?'Disponível':'Não atendendo')+'</small></button>').join("")+'</div><div class="pickup-hours-card" hidden><strong>Horário de retirada</strong><span>08:00–12:00 e 14:00–18:00</span></div>';
    })()+'</div>'+
    '<p>Retirada somente após confirmação do pagamento e liberação pelo vendedor.</p></div>';
+  const hint=document.createElement("p");
+  hint.id="pickupSelectionHint";
+  hint.setAttribute("role","status");
+  hint.style.cssText="margin:14px 0;padding:12px 14px;border:1px solid #d6b77a;border-radius:9px;background:#fff8e9;color:#4b3515;font-weight:700;line-height:1.5";
+  hint.textContent="Retirada presencial: selecione o dia e o horário da sua retirada para poder finalizar sua compra.";
+  box.prepend(hint);
   state.pickup=pickup;
   box.querySelectorAll(".pickup-week-day.is-open").forEach(btn=>btn.onclick=()=>{
     state.pickupDate=btn.dataset.pickupDate;state.pickupPeriod=1;
     box.querySelectorAll(".pickup-week-day").forEach(x=>x.classList.toggle("is-active",x===btn));
     const hours=box.querySelector(".pickup-hours-card");if(hours)hours.hidden=false;
+    const selectedHint=box.querySelector("#pickupSelectionHint");
+    if(selectedHint)selectedHint.textContent="Dia e horário de retirada selecionados. Você pode continuar para o pagamento.";
     renderReady();
   });
  }catch(error){box.textContent=explain(error)}
