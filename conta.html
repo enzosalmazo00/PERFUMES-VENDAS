@@ -190,15 +190,5 @@
   <div id="accountToast" class="toast"></div>
 </main>
 <script type="module" src="conta.js?v=20261002-pickupack1"></script>
-<script>
-(()=>{const root=document.querySelector("#accountView");if(!root)return;
-const menu=root.querySelector(".account-menu-grid"),top=root.querySelector("#accountPanelTop"),back=root.querySelector("#accountPanelBack"),title=root.querySelector("#accountPanelTitle");
-const sections=[...root.querySelectorAll("[data-account-section]")];
-function show(panel){menu.hidden=!!panel;top.hidden=!panel;sections.forEach(x=>x.hidden=x.dataset.accountSection!==panel);if(panel){const btn=menu.querySelector('[data-account-panel="'+panel+'"]');title.textContent=btn?.querySelector("strong")?.textContent||"";if(panel==="tracking"){const source=document.querySelector("#orderList"),target=document.querySelector("#trackingOrderList");if(source&&target)target.innerHTML=source.innerHTML;} }window.scrollTo({top:0,behavior:"smooth"});}
-menu.addEventListener("click",e=>{const b=e.target.closest("[data-account-panel]");if(b)show(b.dataset.accountPanel)});
-back.addEventListener("click",()=>show(null));
-const observer=new MutationObserver(()=>{if(!top.hidden&&title.textContent==="Acompanhar pedidos"){const source=document.querySelector("#orderList"),target=document.querySelector("#trackingOrderList");if(source&&target)target.innerHTML=source.innerHTML;}});
-const orderList=document.querySelector("#orderList");if(orderList)observer.observe(orderList,{childList:true});
-})();
-</script></body>
-</html>
+<script defer src="account-menu.js?v=20261013-menu2"></script>
+</body></html>
