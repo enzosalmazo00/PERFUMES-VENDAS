@@ -194,7 +194,7 @@ async function refreshInventory(){
   $("#sellerFinanceSummary").innerHTML='<div class="metrics"><div class="metric"><span>Vendas brutas</span><strong>'+money(sums.gross)+'</strong></div><div class="metric"><span>Custo dos produtos</span><strong>'+money(sums.cost)+'</strong></div><div class="metric"><span>Taxas MP</span><strong>'+money(sums.fee)+'</strong></div><div class="metric"><span>Lucro líquido</span><strong>'+money(sums.profit)+'</strong></div></div>';
   $("#sellerFinanceSales").innerHTML=fin.length?table([["Data",x=>x.paid_at?new Date(x.paid_at).toLocaleString("pt-BR"):"—"],["Forma",x=>esc(x.payment_method||"—")],["Bruto",x=>money(x.gross_revenue_cents)],["Custo",x=>money(x.product_cost_cents)],["Taxas",x=>x.fee_source==="provider_actual"?money(Number(x.payment_fee_cents||0)+Number(x.financing_fee_cents||0)+Number(x.taxes_cents||0)):"Pendente"],["Líquido",x=>x.net_received_cents==null?"Pendente":money(x.net_received_cents)],["Lucro",x=>x.profit_cents==null?"Pendente":money(x.profit_cents)]],fin):'<p class="muted">Nenhuma venda paga contabilizada ainda.</p>';
   loadCustomSalesFromDashboard(data);
-  const orders=data.orders||[];
+  const orders=(data.orders||[]).filter(order=>!(order.payment_status==="pending"&&Date.now()-Date.parse(order.created_at)>=24*60*60*1000));
   $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
     const canAdvance=order.delivery_method==="presencial"&&order.payment_status==="approved"&&
       !["cancelled","delivered"].includes(order.fulfillment_status);
