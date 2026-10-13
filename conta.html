@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261001-accountui3">
-<link rel="stylesheet" href="conta.css?v=20261001-reviewfollowup1">
+<link rel="stylesheet" href="conta.css?v=20261013-menu1">
 <style>html,body{margin:0;background:#070605}#accountSessionScreen{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 42%,#25190e,#070605 67%);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#e8cb86;font-family:Arial,sans-serif}#accountSessionScreen[hidden]{display:none!important}#accountSessionScreen .session-mark{font-family:Georgia,serif;letter-spacing:.22em;font-size:clamp(36px,7vw,62px)}#accountSessionScreen .session-subtitle{font-size:10px;letter-spacing:.52em;margin-top:5px}#accountSessionScreen .session-status{font-size:12px;letter-spacing:.08em;color:#c1b29b;margin-top:35px}#accountSessionScreen .session-loader{width:39px;height:39px;margin:30px auto 0;border:2px solid #645334;border-top-color:#f1cd82;border-radius:50%;animation:accountSpin .9s linear infinite}@keyframes accountSpin{to{transform:rotate(360deg)}}#accountSessionScreen button{margin:15px 6px 0;padding:10px 20px;border:1px solid #c5a061;background:transparent;color:#f0d494}#accountSessionScreen .session-actions[hidden]{display:none!important}</style>
 </head>
 <body class="account-page">
@@ -112,6 +112,15 @@
       <div class="account-top-actions"><a class="outline-account-btn" href="index.html">Continuar comprando</a><button class="outline-account-btn" id="logoutBtn" type="button">Sair</button></div>
     </div>
 
+    <nav class="account-menu-grid" aria-label="Menu da minha conta">
+      <button type="button" data-account-panel="profile"><span>👤</span><strong>Meus dados</strong><small>Consultar e editar cadastro</small></button>
+      <button type="button" data-account-panel="addresses"><span>📍</span><strong>Endereços</strong><small>Gerenciar locais de entrega</small></button>
+      <button type="button" data-account-panel="custom"><span>🛍️</span><strong>Venda personalizada</strong><small>Consultar cobranças</small></button>
+      <button type="button" data-account-panel="orders"><span>📦</span><strong>Meus pedidos</strong><small>Histórico de compras</small></button>
+      <button type="button" data-account-panel="tracking"><span>🚶</span><strong>Acompanhar pedidos</strong><small>Status e código de retirada</small></button>
+    </nav>
+    <div id="accountPanelTop" class="account-panel-top" hidden><button type="button" id="accountPanelBack">← Voltar ao menu</button><strong id="accountPanelTitle"></strong></div>
+    <div class="account-panel-content" data-account-section="profile" hidden>
     <form id="accountDetailsForm" class="account-details-form">
       <div class="account-grid">
         <section class="account-card">
@@ -148,18 +157,21 @@
       <div id="addressList" class="address-list"></div>
     </section>
 
+    </div><div class="account-panel-content" data-account-section="custom" hidden>
     <section class="account-card account-wide" id="cobrancasPersonalizadas">
 <div class="account-section-head"><div><p class="eyebrow">ENCOMENDAS</p><h2>Vendas personalizadas</h2></div></div>
 <p class="account-hint">Cobranças criadas por um vendedor AZZENA para encomendas negociadas com você. Confira produto, quantidade, preço e frete antes de pagar.</p>
 <div id="customSaleList" class="order-list"><p class="account-hint">Carregando...</p></div>
 </section>
 
+</div><div class="account-panel-content" data-account-section="orders" hidden>
 <section class="account-card account-wide" id="pedidos">
       <div class="account-section-head"><div><p class="eyebrow">PEDIDOS</p><h2>Meus pedidos</h2></div></div>
       <div id="orderList" class="order-list"></div>
     </section>
 
-    <section class="tracking-pending">
+    </div><div class="account-panel-content" data-account-section="tracking" hidden><section class="account-card account-wide"><h2>Acompanhar pedidos</h2><p class="account-hint">Acompanhe o andamento, os códigos de retirada e os comprovantes em seus pedidos.</p><div id="trackingOrderList"></div></section></div>
+    <section class="tracking-pending" hidden>
       <strong>Rastreio de entrega</strong>
       <p>A área de pedidos já está preparada para receber código e link de rastreio. A integração de rastreamento automático será estudada e configurada na próxima etapa.</p>
     </section>
@@ -178,5 +190,15 @@
   <div id="accountToast" class="toast"></div>
 </main>
 <script type="module" src="conta.js?v=20261002-pickupack1"></script>
-</body>
+<script>
+(()=>{const root=document.querySelector("#accountView");if(!root)return;
+const menu=root.querySelector(".account-menu-grid"),top=root.querySelector("#accountPanelTop"),back=root.querySelector("#accountPanelBack"),title=root.querySelector("#accountPanelTitle");
+const sections=[...root.querySelectorAll("[data-account-section]")];
+function show(panel){menu.hidden=!!panel;top.hidden=!panel;sections.forEach(x=>x.hidden=x.dataset.accountSection!==panel);if(panel){const btn=menu.querySelector('[data-account-panel="'+panel+'"]');title.textContent=btn?.querySelector("strong")?.textContent||"";if(panel==="tracking"){const source=document.querySelector("#orderList"),target=document.querySelector("#trackingOrderList");if(source&&target)target.innerHTML=source.innerHTML;} }window.scrollTo({top:0,behavior:"smooth"});}
+menu.addEventListener("click",e=>{const b=e.target.closest("[data-account-panel]");if(b)show(b.dataset.accountPanel)});
+back.addEventListener("click",()=>show(null));
+const observer=new MutationObserver(()=>{if(!top.hidden&&title.textContent==="Acompanhar pedidos"){const source=document.querySelector("#orderList"),target=document.querySelector("#trackingOrderList");if(source&&target)target.innerHTML=source.innerHTML;}});
+const orderList=document.querySelector("#orderList");if(orderList)observer.observe(orderList,{childList:true});
+})();
+</script></body>
 </html>
