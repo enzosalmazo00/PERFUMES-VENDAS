@@ -34,6 +34,12 @@
 @media(max-width:767px){.imports-showcase-grid .imports-feature{min-height:280px!important}}
 /* Desktop/tablet hero art: preserve all embedded copy without clipping. */
 #inicio .hero-slide-clean .hero-banner-link img.hero-media{object-fit:contain!important;object-position:center!important}
+</style><style id="azzena-banner-size-fix">
+/* Electronics slides use a fixed 12:5 image ratio at every viewport size. */
+#inicio.hero:has(.hero-slide-clean.is-active),#inicio .hero-carousel:has(.hero-slide-clean.is-active){height:auto!important;min-height:0!important;aspect-ratio:12 / 5!important}
+#inicio .hero-slide-clean .hero-banner-link{inset:0!important;overflow:hidden!important}
+#inicio .hero-slide-clean .hero-banner-link img.hero-media{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;max-width:100%!important;max-height:100%!important}
+@media(max-width:767px){#inicio.hero:has(.hero-slide-clean.is-active),#inicio .hero-carousel:has(.hero-slide-clean.is-active){aspect-ratio:12 / 5!important;min-height:0!important}}
 </style></head>
 <body>
   <script src="recovery-redirect.js"></script>
