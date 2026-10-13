@@ -201,3 +201,9 @@ body.seller-page{font-family:Poppins,Arial,sans-serif;background:radial-gradient
 @media(max-width:700px){.seller-mp-status{align-items:stretch;flex-direction:column}.seller-custom-money{grid-template-columns:1fr}.seller-custom-row{grid-template-columns:1fr}.seller-custom-row button{width:100%}}
 
 .seller-own-stock{margin-top:22px;padding-top:20px;border-top:1px solid rgba(217,173,100,.3)}.seller-own-stock form{display:grid;gap:12px}.seller-own-stock label{display:grid;gap:6px;color:#e3d1b0;font-size:12px}.seller-own-stock input,.seller-own-stock select,.seller-own-stock textarea{width:100%;box-sizing:border-box;background:#0a0907;color:#fff2df;border:1px solid rgba(213,181,111,.3);padding:11px}.seller-stock-admin-notice{margin-top:18px;padding:14px;border:1px solid rgba(213,181,111,.25);background:#12100c}.seller-stock-admin-notice strong{color:#e7c985}.seller-stock-admin-notice p{margin:5px 0 0;color:#a99e8d;font-size:12px}
+
+/* Situação do pedido em destaque no painel do vendedor */
+.seller-order-state{display:block;margin:0 0 17px;padding:18px 14px;text-align:center;border-radius:10px;font-size:clamp(20px,3.4vw,31px);font-weight:900;letter-spacing:.07em;line-height:1.25;border:2px solid currentColor;background:#101010;text-transform:uppercase}
+.seller-order-state--delivered,.seller-order-state--cancelled{color:#ff6262;background:#250d10;border-color:#b83c46}
+.seller-order-state--ready,.seller-order-state--preparing,.seller-order-state--received{color:#65e6a1;background:#0d251a;border-color:#267d52}
+.seller-order-state--pending{color:#f5cc7b;background:#29200f;border-color:#947033}
