@@ -280,8 +280,8 @@ $("#orderList").addEventListener("click",async event=>{
    notify(copied?"Código de retirada copiado.":"Mantenha o código visível para apresentá-lo ao vendedor.");
  }
 });
-$("#orderList").addEventListener("click",event=>{
- const button=event.target.closest("[data-rate-order]");if(!button)return;
+document.addEventListener("click",event=>{
+ const button=event.target.closest("#orderList [data-rate-order], #trackingOrderList [data-rate-order]");if(!button)return;
  const order=(boot?.orders||[]).find(o=>o.id===button.dataset.rateOrder);
  if(order&&order.payment_status==="approved"&&order.payment_channel==="mercadopago")renderReviewModal(order);
 });
