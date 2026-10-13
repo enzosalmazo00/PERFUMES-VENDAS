@@ -1,6 +1,6 @@
 import{
   loadCustomerSession,validCustomerSession,customerSignIn,customerSignUp,
-  customerSignOut,customerPortal,requestPasswordReset,recoveryFromHash,updateRecoveredPassword
+  customerSignOut,customerPortal,customerCheckout,requestPasswordReset,recoveryFromHash,updateRecoveredPassword
 }from"./customer-api.js?v=20261001-sessionfix1";
 
 const $=selector=>document.querySelector(selector);
@@ -159,6 +159,29 @@ async function loadCustomCustomerSales(){
   const rows=await res.json();box.innerHTML=rows.length?rows.map(s=>'<article class="order-item custom-customer-sale"><div class="order-head"><div><strong>'+esc(s.public_id)+'</strong><p>'+new Date(s.created_at).toLocaleString("pt-BR")+'</p></div><span class="order-status">'+esc(s.status==="pending_payment"?"Aguardando pagamento":s.status==="paid"?"Pago":s.status==="shipped"?"Enviado":s.status)+'</span></div><div class="order-lines">'+esc(s.quantity)+'× '+esc(s.product_name)+(s.volume_ml?" · "+esc(s.volume_ml)+" mL":"")+'</div><p>Produto: <strong>'+brl(Number(s.unit_price_cents)*Number(s.quantity))+'</strong><br>Frete combinado: <strong>'+brl(s.shipping_price_cents)+'</strong><br>Total: <strong>'+brl(s.total_cents)+'</strong></p>'+(s.customer_postal_code?'<p>CEP informado: '+esc(s.customer_postal_code)+'</p>':"")+(s.status==="pending_payment"?'<div class="custom-payment-pending"><strong>Pagamento ainda não ativado</strong><p>PIX com QR Code e cartão serão habilitados aqui quando a conta Mercado Pago deste vendedor estiver conectada. Nenhuma taxa PIX será acrescentada ao seu total.</p><button type="button" disabled>PAGAR — AGUARDANDO MERCADO PAGO</button></div>':'<p><strong>Pagamento registrado:</strong> '+esc(s.payment_method||"Mercado Pago")+(s.payment_confirmed_at?" · "+esc(storeDate(s.payment_confirmed_at)):"")+'</p>')+(s.tracking_code?'<p>Rastreio informado: <strong>'+esc(s.tracking_code)+'</strong></p>':"")+'</article>').join(""):'<p class="account-hint">Nenhuma venda personalizada vinculada à sua conta.</p>';
  }catch{box.innerHTML='<p class="account-hint">Não foi possível carregar as vendas personalizadas agora.</p>'}
 }
+let pixCountdown=null;
+async function reopenPix(orderId){
+ try{
+  const result=await customerCheckout({action:"recover_pix",order_id:orderId});
+  const data=result.data||{},qr=String(data.qr_code||"");
+  if(!qr)throw new Error("PIX_UNAVAILABLE");
+  document.querySelector("#customerPixOverlay")?.remove();
+  const overlay=document.createElement("div");overlay.id="customerPixOverlay";
+  overlay.style.cssText="position:fixed;inset:0;background:#000c;z-index:2147483646;display:grid;place-items:center;padding:16px;overflow:auto";
+  const card=document.createElement("section");card.style.cssText="background:#17130d;color:#fff;border:1px solid #caa35d;border-radius:16px;padding:24px;max-width:430px;width:100%;text-align:center";
+  const title=document.createElement("h2");title.textContent="Seu Pix original";
+  const timer=document.createElement("p");timer.style.cssText="color:#e9c77d;font-weight:bold;font-size:22px";
+  const img=document.createElement("img");img.alt="QR Code Pix original";img.style.cssText="max-width:240px;width:100%;background:white;padding:8px";
+  if(data.qr_code_base64)img.src="data:image/png;base64,"+String(data.qr_code_base64).replace(/^data:image\/png;base64,/,"");
+  const input=document.createElement("textarea");input.readOnly=true;input.value=qr;input.style.cssText="width:100%;height:75px;margin:12px 0";
+  const copy=document.createElement("button");copy.textContent="COPIAR PIX";copy.onclick=async()=>{try{await navigator.clipboard.writeText(qr);notify("Pix copiado.")}catch{input.select();notify("Selecione e copie o código.")}};
+  const close=document.createElement("button");close.textContent="FECHAR";close.style.marginLeft="12px";close.onclick=()=>{clearInterval(pixCountdown);overlay.remove()};
+  card.append(title,timer,img,input,copy,close);overlay.append(card);document.body.append(overlay);
+  clearInterval(pixCountdown);
+  const tick=()=>{const remaining=Math.max(0,Date.parse(data.expires_at)-Date.now());timer.textContent=remaining?("Tempo restante: "+String(Math.floor(remaining/60000)).padStart(2,"0")+":"+String(Math.floor(remaining%60000/1000)).padStart(2,"0")):"Pix expirado";if(!remaining){clearInterval(pixCountdown);img.remove();input.remove();copy.remove();refreshCustomerOrders()}};
+  tick();pixCountdown=setInterval(tick,1000);
+ }catch(error){notify(error?.message==="PIX_EXPIRED"?"Este Pix expirou. O estoque será liberado.":error?.message||"Não foi possível recuperar o Pix original.")}
+}
 function renderOrders(){
  const orders=boot?.orders||[];
  const maps=raw=>{
@@ -234,7 +257,9 @@ function renderOrders(){
      cancelled:"Cancelado",refunded:"Estornado"};
    const reviewedProducts=new Set((order.reviews||[]).map(r=>r.product_id));
     const stillToRate=[...new Set((order.items||[]).map(i=>i.product_id).filter(Boolean))].filter(id=>!reviewedProducts.has(id));
-    const reviewButton=paid&&order.payment_channel==="mercadopago"
+    const recoverButton=!paid&&order.payment_status==="pending"&&order.payment_method==="pix"&&order.mercado_pago_order_id
+      ?'<button type="button" class="account-mini-btn" data-recover-pix="'+esc(order.id)+'">VER PIX E TEMPO RESTANTE</button>':'';
+   const reviewButton=paid&&order.payment_channel==="mercadopago"
       ?'<div class="order-review-action">'+(stillToRate.length
         ?'<button type="button" data-rate-order="'+esc(order.id)+'">★ AVALIAR SUA COMPRA</button>'
         :'<span>Avaliações deste pedido enviadas.</span>')+'</div>'
@@ -250,7 +275,7 @@ function renderOrders(){
      '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
      (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
      (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+
-     '</p>'+pickupCodeCard+pickupProgress+pickupDetails+reviewButton+'</article>';
+     '</p>'+recoverButton+pickupCodeCard+pickupProgress+pickupDetails+reviewButton+'</article>';
  }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
 }
 let orderRefreshBusy=false;
