@@ -434,7 +434,7 @@ fields.onsubmit=async event=>{
   const full_name=field("full_name").value.trim(),phone=field("phone").value.trim();
   if(!full_name||!phone){message.textContent="Informe nome e telefone com DDD.";return}
   const hasAddress=!!selectedAddressId||[
-    "postal_code","street","number","neighborhood","city","state","complement"
+    "postal_code","street","number","neighborhood","city","state"
   ].some(name=>field(name).value.trim());
   let address=null;
   if(hasAddress){
@@ -446,7 +446,7 @@ fields.onsubmit=async event=>{
       complement:field("complement").value.trim(),is_default:field("is_default").checked
     };
     if(address.postal_code.length!==8||!address.street||!address.number||!address.neighborhood||!address.city||address.state!=="SP"){
-      message.textContent="Confira o endereço. Informe um CEP válido de São Paulo e todos os campos obrigatórios.";
+      message.textContent="Endereço não salvo: confira o CEP e os campos obrigatórios. Para retirada presencial, você pode salvar somente nome e telefone apagando os campos de endereço.";
       return;
     }
   }
