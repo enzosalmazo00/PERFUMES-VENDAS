@@ -80,3 +80,11 @@
 .customer-order-journey-step.is-current{color:#7de4a9}
 .customer-order-journey-current{margin:17px 0 0;text-align:center;font-size:13px}
 @media(max-width:480px){.customer-order-journey{padding:18px 10px}.customer-order-journey-step{font-size:10px}}
+
+.account-menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:25px 0}
+.account-menu-grid button{min-height:155px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:8px;padding:23px;border:1px solid #9e8050;border-radius:14px;background:#20180e;color:#f3e5cb;text-align:left;cursor:pointer}
+.account-menu-grid button span{font-size:28px}.account-menu-grid button strong{font-size:18px}.account-menu-grid button small{font-size:12px;color:#c2b49a}
+.account-menu-grid button:hover{border-color:#eac47d;background:#2a1e11}
+.account-panel-top{display:flex;align-items:center;gap:18px;margin:18px 0 24px;color:#e9c889}.account-panel-top button{padding:12px 18px;border:1px solid #a58a5e;background:#17120c;color:#f2dfb8;border-radius:8px;cursor:pointer}
+.account-panel-content[hidden],.account-menu-grid[hidden],.account-panel-top[hidden]{display:none!important}
+@media(max-width:520px){.account-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.account-menu-grid button{min-height:145px;padding:15px}.account-menu-grid button strong{font-size:15px}}
