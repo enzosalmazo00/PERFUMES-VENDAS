@@ -185,6 +185,24 @@ function renderOrders(){
      (map?'<a href="'+esc(map)+'" target="_blank" rel="noopener noreferrer">Abrir Google Maps ↗</a>':'')+
      (loc.instructions?'<p>'+esc(loc.instructions)+'</p>':'')+
      (!redeemed?'<p class="account-warning">Aguarde o pagamento ser confirmado e o pedido ficar pronto antes de ir ao local.</p>':'')+'</div>':"";
+   const pickupProgress=isOnlinePickup&&paid?(()=>{
+     const phases=[
+       {label:"Pagamento aprovado",icon:"✓"},
+       {label:"Em preparação",icon:"📦"},
+       {label:"Pronto para retirada",icon:"🛍"},
+       {label:"Produto entregue",icon:"🏁"}
+     ];
+     const stage=redeemed?3:order.fulfillment_status==="ready"?2:order.fulfillment_status==="preparing"?1:0;
+     const progress=Math.round(stage/3*100);
+     return '<section class="customer-order-journey" aria-label="Acompanhar status do meu pedido">'+
+       '<h3>Acompanhar status do meu pedido</h3>'+
+       '<div class="customer-order-journey-track" role="progressbar" aria-valuemin="0" aria-valuemax="3" aria-valuenow="'+stage+'" aria-valuetext="'+esc(phases[stage].label)+'">'+
+       '<div class="customer-order-journey-fill" style="width:'+progress+'%"></div>'+
+       '<span class="customer-order-journey-traveler" style="left:'+progress+'%" aria-hidden="true">🚶</span>'+
+       '</div><div class="customer-order-journey-steps">'+
+       phases.map((phase,i)=>'<div class="customer-order-journey-step '+(i<=stage?'is-complete ':'')+(i===stage?'is-current':'')+'"><span aria-hidden="true">'+phase.icon+'</span><strong>'+phase.label+'</strong></div>').join("")+
+       '</div><p class="customer-order-journey-current">Etapa atual: <strong>'+esc(phases[stage].label)+'</strong></p></section>';
+   })():"";
    let pickupCodeCard="";
    if(isOnlinePickup){
      if(redeemed){
@@ -232,7 +250,7 @@ function renderOrders(){
      '<br>Total: <strong>'+brl(order.total_cents)+'</strong>'+
      (!isPickup&&order.shipping_delivery_days?'<br>Prazo estimado: '+esc(order.shipping_delivery_days)+' dia(s).':'')+
      (!isPickup&&order.tracking_code?'<br>Rastreio: '+esc(order.tracking_code):'')+
-     '</p>'+pickupCodeCard+pickupDetails+reviewButton+'</article>';
+     '</p>'+pickupCodeCard+pickupProgress+pickupDetails+reviewButton+'</article>';
  }).join(""):'<p class="account-hint">Você ainda não possui pedidos.</p>';
 }
 let orderRefreshBusy=false;
