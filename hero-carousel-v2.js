@@ -3,7 +3,7 @@
   if(!root)return;
   const slides=Array.from(root.querySelectorAll("[data-hero-slide]"));
   const dots=Array.from(root.querySelectorAll("[data-hero-dot]"));
-  if(slides.length<2||slides.length!==dots.length)return;
+  if(slides.length<2)return;
 
   let current=0;
   let timer=null;
@@ -17,7 +17,8 @@
       slide.setAttribute("aria-hidden",active?"false":"true");
     });
     const nextImage=slides[(current+1)%slides.length]?.querySelector("img[loading=lazy]");if(nextImage)nextImage.loading="eager";
-    dots.forEach((dot,i)=>{
+    dots.slice(slides.length).forEach(dot=>{dot.hidden=true;dot.style.display="none";});
+  dots.forEach((dot,i)=>{if(i>=slides.length)return;
       const active=i===current;
       dot.classList.toggle("is-active",active);
       dot.setAttribute("aria-selected",active?"true":"false");
