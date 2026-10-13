@@ -211,7 +211,7 @@ async function calculateShipping(){
  renderReady();
 }
 function showPixPayment(data){
- const order=data?.order||{},qr=String(data?.qr_code||""),base64=String(data?.qr_code_base64||"").replace(/^data:image\\/png;base64,/,"");
+ const order=data?.order||{},qr=String(data?.qr_code||""),base64=String(data?.qr_code_base64||"").replace(/^data:image\/png;base64,/,"");
  if(!order.id||!qr||!base64)throw new Error("PAYMENT_LINK_MISSING");
  document.querySelector("#azzenaPixOverlay")?.remove();
  const overlay=document.createElement("div");overlay.id="azzenaPixOverlay";overlay.className="overlay azzena-pix-overlay";

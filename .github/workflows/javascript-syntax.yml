@@ -13,4 +13,6 @@ jobs:
           node-version: '22'
       - name: Check all JavaScript files
         run: |
-          find . -type f -name '*.js' -not -path './node_modules/*' -print0 | xargs -0 -r -n1 node --check
+          while IFS= read -r -d '' file; do
+            node --input-type=module --check < "$file" || exit 1
+          done < <(find . -type f -name '*.js' -not -path './node_modules/*' -print0)
