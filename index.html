@@ -61,12 +61,12 @@
     </nav>
 
     <div class="header-tools">
-      <label class="header-search" aria-label="Buscar produtos">
+      <form class="header-search" role="search" action="categoria.html" method="get" aria-label="Buscar produtos"><input type="hidden" name="tipo" value="todos">
         <span class="tool-svg" aria-hidden="true">
           <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.8 4.8"/></svg>
         </span>
-        <input id="topSearch" type="search" placeholder="Buscar produtos">
-      </label>
+        <input id="topSearch" name="q" type="search" placeholder="Buscar produtos" enterkeyhint="search" aria-label="Buscar produtos"><button type="submit" aria-label="Pesquisar" style="border:0;background:transparent;color:inherit;cursor:pointer;padding:4px">↗</button>
+      </form>
 
       <a class="user-icon header-action" href="conta.html" aria-label="Minha conta">
         <svg viewBox="0 0 24 24" aria-hidden="true">
