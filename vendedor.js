@@ -201,7 +201,13 @@ async function refreshInventory(){
     const next=order.fulfillment_status==="ready"?"code_required":order.fulfillment_status==="preparing"?"ready":"preparing";
     const labels={preparing:"Iniciar preparação",ready:"Liberar retirada",delivered:"Marcar entregue"};
     const phone=String(order.customer_phone||"").replace(/\D/g,"");
-    return '<article class="seller-order"><header><strong>'+esc(order.public_id)+'</strong><small>'+new Date(order.created_at).toLocaleString("pt-BR")+'</small></header>'+
+    const visualState=order.payment_status==="cancelled"||order.fulfillment_status==="cancelled"?"cancelled":
+      order.payment_status!=="approved"?"pending":
+      order.fulfillment_status==="delivered"?"delivered":
+      order.fulfillment_status==="ready"?"ready":
+      order.fulfillment_status==="preparing"?"preparing":"received";
+    const visualText={cancelled:"PEDIDO CANCELADO",pending:"AGUARDANDO PAGAMENTO",delivered:"ENTREGUE",ready:"PRONTO PARA RETIRADA",preparing:"EM PREPARAÇÃO",received:"INICIAR PREPARAÇÃO"}[visualState];
+    return '<article class="seller-order"><div class="seller-order-state seller-order-state--'+visualState+'" aria-label="Situação do pedido: '+visualText+'">'+visualText+'</div><header><strong>'+esc(order.public_id)+'</strong><small>'+new Date(order.created_at).toLocaleString("pt-BR")+'</small></header>'+
       '<p><b>'+esc(order.customer_name)+'</b> · '+money(order.total_cents)+'</p>'+
       '<p>'+esc(order.delivery_method==="presencial"?"Retirada presencial":"Entrega")+' · '+esc(payments[order.payment_status]||order.payment_status)+
       ' · '+esc(statuses[order.fulfillment_status]||order.fulfillment_status)+'</p>'+
