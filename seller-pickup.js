@@ -82,8 +82,11 @@ export function initPickupVerifier(options){
     confirmButton.disabled=!event.target.checked||!lookedUp||lookedUp.fulfillment_status!=="ready"||busy;
   });
   entry.addEventListener("input",()=>{
-    const before=entry.value;
-    entry.value=before.toUpperCase();
+    const plain=entry.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,17);
+    const parts=[];
+    if(plain.length)parts.push(plain.slice(0,3));
+    for(let start=3;start<plain.length;start+=4)parts.push(plain.slice(start,Math.min(start+4,plain.length)));
+    entry.value=parts.join("-");
     if(lookedUp){
       lookedUp=null;$("#pickupVerifyResult").hidden=true;
       $("#pickupConfirmArea").hidden=true;confirmButton.disabled=true;
