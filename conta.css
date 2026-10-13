@@ -65,3 +65,18 @@
 .order-review-action{margin:15px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px}.order-review-action button{background:transparent;color:#efd59b;border:1px solid #d6b676;padding:11px 15px;border-radius:5px;font:600 12px Poppins,Arial,sans-serif;cursor:pointer}.order-review-action button:focus-visible{outline:2px solid #eac87e;outline-offset:3px}.order-review-action span{font:400 12px Poppins,Arial,sans-serif;color:#bdad91}
 
 .custom-payment-pending{margin-top:14px;padding:14px;border:1px solid rgba(191,151,80,.45);background:#171109}.custom-payment-pending strong{color:#efca83}.custom-payment-pending p{font-size:12px;line-height:1.6}.custom-payment-pending button{width:100%;padding:12px;border:1px solid #6d6250;background:#211d17;color:#928775;cursor:not-allowed}.custom-customer-sale{border-color:rgba(199,159,91,.4)!important}
+
+/* Acompanhamento visual do pedido presencial */
+.customer-order-journey{margin:18px 0;padding:22px 18px;border:1px solid #b49a6b;border-radius:14px;background:#14120f;color:#f8f1e6}
+.customer-order-journey h3{margin:0 0 28px;font-size:clamp(17px,2.6vw,23px);font-weight:800}
+.customer-order-journey-track{position:relative;height:9px;border-radius:99px;background:#40372c;margin:22px 16px 21px}
+.customer-order-journey-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#c3a16b,#60d99d);transition:width .5s ease}
+.customer-order-journey-traveler{position:absolute;top:-27px;transform:translateX(-50%);font-size:26px;transition:left .5s ease}
+.customer-order-journey-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;text-align:center}
+.customer-order-journey-step{opacity:.48;font-size:clamp(10px,1.8vw,13px);line-height:1.35}
+.customer-order-journey-step span{display:block;font-size:21px;margin-bottom:5px}
+.customer-order-journey-step strong{display:block;font-weight:700}
+.customer-order-journey-step.is-complete{opacity:1;color:#e6d4ad}
+.customer-order-journey-step.is-current{color:#7de4a9}
+.customer-order-journey-current{margin:17px 0 0;text-align:center;font-size:13px}
+@media(max-width:480px){.customer-order-journey{padding:18px 10px}.customer-order-journey-step{font-size:10px}}
