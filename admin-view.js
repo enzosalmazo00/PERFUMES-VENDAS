@@ -291,6 +291,7 @@ document.querySelector("#sellers").innerHTML=table([
 ["Login",r=>r.auth_user_id?"Conta vinculada":'<span class="muted">Aguardando primeiro acesso</span>'],
 ["Emergência",r=>r.can_toggle_site_emergency?"Liberada":"Bloqueada"],
 ["Estoque",r=>r.stock_management_mode==="seller"?"Vendedor controla":"ADM controla"],
+["Comissão",r=>Number(r.commission_percent??10).toLocaleString("pt-BR",{maximumFractionDigits:2})+"%"],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
 const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
