@@ -68,3 +68,10 @@
 @media(max-width:1050px){#sellerPayoutDashboard .repasse-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:760px){.repasse-summary{grid-template-columns:repeat(2,minmax(0,1fr));}.repasse-detail-grid{grid-template-columns:1fr 1fr;}.repasse-request-card{grid-template-columns:1fr;}.repasse-record{padding:16px;}}
 @media(max-width:480px){.repasse-summary,#sellerPayoutDashboard .repasse-summary{grid-template-columns:1fr 1fr;gap:9px;}.repasse-summary-card{padding:14px 11px;}.repasse-summary-card strong{font-size:19px;}.repasse-detail-grid{grid-template-columns:1fr;gap:12px;}.repasse-record-amount{text-align:left;align-items:flex-start;}.repasse-record-head{flex-direction:column;}.repasse-track{gap:3px;}.repasse-track span{font-size:9px;}.repasse-action{width:100%;}.repasse-footer{flex-direction:column;align-items:stretch;}.repasse-record-id h4{font-size:17px;}}
+
+/* Audit timeline: the system's three independently recorded timestamps */
+.repasse-timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 6px}
+.repasse-timeline>div{background:rgba(224,189,128,.045);border:1px solid rgba(218,182,126,.17);border-radius:10px;padding:14px 13px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.repasse-timeline span{font-size:11px;color:#baa98d;line-height:1.45}
+.repasse-timeline strong{font-size:13px;color:#f4dfbb;line-height:1.35;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+@media(max-width:650px){.repasse-timeline{grid-template-columns:1fr;gap:8px}.repasse-timeline>div{padding:12px 14px}}
