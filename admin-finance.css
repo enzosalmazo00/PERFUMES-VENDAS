@@ -1,0 +1,69 @@
+
+/* AZZENA | Financial analytics: editorial, responsive, restrained gold accents */
+#adminFinanceHub .finance-chart-card,
+#adminFinanceHub:has(#financeChart) > .card:has(#financeChart) {
+ background:linear-gradient(145deg,#171411,#100e0c 65%,#15110b);
+ border:1px solid rgba(218,176,105,.2);
+ border-radius:16px;
+ box-shadow:0 14px 32px rgba(0,0,0,.14);
+}
+#adminFinanceHub .finance-secondary-charts{
+ display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+ gap:18px;align-items:stretch;margin-top:20px;
+}
+#adminFinanceHub .finance-secondary-charts > .card{margin:0!important;min-width:0;}
+#adminFinanceHub .finance-chart-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin:22px 0 8px;}
+#adminFinanceHub .finance-chart-head > div:first-child{display:flex;flex-direction:column;gap:5px;}
+#adminFinanceHub .finance-chart-eyebrow{font-size:.71rem;letter-spacing:.14em;color:#d2b27c;font-weight:700;}
+#adminFinanceHub .finance-chart-head strong{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:#f1dfbb;font-weight:650;letter-spacing:-.035em;}
+#adminFinanceHub .finance-chart-head small,#adminFinanceHub .finance-chart-peak span,#adminFinanceHub .finance-chart-peak small{color:#b5a892;font-size:.78rem;}
+#adminFinanceHub .finance-chart-peak{display:grid;gap:4px;padding:10px 16px;background:rgba(211,170,96,.055);border:1px solid rgba(216,182,121,.14);border-radius:12px;min-width:135px;}
+#adminFinanceHub .finance-chart-peak b{font-size:1.05rem;color:#f0d4a1;}
+#adminFinanceHub .finance-chart-scroller{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-color:#8a7149 transparent;scrollbar-width:thin;}
+#adminFinanceHub .finance-svg{display:block;max-width:none;min-height:260px;background:transparent;}
+#adminFinanceHub .finance-svg-grid{stroke:rgba(205,180,139,.15);stroke-width:1;stroke-dasharray:3 7;}
+#adminFinanceHub .finance-svg-tick{font-family:inherit;font-size:11px;fill:#b9aa91;font-weight:500;}
+#adminFinanceHub .finance-svg-label{font-family:inherit;font-size:12px;fill:#c7b99f;font-weight:550;}
+#adminFinanceHub .finance-svg-halo{fill:rgba(228,187,118,.09);stroke:none;}
+#adminFinanceHub .finance-svg-dot{fill:#f1d39d;stroke:#17120c;stroke-width:2.5;}
+#adminFinanceHub .finance-point{cursor:default;outline:none;}
+#adminFinanceHub .finance-point:hover .finance-svg-halo,#adminFinanceHub .finance-point:focus .finance-svg-halo{fill:rgba(232,188,119,.38);}
+#adminFinanceHub .finance-point:focus .finance-svg-dot{stroke:#fff;}
+#adminFinanceHub .finance-chart-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#a99b82;font-size:.75rem;border-top:1px solid rgba(221,186,125,.1);padding-top:12px;margin-top:0;}
+#adminFinanceHub .finance-chart-footer span{display:inline-flex;align-items:center;gap:7px;}
+#adminFinanceHub .finance-legend-dot{display:inline-block;width:9px;height:9px;background:#e6bb77;border-radius:50%;box-shadow:0 0 0 3px rgba(230,187,119,.13);}
+#adminFinanceHub .finance-chart-empty{min-height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:9px;padding:25px;border:1px dashed rgba(216,177,108,.25);border-radius:14px;color:#b9ab93;}
+#adminFinanceHub .finance-chart-empty strong{color:#e7d8bb;font-size:1rem;}
+#adminFinanceHub .finance-chart-empty p{font-size:.82rem;max-width:340px;margin:0;}
+#adminFinanceHub .finance-chart-empty-icon{font-size:2rem;color:#d6b175;}
+#adminFinanceHub .finance-bars{display:flex;flex-direction:column;gap:18px;margin:24px 0;}
+#adminFinanceHub .finance-bar-row{min-width:0;display:grid;gap:7px;}
+#adminFinanceHub .finance-bar-meta{display:flex;align-items:center;gap:10px;min-width:0;}
+#adminFinanceHub .finance-bar-rank{color:#9f8c6d;font-size:.76rem;min-width:22px;}
+#adminFinanceHub .finance-bar-meta strong{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;min-width:0;flex:1;font-size:.85rem;color:#eee2cc;font-weight:550;}
+#adminFinanceHub .finance-bar-meta b{font-size:.8rem;color:#e3c38e;font-variant-numeric:tabular-nums;}
+#adminFinanceHub .finance-bar-track{height:9px;border-radius:12px;background:rgba(213,179,121,.13);overflow:hidden;}
+#adminFinanceHub .finance-bar-fill{height:100%;border-radius:12px;background:linear-gradient(90deg,#8f6b39,#edd49f);}
+#adminFinanceHub .finance-bar-row small{font-size:.72rem;color:#ab9d84;}
+#adminFinanceHub .finance-donut-layout{display:flex;align-items:center;gap:24px;margin:24px 0;flex-wrap:wrap;justify-content:center;}
+#adminFinanceHub .finance-donut{width:180px;height:180px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 28px rgba(0,0,0,.15);}
+#adminFinanceHub .finance-donut-center{border-radius:50%;background:#17130f;width:128px;height:128px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:6px;padding:8px;}
+#adminFinanceHub .finance-donut-center small{font-size:.7rem;color:#b6a58c;}
+#adminFinanceHub .finance-donut-center strong{font-size:1.12rem;color:#f4dfb9;overflow-wrap:anywhere;}
+#adminFinanceHub .finance-donut-legend{flex:1;min-width:200px;max-width:450px;display:grid;gap:12px;}
+#adminFinanceHub .finance-donut-legend>div{display:grid;grid-template-columns:11px minmax(0,1fr) auto;gap:6px 9px;align-items:center;}
+#adminFinanceHub .finance-donut-legend i{width:10px;height:10px;border-radius:3px;grid-row:span 2;}
+#adminFinanceHub .finance-donut-legend span{color:#e2d4ba;font-size:.78rem;min-width:0;}
+#adminFinanceHub .finance-donut-legend strong{color:#f2dcb3;font-weight:600;font-size:.79rem;}
+#adminFinanceHub .finance-donut-legend small{grid-column:2/-1;color:#ab9b82;font-size:.69rem;}
+@media(max-width:1040px){#adminFinanceHub .finance-secondary-charts{grid-template-columns:1fr;}}
+@media(max-width:600px){
+ #adminFinanceHub .finance-chart-head{align-items:flex-start;}
+ #adminFinanceHub .finance-chart-peak{min-width:0;padding:9px 12px;}
+ #adminFinanceHub .finance-chart-head strong{font-size:1.55rem;}
+ #adminFinanceHub .finance-svg{min-height:230px;}
+ #adminFinanceHub .finance-chart-footer{font-size:.66rem;}
+ #adminFinanceHub .finance-donut-layout{gap:17px;}
+ #adminFinanceHub .finance-donut{width:160px;height:160px;}
+ #adminFinanceHub .finance-donut-center{width:116px;height:116px;}
+}
