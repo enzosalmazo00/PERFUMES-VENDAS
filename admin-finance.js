@@ -40,7 +40,7 @@ function analyze(d,productId){
   let fee=feeMap.get(order.id);
   if(fee&&fee.fee_source==="provider_actual"){fees+=Math.round((n(fee.payment_fee_cents)+n(fee.financing_fee_cents)+n(fee.taxes_cents))*ratio)}
   else unknownFees++;
-  const month=String(order.payment_confirmed_at||order.created_at).slice(0,7);
+  const month=String(order.created_at).slice(0,7);
   byMonth.set(month,(byMonth.get(month)||0)+rev);
   const sellerEntry=bySeller.get(order.seller_id)||{seller:order.seller_id,revenue:0,commission:0,orders:0};
   sellerEntry.revenue+=rev;sellerEntry.commission+=Math.round(n(order.seller_commission_cents)*ratio);sellerEntry.orders++;bySeller.set(order.seller_id,sellerEntry);
