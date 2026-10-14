@@ -183,6 +183,8 @@ document.addEventListener("submit",async event=>{
 });
 document.addEventListener("click",async event=>{
   if(event.target.id==="sellerPayoutDismiss"){$("#sellerPayoutBigNotice").hidden=true;return}
+  const proof=event.target.closest("[data-seller-view-proof]");
+  if(proof){try{const response=await call("seller-portal",{action:"get_payout_receipt",payout_id:proof.dataset.sellerViewProof});window.open(response.data.url,"_blank","noopener,noreferrer")}catch(error){notify(friendlyError(error))}return}
   const print=event.target.closest("[data-print-payout]");
   if(print){const payouts=JSON.parse($("#sellerPayoutDashboard")?.dataset.payouts||"[]");const row=payouts.find(p=>p.id===print.dataset.printPayout);if(row)sellerPayoutReceipt(row);return}
   const button=event.target.closest("[data-confirm-payout]");
@@ -262,7 +264,7 @@ async function refreshInventory(){
       ["Data",x=>new Date(x.requested_at).toLocaleString("pt-BR")],
       ["Valor",x=>money(x.amount_cents)],
       ["Status",x=>x.status==="requested"?"Aguardando ADM":x.status==="admin_paid"?"Aguardando sua confirmação":"Recebimento confirmado"],
-      ["Documento",x=>'<button type="button" class="seller-outline" data-print-payout="'+esc(x.id)+'">Gerar recibo</button>'],
+      ["Documento",x=>'<button type="button" class="seller-outline" data-print-payout="'+esc(x.id)+'">Demonstrativo</button>'+(x.receipt_path?' <button type="button" class="seller-outline" data-seller-view-proof="'+esc(x.id)+'">Comprovante Pix</button>':"")],
       ["Ação",x=>x.status==="admin_paid"?'<button type="button" class="seller-outline" data-confirm-payout="'+esc(x.id)+'">CONFIRMAR RECEBIMENTO</button>':"—"]
     ],payouts):'<p class="muted">Nenhum repasse solicitado até agora.</p>';
     payoutBox.innerHTML='<h3>Controle de repasses</h3><div class="metrics">'+summary+'</div>'+
