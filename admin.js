@@ -112,6 +112,16 @@ $("#confirmHardDelete").onclick=async()=>{
 };
 
 content.addEventListener("click",async e=>{
+const payoutButton=e.target.closest("[data-admin-pay-payout]");
+if(payoutButton){
+ const payout=data?.payouts?.find(p=>p.id===payoutButton.dataset.adminPayPayout);
+ if(!payout||payout.status!=="requested")return;
+ const seller=data.sellers?.find(x=>x.id===payout.seller_id);
+ if(!confirm("Você efetivamente transferiu "+money(payout.amount_cents)+" para a chave Pix "+payout.pix_key+" do vendedor "+(seller?.name||"")+"? Esta ação envia uma notificação obrigatória de confirmação ao vendedor."))return;
+ payoutButton.disabled=true;
+ try{await adminApi({action:"mark_payout_paid",payout_id:payout.id});await refresh();notify("Pagamento registrado. Aguardando confirmação do vendedor.")}catch(error){payoutButton.disabled=false;notify(error.message||"Não foi possível registrar o repasse.")}
+ return;
+}
 const review=e.target.closest("[data-review-seller]");
 if(review){
   const seller=data?.sellers?.find(x=>x.id===review.dataset.reviewSeller);
