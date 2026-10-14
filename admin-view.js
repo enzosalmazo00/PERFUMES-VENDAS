@@ -9,6 +9,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <button class="tab" data-tab="pedidos">Pedidos e pagamentos</button>
 <button class="tab" data-tab="caixa">Caixa presencial</button>
 <button class="tab" data-tab="rede">Vendedores e regiões</button>
+<button class="tab" data-tab="financeiro">Painel financeiro</button>
 <button class="tab" data-tab="relatorios">Resultados e relatórios</button>
 <button class="tab" data-tab="emergencia">Segurança e emergência</button>
 </nav>
@@ -268,6 +269,45 @@ return `<nav class="tabs" aria-label="Áreas da administração">
    </form>
  </div>
  <div class="card"><p class="eyebrow">4 · CONFERÊNCIA</p><h2>Histórico de compras</h2><div id="purchaseHistory"><p class="muted">Carregando compras...</p></div></div>
+</section>
+<section class="tab-panel" data-panel="financeiro" hidden>
+<div class="card" id="adminFinanceHub">
+<p class="eyebrow">DIRETORIA FINANCEIRA · VISÃO PRIVADA</p><h2>Painel financeiro e gerencial</h2>
+<p class="muted">Vendas, compras, estoque, custos, despesas e comissões. Todos os valores vêm dos registros reais. Resultados incompletos são sinalizados.</p>
+<div class="form-grid" style="align-items:end">
+<label>Período inicial<input type="date" id="financeFrom"></label>
+<label>Período final<input type="date" id="financeTo"></label>
+<label>Vendedor<select id="financeSeller"><option value="">Todos os vendedores</option></select></label>
+<label>Produto<select id="financeProduct"><option value="">Todos os produtos</option></select></label>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0">
+<button class="btn" type="button" id="financeQuickMonth">Este mês</button>
+<button class="btn" type="button" id="financeQuickYear">Este ano</button>
+<button class="btn btn-primary" type="button" id="financeApply">ATUALIZAR INDICADORES</button>
+<button class="btn" type="button" id="financeExport">Exportar CSV</button>
+</div>
+<p id="financeStatus" role="status" class="muted">Escolha um período e atualize.</p>
+<div class="metrics" id="financeKpis"></div>
+<div class="card" style="margin-top:20px;background:#15110c;border:1px solid #80663b">
+<h3>Indicadores e limites da apuração</h3><div id="financeWarnings"></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">EVOLUÇÃO DO FATURAMENTO</p><h2>Gráfico mensal de vendas pagas</h2><div id="financeChart"></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">ITENS MAIS VENDIDOS</p><h2>Produtos, volume e rentabilidade</h2><div style="overflow-x:auto"><table style="width:100%;min-width:570px"><thead><tr><th>Produto</th><th>Unidades vendidas</th><th>Receita</th><th>Custo identificado</th></tr></thead><tbody id="financeProductRanking"></tbody></table></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">DESEMPENHO POR VENDEDOR</p><h2>Vendas e comissões</h2><div style="overflow-x:auto"><table style="width:100%;min-width:570px"><thead><tr><th>Vendedor</th><th>Pedidos</th><th>Receita</th><th>Comissões</th></tr></thead><tbody id="financeSellerRanking"></tbody></table></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">MERCADORIAS E CAPITAL EMPATADO</p><h2>Entradas e posição do estoque</h2><div id="financePurchases"></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">FLUXO DE REPASSES</p><h2>Pagamentos para vendedores</h2><div id="financePayouts"></div></div>
+<div class="card" style="margin-top:20px"><p class="eyebrow">CENTRO DE CUSTOS</p><h2>Registrar despesa operacional</h2>
+<p class="muted">Cadastre os gastos da operação. Compras de mercadorias devem ser registradas na aba Compras e fornecedores para não duplicar o custo do estoque.</p>
+<form id="financeExpenseForm" class="form-grid">
+<label>Data<input name="date" id="financeExpenseDate" type="date" required></label>
+<label>Categoria<select name="category" required><option value="marketing">Marketing</option><option value="frete">Frete operacional</option><option value="embalagens">Embalagens</option><option value="aluguel">Aluguel</option><option value="servicos">Serviços</option><option value="impostos">Impostos</option><option value="taxas">Taxas extras</option><option value="transporte">Transporte</option><option value="outros">Outros</option></select></label>
+<label class="span2">Descrição<input name="description" maxlength="300" minlength="3" required placeholder="Ex.: impulsionamento de anúncios"></label>
+<label>Valor (R$)<input name="amount" type="number" min="0.01" step="0.01" required placeholder="0,00"></label>
+<div style="display:flex;align-items:end"><button type="submit" class="btn btn-primary">SALVAR DESPESA</button></div>
+</form>
+<h3>Despesas cadastradas no período</h3>
+<div style="overflow-x:auto"><table style="width:100%;min-width:620px"><thead><tr><th>Data</th><th>Categoria</th><th>Descrição</th><th>Valor</th><th>Ação</th></tr></thead><tbody id="financeExpenseRows"></tbody></table></div>
+</div>
+</div>
 </section>
 <section class="tab-panel" data-panel="relatorios" hidden><div class="card"><p class="eyebrow">Financeiro privado</p><h2>Relatórios</h2><div class="form-grid"><label>De<input type="date" id="from"></label><label>Até<input type="date" id="to"></label><label>Vendedor<select id="reportSeller"></select></label><label>Produto<select id="reportProduct"></select></label><label>Cidade<select id="reportCity"></select></label></div><button class="btn btn-primary" id="runReport">Gerar relatório</button></div><div id="reportMetrics" class="metrics"></div><div class="card" id="reportMoves"></div><div class="card" id="reportRisks"></div></section>
 <section class="tab-panel" data-panel="emergencia" hidden><div class="grid2"><div class="card danger-card"><p class="eyebrow">Emergência</p><h2>Retirar loja do ar</h2><label>Categoria<select id="outageKind"><option value="stock_issue">Problema de estoque</option><option value="inventory_count">Contagem de estoque</option><option value="maintenance">Manutenção/erro</option><option value="no_seller">Sem vendedor</option><option value="operational_pause">Pausa operacional</option><option value="permanent_closure">Encerramento definitivo</option></select></label><label>Justificativa<textarea id="outageReason"></textarea></label><label>Mensagem pública<textarea id="publicMessage"></textarea></label><button class="btn btn-danger" id="disableSite">Desativar loja</button></div><div class="card"><p class="eyebrow">Status</p><div class="status-line"><span class="status-dot" id="statusDot"></span><strong id="statusText">—</strong></div><p id="statusDetail" class="muted"></p><label>Nota para reativação<textarea id="restoreReason"></textarea></label><button class="btn btn-primary" id="enableSite">Colocar online</button></div></div></section>`;}
