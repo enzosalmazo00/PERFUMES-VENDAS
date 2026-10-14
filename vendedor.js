@@ -274,6 +274,7 @@ async function refreshInventory(){
     payoutBox.dataset.payouts=JSON.stringify(payouts);
     const pendingConfirmation=payouts.find(p=>p.status==="admin_paid");
     const big=$("#sellerPayoutBigNotice");
+    if(big&&big.parentElement!==document.body)document.body.appendChild(big);
     if(big){big.hidden=!pendingConfirmation;if(pendingConfirmation)$("#sellerPayoutBigText").textContent="O administrador informou o pagamento de "+money(pendingConfirmation.amount_cents)+". Confirme somente se o dinheiro entrou na sua conta."}
   }
   const configuredRate=Number(data.seller?.commission_percent??10);
