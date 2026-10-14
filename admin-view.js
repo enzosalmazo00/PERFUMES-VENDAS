@@ -122,7 +122,19 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <label class="span2">Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label>
 <label>Cidade<select name="city_id" id="editSellerCity"></select></label>
 <label class="checkline"><input type="checkbox" name="can_toggle"> Pode usar emergência</label>
-<label>Comissão do vendedor (%)<input name="commission_percent" type="number" min="0" max="100" step="0.01" value="10" required><small>Porcentagem aplicada apenas às novas vendas pagas. O histórico mantém a taxa da época.</small></label>
+<div class="span2" style="padding:18px;border:1px solid #927544;border-radius:12px;background:#17130e">
+<h3 style="margin:0 0 10px;color:#e6bf75">Tabela de comissões por valor unitário do produto</h3>
+<p class="muted">Defina a porcentagem de cada faixa. A comissão é calculada por item, sobre o preço final de venda após desconto, e não sobre o total da sacola. Alterações não modificam vendas anteriores.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px">
+<label>Até R$ 100<input name="commission_tier_0" type="number" min="0" max="100" step="0.01" value="10" required></label>
+<label>De R$ 100,01 a R$ 200<input name="commission_tier_1" type="number" min="0" max="100" step="0.01" value="10" required></label>
+<label>Acima de R$ 200 até R$ 300<input name="commission_tier_2" type="number" min="0" max="100" step="0.01" value="8" required></label>
+<label>Acima de R$ 300 até R$ 400<input name="commission_tier_3" type="number" min="0" max="100" step="0.01" value="7" required></label>
+<label>Acima de R$ 400 até R$ 500<input name="commission_tier_4" type="number" min="0" max="100" step="0.01" value="6.5" required></label>
+<label>Acima de R$ 500 (inclusive acima de R$ 600)<input name="commission_tier_5" type="number" min="0" max="100" step="0.01" value="6" required></label>
+</div>
+<label style="display:block;margin-top:12px">Comissão padrão para registros legados (%)<input name="commission_percent" type="number" min="0" max="100" step="0.01" value="10" required><small>Usada como referência em operações antigas. As novas vendas usam a tabela acima.</small></label>
+</div>
 <label>Controle de estoque<select name="stock_management_mode"><option value="admin">Controlado pelo administrador</option><option value="seller">Vendedor controla o próprio estoque</option></select><small>O vendedor nunca acessa estoque de outros vendedores.</small></label>
 <label class="checkline"><input type="checkbox" name="is_active"> Vendedor ativo</label>
 <div class="span2 edit-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn" type="button" id="cancelEditSeller">Cancelar</button></div>
