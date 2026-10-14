@@ -189,10 +189,19 @@ async function refreshInventory(){
   const statuses={pending:"Recebido",preparing:"Preparando",ready:"Pronto para retirar",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
   const payments={pending:"Pagamento pendente",approved:"Pagamento aprovado",rejected:"Pagamento recusado",cancelled:"Cancelado",refunded:"Estornado"};
   configureOwnStock(data);
-  const fin=Array.isArray(data.financial_sales)?data.financial_sales:[];
-  const sums=fin.reduce((a,x)=>{a.gross+=Number(x.gross_revenue_cents||0);a.cost+=Number(x.product_cost_cents||0);a.fee+=Number(x.payment_fee_cents||0)+Number(x.financing_fee_cents||0)+Number(x.taxes_cents||0);a.profit+=Number(x.profit_cents||0);return a},{gross:0,cost:0,fee:0,profit:0});
-  $("#sellerFinanceSummary").innerHTML='<div class="metrics"><div class="metric"><span>Vendas brutas</span><strong>'+money(sums.gross)+'</strong></div><div class="metric"><span>Custo dos produtos</span><strong>'+money(sums.cost)+'</strong></div><div class="metric"><span>Taxas MP</span><strong>'+money(sums.fee)+'</strong></div><div class="metric"><span>Lucro líquido</span><strong>'+money(sums.profit)+'</strong></div></div>';
-  $("#sellerFinanceSales").innerHTML=fin.length?table([["Data",x=>x.paid_at?new Date(x.paid_at).toLocaleString("pt-BR"):"—"],["Forma",x=>esc(x.payment_method||"—")],["Bruto",x=>money(x.gross_revenue_cents)],["Custo",x=>money(x.product_cost_cents)],["Taxas",x=>x.fee_source==="provider_actual"?money(Number(x.payment_fee_cents||0)+Number(x.financing_fee_cents||0)+Number(x.taxes_cents||0)):"Pendente"],["Líquido",x=>x.net_received_cents==null?"Pendente":money(x.net_received_cents)],["Lucro",x=>x.profit_cents==null?"Pendente":money(x.profit_cents)]],fin):'<p class="muted">Nenhuma venda paga contabilizada ainda.</p>';
+  const approvedOrders=(data.orders||[]).filter(o=>o.payment_status==="approved"&&o.fulfillment_status!=="cancelled");
+  const recordedSales=Array.isArray(data.financial_sales)?data.financial_sales:[];
+  const commissionRows=approvedOrders.map(o=>{
+    const rate=Number(o.seller_commission_percent??data.seller?.commission_percent??10);
+    const gross=Number(o.total_cents||0);
+    const amount=o.seller_commission_cents==null?Math.round(gross*rate/100):Number(o.seller_commission_cents);
+    return {...o,commission_rate:rate,commission_amount_cents:amount,
+      finance:recordedSales.find(f=>f.order_id===o.id)||null};
+  });
+  const sums=commissionRows.reduce((a,o)=>{a.gross+=Number(o.total_cents||0);a.commission+=o.commission_amount_cents;return a},{gross:0,commission:0});
+  const configuredRate=Number(data.seller?.commission_percent??10);
+  $("#sellerFinanceSummary").innerHTML='<div class="metrics"><div class="metric"><span>Vendas aprovadas</span><strong>'+String(commissionRows.length)+'</strong></div><div class="metric"><span>Vendas brutas</span><strong>'+money(sums.gross)+'</strong></div><div class="metric"><span>Comissão a receber</span><strong>'+money(sums.commission)+'</strong></div><div class="metric"><span>Taxa atual definida pelo ADM</span><strong>'+configuredRate.toLocaleString("pt-BR",{maximumFractionDigits:2})+'%</strong></div></div>';
+  $("#sellerFinanceSales").innerHTML=commissionRows.length?table([["Data",x=>new Date(x.payment_confirmed_at||x.created_at).toLocaleString("pt-BR")],["Pedido",x=>esc(x.public_id||"—")],["Pagamento",x=>esc(x.payment_method||"—")],["Venda aprovada",x=>money(x.total_cents)],["Comissão (%)",x=>x.commission_rate.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%"],["A receber",x=>money(x.commission_amount_cents)]],commissionRows):'<p class="muted">Nenhuma venda paga contabilizada ainda.</p>';
   loadCustomSalesFromDashboard(data);
   const orders=(data.orders||[]).filter(order=>!(order.payment_status==="pending"&&Date.now()-Date.parse(order.created_at)>=24*60*60*1000));
   $("#sellerOrders").innerHTML=orders.length?orders.map(order=>{
