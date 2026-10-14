@@ -1,6 +1,6 @@
 import{switchProductCatalog}from"./admin-electronics-ui.js?v=20261009-1";
 import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261002-adminlogin4";
-import{shell,renderDashboard}from"./admin-view.js?v=20261002-adminparsefix1";
+import{shell,renderDashboard}from"./admin-view.js?v=20261013-commissions1";
 import{initializeCatalogForm,catalogLoadProduct,catalogResetForm,catalogReadBrand,catalogReadVolume}from"./fragrance-selectors.js?v=20261001-multicatalog2";
 import{setupProcurement}from"./admin-procurement-ui.js?v=20261001-multicatalog2";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
