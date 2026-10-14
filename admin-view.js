@@ -296,18 +296,36 @@ document.querySelector("#sellers").innerHTML=table([
 ],d.sellers);
 
 const payouts=Array.isArray(d.payouts)?d.payouts:[];
-const summary=payouts.reduce((a,p)=>{a[p.status]=(a[p.status]||0)+Number(p.amount_cents||0);return a},{});
-document.querySelector("#adminSellerPayouts").innerHTML='<div class="metrics">'+
-  [["Solicitado",summary.requested||0],["ADM informou pagamento",summary.admin_paid||0],["Recebimento confirmado",summary.confirmed||0]]
-  .map(r=>'<div class="metric"><span>'+r[0]+'</span><strong>'+money(r[1])+'</strong></div>').join("")+'</div>'+
-  (payouts.length?table([
-    ["Solicitado em",p=>new Date(p.requested_at).toLocaleString("pt-BR")],
-    ["Vendedor",p=>esc(d.sellers.find(x=>x.id===p.seller_id)?.name||"Vendedor")],
-    ["Chave Pix",p=>esc(p.pix_key)],
-    ["Valor",p=>money(p.amount_cents)],
-    ["Situação",p=>p.status==="requested"?"PENDENTE DE REPASSE":p.status==="admin_paid"?"Pago pelo ADM · aguardando vendedor":"Recebimento confirmado"],
-    ["Ação",p=>p.status==="requested"?'<button type="button" class="btn btn-small" data-admin-pay-payout="'+esc(p.id)+'">MARCAR COMO PAGO</button>':"—"]
-  ],payouts):'<p class="muted">Nenhuma solicitação de repasse.</p>');
+const pendingPayouts=payouts.filter(p=>p.status==="requested");
+const paidPayouts=payouts.filter(p=>p.status==="admin_paid");
+const confirmedPayouts=payouts.filter(p=>p.status==="confirmed");
+const payoutTotals=rows=>rows.reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
+const payoutCard=(p,phase)=>{
+  const seller=d.sellers.find(s=>s.id===p.seller_id);
+  const requested=new Date(p.requested_at).toLocaleString("pt-BR");
+  const proof=p.receipt_path?'<button type="button" class="btn btn-small" data-admin-view-proof="'+esc(p.id)+'">Ver comprovante anexado</button>':"";
+  return '<article class="card" style="padding:20px;margin:14px 0;border:1px solid #a88b55;border-radius:12px;background:#17130f">'+
+    '<div style="display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap"><div><small>'+esc(requested)+'</small><h3 style="margin:5px 0">'+esc(seller?.name||"Vendedor")+'</h3><p>Chave Pix: <strong style="overflow-wrap:anywhere">'+esc(p.pix_key)+'</strong></p></div>'+
+    '<div><small>VALOR DO REPASSE</small><h2 style="color:#eac479;margin:8px 0">'+money(p.amount_cents)+'</h2></div></div>'+
+    (phase==="requested"?'<div style="border-top:1px solid #5a482c;padding-top:14px;margin-top:10px"><label style="display:block;font-weight:600;margin-bottom:8px">1. Anexar comprovante da transferência (obrigatório)</label>'+
+     '<input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" data-payout-receipt="'+esc(p.id)+'" style="max-width:100%;padding:12px;border:1px solid #ad8647;border-radius:8px;background:#111;color:#fff">'+
+     '<p class="muted">PDF, JPG, PNG ou WebP até 5 MB. Guarde o comprovante real da transferência.</p>'+
+     '<button class="btn btn-primary" type="button" data-admin-pay-payout="'+esc(p.id)+'" style="display:inline-block;min-height:48px;padding:12px 24px;background:#e4bd73;color:#1a1006;font-weight:800;border-radius:8px">2. CONFIRMAR PAGAMENTO E ENVIAR COMPROVANTE</button></div>':
+     '<p style="padding:12px;border-radius:8px;border:1px solid #6e5935">'+(phase==="admin_paid"?"TRANSFERÊNCIA INFORMADA · aguardando confirmação do vendedor":"RECEBIMENTO CONFIRMADO PELO VENDEDOR")+'</p>'+proof)+
+    '</article>';
+};
+document.querySelector("#adminSellerPayouts").innerHTML=
+  '<div class="metrics">'+[
+    ["Aguardando transferência",payoutTotals(pendingPayouts)],
+    ["Pago · vendedor deve confirmar",payoutTotals(paidPayouts)],
+    ["Recebimento confirmado",payoutTotals(confirmedPayouts)]
+  ].map(x=>'<div class="metric"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong></div>').join("")+'</div>'+
+  '<h3 style="margin-top:26px">1 · Repasses para pagar ('+pendingPayouts.length+')</h3>'+
+  (pendingPayouts.length?pendingPayouts.map(p=>payoutCard(p,"requested")).join(""):'<p class="muted">Nenhum repasse aguardando transferência.</p>')+
+  '<h3 style="margin-top:30px">2 · Transferência realizada · aguardando vendedor ('+paidPayouts.length+')</h3>'+
+  (paidPayouts.length?paidPayouts.map(p=>payoutCard(p,"admin_paid")).join(""):'<p class="muted">Nenhuma confirmação pendente.</p>')+
+  '<h3 style="margin-top:30px">3 · Repasses concluídos ('+confirmedPayouts.length+')</h3>'+
+  (confirmedPayouts.length?confirmedPayouts.map(p=>payoutCard(p,"confirmed")).join(""):'<p class="muted">Nenhum repasse concluído ainda.</p>');
 const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
 const paymentLabels={pending:"Pendente",approved:"Aprovado",rejected:"Recusado",cancelled:"Cancelado",refunded:"Estornado"};
 document.querySelector("#orders").innerHTML=table([
