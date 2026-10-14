@@ -9,10 +9,44 @@ let api,notifyFn,lastData=null,lastAnalysis=null,loading=false;
 const reportNode=()=>$("#adminFinanceHub");
 const fields=()=>({from:$("#financeFrom").value,to:$("#financeTo").value,seller_id:$("#financeSeller").value,product_id:$("#financeProduct").value});
 function metric(name,value,note=""){return '<div class="metric" style="min-height:112px"><span>'+esc(name)+'</span><strong>'+esc(value)+'</strong>'+(note?'<small style="display:block;margin-top:8px;color:#c5b89c">'+esc(note)+'</small>':"")+'</div>'}
+
+const shortMoney=c=>{const v=Number(c||0)/100,abs=Math.abs(v);return abs>=1000000?"R$ "+(v/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi":abs>=1000?"R$ "+(v/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mil":new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0}).format(v)};
+const chartPlaceholder=message=>'<div class="finance-chart-empty"><span class="finance-chart-empty-icon" aria-hidden="true">◇</span><strong>Sem dados no período</strong><p>'+esc(message)+'</p></div>';
 function barChart(rows){
- const max=Math.max(1,...rows.map(x=>n(x.sales)));
- const bars=rows.map(x=>'<div style="display:flex;flex-direction:column;align-items:center;justify-content:end;min-width:43px;flex:1;gap:5px" title="'+esc(x.label)+': '+fmt(x.sales)+'"><small style="font-size:10px">'+fmt(x.sales)+'</small><div style="width:65%;min-height:2px;height:'+Math.max(2,Math.round(n(x.sales)/max*145))+'px;border-radius:5px 5px 0 0;background:linear-gradient(#e6c27e,#90703b)"></div><small>'+esc(x.label)+'</small></div>').join("");
- return '<div role="img" aria-label="Gráfico de faturamento do período por mês" style="display:flex;gap:9px;align-items:end;overflow-x:auto;min-height:195px;padding:10px 0;border-bottom:1px solid #5d4929">'+bars+'</div>';
+ if(!rows.length||rows.every(r=>!n(r.sales)))return chartPlaceholder("Assim que houver vendas aprovadas, a evolução mensal aparecerá aqui.");
+ const W=Math.max(820,rows.length*82),H=330,left=84,right=26,top=32,bottom=55,plot=W-left-right,base=H-bottom;
+ const topValue=Math.max(...rows.map(r=>n(r.sales)),1),magnitude=Math.pow(10,Math.floor(Math.log10(topValue)));
+ const step=Math.max(1,Math.ceil(topValue/4/magnitude)*magnitude),cap=step*4;
+ const xp=i=>left+(rows.length===1?plot/2:(plot*i/(rows.length-1)));
+ const yp=v=>base-n(v)/cap*(base-top);
+ const coords=rows.map((r,i)=>[xp(i),yp(r.sales)]);
+ const curve=coords.map(([x,y],i)=>(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)).join(" ");
+ const area=curve+" L"+coords[coords.length-1][0].toFixed(1)+" "+base+" L"+coords[0][0].toFixed(1)+" "+base+" Z";
+ const grid=Array.from({length:5},(_,i)=>{
+  const y=base-(base-top)*i/4;
+  return '<line x1="'+left+'" x2="'+(W-right)+'" y1="'+y+'" y2="'+y+'" class="finance-svg-grid"/><text x="'+(left-13)+'" y="'+(y+4)+'" text-anchor="end" class="finance-svg-tick">'+esc(shortMoney(cap*i/4))+'</text>';
+ }).join("");
+ const labels=rows.map((r,i)=>'<text x="'+xp(i)+'" y="'+(base+26)+'" class="finance-svg-label" text-anchor="middle">'+esc(r.label)+'</text>').join("");
+ const dots=coords.map(([x,y],i)=>'<g class="finance-point" tabindex="0" role="img" aria-label="'+esc(rows[i].label+': '+fmt(rows[i].sales))+'"><circle class="finance-svg-halo" cx="'+x+'" cy="'+y+'" r="13"/><circle class="finance-svg-dot" cx="'+x+'" cy="'+y+'" r="5"/><title>'+esc(rows[i].label+" • "+fmt(rows[i].sales))+'</title></g>').join("");
+ const total=sum(rows,"sales"),peak=rows.reduce((best,r)=>n(r.sales)>n(best.sales)?r:best,rows[0]);
+ return '<div class="finance-chart-head"><div><span class="finance-chart-eyebrow">FATURAMENTO DO PERÍODO</span><strong>'+fmt(total)+'</strong><small>Receita de produtos • somente vendas aprovadas</small></div><div class="finance-chart-peak"><span>Melhor mês</span><b>'+esc(peak.label)+'</b><small>'+fmt(peak.sales)+'</small></div></div>'+
+ '<div class="finance-chart-scroller"><svg class="finance-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="Evolução mensal do faturamento aprovado">'+
+ '<defs><linearGradient id="azzenaFinanceGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8b273" stop-opacity=".32"/><stop offset="100%" stop-color="#d8b273" stop-opacity="0"/></linearGradient><linearGradient id="azzenaFinanceStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#93703d"/><stop offset="50%" stop-color="#f3d69a"/><stop offset="100%" stop-color="#d5aa64"/></linearGradient></defs>'+
+ grid+'<path d="'+area+'" fill="url(#azzenaFinanceGold)"/><path d="'+curve+'" fill="none" stroke="url(#azzenaFinanceStroke)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'+dots+labels+'</svg></div>'+
+ '<div class="finance-chart-footer"><span><i class="finance-legend-dot"></i> Vendas aprovadas</span><span>Deslize horizontalmente para visualizar mais meses</span></div>';
+}
+function horizontalBars(rows){
+ if(!rows.length||!rows.some(r=>n(r.revenue)>0))return chartPlaceholder("Ainda não há vendas de produtos para comparar.");
+ const top=[...rows].sort((a,b)=>n(b.revenue)-n(a.revenue)).slice(0,6),max=Math.max(...top.map(r=>n(r.revenue)),1);
+ return '<div class="finance-bars">'+top.map((r,i)=>'<div class="finance-bar-row"><div class="finance-bar-meta"><span class="finance-bar-rank">'+String(i+1).padStart(2,"0")+'</span><strong title="'+esc(r.name)+'">'+esc(r.name)+'</strong><b>'+fmt(r.revenue)+'</b></div><div class="finance-bar-track"><div class="finance-bar-fill" style="width:'+Math.max(1,100*n(r.revenue)/max).toFixed(2)+'%"></div></div><small>'+n(r.quantity).toLocaleString("pt-BR")+' un. vendidas</small></div>').join("")+'</div>';
+}
+function expenseDonut(expenses){
+ const totals=new Map();for(const e of expenses)totals.set(e.category,(totals.get(e.category)||0)+n(e.amount_cents));
+ const data=[...totals].sort((a,b)=>b[1]-a[1]),total=sum(expenses,"amount_cents");
+ if(!total)return chartPlaceholder("Lance as despesas da operação para visualizar a distribuição por categoria.");
+ const palette=["#e6c38b","#b89259","#836a4c","#dacdb5","#9e8b78","#685849","#c0a57c","#8c7766","#eee2cd"];
+ let cumulative=0;const gradient=data.map(([name,value],i)=>{const from=cumulative/total*100;cumulative+=value;return palette[i%palette.length]+" "+from.toFixed(2)+"% "+(cumulative/total*100).toFixed(2)+"%"}).join(",");
+ return '<div class="finance-donut-layout"><div class="finance-donut" role="img" aria-label="Distribuição de despesas por categoria: '+esc(fmt(total))+'" style="background:conic-gradient('+gradient+')"><div class="finance-donut-center"><small>Total de despesas</small><strong>'+fmt(total)+'</strong></div></div><div class="finance-donut-legend">'+data.map(([cat,value],i)=>'<div><i style="background:'+palette[i%palette.length]+'"></i><span>'+esc(categories[cat]||cat)+'</span><strong>'+fmt(value)+'</strong><small>'+(value/total*100).toLocaleString("pt-BR",{maximumFractionDigits:1})+'%</small></div>').join("")+'</div></div>';
 }
 function analyze(d,productId){
  const p=d.private||{},orders=d.orders||[],items=d.items||[],locations=d.locations||[],balances=d.stock||[];
@@ -105,6 +139,8 @@ function render(d){
  const months=[];const start=new Date(d.from+"T12:00:00Z"),end=new Date(d.to+"T12:00:00Z");const ptr=new Date(Date.UTC(start.getUTCFullYear(),start.getUTCMonth(),1));
  while(ptr<=end&&months.length<36){const key=ptr.toISOString().slice(0,7);months.push({key,label:key.slice(5)+"/"+key.slice(2,4),sales:model.byMonth.get(key)||0});ptr.setUTCMonth(ptr.getUTCMonth()+1)}
  $("#financeChart").innerHTML=barChart(months);
+ $("#financeTopProductsChart").innerHTML=horizontalBars([...model.byProduct.values()]);
+ $("#financeExpenseChart").innerHTML=expenseDonut(model.expenses);
  const sellers=new Map((d.sellers||[]).map(x=>[x.id,x.name]));
  $("#financeProductRanking").innerHTML=[...model.byProduct.values()].sort((a,b)=>b.revenue-a.revenue).slice(0,30).map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+x.quantity+'</td><td>'+fmt(x.revenue)+'</td><td>'+(x.missing?"Custo não apurado":fmt(x.cost))+'</td></tr>').join("")||'<tr><td colspan="4">Nenhuma venda de produto neste período</td></tr>';
  $("#financeSellerRanking").innerHTML=[...model.bySeller.values()].sort((a,b)=>b.revenue-a.revenue).map(x=>'<tr><td>'+esc(sellers.get(x.seller)||"Vendedor")+'</td><td>'+x.orders+'</td><td>'+fmt(x.revenue)+'</td><td>'+fmt(x.commission)+'</td></tr>').join("")||'<tr><td colspan="4">Nenhuma venda registrada</td></tr>';
