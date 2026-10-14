@@ -110,7 +110,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <div class="card"><p class="eyebrow">Aguardando sua autorização</p><h2>Solicitações de vendedores</h2>
 <p class="muted">O vendedor cria a própria conta em <a href="vendedor.html" target="_blank" rel="noopener">vendedor.html</a> e confirma o e-mail. Você aprova ou recusa o acesso aqui. A senha é criada e guardada pelo próprio vendedor.</p>
 <div id="sellerApplications"></div></div>
-<div class="card"><p class="eyebrow">Equipe cadastrada</p><h2>Vendedores</h2><div id="sellers"></div></div>
+<div class="card"><p class="eyebrow">Equipe cadastrada</p><h2>Vendedores</h2><div id="sellers"></div></div><div class="card"><p class="eyebrow">FINANCEIRO DOS VENDEDORES</p><h2>Solicitações de repasse e confirmação dupla</h2><p class="muted">Marque como pago somente após realizar a transferência bancária. O vendedor receberá um aviso e precisará confirmar que recebeu.</p><div id="adminSellerPayouts"></div></div>
 <div class="card edit-product-card" id="editSellerCard" hidden>
 <p class="eyebrow">Edição</p><h2>Editar vendedor</h2>
 <form id="editSellerForm" class="form-grid">
@@ -294,6 +294,20 @@ document.querySelector("#sellers").innerHTML=table([
 ["Comissão",r=>Number(r.commission_percent??10).toLocaleString("pt-BR",{maximumFractionDigits:2})+"%"],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
+
+const payouts=Array.isArray(d.payouts)?d.payouts:[];
+const summary=payouts.reduce((a,p)=>{a[p.status]=(a[p.status]||0)+Number(p.amount_cents||0);return a},{});
+document.querySelector("#adminSellerPayouts").innerHTML='<div class="metrics">'+
+  [["Solicitado",summary.requested||0],["ADM informou pagamento",summary.admin_paid||0],["Recebimento confirmado",summary.confirmed||0]]
+  .map(r=>'<div class="metric"><span>'+r[0]+'</span><strong>'+money(r[1])+'</strong></div>').join("")+'</div>'+
+  (payouts.length?table([
+    ["Solicitado em",p=>new Date(p.requested_at).toLocaleString("pt-BR")],
+    ["Vendedor",p=>esc(d.sellers.find(x=>x.id===p.seller_id)?.name||"Vendedor")],
+    ["Chave Pix",p=>esc(p.pix_key)],
+    ["Valor",p=>money(p.amount_cents)],
+    ["Situação",p=>p.status==="requested"?"PENDENTE DE REPASSE":p.status==="admin_paid"?"Pago pelo ADM · aguardando vendedor":"Recebimento confirmado"],
+    ["Ação",p=>p.status==="requested"?'<button type="button" class="btn btn-small" data-admin-pay-payout="'+esc(p.id)+'">MARCAR COMO PAGO</button>':"—"]
+  ],payouts):'<p class="muted">Nenhuma solicitação de repasse.</p>');
 const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
 const paymentLabels={pending:"Pendente",approved:"Aprovado",rejected:"Recusado",cancelled:"Cancelado",refunded:"Estornado"};
 document.querySelector("#orders").innerHTML=table([
