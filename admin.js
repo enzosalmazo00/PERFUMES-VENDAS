@@ -112,14 +112,32 @@ $("#confirmHardDelete").onclick=async()=>{
 };
 
 content.addEventListener("click",async e=>{
+const proofView=e.target.closest("[data-admin-view-proof]");
+if(proofView){
+  try{const result=await adminApi({action:"get_payout_receipt",payout_id:proofView.dataset.adminViewProof});window.open(result.data.url,"_blank","noopener,noreferrer")}
+  catch(error){notify(error.message||"Não foi possível acessar o comprovante.")}
+  return;
+}
 const payoutButton=e.target.closest("[data-admin-pay-payout]");
 if(payoutButton){
- const payout=data?.payouts?.find(p=>p.id===payoutButton.dataset.adminPayPayout);
+ const id=payoutButton.dataset.adminPayPayout;
+ const payout=data?.payouts?.find(p=>p.id===id);
  if(!payout||payout.status!=="requested")return;
+ const input=[...content.querySelectorAll("[data-payout-receipt]")].find(el=>el.dataset.payoutReceipt===id);
+ const file=input?.files?.[0];
+ if(!file){notify("Anexe o comprovante bancário antes de marcar como pago.");input?.focus();return}
+ if(file.size>5*1024*1024||file.size<40){notify("O comprovante precisa ter no máximo 5 MB.");return}
+ if(!["application/pdf","image/jpeg","image/png","image/webp"].includes(file.type)){notify("Envie PDF, JPG, PNG ou WebP.");return}
  const seller=data.sellers?.find(x=>x.id===payout.seller_id);
- if(!confirm("Você efetivamente transferiu "+money(payout.amount_cents)+" para a chave Pix "+payout.pix_key+" do vendedor "+(seller?.name||"")+"? Esta ação envia uma notificação obrigatória de confirmação ao vendedor."))return;
- payoutButton.disabled=true;
- try{await adminApi({action:"mark_payout_paid",payout_id:payout.id});await refresh();notify("Pagamento registrado. Aguardando confirmação do vendedor.")}catch(error){payoutButton.disabled=false;notify(error.message||"Não foi possível registrar o repasse.")}
+ if(!confirm("Confirma que a transferência de "+money(payout.amount_cents)+" foi realizada para a chave Pix "+payout.pix_key+" de "+(seller?.name||"vendedor")+"? O comprovante será guardado e o vendedor será avisado."))return;
+ payoutButton.disabled=true;payoutButton.textContent="ENVIANDO COMPROVANTE...";
+ try{
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  const chunk=32768;let binary="";
+  for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  await adminApi({action:"mark_payout_paid",payout_id:id,receipt_mime:file.type,receipt_base64:btoa(binary)});
+  await refresh();notify("Comprovante salvo. Aguardando confirmação de recebimento do vendedor.");
+ }catch(error){payoutButton.disabled=false;payoutButton.textContent="CONFIRMAR PAGAMENTO E ENVIAR COMPROVANTE";notify(error.message||"Erro ao registrar comprovante.")}
  return;
 }
 const review=e.target.closest("[data-review-seller]");
