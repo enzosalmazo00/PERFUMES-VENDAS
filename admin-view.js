@@ -348,37 +348,36 @@ document.querySelector("#sellers").innerHTML=table([
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-seller="'+esc(r.id)+'">Editar</button></div>']
 ],d.sellers);
 
+
 const payouts=Array.isArray(d.payouts)?d.payouts:[];
 const pendingPayouts=payouts.filter(p=>p.status==="requested");
 const paidPayouts=payouts.filter(p=>p.status==="admin_paid");
 const confirmedPayouts=payouts.filter(p=>p.status==="confirmed");
-const payoutTotals=rows=>rows.reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
-const payoutCard=(p,phase)=>{
-  const seller=d.sellers.find(s=>s.id===p.seller_id);
-  const requested=new Date(p.requested_at).toLocaleString("pt-BR");
-  const proof=p.receipt_path?'<button type="button" class="btn btn-small" data-admin-view-proof="'+esc(p.id)+'">Ver comprovante anexado</button>':"";
-  return '<article class="card" style="padding:20px;margin:14px 0;border:1px solid #a88b55;border-radius:12px;background:#17130f">'+
-    '<div style="display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap"><div><small>'+esc(requested)+'</small><h3 style="margin:5px 0">'+esc(seller?.name||"Vendedor")+'</h3><p>Chave Pix: <strong style="overflow-wrap:anywhere">'+esc(p.pix_key)+'</strong></p></div>'+
-    '<div><small>VALOR DO REPASSE</small><h2 style="color:#eac479;margin:8px 0">'+money(p.amount_cents)+'</h2></div></div>'+
-    (phase==="requested"?'<div style="border-top:1px solid #5a482c;padding-top:14px;margin-top:10px"><label style="display:block;font-weight:600;margin-bottom:8px">1. Anexar comprovante da transferência (obrigatório)</label>'+
-     '<input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" data-payout-receipt="'+esc(p.id)+'" style="max-width:100%;padding:12px;border:1px solid #ad8647;border-radius:8px;background:#111;color:#fff">'+
-     '<p class="muted">PDF, JPG, PNG ou WebP até 5 MB. Guarde o comprovante real da transferência.</p>'+
-     '<button class="btn btn-primary" type="button" data-admin-pay-payout="'+esc(p.id)+'" style="display:inline-block;min-height:48px;padding:12px 24px;background:#e4bd73;color:#1a1006;font-weight:800;border-radius:8px">2. CONFIRMAR PAGAMENTO E ENVIAR COMPROVANTE</button></div>':
-     '<p style="padding:12px;border-radius:8px;border:1px solid #6e5935">'+(phase==="admin_paid"?"TRANSFERÊNCIA INFORMADA · aguardando confirmação do vendedor":"RECEBIMENTO CONFIRMADO PELO VENDEDOR")+'</p>'+proof)+
-    '</article>';
+const payoutTotal=rows=>rows.reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
+const payoffCard=(p,phase)=>{
+ const seller=d.sellers.find(s=>s.id===p.seller_id);
+ const time=value=>value?new Date(value).toLocaleString("pt-BR"):"—";
+ const status=phase==="requested"?"Pendente de transferência":phase==="admin_paid"?"Aguardando confirmação":"Concluído";
+ const proof=p.receipt_path?'<button type="button" class="repasse-action repasse-action--secondary" data-admin-view-proof="'+esc(p.id)+'">Ver comprovante</button>':"";
+ const upload=phase==="requested"?'<div class="repasse-upload"><label for="proof-'+esc(p.id)+'">Comprovante da transferência</label><p>Anexe o comprovante real em PDF, JPG, PNG ou WebP (até 5 MB).</p><input id="proof-'+esc(p.id)+'" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/png,image/jpeg,image/webp" data-payout-receipt="'+esc(p.id)+'"><button type="button" class="repasse-action repasse-action--primary" data-admin-pay-payout="'+esc(p.id)+'">Registrar pagamento e enviar comprovante <span aria-hidden="true">→</span></button></div>':"";
+ return '<article class="repasse-record" data-status="'+phase+'">'+
+ '<header class="repasse-record-head"><div class="repasse-record-id"><span class="repasse-index">REF. '+esc(String(p.id).slice(0,8).toUpperCase())+'</span><h4>'+esc(seller?.name||"Vendedor")+'</h4><small>Solicitado em '+esc(time(p.requested_at))+'</small></div><div class="repasse-record-amount"><span>VALOR DO REPASSE</span><strong>'+money(p.amount_cents)+'</strong><span class="repasse-status repasse-status--'+phase+'">'+status+'</span></div></header>'+
+ '<div class="repasse-detail-grid"><div><span>Chave Pix do vendedor</span><strong class="repasse-break">'+esc(p.pix_key)+'</strong><button type="button" class="repasse-action repasse-action--text" data-repasse-copy="'+esc(p.id)+'">Copiar chave Pix</button></div><div><span>Transferência registrada</span><strong>'+esc(time(p.paid_at))+'</strong></div><div><span>Confirmação do vendedor</span><strong>'+esc(time(p.confirmed_at))+'</strong></div></div>'+
+ '<div class="repasse-track" aria-label="Etapas do repasse"><span class="is-complete">1 · Solicitado</span><span class="'+(phase==="requested"?"":"is-complete")+'">2 · Pago pelo ADM</span><span class="'+(phase==="confirmed"?"is-complete":"")+'">3 · Recebido</span></div>'+
+ (phase==="requested"?upload:'<div class="repasse-footer">'+proof+(phase==="admin_paid"?'<span class="repasse-wait">Aguardando o vendedor conferir o crédito e confirmar.</span>':'<span class="repasse-done">Pagamento conferido pelas duas partes</span>')+'</div>')+
+ '</article>';
 };
+const payoutSection=(title,subtitle,rows,phase)=>'<section class="repasse-group"><div class="repasse-group-head"><div><h3>'+title+' <small>'+rows.length+'</small></h3><p>'+subtitle+'</p></div><strong>'+money(payoutTotal(rows))+'</strong></div>'+(rows.length?rows.map(p=>payoffCard(p,phase)).join(""):'<div class="repasse-empty">Nenhum repasse nesta etapa.</div>')+'</section>';
 document.querySelector("#adminSellerPayouts").innerHTML=
-  '<div class="metrics">'+[
-    ["Aguardando transferência",payoutTotals(pendingPayouts)],
-    ["Pago · vendedor deve confirmar",payoutTotals(paidPayouts)],
-    ["Recebimento confirmado",payoutTotals(confirmedPayouts)]
-  ].map(x=>'<div class="metric"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong></div>').join("")+'</div>'+
-  '<h3 style="margin-top:26px">1 · Repasses para pagar ('+pendingPayouts.length+')</h3>'+
-  (pendingPayouts.length?pendingPayouts.map(p=>payoutCard(p,"requested")).join(""):'<p class="muted">Nenhum repasse aguardando transferência.</p>')+
-  '<h3 style="margin-top:30px">2 · Transferência realizada · aguardando vendedor ('+paidPayouts.length+')</h3>'+
-  (paidPayouts.length?paidPayouts.map(p=>payoutCard(p,"admin_paid")).join(""):'<p class="muted">Nenhuma confirmação pendente.</p>')+
-  '<h3 style="margin-top:30px">3 · Repasses concluídos ('+confirmedPayouts.length+')</h3>'+
-  (confirmedPayouts.length?confirmedPayouts.map(p=>payoutCard(p,"confirmed")).join(""):'<p class="muted">Nenhum repasse concluído ainda.</p>');
+ '<div class="repasse-summary">'+[
+ ["Aguardando pagamento",payoutTotal(pendingPayouts),pendingPayouts.length+" solicitações"],
+ ["Pagos · aguardando vendedor",payoutTotal(paidPayouts),paidPayouts.length+" solicitações"],
+ ["Concluídos",payoutTotal(confirmedPayouts),confirmedPayouts.length+" confirmações"]
+ ].map(x=>'<div class="repasse-summary-card"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong><small>'+x[2]+'</small></div>').join("")+'</div>'+
+ '<div class="repasse-guidance"><strong>Fluxo seguro de repasse</strong><p>1. Confira o valor e a chave Pix. 2. Transfira no banco. 3. Anexe o comprovante e registre o pagamento. 4. Aguarde a confirmação do vendedor. Registrar pagamento não envia dinheiro automaticamente.</p></div>'+
+ payoutSection("Para pagar","Solicitações aguardando comprovante e registro de transferência.",pendingPayouts,"requested")+
+ payoutSection("Aguardando confirmação","Transferência informada pelo ADM. O vendedor ainda precisa confirmar o crédito.",paidPayouts,"admin_paid")+
+ payoutSection("Histórico concluído","Pagamentos com confirmação de recebimento registrada.",confirmedPayouts,"confirmed");
 const orderStatusLabels={pending:"Recebido",preparing:"Preparando",ready:"Pronto",shipped:"Enviado",delivered:"Entregue",cancelled:"Cancelado"};
 const paymentLabels={pending:"Pendente",approved:"Aprovado",rejected:"Recusado",cancelled:"Cancelado",refunded:"Estornado"};
 document.querySelector("#orders").innerHTML=table([
