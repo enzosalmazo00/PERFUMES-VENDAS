@@ -192,6 +192,23 @@ document.addEventListener("click",async event=>{
   try{await call("seller-portal",{action:"confirm_payout",payout_id:button.dataset.confirmPayout});notify("Recebimento confirmado.");await refreshInventory()}
   catch(error){notify(friendlyError(error));button.disabled=false}
 });
+let lastPayoutAlertId="";
+setInterval(async()=>{
+  if(document.visibilityState!=="visible"||$("#app")?.hidden)return;
+  try{
+    const res=await call("seller-portal",{action:"payout_status"});
+    const due=(Array.isArray(res.data)?res.data:[])[0];
+    if(due&&due.id!==lastPayoutAlertId){
+      lastPayoutAlertId=due.id;
+      const notice=$("#sellerPayoutBigNotice");
+      if(notice){
+        $("#sellerPayoutBigText").textContent="O administrador informou um repasse de "+money(due.amount_cents)+". Confira se realmente recebeu antes de confirmar.";
+        notice.hidden=false;
+      }
+      await refreshInventory();
+    }
+  }catch{ /* A rede pode oscilar; manter os dados atuais e tentar no próximo intervalo. */ }
+},20000);
 async function refreshInventory(){
   const response=await call("seller-portal",{});
   const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
