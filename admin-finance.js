@@ -55,7 +55,7 @@ function analyze(d,productId){
  const expenses=(p.expenses||[]).filter(x=>x.date>=d.from&&x.date<=d.to&&(!d.seller_id||x.seller_id===d.seller_id));
  const operations=sum(expenses,"amount_cents");
  const purchases=(p.purchases||[]).filter(x=>String(x.date||"").slice(0,10)>=d.from&&String(x.date||"").slice(0,10)<=d.to&&(!d.seller_id||x.seller_id===d.seller_id));
- const purchaseAmount=sum(purchases,x=>n(x.quantity)*n(x.unit_cost_cents))+sum(new Map(purchases.map(x=>[x.id,x])).values(),x=>n(x.freight_cents)+n(x.other_costs_cents));
+ const purchaseAmount=sum(purchases,x=>n(x.quantity)*n(x.unit_cost_cents))+sum([...new Map(purchases.map(x=>[x.id,x])).values()],x=>n(x.freight_cents)+n(x.other_costs_cents));
  const enteredUnits=sum(purchases,"quantity");
  const filteredStocks=balances.filter(x=>!d.seller_id||locationMap.get(x.location_id)?.seller_id===d.seller_id).filter(x=>!productId||x.product_id===productId);
  let stockQty=0,stockKnown=0,stockUnknown=0,stockLow=0;
