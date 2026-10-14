@@ -161,6 +161,37 @@ async function submitOwnStock(event){
   $("#sellerStockMessage").textContent="Movimentação registrada com sucesso.";$("#sellerStockNote").value="";await refreshInventory();notify("Estoque atualizado.")
  }catch(error){$("#sellerStockMessage").textContent=friendlyError(error)}finally{btn.disabled=false}
 }
+
+function sellerPayoutReceipt(p){
+  const safeText=x=>String(x??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+  const win=window.open("","_blank","width=780,height=840");
+  if(!win)return notify("Autorize pop-ups para gerar o demonstrativo.");
+  const status=p.status==="confirmed"?"RECEBIMENTO CONFIRMADO":p.status==="admin_paid"?"PAGAMENTO INFORMADO PELO ADM":"SOLICITAÇÃO DE PAGAMENTO";
+  const rows=(p.items||[]).map(i=>'<tr><td>'+safeText(String(i.order_id).slice(0,8))+'</td><td>'+Number(i.commission_percent).toLocaleString("pt-BR")+'%</td><td>'+money(i.commission_cents)+'</td></tr>').join("");
+  win.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Demonstrativo de comissão</title><style>body{font:15px Arial;padding:36px;color:#222}table{border-collapse:collapse;width:100%;margin:24px 0}th,td{text-align:left;padding:10px;border-bottom:1px solid #ddd}h1{font-size:28px}strong.total{font-size:27px}small{color:#555}</style></head><body><h1>AZZENA IMPORTS</h1><h2>Demonstrativo de repasse</h2><p><b>Vendedor:</b> '+safeText(currentSeller?.name||"")+'</p><p><b>Situação:</b> '+status+'</p><p><b>Solicitado em:</b> '+new Date(p.requested_at).toLocaleString("pt-BR")+'</p><p><b>Chave Pix:</b> '+safeText(p.pix_key)+'</p><table><thead><tr><th>Pedido</th><th>Comissão</th><th>Valor</th></tr></thead><tbody>'+rows+'</tbody></table><p><strong class="total">TOTAL: '+money(p.amount_cents)+'</strong></p><p><small>Este documento não comprova uma transferência bancária. O recebimento só é confirmado após a checagem do vendedor.</small></p><button onclick="window.print()">Imprimir / salvar PDF</button></body></html>');
+  win.document.close();
+}
+document.addEventListener("submit",async event=>{
+  if(event.target?.id!=="sellerRequestPayout")return;
+  event.preventDefault();
+  const form=event.target,pix=String(new FormData(form).get("pix_key")||"").trim();
+  if(pix.length<5)return notify("Informe sua chave Pix.");
+  if(!confirm("Solicitar pagamento das comissões disponíveis para a chave Pix informada?"))return;
+  const button=form.querySelector('button[type="submit"]');button.disabled=true;
+  try{await call("seller-portal",{action:"request_payout",pix_key:pix});notify("Solicitação enviada ao administrador.");await refreshInventory()}
+  catch(error){notify(friendlyError(error));button.disabled=false}
+});
+document.addEventListener("click",async event=>{
+  if(event.target.id==="sellerPayoutDismiss"){$("#sellerPayoutBigNotice").hidden=true;return}
+  const print=event.target.closest("[data-print-payout]");
+  if(print){const payouts=JSON.parse($("#sellerPayoutDashboard")?.dataset.payouts||"[]");const row=payouts.find(p=>p.id===print.dataset.printPayout);if(row)sellerPayoutReceipt(row);return}
+  const button=event.target.closest("[data-confirm-payout]");
+  if(!button)return;
+  if(!confirm("ATENÇÃO: você verificou sua conta bancária e confirma que recebeu este valor?"))return;
+  button.disabled=true;
+  try{await call("seller-portal",{action:"confirm_payout",payout_id:button.dataset.confirmPayout});notify("Recebimento confirmado.");await refreshInventory()}
+  catch(error){notify(friendlyError(error));button.disabled=false}
+});
 async function refreshInventory(){
   const response=await call("seller-portal",{});
   const data=response.data||{},inventory=data.inventory||[],low=data.low_stock||[];
