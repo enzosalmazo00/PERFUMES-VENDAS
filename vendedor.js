@@ -258,21 +258,26 @@ async function refreshInventory(){
   const received=payouts.filter(p=>p.status==="confirmed").reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
   const payoutBox=$("#sellerPayoutDashboard");
   if(payoutBox){
-    const summary=[["Disponível para solicitar",available],["Solicitado ao ADM",requested],["ADM marcou pago",markedPaid],["Recebido e confirmado",received]]
-      .map(x=>'<div class="metric"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong></div>').join("");
-    const history=payouts.length?table([
-      ["Data",x=>new Date(x.requested_at).toLocaleString("pt-BR")],
-      ["Valor",x=>money(x.amount_cents)],
-      ["Status",x=>x.status==="requested"?"Aguardando ADM":x.status==="admin_paid"?"Aguardando sua confirmação":"Recebimento confirmado"],
-      ["Documento",x=>'<button type="button" class="seller-outline" data-print-payout="'+esc(x.id)+'">Demonstrativo</button>'+(x.receipt_path?' <button type="button" class="seller-outline" data-seller-view-proof="'+esc(x.id)+'">Comprovante Pix</button>':"")],
-      ["Ação",x=>x.status==="admin_paid"?'<button type="button" class="seller-outline" data-confirm-payout="'+esc(x.id)+'">CONFIRMAR RECEBIMENTO</button>':"—"]
-    ],payouts):'<p class="muted">Nenhum repasse solicitado até agora.</p>';
-    payoutBox.innerHTML='<h3>Controle de repasses</h3><div class="metrics">'+summary+'</div>'+
-      '<form id="sellerRequestPayout" style="display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:16px 0">'+
-      '<label style="flex:1;min-width:220px">Chave Pix para receber<input name="pix_key" required minlength="5" maxlength="150" autocomplete="off" placeholder="CPF, e-mail, telefone ou chave aleatória" style="display:block;width:100%"></label>'+
-      '<button type="submit" class="seller-outline" '+(available<=0?'disabled':'')+'>SOLICITAR '+money(available)+'</button></form>'+
-      '<p class="muted">Somente vendas aprovadas. A solicitação é um pedido de repasse, não uma transferência automática. Confirme o recebimento somente após consultar seu extrato.</p>'+
-      '<h3>Histórico dos pagamentos de comissão</h3>'+history;
+
+    const summary=[["Disponível para solicitar",available,"Pronto para o próximo pedido"],["Solicitado ao ADM",requested,"Transferência ainda não registrada"],["Pago · conferir recebimento",markedPaid,"Confirme somente após verificar a conta"],["Recebido e confirmado",received,"Repasses encerrados"]]
+      .map((x,i)=>'<div class="repasse-summary-card"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong><small>'+x[2]+'</small></div>').join("");
+    const payoutStatus=p=>p.status==="requested"?"Aguardando transferência":p.status==="admin_paid"?"Confirme o recebimento":"Recebimento confirmado";
+    const history=payouts.length?payouts.map(p=>{
+      const count=(p.items||[]).length;
+      const actions='<button type="button" class="repasse-action repasse-action--secondary" data-print-payout="'+esc(p.id)+'">Demonstrativo</button>'+
+        (p.receipt_path?'<button type="button" class="repasse-action repasse-action--secondary" data-seller-view-proof="'+esc(p.id)+'">Comprovante bancário</button>':"")+
+        (p.status==="admin_paid"?'<button type="button" class="repasse-action repasse-action--primary" data-confirm-payout="'+esc(p.id)+'">Confirmar que recebi</button>':"");
+      return '<article class="repasse-record" data-status="'+esc(p.status)+'"><header class="repasse-record-head"><div class="repasse-record-id"><span class="repasse-index">REPASSE '+esc(String(p.id).slice(0,8).toUpperCase())+'</span><h4>'+payoutStatus(p)+'</h4><small>Solicitado em '+new Date(p.requested_at).toLocaleString("pt-BR")+'</small></div><div class="repasse-record-amount"><span>VALOR SOLICITADO</span><strong>'+money(p.amount_cents)+'</strong><span class="repasse-status repasse-status--'+esc(p.status)+'">'+(p.status==="requested"?"Aguardando ADM":p.status==="admin_paid"?"Aguardando você":"Concluído")+'</span></div></header>'+
+      '<div class="repasse-detail-grid"><div><span>Chave Pix</span><strong class="repasse-break">'+esc(p.pix_key)+'</strong></div><div><span>Vendas neste repasse</span><strong>'+count+' pedido(s)</strong></div><div><span>Pagamento registrado</span><strong>'+(p.paid_at?new Date(p.paid_at).toLocaleString("pt-BR"):"Não registrado")+'</strong></div></div>'+
+      '<div class="repasse-track"><span class="is-complete">1 · Solicitado</span><span class="'+(p.status!=="requested"?"is-complete":"")+'">2 · Pago pelo ADM</span><span class="'+(p.status==="confirmed"?"is-complete":"")+'">3 · Recebido</span></div>'+
+      (p.status==="admin_paid"?'<div class="repasse-attention">O administrador informou a transferência. Confira seu extrato bancário antes de confirmar.</div>':"")+
+      '<div class="repasse-footer">'+actions+'</div></article>';
+    }).join(""):'<div class="repasse-empty">Você ainda não solicitou nenhum repasse. Suas solicitações aparecerão aqui com o demonstrativo e o comprovante.</div>';
+    payoutBox.innerHTML='<div class="repasse-heading"><span class="repasse-eyebrow">CONTROLE DE COMISSÕES</span><h3>Seus repasses</h3><p>Um extrato claro do que foi gerado, solicitado, transferido e confirmado.</p></div>'+
+      '<div class="repasse-summary">'+summary+'</div>'+
+      '<section class="repasse-request-card"><div><span class="repasse-eyebrow">SOLICITAÇÃO DE PAGAMENTO</span><h3>Saldo disponível para receber</h3><strong class="repasse-request-total">'+money(available)+'</strong><p>O pedido reúne todas as comissões aprovadas ainda não incluídas em outro repasse.</p></div>'+
+      '<form id="sellerRequestPayout" class="repasse-request-form"><label>Chave Pix para recebimento<input name="pix_key" required minlength="5" maxlength="150" autocomplete="off" placeholder="CPF, e-mail, telefone ou chave aleatória"></label><button class="repasse-action repasse-action--primary" type="submit" '+(available<=0?'disabled':'')+'>Solicitar repasse de '+money(available)+'</button><small>O envio registra uma solicitação, não faz transferência automática.</small></form></section>'+
+      '<section class="repasse-group"><div class="repasse-group-head"><div><h3>Histórico de solicitações <small>'+payouts.length+'</small></h3><p>Documentos, comprovantes e situação de cada pagamento.</p></div></div>'+history+'</section>';
     payoutBox.dataset.payouts=JSON.stringify(payouts);
     const pendingConfirmation=payouts.find(p=>p.status==="admin_paid");
     const big=$("#sellerPayoutBigNotice");
