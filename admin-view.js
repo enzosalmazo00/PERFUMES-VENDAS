@@ -122,6 +122,7 @@ return `<nav class="tabs" aria-label="Áreas da administração">
 <label class="span2">Bio<textarea name="bio" placeholder="Apresentação curta do vendedor"></textarea></label>
 <label>Cidade<select name="city_id" id="editSellerCity"></select></label>
 <label class="checkline"><input type="checkbox" name="can_toggle"> Pode usar emergência</label>
+<label>Comissão do vendedor (%)<input name="commission_percent" type="number" min="0" max="100" step="0.01" value="10" required><small>Porcentagem aplicada apenas às novas vendas pagas. O histórico mantém a taxa da época.</small></label>
 <label>Controle de estoque<select name="stock_management_mode"><option value="admin">Controlado pelo administrador</option><option value="seller">Vendedor controla o próprio estoque</option></select><small>O vendedor nunca acessa estoque de outros vendedores.</small></label>
 <label class="checkline"><input type="checkbox" name="is_active"> Vendedor ativo</label>
 <div class="span2 edit-actions"><button class="btn btn-primary" type="submit">Salvar alterações</button><button class="btn" type="button" id="cancelEditSeller">Cancelar</button></div>
