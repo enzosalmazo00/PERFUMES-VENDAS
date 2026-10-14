@@ -139,7 +139,21 @@
 .azzena-beverage-banner img.hero-media{position:relative!important;z-index:1}
 @media(max-width:1100px){.imports-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){.imports-showcase-grid{grid-template-columns:1fr!important}}
-</style></head>
+</style><style id="azzena-first-two-slides-style-20261014">
+/* Same 16:9 carousel framing for every slide; keeps the current GitHub filenames even though image bytes are WebP. */
+#inicio.hero,#inicio .hero-carousel{aspect-ratio:16/9!important;height:auto!important;min-height:0!important;max-height:760px!important}
+#inicio .hero-carousel{position:relative!important;width:100%!important}
+#inicio .hero-slide:nth-child(-n+2)>img.hero-media{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;opacity:1!important;filter:none!important;transform:none!important}
+#inicio .hero-slide:nth-child(-n+2)>.hero-shade{position:absolute!important;inset:0!important;display:block!important;z-index:1!important;background:linear-gradient(90deg,rgba(0,0,0,.93) 0%,rgba(0,0,0,.72) 29%,rgba(0,0,0,.23) 50%,transparent 73%)!important;pointer-events:none!important}
+#inicio .hero-slide:nth-child(-n+2)>.hero-copy{position:relative!important;z-index:3!important;width:min(49%,660px)!important;max-width:none!important;min-height:0!important;padding:clamp(18px,3vw,54px) 0 clamp(18px,3vw,54px) clamp(24px,5.3vw,84px)!important;box-sizing:border-box!important}
+#inicio .hero-slide:nth-child(-n+2) .hero-copy>p{font-family:Poppins,Arial,sans-serif!important;color:#ffb359!important;font-weight:700!important;font-size:clamp(10px,1.05vw,15px)!important;letter-spacing:.16em!important;margin:0 0 18px!important}
+#inicio .hero-slide:nth-child(-n+2) .hero-copy h1{font-family:Poppins,Arial,sans-serif!important;font-weight:700!important;font-size:clamp(28px,4.1vw,64px)!important;line-height:1.09!important;letter-spacing:-.04em!important;color:#fff!important;margin:0 0 20px!important;text-shadow:0 3px 12px rgba(0,0,0,.38)!important}
+#inicio .hero-slide:nth-child(-n+2) .hero-copy h1 em{font-style:normal!important;font-family:inherit!important;font-weight:700!important;background:linear-gradient(95deg,#ff9517 0%,#ff4c13 65%,#ee241d 100%)!important;color:#ff5b16!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+#inicio .hero-slide:nth-child(-n+2) .hero-desc{display:block!important;color:#fff!important;font-family:Poppins,Arial,sans-serif!important;font-size:clamp(12px,1.32vw,18px)!important;line-height:1.5!important;max-width:560px!important;text-shadow:0 2px 9px #000!important;margin-bottom:24px!important}
+#inicio .hero-slide:nth-child(-n+2) .hero-button{font-family:Poppins,Arial,sans-serif!important;display:inline-flex!important;align-items:center!important;justify-content:space-between!important;gap:24px!important;max-width:100%!important;width:auto!important;padding:14px 27px!important;min-height:45px!important;line-height:1.2!important;font-weight:700!important;color:#0a0704!important;background:linear-gradient(105deg,#f6c872,#ffa422)!important;border:1px solid #e6aa55!important;border-radius:7px!important;text-decoration:none!important;box-shadow:0 7px 24px rgba(0,0,0,.25)!important}
+@media(max-width:700px){#inicio .hero-slide:nth-child(-n+2)>.hero-copy{width:68%!important;padding:10px 6px 10px 4vw!important}#inicio .hero-slide:nth-child(-n+2)>.hero-shade{background:linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.67) 45%,rgba(0,0,0,.02) 83%)!important}#inicio .hero-slide:nth-child(-n+2) .hero-copy>p{font-size:9px!important;letter-spacing:.06em!important;margin-bottom:5px!important}#inicio .hero-slide:nth-child(-n+2) .hero-copy h1{font-size:clamp(19px,5.2vw,33px)!important;margin-bottom:6px!important}#inicio .hero-slide:nth-child(-n+2) .hero-desc{font-size:clamp(9px,2.25vw,12px)!important;line-height:1.25!important;margin-bottom:8px!important}#inicio .hero-slide:nth-child(-n+2) .hero-button{padding:6px 10px!important;min-height:27px!important;gap:7px!important;font-size:10px!important}}
+</style>
+</head>
 <body>
   <script src="recovery-redirect.js"></script>
   <div class="site-unavailable" id="siteUnavailable" hidden>
@@ -212,7 +226,7 @@
       <div class="hero-carousel" id="heroCarousel">
 
         <article class="hero-slide is-active" data-hero-slide aria-hidden="false">
-          <img class="hero-media" src="assets/hero-feminine-hd.jpg?v=20261001-hd2" alt="" draggable="false" fetchpriority="high" decoding="async">
+          <img class="hero-media" src="assets/hero-feminine-hd.jpg?v=2a587f3f58ef" alt="" draggable="false" fetchpriority="high" decoding="async">
           <div class="hero-shade"></div>
           <div class="hero-copy">
             <p>ELEGÂNCIA QUE ENVOLVE</p>
@@ -223,7 +237,7 @@
         </article>
 
         <article class="hero-slide" data-hero-slide aria-hidden="true">
-          <img class="hero-media" src="assets/hero-masculine-hd.jpg?v=20261001-hd2" alt="" draggable="false" loading="lazy" decoding="async">
+          <img class="hero-media" src="assets/hero-masculine-hd.jpg?v=b15cb51d3e71" alt="" draggable="false" loading="lazy" decoding="async">
           <div class="hero-shade"></div>
           <div class="hero-copy">
             <p>PERSONALIDADE EM CADA NOTA</p>
