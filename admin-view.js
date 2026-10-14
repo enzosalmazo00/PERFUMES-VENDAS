@@ -320,15 +320,15 @@ const low=d.inventory.filter(x=>x.low_stock);
 document.querySelector("#lowStock").innerHTML=table([["Produto",r=>esc(r.product_name)],["Local",r=>esc(r.location_name)],["Saldo",r=>'<span class="badge-warn">⚠ '+r.quantity+'</span>'],["Limite",r=>r.low_stock_threshold]],low);
 document.querySelector("#products").innerHTML=table([
 ["Foto",r=>r.image_url?'<img class="product-thumb" src="'+esc(r.image_url)+'" alt="">':'—'],
-["Produto",r=>'<strong>'+esc(r.name)+'</strong><br><span class="muted">'+esc(r.brand||"—")+' · '+r.volume_ml+' mL</span>'],
-["Tipo",r=>r.product_type==="body_splash"?"Body Splash":"Perfume"],
+["Produto",r=>'<strong>'+esc(r.name)+'</strong><br><span class="muted">'+esc(r.brand||"—")+(["perfume","body_splash","bebidas"].includes(r.product_type)?" · "+r.volume_ml+" mL":" · unidade")+"</span>"],
+["Tipo",r=>({perfume:"Perfume",body_splash:"Body Splash",fones:"Fones de ouvido",caixas:"Caixas de som",carregadores:"Carregadores",bebidas:"Bebidas",eletronicos:"Eletrônicos",acessorios:"Acessórios"})[r.product_type]||esc(r.product_type)],
 ["Categoria",r=>esc(r.category)],
 ["Preço",r=>money(r.sale_price_cents??r.price_cents)],
 ["Desconto máx.",r=>Number(r.max_discount_percent||0).toLocaleString("pt-BR")+"%"],
 ["Envio",r=>Number(r.weight_kg||0).toFixed(3)+" kg · "+Number(r.width_cm||0)+"×"+Number(r.height_cm||0)+"×"+Number(r.length_cm||0)+" cm"],
 ["Status",r=>r.is_active?'<span class="badge-ok">Ativo</span>':'<span class="badge-off">Fora da loja</span>'],
 ["Ações",r=>'<div class="row-actions"><button class="btn btn-small" type="button" data-edit-product="'+esc(r.id)+'">Editar</button>'+(r.is_active?'<button class="btn btn-small btn-danger-soft" type="button" data-delete-product="'+esc(r.id)+'">Remover da loja</button>':'<button class="btn btn-small btn-restore" type="button" data-restore-product="'+esc(r.id)+'">Restaurar</button>')+'<button class="btn btn-small btn-danger-outline" type="button" data-hard-delete-product="'+esc(r.id)+'">Excluir definitivamente</button>'+'</div>']
-],d.products);
+],d.products.filter(p=>{const tab=document.querySelector(".tab.is-active")?.dataset.tab;return tab==="bebidas"?p.product_type==="bebidas":tab==="eletronicos"?!["perfume","body_splash","bebidas"].includes(p.product_type):tab==="perfumes"?["perfume","body_splash"].includes(p.product_type):true}));
 document.querySelector("#cities").innerHTML=table([["Cidade",r=>esc(r.city_name)],["Estado/Departamento",r=>esc(r.state_name||"—")],["País",r=>r.country_code==="PY"?"Paraguai":"Brasil"],["Status",r=>r.is_active?'<span class="badge-ok">Ativa</span>':'<span class="badge-off">Inativa</span>']],d.cities);
 const pendingSellers=d.sellers.filter(r=>r.approval_status==="pending");
 document.querySelector("#sellerApplications").innerHTML=pendingSellers.length?table([
