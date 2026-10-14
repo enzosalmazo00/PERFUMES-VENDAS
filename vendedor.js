@@ -199,6 +199,35 @@ async function refreshInventory(){
       finance:recordedSales.find(f=>f.order_id===o.id)||null};
   });
   const sums=commissionRows.reduce((a,o)=>{a.gross+=Number(o.total_cents||0);a.commission+=o.commission_amount_cents;return a},{gross:0,commission:0});
+
+  const payouts=Array.isArray(data.payouts)?data.payouts:[];
+  const linkedIds=new Set(payouts.flatMap(p=>(p.items||[]).map(i=>i.order_id)));
+  const available=commissionRows.filter(o=>!linkedIds.has(o.id)).reduce((sum,o)=>sum+o.commission_amount_cents,0);
+  const requested=payouts.filter(p=>p.status==="requested").reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
+  const markedPaid=payouts.filter(p=>p.status==="admin_paid").reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
+  const received=payouts.filter(p=>p.status==="confirmed").reduce((sum,p)=>sum+Number(p.amount_cents||0),0);
+  const payoutBox=$("#sellerPayoutDashboard");
+  if(payoutBox){
+    const summary=[["Disponível para solicitar",available],["Solicitado ao ADM",requested],["ADM marcou pago",markedPaid],["Recebido e confirmado",received]]
+      .map(x=>'<div class="metric"><span>'+x[0]+'</span><strong>'+money(x[1])+'</strong></div>').join("");
+    const history=payouts.length?table([
+      ["Data",x=>new Date(x.requested_at).toLocaleString("pt-BR")],
+      ["Valor",x=>money(x.amount_cents)],
+      ["Status",x=>x.status==="requested"?"Aguardando ADM":x.status==="admin_paid"?"Aguardando sua confirmação":"Recebimento confirmado"],
+      ["Documento",x=>'<button type="button" class="seller-outline" data-print-payout="'+esc(x.id)+'">Gerar recibo</button>'],
+      ["Ação",x=>x.status==="admin_paid"?'<button type="button" class="seller-outline" data-confirm-payout="'+esc(x.id)+'">CONFIRMAR RECEBIMENTO</button>':"—"]
+    ],payouts):'<p class="muted">Nenhum repasse solicitado até agora.</p>';
+    payoutBox.innerHTML='<h3>Controle de repasses</h3><div class="metrics">'+summary+'</div>'+
+      '<form id="sellerRequestPayout" style="display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:16px 0">'+
+      '<label style="flex:1;min-width:220px">Chave Pix para receber<input name="pix_key" required minlength="5" maxlength="150" autocomplete="off" placeholder="CPF, e-mail, telefone ou chave aleatória" style="display:block;width:100%"></label>'+
+      '<button type="submit" class="seller-outline" '+(available<=0?'disabled':'')+'>SOLICITAR '+money(available)+'</button></form>'+
+      '<p class="muted">Somente vendas aprovadas. A solicitação é um pedido de repasse, não uma transferência automática. Confirme o recebimento somente após consultar seu extrato.</p>'+
+      '<h3>Histórico dos pagamentos de comissão</h3>'+history;
+    payoutBox.dataset.payouts=JSON.stringify(payouts);
+    const pendingConfirmation=payouts.find(p=>p.status==="admin_paid");
+    const big=$("#sellerPayoutBigNotice");
+    if(big){big.hidden=!pendingConfirmation;if(pendingConfirmation)$("#sellerPayoutBigText").textContent="O administrador informou o pagamento de "+money(pendingConfirmation.amount_cents)+". Confirme somente se o dinheiro entrou na sua conta."}
+  }
   const configuredRate=Number(data.seller?.commission_percent??10);
   $("#sellerFinanceSummary").innerHTML='<div class="metrics"><div class="metric"><span>Vendas aprovadas</span><strong>'+String(commissionRows.length)+'</strong></div><div class="metric"><span>Vendas brutas</span><strong>'+money(sums.gross)+'</strong></div><div class="metric"><span>Comissão a receber</span><strong>'+money(sums.commission)+'</strong></div><div class="metric"><span>Taxa atual definida pelo ADM</span><strong>'+configuredRate.toLocaleString("pt-BR",{maximumFractionDigits:2})+'%</strong></div></div>';
   $("#sellerFinanceSales").innerHTML=commissionRows.length?table([["Data",x=>new Date(x.payment_confirmed_at||x.created_at).toLocaleString("pt-BR")],["Pedido",x=>esc(x.public_id||"—")],["Pagamento",x=>esc(x.payment_method||"—")],["Venda aprovada",x=>money(x.total_cents)],["Comissão (%)",x=>x.commission_rate.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%"],["A receber",x=>money(x.commission_amount_cents)]],commissionRows):'<p class="muted">Nenhuma venda paga contabilizada ainda.</p>';
