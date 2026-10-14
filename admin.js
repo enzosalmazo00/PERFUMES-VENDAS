@@ -1,3 +1,4 @@
+import {setupAdminFinance,loadAdminFinance} from "./admin-finance.js?v=20261013-finance1";
 import{switchProductCatalog}from"./admin-electronics-ui.js?v=20261009-1";
 import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261002-adminlogin4";
 import{shell,renderDashboard}from"./admin-view.js?v=20261013-tieredreceipt2";
@@ -7,9 +8,9 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const login=$("#loginView"),app=$("#app"),content=$("#adminContent"),msg=$("#loginMessage"),toast=$("#toast");
 let data=null,procurementUi=null;
 function notify(t){toast.textContent=t;toast.classList.add("show");clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove("show"),2800)}
-function bindTabs(){$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.toggle("is-active",x===b));$$(".tab-panel").forEach(p=>p.hidden=p.dataset.panel!==b.dataset.tab);if(b.dataset.tab==="perfumes"||b.dataset.tab==="eletronicos")switchProductCatalog(b.dataset.tab);if(b.dataset.tab==="compras")procurementUi?.load();if(b.dataset.tab==="estoque")loadInventoryHistory();if(b.dataset.tab==="relatorios")runReports();if(b.dataset.tab==="emergencia")loadStatus()})}
+function bindTabs(){$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.toggle("is-active",x===b));$$(".tab-panel").forEach(p=>p.hidden=p.dataset.panel!==b.dataset.tab);if(b.dataset.tab==="perfumes"||b.dataset.tab==="eletronicos")switchProductCatalog(b.dataset.tab);if(b.dataset.tab==="compras")procurementUi?.load();if(b.dataset.tab==="estoque")loadInventoryHistory();if(b.dataset.tab==="financeiro")loadAdminFinance();if(b.dataset.tab==="relatorios")runReports();if(b.dataset.tab==="emergencia")loadStatus()})}
 async function refresh(){data=(await adminApi({action:"dashboard"})).data;renderDashboard(data)}
-async function open(){const fresh=(await adminApi({action:"dashboard"})).data;data=fresh;content.innerHTML=shell();login.hidden=true;app.hidden=false;bindTabs();bindForms();renderDashboard(data);procurementUi=setupProcurement({api:procurementApi,getData:()=>data,refresh,notify,esc,money,cents,option,table})}
+async function open(){const fresh=(await adminApi({action:"dashboard"})).data;data=fresh;content.innerHTML=shell();login.hidden=true;app.hidden=false;bindTabs();bindForms();renderDashboard(data);setupAdminFinance({call:adminApi,notify});procurementUi=setupProcurement({api:procurementApi,getData:()=>data,refresh,notify,esc,money,cents,option,table})}
 
 const stockReasons={
  entry:[["restock","Entrada sem compra"],["return","Devolução recebida"],["inventory_count","Ajuste de inventário"],["other","Outra entrada"]],
