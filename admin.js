@@ -1,4 +1,4 @@
-import {setupAdminFinance,loadAdminFinance} from "./admin-finance.js?v=20261013-finance2";
+import {setupAdminFinance,loadAdminFinance} from "./admin-finance.js?v=20261013-finance3";
 import{switchProductCatalog}from"./admin-electronics-ui.js?v=20261009-1";
 import{loadSession,saveSession,signIn,createFirstAccess,resendConfirmation,requestPasswordReset,adminApi,procurementApi,emergencyApi,productImageApi,uploadProductImage,money,cents,esc,option,table}from"./admin-api.js?v=20261002-adminlogin4";
 import{shell,renderDashboard}from"./admin-view.js?v=20261013-finance2";
