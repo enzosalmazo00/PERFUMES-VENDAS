@@ -113,6 +113,14 @@ $("#confirmHardDelete").onclick=async()=>{
 };
 
 content.addEventListener("click",async e=>{
+const copyPix=e.target.closest("[data-repasse-copy]");
+if(copyPix){
+ const payout=data?.payouts?.find(p=>p.id===copyPix.dataset.repasseCopy);
+ if(!payout)return;
+ try{await navigator.clipboard.writeText(payout.pix_key);notify("Chave Pix copiada com sucesso.")}
+ catch{window.prompt("Copie a chave Pix:",payout.pix_key)}
+ return;
+}
 const proofView=e.target.closest("[data-admin-view-proof]");
 if(proofView){
   try{const result=await adminApi({action:"get_payout_receipt",payout_id:proofView.dataset.adminViewProof});window.open(result.data.url,"_blank","noopener,noreferrer")}
